@@ -11,6 +11,12 @@ Al finalizar las prácticas del módulo serás capaz de:
 5. aplicar controles deterministas alrededor de un componente probabilístico;
 6. comprobar mediante pruebas que algunos riesgos deben resolverse en la aplicación, no delegarse únicamente al modelo.
 
+## Entorno
+
+Todos los laboratorios se realizan desde el **entorno web facilitado por el instructor**. El ordenador del alumno solo necesita un navegador.
+
+Cuando una práctica requiera acceso a servicios de IA o recursos cloud, las credenciales, permisos y configuración necesarios estarán disponibles en el entorno de laboratorio.
+
 ## Orden recomendado
 
 ```text

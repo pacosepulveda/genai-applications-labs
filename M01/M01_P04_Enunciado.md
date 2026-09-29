@@ -1,6 +1,5 @@
 # M01.P04 — Red Team básico y hardening
 
-**Duración:** 20 minutos  
 **Prerequisito:** M01.P03  
 **Entregable:** batería de pruebas ejecutada y política endurecida
 
@@ -16,7 +15,7 @@ assets/red_team_cases.json
 
 ## Parte A — Ejecutar el Red Team
 
-Conservando la aplicación de P03, ejecuta:
+Conservando la aplicación de P03, ejecuta desde el terminal del entorno web:
 
 ```bash
 python scripts/red_team.py

@@ -1,6 +1,5 @@
 # M01.P03 — Enterprise GenAI Assistant v0.1
 
-**Duración:** 55 minutos  
 **Modalidad:** individual o parejas  
 **Entregable:** API funcionando + pruebas superadas
 
@@ -28,31 +27,15 @@ request
   -> metadatos y logging
 ```
 
-## Parte A — Preparar el entorno
+## Parte A — Acceder al entorno
 
-Desde `M01/enterprise-genai-assistant`:
+Abre el **entorno web de laboratorio facilitado por el instructor** y entra en:
 
-```bash
-python -m venv .venv
+```text
+M01/enterprise-genai-assistant
 ```
 
-Activa el entorno virtual y ejecuta:
-
-```bash
-pip install -r requirements.txt
-```
-
-Copia la configuración:
-
-```bash
-cp .env.example .env
-```
-
-En PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
+El entorno ya dispone de Python, Git y las dependencias necesarias para la práctica. No necesitas instalar software en tu ordenador.
 
 La configuración inicial utiliza:
 
@@ -60,7 +43,7 @@ La configuración inicial utiliza:
 GENAI_PROVIDER=mock
 ```
 
-No necesitas ninguna API key.
+Por tanto, puedes desarrollar y probar la arquitectura sin utilizar todavía un modelo externo.
 
 ## Parte B — Comprender la arquitectura
 
@@ -103,6 +86,8 @@ Implementa estas reglas:
 
 ## Parte D — Ejecutar pruebas
 
+Desde el terminal integrado del entorno web:
+
 ```bash
 pytest -q
 ```
@@ -115,11 +100,7 @@ Antes de continuar, las pruebas de P03 deben pasar.
 uvicorn src.main:app --reload --port 8080
 ```
 
-Abre:
-
-```text
-http://localhost:8080/docs
-```
+Utiliza la vista web o el acceso al puerto que proporcione el entorno de laboratorio para abrir `/docs`.
 
 Prueba una petición válida:
 
@@ -145,28 +126,17 @@ Después prueba:
 
 Explica por qué la segunda petición debe bloquearse aunque un LLM pudiera producir una respuesta plausible.
 
-## Parte F — Provider real opcional
+## Parte F — Utilizar el modelo facilitado para el laboratorio
 
-Si el instructor proporciona acceso a un modelo compatible, configura:
+Cuando el instructor lo indique, cambia del provider `mock` al provider configurado en el entorno de laboratorio.
 
-```text
-GENAI_PROVIDER=openai
-OPENAI_API_KEY=...
-OPENAI_MODEL=...
-```
+La aplicación mantiene una interfaz compatible con la **Responses API**, de forma que el mismo código pueda trabajar con un endpoint compatible autorizado modificando la configuración y no la lógica de negocio.
 
-`OPENAI_BASE_URL` es opcional y puede utilizarse cuando exista un endpoint compatible aprobado para el laboratorio.
+Las credenciales y el endpoint serán proporcionados mediante el propio entorno. No copies claves en notebooks, código fuente ni commits.
 
-> Nunca subas `.env` ni claves al repositorio.
+## Parte G — Ejecución empaquetada
 
-## Parte G — Docker opcional
-
-```bash
-docker build -t enterprise-genai-assistant:m01 .
-docker run --rm -p 8080:8080 --env-file .env enterprise-genai-assistant:m01
-```
-
-Comprueba de nuevo `/health` y `/docs`.
+Si el entorno facilitado incluye soporte de contenedores, construye y ejecuta también la aplicación desde el `Dockerfile`. Si no lo incluye, utiliza la ejecución directa de FastAPI de la Parte E.
 
 ## Preguntas finales
 

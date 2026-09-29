@@ -1,6 +1,5 @@
 # M01.P02 — Del caso de uso a criterios de éxito
 
-**Duración:** 25 minutos  
 **Modalidad:** grupos de 3–4  
 **Entregable:** ficha de caso de uso y primera matriz de riesgos
 
@@ -20,7 +19,7 @@ Tu equipo debe escoger **un caso de uso inicial** y transformarlo en un proyecto
 
 ## Tarea
 
-Abre `notebooks/M01_P02_Use_Case_Canvas.ipynb` y completa:
+Abre `notebooks/M01_P02_Use_Case_Canvas.ipynb` en el entorno web de laboratorio y completa:
 
 ### 1. Problema
 

@@ -1,30 +1,34 @@
-# Enterprise GenAI Assistant — M01 starter
+# Enterprise GenAI Assistant — M01
 
 Primera vertical funcional del proyecto transversal. En M01 no incorpora RAG ni herramientas.
 
-## Arranque
+## Entorno
+
+La aplicación está preparada para ejecutarse en el **entorno web de laboratorio** facilitado para el curso. No es necesario instalar Python, Git, Docker ni un IDE en el equipo del alumno.
+
+Desde el terminal integrado:
 
 ```bash
-python -m venv .venv
-pip install -r requirements.txt
-cp .env.example .env
 uvicorn src.main:app --reload --port 8080
 ```
 
-Visita `http://localhost:8080/docs`.
+Abre la vista web del puerto 8080 y accede a `/docs`.
 
 ## Modo mock
 
-`GENAI_PROVIDER=mock` permite ejecutar todo sin credenciales.
+`GENAI_PROVIDER=mock` permite ejecutar y probar la arquitectura sin credenciales ni llamadas externas.
 
-## Modo OpenAI opcional
+## Provider compatible con Responses API
 
-Configura en `.env`:
+Cuando el entorno incluya acceso a un modelo real, la configuración puede utilizar:
 
 ```text
 GENAI_PROVIDER=openai
 OPENAI_API_KEY=...
 OPENAI_MODEL=...
+OPENAI_BASE_URL=...
 ```
 
-La implementación usa la Responses API y solicita `store=False`.
+Estas variables permiten utilizar un endpoint compatible con la Responses API sin acoplar la aplicación a un único proveedor.
+
+Las credenciales deben inyectarse desde el entorno de laboratorio y nunca guardarse en el repositorio.

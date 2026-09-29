@@ -1,0 +1,11 @@
+id,caso,pista_contextual
+C01,Calcular el IVA y el total de una factura a partir de bases imponibles y tipos fiscales ya definidos.,La regla debe ser exacta y auditable.
+C02,Estimar la probabilidad de fraude de una transacción utilizando histórico etiquetado y variables de contexto.,Existe señal histórica y se busca una probabilidad.
+C03,Crear un resumen ejecutivo de un contrato de 40 páginas para revisión humana.,La salida es contenido nuevo derivado de texto existente.
+C04,"Predecir la demanda semanal de repuestos a partir de series históricas, calendario y variables externas.",Se desea una predicción numérica.
+C05,Generar un primer borrador de informe de incidencia a partir de hechos estructurados introducidos por un técnico.,"Se desea redactar contenido, no tomar la decisión final."
+C06,"Localizar la versión vigente de un procedimiento cuando conocemos código documental, versión y metadatos.",La información ya existe y se dispone de claves de búsqueda.
+C07,Encontrar la combinación de rutas de reparto que minimiza distancia respetando capacidad y ventanas horarias.,Problema clásico de optimización con restricciones.
+C08,Responder preguntas sobre procedimientos internos autorizados mostrando las fuentes exactas utilizadas.,Combina recuperación de información y generación controlada.
+C09,Decidir si un usuario puede acceder a un recurso aplicando roles y políticas de autorización corporativas.,"La decisión debe ser determinista, verificable y gobernada por política."
+C10,Clasificar tickets de soporte por categoría y prioridad a partir de texto libre y contexto operativo.,"Puede resolverse con ML/LLM; importan coste, volumen, explicabilidad y calidad."

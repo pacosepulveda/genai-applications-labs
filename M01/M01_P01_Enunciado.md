@@ -1,6 +1,5 @@
 # M01.P01 — ¿IA, ML, GenAI o software convencional?
 
-**Duración:** 20 minutos  
 **Modalidad:** parejas o grupos de 3  
 **Entregable:** matriz de decisión completada en el notebook
 
@@ -31,7 +30,7 @@ Utiliza una de estas categorías principales:
 
 ## Tarea
 
-1. Abre `notebooks/M01_P01_Technology_Fit.ipynb`.
+1. Abre `notebooks/M01_P01_Technology_Fit.ipynb` en el entorno web de laboratorio.
 2. Carga `assets/technology_cases.csv`.
 3. Para cada caso indica:
    - categoría principal;

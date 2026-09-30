@@ -1,0 +1,25 @@
+risk_levels:
+  LOW:
+    required_gates: []
+  MEDIUM:
+    required_gates: []
+  HIGH:
+    required_gates: []
+  CRITICAL:
+    required_gates: []
+
+artifacts:
+  PROMPT:
+    extra_gates: []
+  MODEL:
+    extra_gates: []
+  INDEX:
+    extra_gates: []
+  EMBEDDING_INDEX:
+    extra_gates: []
+  TOOL_READ:
+    extra_gates: []
+  TOOL_WRITE:
+    extra_gates: []
+  CONFIG:
+    extra_gates: []

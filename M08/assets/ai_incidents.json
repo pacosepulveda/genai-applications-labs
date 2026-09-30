@@ -1,0 +1,47 @@
+[
+  {
+    "incident_id": "AI-INC-001",
+    "signal": "availability=0.94 and provider errors",
+    "scenario": "El proveedor principal del modelo falla durante una hora.",
+    "expected_owner_area": "Service/Platform",
+    "candidate_actions": [
+      "graceful degradation",
+      "switch provider",
+      "status communication"
+    ]
+  },
+  {
+    "incident_id": "AI-INC-002",
+    "signal": "citation_validity < 0.95 and hit_rate falling",
+    "scenario": "Tras reindexar, el retrieval empieza a devolver fragmentos incorrectos.",
+    "expected_owner_area": "Data/Knowledge + AI Engineering",
+    "candidate_actions": [
+      "rollback index",
+      "disable RAG version",
+      "run retrieval regression"
+    ]
+  },
+  {
+    "incident_id": "AI-INC-003",
+    "signal": "unauthorized_retrieval_count > 0",
+    "scenario": "Se detecta un documento recuperado sin autorización para el usuario.",
+    "expected_owner_area": "Security + Service Owner",
+    "candidate_actions": [
+      "kill switch",
+      "revoke affected path",
+      "incident response",
+      "audit"
+    ]
+  },
+  {
+    "incident_id": "AI-INC-004",
+    "signal": "cost_per_query_eur spikes",
+    "scenario": "Un cambio de agente aumenta el número de llamadas y multiplica el coste.",
+    "expected_owner_area": "Product + AI Engineering + FinOps",
+    "candidate_actions": [
+      "disable agent feature",
+      "inspect loops",
+      "restore limits"
+    ]
+  }
+]

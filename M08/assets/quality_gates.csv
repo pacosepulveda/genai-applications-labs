@@ -1,0 +1,11 @@
+gate,default_min_risk
+unit_tests,LOW
+policy_tests,LOW
+prompt_eval,MEDIUM
+retrieval_eval,MEDIUM
+model_eval,HIGH
+security_review,HIGH
+cost_review,HIGH
+human_approval,CRITICAL
+rollback_plan,HIGH
+tool_authorization_test,MEDIUM

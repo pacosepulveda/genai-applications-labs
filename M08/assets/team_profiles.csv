@@ -1,0 +1,10 @@
+person_id,name,current_role,function,software,data,ml,llm,rag,agents,cloud,security,evaluation,product,governance,domain,strengths
+P01,Ana,Backend Engineer,Engineering,4,2,1,2,1,1,3,2,1,1,1,2,"API/backend, integración"
+P02,Bruno,Data Engineer,Data,3,4,2,1,2,1,3,2,2,1,2,2,"Pipelines, SQL, data quality"
+P03,Carla,Data Scientist,Data Science,3,3,4,2,2,1,2,1,4,1,1,2,"Modelado, experimentación, métricas"
+P04,Diego,Cloud Engineer,Platform,3,2,1,1,1,1,4,3,1,1,2,1,"Cloud, IaC, observabilidad"
+P05,Elena,Security Engineer,Security,2,2,1,1,1,1,3,4,2,1,4,2,"IAM, threat modeling, incident response"
+P06,Fátima,Product Manager,Product,1,1,0,1,1,0,1,1,1,4,3,3,"Discovery, métricas, stakeholders"
+P07,Gonzalo,Operations SME,Operations,1,2,0,1,1,0,1,2,1,2,2,4,"Incidentes, procedimientos, operación"
+P08,Helena,ML Engineer,AI/ML,4,3,4,3,2,2,3,2,3,1,1,2,"Serving, ML pipelines, Python"
+P09,Iván,Legal/Risk Partner,Risk,0,1,0,1,0,0,0,2,1,2,4,2,"Privacy, contratos, AI governance"

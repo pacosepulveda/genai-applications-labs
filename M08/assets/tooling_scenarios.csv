@@ -1,0 +1,6 @@
+scenario_id,need,reference_direction
+T01,"Versionar código, prompts y configuración; PR y checks",Git + CI
+T02,Comparar experimentos de modelos ML y registrar métricas,MLflow
+T03,"Trazar retrieval, tool calls y prompts en una app GenAI",MLflow GenAI / tracing platform
+T04,Orquestar training/data pipelines complejos sobre Kubernetes,Kubeflow Pipelines
+T05,Aplicación RAG simple con modelo gestionado y sin training,Git + CI + eval + observability; Kubeflow no necesario

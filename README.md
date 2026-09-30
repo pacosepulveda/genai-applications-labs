@@ -17,7 +17,7 @@ El instructor facilitará el acceso al entorno de laboratorio y, cuando sea nece
 | M01 | Introducción: Inteligencia Artificial y su uso en la empresa | [Laboratorios](M01/) |
 | M02 | Fundamentos del Machine Learning | [Laboratorios](M02/) |
 | M03 | Redes Neuronales y Deep Learning | [Laboratorios](M03/) |
-| M04 | Visión Artificial Generativa | Se añadirá progresivamente |
+| M04 | Visión Artificial Generativa | [Laboratorios](M04/) |
 | M05 | NLP Generativo | Se añadirá progresivamente |
 | M06 | LangChain y desarrollo de aplicaciones de IA | Se añadirá progresivamente |
 | M07 | Estrategia de Inteligencia Artificial Generativa | Se añadirá progresivamente |

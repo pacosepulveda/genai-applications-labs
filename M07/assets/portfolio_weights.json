@@ -1,0 +1,8 @@
+{
+  "business_value": 0.25,
+  "strategic_alignment": 0.2,
+  "data_readiness": 0.15,
+  "technical_feasibility": 0.15,
+  "user_readiness": 0.1,
+  "time_to_value": 0.15
+}

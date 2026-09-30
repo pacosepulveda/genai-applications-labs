@@ -1,0 +1,11 @@
+use_case_id,department,task,monthly_volume,avg_minutes_per_case,current_error_rate,pain_description,data_type,decision_impact,current_tooling
+UC01,Operations,Localizar el procedimiento vigente durante un incidente,180,11.0,0.06,"Los técnicos buscan entre wiki, PDF y repositorios; a veces abren versiones antiguas.",Documentos no estructurados,MEDIUM,Búsqueda manual
+UC02,Operations,Redactar actualización de estado de un incidente,420,6.0,0.03,Mensajes repetitivos que requieren adaptar impacto y servicios afectados.,Texto no estructurado,MEDIUM,Plantillas manuales
+UC03,Security,Aprobar o denegar accesos privilegiados,95,4.0,0.01,La decisión sigue reglas de autorización y segregación de funciones.,Datos estructurados,HIGH,Workflow IAM
+UC04,Finance,Reconciliar importes de facturas y pedidos,1200,3.5,0.025,"Comparación de importes, impuestos, tolerancias y códigos.",Datos estructurados,HIGH,ERP + reglas
+UC05,Service Desk,Resumir tickets largos antes de escalarlos,2400,5.5,0.08,Los equipos de segundo nivel leen historiales extensos y repetitivos.,Texto no estructurado,LOW,Manual
+UC06,Support,Traducir respuestas técnicas ES/EN preservando IDs y rutas,850,4.5,0.04,"Las traducciones deben mantener códigos, placeholders y nombres de producto.",Texto técnico,MEDIUM,Manual
+UC07,HR,Priorizar candidatos automáticamente para contratación,300,12.0,0.05,Se desea reducir el tiempo de cribado inicial de currículos.,CVs / datos personales,HIGH,ATS + revisión humana
+UC08,Legal,Extraer cláusulas y obligaciones de contratos,160,18.0,0.07,Revisión documental lenta; se necesita trazabilidad a la cláusula original.,Contratos,HIGH,Manual
+UC09,Marketing,Generar variantes de copys internos para campañas,600,9.0,0.1,Trabajo creativo repetitivo con revisión posterior.,Texto,LOW,Manual
+UC10,Operations,Agente que ejecuta cambios de configuración en producción,70,15.0,0.02,Se propone permitir que un agente aplique cambios tras interpretar un incidente.,Incidentes + APIs,CRITICAL,Ingeniero on-call

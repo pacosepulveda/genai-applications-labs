@@ -14,6 +14,7 @@ risk
 classification
 offline capability
 authoritative knowledge
+realtime state
 cost
 latency
 ```
@@ -36,15 +37,27 @@ notebooks/M09_P02_Adaptive_Architecture.ipynb
 Diseña reglas como:
 
 ```text
-authoritative knowledge -> RAG
-image + high complexity -> CLOUD_MULTIMODAL
-offline/private simple task -> EDGE
-complex reasoning -> CLOUD_REASONING
+authoritative knowledge
+→ RAG
+
+realtime system state
+→ TOOL/API
+
+image + high complexity
+→ CLOUD_MULTIMODAL
+
+offline/private simple task
+→ EDGE
+
+complex reasoning
+→ CLOUD_REASONING
 ```
 
 ## Parte B — Router
 
-Implementa `route_request(row)`. El resultado debe incluir:
+Implementa `route_request(row)`.
+
+El resultado debe incluir:
 
 ```text
 route
@@ -56,11 +69,28 @@ human_gate
 
 Las tareas `CRITICAL` no pueden pasar automáticamente a una ruta que ejecute cambios.
 
-El router debe poder responder `HUMAN_APPROVAL_REQUIRED` o `UNSUPPORTED_AUTONOMY`.
+El router debe poder responder:
+
+```text
+HUMAN_APPROVAL_REQUIRED
+```
+
+o:
+
+```text
+UNSUPPORTED_AUTONOMY
+```
 
 ## Parte D — Coste y latencia
 
-Usando `model_capabilities.csv`, estima `total_cost` y `mean_latency`.
+Usando `model_capabilities.csv`, estima:
+
+```text
+total_cost
+mean_latency
+```
+
+de la política elegida.
 
 ## Parte E — Comparación
 
@@ -76,11 +106,13 @@ en coste y latencia.
 
 ## Parte F — Reflexión
 
-¿Dónde sacrificarías coste para ganar calidad? ¿Dónde sacrificarías calidad para garantizar privacidad/offline?
+¿Dónde sacrificarías coste para ganar calidad?
+
+¿Dónde sacrificarías calidad para garantizar privacidad/offline?
 
 ## Preguntas
 
 1. ¿Por qué un único modelo para todo puede ser subóptimo?
-2. ¿Qué requests deben ir necesariamente a RAG?
+2. ¿Qué requests deben ir necesariamente a RAG y cuáles a una tool/API?
 3. ¿Cuándo edge aporta valor real?
 4. ¿Qué control nunca debe delegarse al modelo?

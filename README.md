@@ -15,7 +15,7 @@ El instructor facilitará el acceso al entorno de laboratorio y, cuando sea nece
 | Módulo | Tema | Material |
 |---|---|---|
 | M01 | Introducción: Inteligencia Artificial y su uso en la empresa | [Laboratorios](M01/) |
-| M02 | Fundamentos del Machine Learning | Se añadirá progresivamente |
+| M02 | Fundamentos del Machine Learning | [Laboratorios](M02/) |
 | M03 | Redes Neuronales y Deep Learning | Se añadirá progresivamente |
 | M04 | Visión Artificial Generativa | Se añadirá progresivamente |
 | M05 | NLP Generativo | Se añadirá progresivamente |

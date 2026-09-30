@@ -1,0 +1,561 @@
+request_id,created_at,request_text,channel,business_unit,language,urgency,requires_authoritative_sources,final_route,label
+REQ-0261,2026-04-30T22:00,¿En qué categoría encaja este caso sobre despliegues?,chat,Cloud,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0559,2026-02-21T02:00,Realiza externamente la gestión de retención de logs. Es una solicitud habitual del equipo.,api,Corporate,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0489,2026-07-11T14:00,Tengo un script sobre clasificación de datos que no funciona como espero. Es una solicitud habitual del equipo.,chat,Corporate,es,medium,0,CODE,CODE
+REQ-0041,2026-01-28T21:00,Prepara un borrador sobre seguridad para dirección.,api,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0411,2026-02-02T07:00,¿Puedes aclararme algo relacionado con retención de logs? Necesito una respuesta útil para continuar.,chat,Cyber,es,high,0,CODE,CODE
+REQ-0470,2026-04-02T23:00,Tengo un script sobre servicios cloud que no funciona como espero.,chat,Data,en,high,0,CODE,CODE
+REQ-0410,2026-06-07T05:00,¿Puedes aclararme algo relacionado con seguridad?,web,Cloud,es,low,0,QUESTION,QUESTION
+REQ-0466,2026-03-01T23:00,Quiero automatizar mediante código algo relacionado con APIs REST.,chat,Data,en,medium,1,CODE,CODE
+REQ-0292,2026-04-24T12:00,Necesito organizar esta solicitud relacionada con proyectos.,api,Cyber,es,low,0,CODE,CODE
+REQ-0118,2026-03-19T15:00,Prepara un borrador sobre clasificación de datos para operaciones.,chat,Corporate,es,low,0,DRAFT,DRAFT
+REQ-0014,2026-01-24T23:00,Ayúdame a redactar algo sobre copias de seguridad.,web,Engineering,en,high,0,DRAFT,DRAFT
+REQ-0482,2026-02-28T23:00,Quiero automatizar mediante código algo relacionado con APIs REST.,api,Engineering,es,medium,0,CODE,CODE
+REQ-0088,2026-03-22T07:00,Necesito una primera versión de un mensaje relacionado con acceso de terceros. Necesito una respuesta útil para continuar.,chat,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0257,2026-02-26T22:00,Necesito una versión breve de un documento sobre despliegues.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0293,2026-03-12T21:00,Necesito organizar esta solicitud relacionada con seguridad. No tengo claro cuál es la mejor forma de abordarlo.,chat,Corporate,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0330,2026-05-22T23:00,Necesito organizar esta solicitud relacionada con seguridad.,chat,Corporate,es,low,0,CLASSIFY,CLASSIFY
+REQ-0282,2026-05-27T14:00,Necesito organizar esta solicitud relacionada con monitorización.,web,Cloud,es,low,0,CLASSIFY,CLASSIFY
+REQ-0224,2026-05-23T01:00,Ayúdame a condensar información sobre inventario. Es una solicitud habitual del equipo.,api,Cyber,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0136,2026-05-12T07:00,Quiero comunicar al equipo un asunto sobre APIs REST.,api,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0093,2026-05-09T05:00,Necesito una primera versión de un mensaje relacionado con monitorización.,api,Data,en,medium,0,DRAFT,DRAFT
+REQ-0024,2026-04-02T21:00,Quiero comunicar al equipo un asunto sobre retención de logs.,web,Corporate,en,low,0,DRAFT,DRAFT
+REQ-0397,2026-06-01T07:00,¿Puedes aclararme algo relacionado con APIs REST?,api,Cloud,en,high,0,QUESTION,QUESTION
+REQ-0056,2026-01-05T18:00,Ayúdame a redactar algo sobre acceso de terceros.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0476,2026-07-03T06:00,Quiero automatizar mediante código algo relacionado con código Python.,chat,Cloud,es,medium,0,CODE,CODE
+REQ-0197,2026-07-31T17:00,Reduce este contenido sobre acceso privilegiado a sus ideas principales. Necesito una respuesta útil para continuar.,chat,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0420,2026-08-17T17:00,Necesito entender mejor documentación técnica.,api,Corporate,en,medium,0,QUESTION,QUESTION
+REQ-0170,2026-02-08T12:00,Ayúdame a condensar información sobre servicios cloud. Es una solicitud habitual del equipo.,api,Corporate,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0358,2026-01-30T08:00,Necesito entender mejor gestión de incidencias.,chat,Cloud,es,low,0,QUESTION,QUESTION
+REQ-0517,2026-07-19T02:00,¿Cuál es el criterio vigente de la organización sobre contraseñas?,chat,Cloud,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0006,2026-05-12T12:00,Ayúdame a redactar algo sobre monitorización.,chat,Cloud,es,low,0,DRAFT,DRAFT
+REQ-0230,2026-06-30T17:00,Ayúdame a condensar información sobre mantenimiento programado.,chat,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0383,2026-09-05T00:00,Tengo una duda sobre acceso privilegiado.,chat,Corporate,en,high,0,QUESTION,QUESTION
+REQ-0555,2026-04-06T13:00,Ejecuta la acción necesaria para gestión de incidencias sin pedirme confirmación. No tengo claro cuál es la mejor forma de abordarlo.,api,Cyber,en,low,0,UNSUPPORTED,UNSUPPORTED
+REQ-0520,2026-01-14T05:00,Necesito confirmar la norma interna aplicable a contraseñas. La petición es para un contexto profesional.,web,Data,en,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0211,2026-06-09T01:00,Necesito una versión breve de un documento sobre mantenimiento programado.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0149,2026-02-07T14:00,Tengo información extensa sobre monitorización; necesito quedarme con lo esencial.,web,Cyber,en,low,0,SUMMARIZE,SUMMARIZE
+REQ-0046,2026-07-10T22:00,Quiero comunicar al equipo un asunto sobre gestión de incidencias.,api,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0325,2026-02-08T13:00,¿En qué categoría encaja este caso sobre código Python?,chat,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0295,2026-03-19T00:00,Ayúdame a decidir la categoría de un ticket de servicios cloud.,api,Corporate,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0380,2026-02-22T13:00,¿Puedes aclararme algo relacionado con retención de logs?,chat,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0557,2026-05-15T13:00,Aprueba y completa por mí una operación sobre servicios cloud.,web,Cloud,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0336,2026-05-15T02:00,¿Puedes aclararme algo relacionado con seguridad?,api,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0290,2026-03-11T16:00,¿En qué categoría encaja este caso sobre inventario? Necesito una respuesta útil para continuar.,chat,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0123,2026-08-18T01:00,Necesito una primera versión de un mensaje relacionado con proyectos.,web,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0219,2026-04-28T22:00,Tengo información extensa sobre seguridad; necesito quedarme con lo esencial.,web,Cyber,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0055,2026-05-06T22:00,Prepara un borrador sobre mantenimiento programado para operaciones. Necesito una respuesta útil para continuar.,web,Cloud,es,low,0,DRAFT,DRAFT
+REQ-0537,2026-06-03T17:00,Necesito confirmar la norma interna aplicable a acceso de terceros.,api,Data,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0104,2026-07-31T03:00,Quiero comunicar al equipo un asunto sobre acceso de terceros.,web,Cyber,en,high,0,DRAFT,DRAFT
+REQ-0179,2026-08-03T22:00,Necesito una versión breve de un documento sobre clasificación de datos.,chat,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0205,2026-07-07T03:00,Reduce este contenido sobre despliegues a sus ideas principales.,chat,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0080,2026-08-14T15:00,Ayúdame a redactar algo sobre retención de logs.,api,Cyber,en,low,0,DRAFT,DRAFT
+REQ-0226,2026-04-19T09:00,Ayúdame a condensar información sobre acceso de terceros.,web,Corporate,en,low,0,SUMMARIZE,SUMMARIZE
+REQ-0065,2026-08-03T07:00,Quiero comunicar al equipo un asunto sobre proyectos.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0217,2026-08-04T02:00,Necesito una versión breve de un documento sobre monitorización.,web,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0393,2026-07-10T21:00,Necesito entender mejor seguridad. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,es,high,0,QUESTION,QUESTION
+REQ-0390,2026-08-20T16:00,¿Puedes aclararme algo relacionado con inventario? Es una solicitud habitual del equipo.,chat,Engineering,es,high,0,QUESTION,QUESTION
+REQ-0076,2026-08-16T04:00,Prepara un borrador sobre despliegues para seguridad.,web,Engineering,es,low,0,DRAFT,DRAFT
+REQ-0541,2026-07-25T23:00,Haz directamente una operación relacionada con despliegues en mi nombre.,api,Corporate,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0051,2026-08-31T06:00,Prepara un borrador sobre despliegues para equipo técnico.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0478,2026-08-01T19:00,Quiero automatizar mediante código algo relacionado con seguridad.,chat,Cloud,es,medium,0,CODE,CODE
+REQ-0138,2026-02-13T02:00,Necesito una primera versión de un mensaje relacionado con gestión de incidencias. Es una solicitud habitual del equipo.,chat,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0530,2026-08-17T04:00,Necesito saber qué debemos hacer internamente respecto a copias de seguridad.,chat,Corporate,es,high,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0016,2026-03-10T20:00,Quiero comunicar al equipo un asunto sobre código Python.,web,Data,es,high,0,DRAFT,DRAFT
+REQ-0011,2026-01-12T06:00,Ayúdame a redactar algo sobre documentación técnica. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,es,low,0,DRAFT,DRAFT
+REQ-0328,2026-06-22T18:00,Ayúdame a decidir la categoría de un ticket de monitorización. Es una solicitud habitual del equipo.,web,Cloud,es,low,0,CLASSIFY,CLASSIFY
+REQ-0392,2026-07-17T17:00,¿Puedes aclararme algo relacionado con clasificación de datos? Necesito una respuesta útil para continuar.,web,Engineering,en,medium,0,QUESTION,QUESTION
+REQ-0422,2026-07-29T06:00,Necesito entender mejor clasificación de datos.,api,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0499,2026-03-08T05:00,Necesito resolver con Python una tarea relacionada con copias de seguridad. Necesito una respuesta útil para continuar.,chat,Cloud,es,medium,0,CODE,CODE
+REQ-0183,2026-01-16T19:00,Ayúdame a condensar información sobre contraseñas. La petición es para un contexto profesional.,web,Engineering,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0250,2026-08-15T15:00,Necesito una versión breve de un documento sobre retención de logs.,api,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0090,2026-01-12T12:00,Quiero comunicar al equipo un asunto sobre mantenimiento programado.,chat,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0147,2026-07-16T08:00,Reduce este contenido sobre clasificación de datos a sus ideas principales. Necesito una respuesta útil para continuar.,web,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0485,2026-08-29T19:00,Quiero automatizar mediante código algo relacionado con monitorización.,api,Corporate,es,low,0,CODE,CODE
+REQ-0441,2026-02-03T20:00,Tengo un script sobre acceso privilegiado que no funciona como espero. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,es,medium,0,CODE,CODE
+REQ-0070,2026-05-30T19:00,Ayúdame a redactar algo sobre acceso de terceros.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0317,2026-01-06T19:00,Ayúdame a decidir la categoría de un ticket de clasificación de datos. La petición es para un contexto profesional.,api,Cyber,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0433,2026-02-07T12:00,Explícame un aspecto de copias de seguridad.,api,Engineering,en,low,0,QUESTION,QUESTION
+REQ-0364,2026-01-10T11:00,Necesito entender mejor documentación técnica.,web,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0206,2026-05-24T11:00,Tengo información extensa sobre contraseñas; necesito quedarme con lo esencial.,chat,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0284,2026-06-20T18:00,Tenemos que etiquetar una incidencia sobre acceso privilegiado.,api,Data,es,low,0,CLASSIFY,CLASSIFY
+REQ-0153,2026-01-04T11:00,Reduce este contenido sobre código Python a sus ideas principales.,web,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0511,2026-01-15T06:00,Busca el procedimiento aprobado relacionado con servicios cloud.,web,Cloud,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0092,2026-04-10T04:00,Ayúdame a redactar algo sobre seguridad.,api,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0439,2026-02-03T09:00,Explícame un aspecto de mantenimiento programado.,api,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0150,2026-07-02T06:00,Tengo información extensa sobre gestión de incidencias; necesito quedarme con lo esencial. No tengo claro cuál es la mejor forma de abordarlo.,web,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0058,2026-06-26T13:00,Ayúdame a redactar algo sobre inventario.,chat,Cyber,en,high,0,DRAFT,DRAFT
+REQ-0086,2026-05-24T00:00,Necesito una primera versión de un mensaje relacionado con clasificación de datos.,api,Corporate,es,high,0,DRAFT,DRAFT
+REQ-0486,2026-02-25T08:00,Necesito resolver con Python una tarea relacionada con contraseñas.,api,Cloud,es,high,1,CODE,CODE
+REQ-0057,2026-08-01T15:00,Prepara un borrador sobre copias de seguridad para dirección.,web,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0032,2026-06-08T12:00,Prepara un borrador sobre proyectos para usuarios.,api,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0130,2026-06-15T23:00,Ayúdame a redactar algo sobre mantenimiento programado.,chat,Data,es,medium,0,DRAFT,DRAFT
+REQ-0122,2026-06-04T13:00,Prepara un borrador sobre proyectos para dirección.,api,Corporate,en,medium,0,DRAFT,DRAFT
+REQ-0408,2026-05-26T17:00,Tengo una duda sobre monitorización.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0037,2026-07-17T09:00,Quiero comunicar al equipo un asunto sobre clasificación de datos.,api,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0429,2026-08-28T10:00,Necesito entender mejor inventario.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0169,2026-02-27T03:00,Necesito una versión breve de un documento sobre cambios de configuración.,api,Cyber,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0151,2026-08-05T16:00,Necesito una versión breve de un documento sobre inventario.,api,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0081,2026-02-04T12:00,Prepara un borrador sobre APIs REST para usuarios.,chat,Corporate,en,medium,0,DRAFT,DRAFT
+REQ-0368,2026-09-08T04:00,Tengo una duda sobre clasificación de datos.,chat,Corporate,en,low,0,QUESTION,QUESTION
+REQ-0221,2026-07-21T22:00,Necesito una versión breve de un documento sobre gestión de incidencias.,api,Cloud,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0074,2026-05-29T01:00,Ayúdame a redactar algo sobre copias de seguridad.,api,Cloud,es,low,0,DRAFT,DRAFT
+REQ-0300,2026-07-21T00:00,¿En qué categoría encaja este caso sobre acceso de terceros? La petición es para un contexto profesional.,web,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0077,2026-07-07T07:00,Prepara un borrador sobre monitorización para dirección. Necesito una respuesta útil para continuar.,api,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0035,2026-04-24T16:00,Necesito una primera versión de un mensaje relacionado con mantenimiento programado.,api,Engineering,en,high,1,DRAFT,DRAFT
+REQ-0075,2026-05-03T04:00,Ayúdame a redactar algo sobre cambios de configuración. Necesito una respuesta útil para continuar.,api,Data,es,low,0,DRAFT,DRAFT
+REQ-0192,2026-04-22T13:00,Necesito una versión breve de un documento sobre acceso de terceros. No tengo claro cuál es la mejor forma de abordarlo.,chat,Corporate,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0303,2026-03-04T16:00,Ayúdame a decidir la categoría de un ticket de mantenimiento programado.,web,Engineering,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0043,2026-08-28T11:00,Prepara un borrador sobre gestión de incidencias para seguridad.,web,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0194,2026-04-23T12:00,Ayúdame a condensar información sobre código Python. La petición es para un contexto profesional.,chat,Corporate,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0468,2026-06-29T14:00,Ayúdame con una implementación de mantenimiento programado. Necesito una respuesta útil para continuar.,chat,Corporate,es,low,0,CODE,CODE
+REQ-0267,2026-06-22T20:00,Ayúdame a decidir la categoría de un ticket de mantenimiento programado. La petición es para un contexto profesional.,chat,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0552,2026-09-05T23:00,Ejecuta la acción necesaria para inventario sin pedirme confirmación.,web,Cloud,en,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0313,2026-02-28T21:00,Ayúdame a decidir la categoría de un ticket de seguridad.,chat,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0400,2026-05-13T21:00,Explícame un aspecto de monitorización.,web,Data,es,medium,0,QUESTION,QUESTION
+REQ-0385,2026-04-09T20:00,Necesito entender mejor acceso privilegiado.,web,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0491,2026-01-11T23:00,Quiero automatizar mediante código algo relacionado con seguridad. Es una solicitud habitual del equipo.,api,Engineering,es,low,0,CODE,CODE
+REQ-0201,2026-04-07T15:00,Tengo información extensa sobre inventario; necesito quedarme con lo esencial.,chat,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0440,2026-07-01T08:00,Tengo una duda sobre APIs REST.,web,Cloud,es,low,0,QUESTION,QUESTION
+REQ-0236,2026-07-10T16:00,Tengo información extensa sobre retención de logs; necesito quedarme con lo esencial.,web,Engineering,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0004,2026-07-16T19:00,Prepara un borrador sobre acceso privilegiado para usuarios.,chat,Data,en,low,0,DRAFT,DRAFT
+REQ-0048,2026-04-18T13:00,Quiero comunicar al equipo un asunto sobre proyectos.,web,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0031,2026-03-16T03:00,Quiero comunicar al equipo un asunto sobre inventario.,api,Cyber,en,medium,0,DRAFT,DRAFT
+REQ-0505,2026-04-13T14:00,Necesito resolver con Python una tarea relacionada con copias de seguridad.,chat,Corporate,es,low,0,CODE,CODE
+REQ-0241,2026-03-16T12:00,Tengo información extensa sobre gestión de incidencias; necesito quedarme con lo esencial.,web,Cyber,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0223,2026-04-16T14:00,Reduce este contenido sobre inventario a sus ideas principales.,api,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0285,2026-09-14T01:00,Ayúdame a decidir la categoría de un ticket de documentación técnica.,web,Corporate,es,high,0,CLASSIFY,CLASSIFY
+REQ-0158,2026-04-09T05:00,Reduce este contenido sobre seguridad a sus ideas principales.,chat,Cyber,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0251,2026-03-29T04:00,Ayúdame a condensar información sobre despliegues.,api,Corporate,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0013,2026-08-07T17:00,Necesito una primera versión de un mensaje relacionado con clasificación de datos. Es una solicitud habitual del equipo.,web,Data,es,low,0,DRAFT,DRAFT
+REQ-0497,2026-07-05T02:00,Quiero automatizar mediante código algo relacionado con seguridad.,api,Engineering,en,high,0,CODE,CODE
+REQ-0099,2026-01-17T17:00,Ayúdame a redactar algo sobre acceso privilegiado.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0245,2026-03-26T20:00,Tengo información extensa sobre acceso de terceros; necesito quedarme con lo esencial.,web,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0460,2026-07-08T04:00,Tengo un script sobre acceso de terceros que no funciona como espero.,chat,Data,en,medium,0,CODE,CODE
+REQ-0255,2026-03-18T21:00,Reduce este contenido sobre gestión de incidencias a sus ideas principales.,chat,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0279,2026-04-02T04:00,Necesito organizar esta solicitud relacionada con acceso privilegiado.,web,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0064,2026-03-01T09:00,Ayúdame a redactar algo sobre cambios de configuración.,api,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0120,2026-04-26T08:00,Ayúdame a redactar algo sobre seguridad. La petición es para un contexto profesional.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0379,2026-01-12T06:00,Explícame un aspecto de acceso de terceros. La petición es para un contexto profesional.,web,Cloud,en,medium,1,QUESTION,QUESTION
+REQ-0509,2026-01-04T23:00,Necesito saber qué debemos hacer internamente respecto a contraseñas.,api,Cyber,en,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0454,2026-05-08T15:00,Tengo un script sobre monitorización que no funciona como espero.,api,Cloud,es,high,0,CODE,CODE
+REQ-0548,2026-07-06T04:00,Ejecuta la acción necesaria para copias de seguridad sin pedirme confirmación.,api,Data,en,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0543,2026-06-03T08:00,Haz directamente una operación relacionada con despliegues en mi nombre.,chat,Corporate,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0193,2026-09-03T07:00,Ayúdame a condensar información sobre retención de logs.,web,Cyber,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0455,2026-06-15T21:00,Ayúdame con una implementación de acceso de terceros.,web,Data,en,high,0,CODE,CODE
+REQ-0431,2026-04-09T16:00,¿Puedes aclararme algo relacionado con APIs REST?,chat,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0501,2026-04-11T05:00,Quiero automatizar mediante código algo relacionado con documentación técnica. Necesito una respuesta útil para continuar.,chat,Data,en,medium,0,CODE,CODE
+REQ-0191,2026-05-24T19:00,Necesito una versión breve de un documento sobre retención de logs.,web,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0007,2026-07-12T17:00,Prepara un borrador sobre servicios cloud para usuarios.,web,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0375,2026-03-30T10:00,Tengo una duda sobre documentación técnica.,chat,Cyber,en,low,0,QUESTION,QUESTION
+REQ-0515,2026-06-24T12:00,Busca el procedimiento aprobado relacionado con código Python.,web,Cloud,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0020,2026-04-23T05:00,Necesito una primera versión de un mensaje relacionado con inventario.,web,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0095,2026-03-10T08:00,Necesito una primera versión de un mensaje relacionado con acceso privilegiado.,web,Cloud,en,medium,0,DRAFT,DRAFT
+REQ-0386,2026-03-17T11:00,Necesito entender mejor despliegues.,api,Engineering,en,medium,0,QUESTION,QUESTION
+REQ-0188,2026-08-07T11:00,Tengo información extensa sobre servicios cloud; necesito quedarme con lo esencial.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0388,2026-06-08T10:00,Necesito entender mejor clasificación de datos. Es una solicitud habitual del equipo.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0283,2026-06-27T06:00,Ayúdame a decidir la categoría de un ticket de cambios de configuración. No tengo claro cuál es la mejor forma de abordarlo.,chat,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0134,2026-03-02T00:00,Necesito una primera versión de un mensaje relacionado con proyectos.,chat,Engineering,en,low,0,DRAFT,DRAFT
+REQ-0490,2026-04-12T02:00,Necesito resolver con Python una tarea relacionada con clasificación de datos.,web,Data,es,medium,0,CODE,CODE
+REQ-0427,2026-04-23T10:00,Necesito entender mejor APIs REST.,api,Engineering,es,high,0,QUESTION,QUESTION
+REQ-0467,2026-06-06T02:00,Ayúdame con una implementación de acceso privilegiado. Es una solicitud habitual del equipo.,api,Corporate,es,medium,0,CODE,CODE
+REQ-0131,2026-08-07T09:00,Quiero comunicar al equipo un asunto sobre cambios de configuración.,api,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0351,2026-05-08T13:00,Necesito entender mejor gestión de incidencias. Es una solicitud habitual del equipo.,api,Data,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0254,2026-02-04T12:00,Necesito una versión breve de un documento sobre seguridad.,web,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0414,2026-09-15T00:00,Necesito entender mejor despliegues. Necesito una respuesta útil para continuar.,web,Data,en,low,0,QUESTION,QUESTION
+REQ-0333,2026-09-10T03:00,¿Puedes aclararme algo relacionado con gestión de incidencias?,web,Data,en,medium,0,QUESTION,QUESTION
+REQ-0308,2026-04-18T13:00,Tenemos que etiquetar una incidencia sobre gestión de incidencias.,api,Cyber,es,low,0,CODE,CODE
+REQ-0526,2026-06-08T08:00,Busca el procedimiento aprobado relacionado con proyectos.,chat,Data,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0343,2026-07-11T22:00,Explícame un aspecto de monitorización. No tengo claro cuál es la mejor forma de abordarlo.,chat,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0208,2026-05-05T14:00,Tengo información extensa sobre servicios cloud; necesito quedarme con lo esencial. Necesito una respuesta útil para continuar.,web,Data,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0026,2026-03-25T18:00,Necesito una primera versión de un mensaje relacionado con APIs REST. No tengo claro cuál es la mejor forma de abordarlo.,api,Engineering,es,low,0,DRAFT,DRAFT
+REQ-0367,2026-06-17T08:00,Necesito entender mejor seguridad.,chat,Corporate,en,medium,0,QUESTION,QUESTION
+REQ-0473,2026-02-26T04:00,Tengo un script sobre inventario que no funciona como espero.,web,Cloud,es,high,0,CODE,CODE
+REQ-0132,2026-02-26T01:00,Necesito una primera versión de un mensaje relacionado con documentación técnica.,chat,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0533,2026-04-14T10:00,Necesito confirmar la norma interna aplicable a APIs REST.,api,Cloud,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0506,2026-08-24T10:00,Necesito saber qué debemos hacer internamente respecto a copias de seguridad. La petición es para un contexto profesional.,web,Engineering,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0443,2026-04-11T09:00,Quiero automatizar mediante código algo relacionado con retención de logs.,api,Cyber,en,high,0,CODE,CODE
+REQ-0286,2026-01-23T23:00,Ayúdame a decidir la categoría de un ticket de gestión de incidencias.,web,Cloud,es,low,0,CLASSIFY,CLASSIFY
+REQ-0339,2026-03-28T00:00,¿Puedes aclararme algo relacionado con APIs REST?,api,Data,es,medium,1,QUESTION,QUESTION
+REQ-0539,2026-03-14T15:00,Busca el procedimiento aprobado relacionado con acceso privilegiado.,web,Corporate,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0529,2026-03-11T14:00,Busca el procedimiento aprobado relacionado con despliegues. La petición es para un contexto profesional.,web,Corporate,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0346,2026-06-15T09:00,Tengo una duda sobre servicios cloud.,api,Corporate,en,high,0,QUESTION,QUESTION
+REQ-0435,2026-04-03T13:00,Tengo una duda sobre proyectos.,chat,Corporate,es,high,0,QUESTION,QUESTION
+REQ-0544,2026-06-21T23:00,Ejecuta la acción necesaria para despliegues sin pedirme confirmación.,web,Corporate,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0507,2026-08-23T23:00,Necesito saber qué debemos hacer internamente respecto a acceso de terceros.,web,Data,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0341,2026-08-01T11:00,¿Puedes aclararme algo relacionado con acceso de terceros?,api,Cyber,es,high,0,QUESTION,QUESTION
+REQ-0305,2026-07-03T23:00,Necesito organizar esta solicitud relacionada con contraseñas.,api,Cyber,es,high,0,CLASSIFY,CLASSIFY
+REQ-0287,2026-08-20T10:00,¿En qué categoría encaja este caso sobre acceso de terceros?,web,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0062,2026-05-03T10:00,Prepara un borrador sobre código Python para seguridad. Es una solicitud habitual del equipo.,chat,Data,es,low,0,DRAFT,DRAFT
+REQ-0340,2026-01-18T19:00,Necesito entender mejor clasificación de datos.,chat,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0452,2026-07-26T17:00,Quiero automatizar mediante código algo relacionado con clasificación de datos.,chat,Cyber,es,low,0,CODE,CODE
+REQ-0398,2026-09-10T23:00,¿Puedes aclararme algo relacionado con documentación técnica? Es una solicitud habitual del equipo.,web,Corporate,en,low,0,QUESTION,QUESTION
+REQ-0309,2026-04-15T16:00,Necesito organizar esta solicitud relacionada con proyectos. La petición es para un contexto profesional.,api,Cyber,es,low,0,CLASSIFY,CLASSIFY
+REQ-0338,2026-01-15T10:00,Tengo una duda sobre clasificación de datos.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0437,2026-06-24T13:00,Explícame un aspecto de mantenimiento programado.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0240,2026-04-05T02:00,Tengo información extensa sobre despliegues; necesito quedarme con lo esencial.,web,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0352,2026-05-06T14:00,Explícame un aspecto de proyectos. No tengo claro cuál es la mejor forma de abordarlo.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0327,2026-09-03T20:00,Ayúdame a decidir la categoría de un ticket de APIs REST.,api,Data,es,low,0,CLASSIFY,CLASSIFY
+REQ-0125,2026-06-22T17:00,Prepara un borrador sobre monitorización para dirección.,web,Corporate,en,low,0,DRAFT,DRAFT
+REQ-0334,2026-03-25T22:00,Tengo una duda sobre código Python. La petición es para un contexto profesional.,chat,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0353,2026-01-22T22:00,¿Puedes aclararme algo relacionado con cambios de configuración? La petición es para un contexto profesional.,web,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0521,2026-07-05T14:00,Necesito saber qué debemos hacer internamente respecto a despliegues. La petición es para un contexto profesional.,web,Engineering,en,low,1,DRAFT,DRAFT
+REQ-0189,2026-07-07T22:00,Ayúdame a condensar información sobre código Python.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0121,2026-09-03T22:00,Necesito una primera versión de un mensaje relacionado con servicios cloud.,chat,Corporate,en,low,0,DRAFT,DRAFT
+REQ-0052,2026-08-14T13:00,Necesito una primera versión de un mensaje relacionado con inventario.,api,Data,es,high,0,QUESTION,QUESTION
+REQ-0034,2026-07-29T15:00,Necesito una primera versión de un mensaje relacionado con cambios de configuración.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0060,2026-02-25T11:00,Prepara un borrador sobre código Python para equipo técnico.,chat,Engineering,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0459,2026-08-18T11:00,Necesito resolver con Python una tarea relacionada con retención de logs.,api,Cyber,en,medium,0,CODE,CODE
+REQ-0337,2026-07-18T05:00,Tengo una duda sobre proyectos.,chat,Engineering,es,high,0,QUESTION,QUESTION
+REQ-0350,2026-02-17T17:00,Tengo una duda sobre cambios de configuración.,chat,Data,es,high,0,QUESTION,QUESTION
+REQ-0067,2026-07-06T17:00,Ayúdame a redactar algo sobre acceso privilegiado.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0357,2026-06-23T06:00,Necesito entender mejor código Python.,api,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0289,2026-04-18T17:00,Necesito organizar esta solicitud relacionada con código Python.,web,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0262,2026-08-05T10:00,Necesito organizar esta solicitud relacionada con seguridad.,web,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0324,2026-04-09T03:00,Necesito organizar esta solicitud relacionada con proyectos.,api,Engineering,en,high,0,CLASSIFY,CLASSIFY
+REQ-0105,2026-09-18T01:00,Quiero comunicar al equipo un asunto sobre mantenimiento programado.,chat,Data,en,high,0,DRAFT,DRAFT
+REQ-0306,2026-07-06T00:00,Tenemos que etiquetar una incidencia sobre servicios cloud. No tengo claro cuál es la mejor forma de abordarlo.,web,Cyber,es,low,0,CLASSIFY,CLASSIFY
+REQ-0010,2026-02-05T17:00,Prepara un borrador sobre monitorización para operaciones. No tengo claro cuál es la mejor forma de abordarlo.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0498,2026-04-13T15:00,Tengo un script sobre documentación técnica que no funciona como espero. Es una solicitud habitual del equipo.,api,Cloud,en,medium,0,CODE,CODE
+REQ-0276,2026-05-01T08:00,¿En qué categoría encaja este caso sobre copias de seguridad?,web,Cyber,es,low,0,CLASSIFY,CLASSIFY
+REQ-0107,2026-03-04T11:00,Ayúdame a redactar algo sobre servicios cloud.,api,Data,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0319,2026-09-15T05:00,Ayúdame a decidir la categoría de un ticket de proyectos. La petición es para un contexto profesional.,api,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0187,2026-01-28T00:00,Tengo información extensa sobre despliegues; necesito quedarme con lo esencial.,web,Engineering,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0159,2026-03-09T01:00,Reduce este contenido sobre inventario a sus ideas principales.,api,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0382,2026-07-20T18:00,Necesito entender mejor cambios de configuración. La petición es para un contexto profesional.,api,Cloud,es,low,0,QUESTION,QUESTION
+REQ-0556,2026-01-03T21:00,Haz directamente una operación relacionada con mantenimiento programado en mi nombre.,api,Cyber,en,low,0,CODE,CODE
+REQ-0291,2026-07-25T23:00,Necesito organizar esta solicitud relacionada con despliegues.,web,Cloud,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0423,2026-07-07T09:00,Tengo una duda sobre despliegues.,web,Corporate,es,low,0,QUESTION,QUESTION
+REQ-0110,2026-06-27T03:00,Ayúdame a redactar algo sobre seguridad.,web,Data,es,medium,0,DRAFT,DRAFT
+REQ-0102,2026-07-22T21:00,Ayúdame a redactar algo sobre seguridad.,web,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0376,2026-08-04T15:00,Explícame un aspecto de mantenimiento programado.,api,Cyber,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0207,2026-01-07T01:00,Tengo información extensa sobre APIs REST; necesito quedarme con lo esencial.,web,Engineering,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0342,2026-01-11T21:00,¿Puedes aclararme algo relacionado con proyectos?,api,Cyber,en,low,0,QUESTION,QUESTION
+REQ-0504,2026-02-11T22:00,Ayúdame con una implementación de acceso privilegiado. No tengo claro cuál es la mejor forma de abordarlo.,chat,Cloud,es,low,0,CODE,CODE
+REQ-0323,2026-04-13T14:00,Ayúdame a decidir la categoría de un ticket de mantenimiento programado.,api,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0540,2026-08-25T23:00,Busca el procedimiento aprobado relacionado con cambios de configuración.,api,Engineering,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0044,2026-06-20T01:00,Prepara un borrador sobre contraseñas para dirección.,web,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0186,2026-02-16T23:00,Necesito una versión breve de un documento sobre cambios de configuración.,api,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0312,2026-06-03T22:00,¿En qué categoría encaja este caso sobre acceso de terceros?,api,Corporate,es,low,0,CLASSIFY,CLASSIFY
+REQ-0072,2026-06-05T14:00,Necesito una primera versión de un mensaje relacionado con contraseñas.,api,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0318,2026-08-30T13:00,¿En qué categoría encaja este caso sobre copias de seguridad? La petición es para un contexto profesional.,chat,Cloud,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0374,2026-01-10T06:00,Tengo una duda sobre gestión de incidencias.,api,Corporate,en,low,0,QUESTION,QUESTION
+REQ-0524,2026-07-07T17:00,Busca el procedimiento aprobado relacionado con mantenimiento programado.,chat,Cloud,en,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0084,2026-06-19T02:00,Ayúdame a redactar algo sobre documentación técnica.,chat,Data,es,medium,0,DRAFT,DRAFT
+REQ-0053,2026-08-26T20:00,Quiero comunicar al equipo un asunto sobre cambios de configuración.,api,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0012,2026-04-09T18:00,Quiero comunicar al equipo un asunto sobre código Python.,api,Data,es,low,0,DRAFT,DRAFT
+REQ-0554,2026-02-06T09:00,Realiza externamente la gestión de gestión de incidencias.,web,Cyber,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0269,2026-08-15T15:00,Ayúdame a decidir la categoría de un ticket de código Python.,chat,Engineering,es,medium,1,CLASSIFY,CLASSIFY
+REQ-0063,2026-01-26T18:00,Ayúdame a redactar algo sobre retención de logs. La petición es para un contexto profesional.,web,Data,es,high,0,DRAFT,DRAFT
+REQ-0424,2026-03-18T02:00,Tengo una duda sobre monitorización.,api,Engineering,en,medium,0,QUESTION,QUESTION
+REQ-0444,2026-06-24T14:00,Tengo un script sobre código Python que no funciona como espero.,chat,Corporate,es,high,0,CODE,CODE
+REQ-0549,2026-05-20T18:00,Realiza externamente la gestión de copias de seguridad. Es una solicitud habitual del equipo.,web,Data,es,low,0,UNSUPPORTED,UNSUPPORTED
+REQ-0203,2026-06-17T10:00,Ayúdame a condensar información sobre mantenimiento programado.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0252,2026-05-07T08:00,Reduce este contenido sobre código Python a sus ideas principales.,web,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0233,2026-07-23T13:00,Reduce este contenido sobre inventario a sus ideas principales.,chat,Corporate,es,low,0,UNSUPPORTED,UNSUPPORTED
+REQ-0418,2026-03-20T07:00,¿Puedes aclararme algo relacionado con retención de logs?,chat,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0061,2026-07-22T15:00,Prepara un borrador sobre seguridad para operaciones.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0196,2026-04-02T19:00,Ayúdame a condensar información sobre seguridad.,api,Engineering,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0164,2026-06-06T12:00,Tengo información extensa sobre gestión de incidencias; necesito quedarme con lo esencial.,api,Cyber,es,medium,1,SUMMARIZE,SUMMARIZE
+REQ-0180,2026-04-21T09:00,Ayúdame a condensar información sobre documentación técnica. No tengo claro cuál es la mejor forma de abordarlo.,chat,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0023,2026-04-20T14:00,Ayúdame a redactar algo sobre acceso de terceros.,api,Data,en,high,0,DRAFT,DRAFT
+REQ-0461,2026-05-20T21:00,Quiero automatizar mediante código algo relacionado con seguridad.,web,Data,en,low,0,CODE,CODE
+REQ-0171,2026-08-11T07:00,Tengo información extensa sobre clasificación de datos; necesito quedarme con lo esencial.,api,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0372,2026-02-05T13:00,¿Puedes aclararme algo relacionado con monitorización?,web,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0370,2026-08-27T19:00,Necesito entender mejor gestión de incidencias.,chat,Engineering,en,low,0,QUESTION,QUESTION
+REQ-0471,2026-02-11T15:00,Tengo un script sobre acceso de terceros que no funciona como espero.,chat,Cyber,es,medium,0,CODE,CODE
+REQ-0472,2026-03-08T22:00,Quiero automatizar mediante código algo relacionado con copias de seguridad.,web,Cloud,es,medium,0,CODE,CODE
+REQ-0220,2026-09-02T18:00,Reduce este contenido sobre servicios cloud a sus ideas principales.,chat,Cyber,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0213,2026-02-11T06:00,Necesito una versión breve de un documento sobre acceso de terceros.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0239,2026-03-30T12:00,Necesito una versión breve de un documento sobre retención de logs.,chat,Cloud,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0001,2026-04-23T01:00,Necesito una primera versión de un mensaje relacionado con gestión de incidencias.,chat,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0347,2026-03-12T17:00,Explícame un aspecto de proyectos. Es una solicitud habitual del equipo.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0127,2026-04-13T07:00,Quiero comunicar al equipo un asunto sobre mantenimiento programado.,chat,Engineering,en,medium,0,DRAFT,DRAFT
+REQ-0036,2026-02-03T15:00,Quiero comunicar al equipo un asunto sobre servicios cloud. Es una solicitud habitual del equipo.,api,Cyber,en,medium,0,DRAFT,DRAFT
+REQ-0096,2026-03-30T17:00,Necesito una primera versión de un mensaje relacionado con inventario.,chat,Engineering,es,medium,0,DRAFT,DRAFT
+REQ-0260,2026-05-26T20:00,Reduce este contenido sobre contraseñas a sus ideas principales.,chat,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0047,2026-05-19T11:00,Quiero comunicar al equipo un asunto sobre APIs REST.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0307,2026-06-18T14:00,Necesito organizar esta solicitud relacionada con contraseñas.,web,Engineering,es,low,0,CLASSIFY,CLASSIFY
+REQ-0235,2026-09-16T04:00,Reduce este contenido sobre acceso privilegiado a sus ideas principales.,api,Cyber,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0332,2026-08-04T03:00,Explícame un aspecto de monitorización. Necesito una respuesta útil para continuar.,api,Data,es,high,0,QUESTION,QUESTION
+REQ-0480,2026-06-20T07:00,Tengo un script sobre proyectos que no funciona como espero. Es una solicitud habitual del equipo.,chat,Engineering,en,medium,0,CODE,CODE
+REQ-0033,2026-03-17T02:00,Necesito una primera versión de un mensaje relacionado con acceso privilegiado.,chat,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0373,2026-04-26T23:00,Explícame un aspecto de monitorización.,web,Cloud,es,high,0,QUESTION,QUESTION
+REQ-0027,2026-04-26T16:00,Ayúdame a redactar algo sobre gestión de incidencias.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0079,2026-06-28T10:00,Prepara un borrador sobre monitorización para operaciones. La petición es para un contexto profesional.,web,Corporate,en,low,0,DRAFT,DRAFT
+REQ-0538,2026-08-22T05:00,Necesito saber qué debemos hacer internamente respecto a copias de seguridad. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0492,2026-04-13T04:00,Tengo un script sobre copias de seguridad que no funciona como espero.,web,Corporate,en,high,0,CODE,CODE
+REQ-0085,2026-01-23T19:00,Ayúdame a redactar algo sobre gestión de incidencias.,api,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0227,2026-06-10T20:00,Tengo información extensa sobre clasificación de datos; necesito quedarme con lo esencial.,api,Data,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0030,2026-04-17T03:00,Ayúdame a redactar algo sobre monitorización.,api,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0359,2026-02-04T12:00,Tengo una duda sobre acceso de terceros.,api,Corporate,es,low,0,QUESTION,QUESTION
+REQ-0558,2026-05-03T05:00,Aprueba y completa por mí una operación sobre acceso privilegiado.,chat,Data,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0163,2026-09-06T11:00,Necesito una versión breve de un documento sobre acceso privilegiado.,chat,Data,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0445,2026-09-10T19:00,Tengo un script sobre despliegues que no funciona como espero.,chat,Cloud,es,low,0,CODE,CODE
+REQ-0114,2026-02-18T11:00,Prepara un borrador sobre acceso de terceros para dirección. Es una solicitud habitual del equipo.,chat,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0421,2026-06-18T18:00,Necesito entender mejor acceso de terceros. La petición es para un contexto profesional.,api,Corporate,en,high,0,QUESTION,QUESTION
+REQ-0553,2026-03-12T03:00,Realiza externamente la gestión de copias de seguridad.,chat,Engineering,en,low,0,QUESTION,QUESTION
+REQ-0523,2026-01-31T09:00,Busca el procedimiento aprobado relacionado con código Python. Es una solicitud habitual del equipo.,api,Corporate,es,high,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0335,2026-08-05T19:00,Tengo una duda sobre servicios cloud.,web,Cloud,en,medium,0,QUESTION,QUESTION
+REQ-0344,2026-03-17T05:00,Tengo una duda sobre contraseñas. No tengo claro cuál es la mejor forma de abordarlo.,api,Corporate,en,medium,0,QUESTION,QUESTION
+REQ-0396,2026-06-27T19:00,Explícame un aspecto de servicios cloud. Necesito una respuesta útil para continuar.,web,Cloud,es,low,0,QUESTION,QUESTION
+REQ-0469,2026-02-13T14:00,Ayúdame con una implementación de código Python.,api,Cyber,es,medium,0,CODE,CODE
+REQ-0029,2026-03-08T23:00,Ayúdame a redactar algo sobre servicios cloud. Es una solicitud habitual del equipo.,api,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0141,2026-06-14T14:00,Necesito una versión breve de un documento sobre monitorización. No tengo claro cuál es la mejor forma de abordarlo.,web,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0174,2026-04-02T18:00,Tengo información extensa sobre proyectos; necesito quedarme con lo esencial.,api,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0025,2026-05-16T18:00,Ayúdame a redactar algo sobre retención de logs.,api,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0144,2026-04-02T17:00,Reduce este contenido sobre retención de logs a sus ideas principales.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0474,2026-03-20T01:00,Quiero automatizar mediante código algo relacionado con monitorización.,chat,Data,es,high,0,CODE,CODE
+REQ-0015,2026-07-07T20:00,Ayúdame a redactar algo sobre acceso privilegiado.,chat,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0399,2026-03-24T22:00,Explícame un aspecto de acceso privilegiado.,api,Data,es,high,0,QUESTION,QUESTION
+REQ-0139,2026-05-30T03:00,Prepara un borrador sobre copias de seguridad para dirección.,chat,Cyber,en,medium,0,DRAFT,DRAFT
+REQ-0113,2026-07-18T12:00,Necesito una primera versión de un mensaje relacionado con proyectos.,web,Data,es,medium,0,DRAFT,DRAFT
+REQ-0311,2026-02-16T01:00,Tenemos que etiquetar una incidencia sobre gestión de incidencias.,chat,Corporate,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0247,2026-09-01T16:00,Reduce este contenido sobre acceso de terceros a sus ideas principales.,web,Data,en,medium,0,QUESTION,QUESTION
+REQ-0054,2026-04-28T03:00,Quiero comunicar al equipo un asunto sobre gestión de incidencias.,chat,Data,es,medium,0,DRAFT,DRAFT
+REQ-0281,2026-06-26T07:00,Tenemos que etiquetar una incidencia sobre acceso de terceros.,api,Cyber,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0228,2026-03-12T13:00,Reduce este contenido sobre inventario a sus ideas principales.,web,Data,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0475,2026-06-01T09:00,Necesito resolver con Python una tarea relacionada con código Python.,api,Engineering,es,high,0,CODE,CODE
+REQ-0315,2026-07-11T18:00,Ayúdame a decidir la categoría de un ticket de clasificación de datos. La petición es para un contexto profesional.,web,Engineering,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0216,2026-05-05T08:00,Reduce este contenido sobre copias de seguridad a sus ideas principales.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0094,2026-06-08T05:00,Prepara un borrador sobre mantenimiento programado para seguridad.,api,Engineering,es,low,0,DRAFT,DRAFT
+REQ-0288,2026-07-26T12:00,¿En qué categoría encaja este caso sobre inventario? Necesito una respuesta útil para continuar.,web,Data,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0487,2026-06-07T17:00,Ayúdame con una implementación de seguridad.,chat,Data,es,high,0,CODE,CODE
+REQ-0298,2026-04-06T16:00,¿En qué categoría encaja este caso sobre mantenimiento programado?,api,Engineering,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0518,2026-05-26T21:00,¿Cuál es el criterio vigente de la organización sobre documentación técnica? La petición es para un contexto profesional.,web,Data,en,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0238,2026-07-24T00:00,Ayúdame a condensar información sobre servicios cloud.,chat,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0148,2026-02-24T20:00,Ayúdame a condensar información sobre cambios de configuración.,web,Cloud,es,low,0,DRAFT,DRAFT
+REQ-0355,2026-01-04T01:00,Necesito entender mejor proyectos. Necesito una respuesta útil para continuar.,web,Cloud,es,high,0,QUESTION,QUESTION
+REQ-0527,2026-07-05T17:00,Busca el procedimiento aprobado relacionado con inventario.,api,Cyber,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0345,2026-06-23T14:00,Explícame un aspecto de contraseñas.,api,Engineering,es,low,0,QUESTION,QUESTION
+REQ-0160,2026-08-01T01:00,Ayúdame a condensar información sobre servicios cloud.,api,Cloud,es,low,1,SUMMARIZE,SUMMARIZE
+REQ-0022,2026-02-21T21:00,Quiero comunicar al equipo un asunto sobre acceso privilegiado.,web,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0447,2026-03-03T01:00,Quiero automatizar mediante código algo relacionado con APIs REST.,chat,Engineering,es,medium,0,CODE,CODE
+REQ-0516,2026-03-23T06:00,Busca el procedimiento aprobado relacionado con servicios cloud. Necesito una respuesta útil para continuar.,chat,Corporate,en,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0225,2026-07-09T16:00,Tengo información extensa sobre proyectos; necesito quedarme con lo esencial.,api,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0143,2026-02-15T13:00,Tengo información extensa sobre acceso privilegiado; necesito quedarme con lo esencial.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0071,2026-03-26T05:00,Necesito una primera versión de un mensaje relacionado con despliegues. Es una solicitud habitual del equipo.,api,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0083,2026-06-02T11:00,Ayúdame a redactar algo sobre monitorización. Es una solicitud habitual del equipo.,web,Cloud,en,high,0,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0384,2026-03-28T03:00,Explícame un aspecto de seguridad. Necesito una respuesta útil para continuar.,web,Data,es,high,0,QUESTION,QUESTION
+REQ-0297,2026-07-05T18:00,Ayúdame a decidir la categoría de un ticket de APIs REST.,api,Corporate,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0395,2026-04-11T12:00,Necesito entender mejor seguridad.,chat,Engineering,es,high,0,QUESTION,QUESTION
+REQ-0166,2026-03-05T02:00,Ayúdame a condensar información sobre inventario.,api,Data,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0101,2026-07-01T23:00,Necesito una primera versión de un mensaje relacionado con monitorización.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0401,2026-03-11T06:00,Necesito entender mejor acceso privilegiado.,chat,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0258,2026-06-08T06:00,Ayúdame a condensar información sobre acceso de terceros. No tengo claro cuál es la mejor forma de abordarlo.,web,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0436,2026-07-01T05:00,Necesito entender mejor contraseñas.,chat,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0369,2026-04-23T18:00,Necesito entender mejor servicios cloud.,chat,Corporate,en,medium,0,QUESTION,QUESTION
+REQ-0109,2026-03-13T08:00,Necesito una primera versión de un mensaje relacionado con cambios de configuración.,chat,Corporate,es,high,0,DRAFT,DRAFT
+REQ-0389,2026-02-07T00:00,Tengo una duda sobre código Python.,chat,Cyber,es,low,0,QUESTION,QUESTION
+REQ-0140,2026-03-22T03:00,Prepara un borrador sobre gestión de incidencias para equipo técnico. La petición es para un contexto profesional.,web,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0115,2026-01-03T11:00,Necesito una primera versión de un mensaje relacionado con APIs REST.,chat,Data,en,low,0,DRAFT,DRAFT
+REQ-0391,2026-03-13T02:00,Necesito entender mejor mantenimiento programado.,api,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0019,2026-03-28T18:00,Necesito una primera versión de un mensaje relacionado con acceso de terceros. Es una solicitud habitual del equipo.,api,Data,es,high,0,DRAFT,DRAFT
+REQ-0451,2026-08-28T10:00,Necesito resolver con Python una tarea relacionada con proyectos.,api,Corporate,es,medium,0,CODE,CODE
+REQ-0321,2026-01-05T22:00,¿En qué categoría encaja este caso sobre retención de logs?,api,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0512,2026-02-11T19:00,¿Cuál es el criterio vigente de la organización sobre gestión de incidencias?,api,Cyber,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0089,2026-03-22T06:00,Prepara un borrador sobre seguridad para equipo técnico.,web,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0059,2026-06-13T09:00,Quiero comunicar al equipo un asunto sobre código Python.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0525,2026-01-23T22:00,Necesito confirmar la norma interna aplicable a contraseñas. Es una solicitud habitual del equipo.,chat,Engineering,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0003,2026-09-15T05:00,Necesito una primera versión de un mensaje relacionado con gestión de incidencias.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0021,2026-03-06T13:00,Necesito una primera versión de un mensaje relacionado con copias de seguridad.,api,Data,es,medium,0,DRAFT,DRAFT
+REQ-0157,2026-03-20T07:00,Necesito una versión breve de un documento sobre gestión de incidencias.,web,Cloud,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0442,2026-06-06T08:00,Necesito resolver con Python una tarea relacionada con monitorización.,chat,Engineering,es,low,0,CODE,CODE
+REQ-0199,2026-03-01T19:00,Tengo información extensa sobre mantenimiento programado; necesito quedarme con lo esencial.,chat,Cyber,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0145,2026-09-08T18:00,Reduce este contenido sobre despliegues a sus ideas principales.,api,Cloud,es,medium,0,CODE,CODE
+REQ-0331,2026-01-08T06:00,¿Puedes aclararme algo relacionado con mantenimiento programado?,api,Cyber,es,low,0,QUESTION,QUESTION
+REQ-0133,2026-03-15T22:00,Necesito una primera versión de un mensaje relacionado con proyectos. Es una solicitud habitual del equipo.,api,Engineering,en,medium,0,DRAFT,DRAFT
+REQ-0268,2026-04-13T20:00,Tenemos que etiquetar una incidencia sobre servicios cloud.,api,Data,es,high,0,CODE,CODE
+REQ-0404,2026-01-06T00:00,¿Puedes aclararme algo relacionado con APIs REST?,api,Engineering,en,medium,0,CODE,CODE
+REQ-0403,2026-01-08T10:00,Tengo una duda sobre acceso de terceros.,chat,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0264,2026-07-05T12:00,Necesito organizar esta solicitud relacionada con seguridad. Es una solicitud habitual del equipo.,web,Engineering,es,low,0,CLASSIFY,CLASSIFY
+REQ-0161,2026-05-29T17:00,Necesito una versión breve de un documento sobre inventario.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0156,2026-07-11T16:00,Tengo información extensa sobre mantenimiento programado; necesito quedarme con lo esencial.,api,Cyber,en,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0494,2026-08-03T07:00,Necesito resolver con Python una tarea relacionada con acceso privilegiado.,api,Data,es,high,0,CODE,CODE
+REQ-0550,2026-05-01T12:00,Haz directamente una operación relacionada con monitorización en mi nombre. Es una solicitud habitual del equipo.,web,Cloud,es,medium,1,UNSUPPORTED,UNSUPPORTED
+REQ-0532,2026-05-18T20:00,Busca el procedimiento aprobado relacionado con código Python. Es una solicitud habitual del equipo.,chat,Engineering,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0464,2026-01-18T04:00,Quiero automatizar mediante código algo relacionado con seguridad. La petición es para un contexto profesional.,web,Data,en,low,0,CODE,CODE
+REQ-0087,2026-06-17T20:00,Quiero comunicar al equipo un asunto sobre servicios cloud. Es una solicitud habitual del equipo.,chat,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0066,2026-04-18T03:00,Prepara un borrador sobre mantenimiento programado para operaciones. Necesito una respuesta útil para continuar.,web,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0479,2026-02-21T15:00,Ayúdame con una implementación de gestión de incidencias. Necesito una respuesta útil para continuar.,chat,Corporate,es,high,0,CODE,CODE
+REQ-0361,2026-03-18T17:00,Explícame un aspecto de contraseñas.,api,Data,es,low,0,QUESTION,QUESTION
+REQ-0449,2026-09-12T13:00,Necesito resolver con Python una tarea relacionada con documentación técnica. Necesito una respuesta útil para continuar.,chat,Corporate,es,low,0,CODE,CODE
+REQ-0448,2026-05-16T14:00,Necesito resolver con Python una tarea relacionada con cambios de configuración. La petición es para un contexto profesional.,web,Cyber,es,medium,0,CODE,CODE
+REQ-0117,2026-08-25T02:00,Prepara un borrador sobre APIs REST para operaciones. La petición es para un contexto profesional.,chat,Data,es,high,0,DRAFT,DRAFT
+REQ-0406,2026-04-25T05:00,Explícame un aspecto de clasificación de datos.,chat,Cyber,en,low,0,QUESTION,QUESTION
+REQ-0278,2026-04-05T03:00,Ayúdame a decidir la categoría de un ticket de cambios de configuración.,api,Cloud,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0365,2026-03-28T11:00,Necesito entender mejor retención de logs. La petición es para un contexto profesional.,web,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0270,2026-01-09T00:00,¿En qué categoría encaja este caso sobre despliegues? No tengo claro cuál es la mejor forma de abordarlo.,chat,Corporate,es,high,1,CLASSIFY,CLASSIFY
+REQ-0152,2026-08-26T02:00,Necesito una versión breve de un documento sobre retención de logs.,api,Corporate,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0536,2026-08-06T11:00,Necesito confirmar la norma interna aplicable a monitorización. La petición es para un contexto profesional.,chat,Corporate,en,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0514,2026-01-31T16:00,¿Cuál es el criterio vigente de la organización sobre monitorización?,api,Engineering,en,high,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0302,2026-03-12T05:00,Necesito organizar esta solicitud relacionada con acceso privilegiado.,api,Corporate,es,low,1,CLASSIFY,CLASSIFY
+REQ-0249,2026-06-11T01:00,Ayúdame a condensar información sobre código Python.,chat,Engineering,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0322,2026-05-22T00:00,¿En qué categoría encaja este caso sobre seguridad?,web,Cyber,en,high,0,CLASSIFY,CLASSIFY
+REQ-0483,2026-01-24T15:00,Necesito resolver con Python una tarea relacionada con contraseñas.,api,Data,es,low,0,CODE,CODE
+REQ-0078,2026-05-14T21:00,Necesito una primera versión de un mensaje relacionado con servicios cloud.,web,Engineering,es,low,0,DRAFT,DRAFT
+REQ-0222,2026-04-17T13:00,Reduce este contenido sobre gestión de incidencias a sus ideas principales.,chat,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0495,2026-07-16T23:00,Tengo un script sobre clasificación de datos que no funciona como espero.,api,Cloud,es,high,0,CODE,CODE
+REQ-0519,2026-06-29T17:00,Necesito confirmar la norma interna aplicable a contraseñas.,chat,Data,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0135,2026-06-17T12:00,Prepara un borrador sobre copias de seguridad para dirección.,chat,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0005,2026-02-06T03:00,Necesito una primera versión de un mensaje relacionado con inventario. Necesito una respuesta útil para continuar.,chat,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0356,2026-02-05T15:00,Explícame un aspecto de copias de seguridad.,chat,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0560,2026-07-30T15:00,Ejecuta la acción necesaria para acceso de terceros sin pedirme confirmación. Es una solicitud habitual del equipo.,api,Cyber,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0394,2026-07-13T19:00,Tengo una duda sobre APIs REST. Necesito una respuesta útil para continuar.,api,Engineering,es,low,0,QUESTION,QUESTION
+REQ-0265,2026-07-05T09:00,Necesito organizar esta solicitud relacionada con contraseñas.,web,Data,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0154,2026-01-07T10:00,Tengo información extensa sobre APIs REST; necesito quedarme con lo esencial. La petición es para un contexto profesional.,api,Cyber,en,medium,1,SUMMARIZE,SUMMARIZE
+REQ-0363,2026-03-19T03:00,¿Puedes aclararme algo relacionado con copias de seguridad?,chat,Cyber,en,medium,0,QUESTION,QUESTION
+REQ-0209,2026-02-19T08:00,Ayúdame a condensar información sobre proyectos. La petición es para un contexto profesional.,api,Corporate,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0256,2026-03-15T18:00,Necesito una versión breve de un documento sobre copias de seguridad.,api,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0040,2026-08-09T03:00,Prepara un borrador sobre mantenimiento programado para equipo técnico.,web,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0277,2026-04-07T05:00,Ayúdame a decidir la categoría de un ticket de APIs REST. Es una solicitud habitual del equipo.,web,Cloud,es,low,0,CLASSIFY,CLASSIFY
+REQ-0329,2026-01-01T13:00,Necesito organizar esta solicitud relacionada con gestión de incidencias.,web,Corporate,es,low,0,CLASSIFY,CLASSIFY
+REQ-0212,2026-04-29T22:00,Reduce este contenido sobre acceso de terceros a sus ideas principales.,chat,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0218,2026-05-23T22:00,Tengo información extensa sobre proyectos; necesito quedarme con lo esencial.,web,Cyber,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0103,2026-03-13T20:00,Ayúdame a redactar algo sobre clasificación de datos.,api,Cloud,es,high,0,DRAFT,DRAFT
+REQ-0407,2026-07-01T07:00,¿Puedes aclararme algo relacionado con acceso de terceros? Necesito una respuesta útil para continuar.,api,Cyber,en,medium,0,QUESTION,QUESTION
+REQ-0176,2026-05-06T15:00,Ayúdame a condensar información sobre contraseñas. La petición es para un contexto profesional.,chat,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0177,2026-01-16T23:00,Ayúdame a condensar información sobre inventario.,chat,Cyber,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0200,2026-01-05T22:00,Tengo información extensa sobre acceso de terceros; necesito quedarme con lo esencial. Es una solicitud habitual del equipo.,chat,Cyber,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0378,2026-05-04T04:00,Explícame un aspecto de contraseñas.,web,Data,en,low,0,QUESTION,QUESTION
+REQ-0534,2026-03-23T22:00,¿Cuál es el criterio vigente de la organización sobre seguridad?,api,Engineering,en,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0202,2026-07-04T10:00,Reduce este contenido sobre copias de seguridad a sus ideas principales.,web,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0008,2026-01-18T17:00,Quiero comunicar al equipo un asunto sobre cambios de configuración. Es una solicitud habitual del equipo.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0415,2026-01-18T02:00,Explícame un aspecto de mantenimiento programado.,chat,Engineering,es,medium,0,QUESTION,QUESTION
+REQ-0098,2026-04-13T12:00,Quiero comunicar al equipo un asunto sobre monitorización.,api,Corporate,es,low,0,DRAFT,DRAFT
+REQ-0438,2026-08-13T19:00,¿Puedes aclararme algo relacionado con proyectos?,web,Cyber,es,low,0,QUESTION,QUESTION
+REQ-0275,2026-06-27T14:00,¿En qué categoría encaja este caso sobre copias de seguridad? Es una solicitud habitual del equipo.,chat,Engineering,en,medium,0,QUESTION,QUESTION
+REQ-0280,2026-06-04T04:00,Ayúdame a decidir la categoría de un ticket de copias de seguridad.,web,Cloud,es,high,0,CLASSIFY,CLASSIFY
+REQ-0413,2026-03-05T01:00,Explícame un aspecto de servicios cloud.,api,Corporate,es,low,0,QUESTION,QUESTION
+REQ-0409,2026-07-23T03:00,Tengo una duda sobre acceso de terceros.,chat,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0038,2026-08-27T11:00,Ayúdame a redactar algo sobre acceso privilegiado.,api,Engineering,en,low,1,DRAFT,DRAFT
+REQ-0316,2026-01-21T14:00,Tenemos que etiquetar una incidencia sobre despliegues.,chat,Corporate,en,low,0,CLASSIFY,CLASSIFY
+REQ-0253,2026-03-31T23:00,Ayúdame a condensar información sobre monitorización. Es una solicitud habitual del equipo.,web,Corporate,en,low,0,SUMMARIZE,SUMMARIZE
+REQ-0184,2026-05-26T07:00,Ayúdame a condensar información sobre mantenimiento programado.,web,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0546,2026-08-02T07:00,Aprueba y completa por mí una operación sobre contraseñas. No tengo claro cuál es la mejor forma de abordarlo.,web,Engineering,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0126,2026-05-17T17:00,Quiero comunicar al equipo un asunto sobre cambios de configuración.,web,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0535,2026-03-06T04:00,Necesito saber qué debemos hacer internamente respecto a seguridad.,chat,Corporate,es,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0426,2026-06-13T17:00,Explícame un aspecto de servicios cloud. Necesito una respuesta útil para continuar.,web,Data,es,low,0,QUESTION,QUESTION
+REQ-0456,2026-07-10T08:00,Tengo un script sobre inventario que no funciona como espero.,api,Corporate,es,high,0,CODE,CODE
+REQ-0416,2026-05-10T11:00,¿Puedes aclararme algo relacionado con monitorización?,chat,Engineering,es,low,0,QUESTION,QUESTION
+REQ-0362,2026-05-27T17:00,Necesito entender mejor seguridad.,api,Data,en,medium,0,QUESTION,QUESTION
+REQ-0050,2026-02-26T05:00,Ayúdame a redactar algo sobre clasificación de datos. Es una solicitud habitual del equipo.,web,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0360,2026-09-17T04:00,Tengo una duda sobre proyectos. Es una solicitud habitual del equipo.,api,Corporate,es,low,0,QUESTION,QUESTION
+REQ-0294,2026-05-28T13:00,Necesito organizar esta solicitud relacionada con acceso privilegiado.,chat,Cyber,en,high,0,CLASSIFY,CLASSIFY
+REQ-0272,2026-05-29T14:00,Necesito organizar esta solicitud relacionada con gestión de incidencias.,api,Cloud,es,low,0,CLASSIFY,CLASSIFY
+REQ-0271,2026-08-10T13:00,Necesito organizar esta solicitud relacionada con código Python. Es una solicitud habitual del equipo.,chat,Data,es,high,0,CLASSIFY,CLASSIFY
+REQ-0175,2026-07-15T08:00,Necesito una versión breve de un documento sobre copias de seguridad.,chat,Data,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0167,2026-02-25T03:00,Tengo información extensa sobre APIs REST; necesito quedarme con lo esencial.,api,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0231,2026-08-05T13:00,Reduce este contenido sobre copias de seguridad a sus ideas principales. Es una solicitud habitual del equipo.,chat,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0462,2026-05-06T03:00,Tengo un script sobre proyectos que no funciona como espero.,chat,Engineering,es,low,0,CODE,CODE
+REQ-0405,2026-04-10T06:00,Explícame un aspecto de inventario.,web,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0049,2026-05-12T12:00,Quiero comunicar al equipo un asunto sobre servicios cloud.,api,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0002,2026-06-03T09:00,Quiero comunicar al equipo un asunto sobre gestión de incidencias. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,en,medium,0,DRAFT,DRAFT
+REQ-0510,2026-03-18T13:00,Busca el procedimiento aprobado relacionado con proyectos.,chat,Corporate,en,high,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0481,2026-05-17T21:00,Quiero automatizar mediante código algo relacionado con código Python.,api,Data,en,medium,0,CODE,CODE
+REQ-0198,2026-05-01T09:00,Necesito una versión breve de un documento sobre contraseñas.,api,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0458,2026-03-16T18:00,Ayúdame con una implementación de acceso privilegiado.,chat,Engineering,en,high,1,CODE,CODE
+REQ-0349,2026-08-01T12:00,Tengo una duda sobre despliegues. Necesito una respuesta útil para continuar.,chat,Data,es,medium,0,QUESTION,QUESTION
+REQ-0100,2026-03-30T22:00,Quiero comunicar al equipo un asunto sobre mantenimiento programado.,api,Engineering,en,medium,0,DRAFT,DRAFT
+REQ-0155,2026-06-11T18:00,Necesito una versión breve de un documento sobre servicios cloud. No tengo claro cuál es la mejor forma de abordarlo.,web,Cyber,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0493,2026-08-21T19:00,Necesito resolver con Python una tarea relacionada con contraseñas.,chat,Engineering,es,low,0,CODE,CODE
+REQ-0234,2026-08-14T10:00,Reduce este contenido sobre mantenimiento programado a sus ideas principales.,web,Data,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0412,2026-04-28T05:00,Necesito entender mejor monitorización. Es una solicitud habitual del equipo.,chat,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0419,2026-08-12T13:00,Explícame un aspecto de código Python.,chat,Cyber,es,medium,0,QUESTION,QUESTION
+REQ-0237,2026-06-01T23:00,Necesito una versión breve de un documento sobre servicios cloud.,web,Cyber,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0137,2026-06-15T08:00,Quiero comunicar al equipo un asunto sobre proyectos. Necesito una respuesta útil para continuar.,api,Data,es,low,0,DRAFT,DRAFT
+REQ-0009,2026-04-25T00:00,Necesito una primera versión de un mensaje relacionado con clasificación de datos.,web,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0190,2026-04-06T00:00,Ayúdame a condensar información sobre acceso de terceros.,api,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0488,2026-07-13T15:00,Necesito resolver con Python una tarea relacionada con mantenimiento programado. La petición es para un contexto profesional.,api,Cloud,en,medium,1,CODE,CODE
+REQ-0266,2026-08-08T22:00,Necesito organizar esta solicitud relacionada con inventario. La petición es para un contexto profesional.,api,Engineering,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0463,2026-03-21T12:00,Ayúdame con una implementación de proyectos.,web,Cyber,es,medium,0,CODE,CODE
+REQ-0522,2026-07-04T23:00,Busca el procedimiento aprobado relacionado con documentación técnica.,web,Data,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0502,2026-02-08T13:00,Tengo un script sobre acceso de terceros que no funciona como espero. No tengo claro cuál es la mejor forma de abordarlo.,chat,Corporate,en,low,0,CODE,CODE
+REQ-0542,2026-03-01T22:00,Ejecuta la acción necesaria para despliegues sin pedirme confirmación.,chat,Engineering,en,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0244,2026-05-02T12:00,Ayúdame a condensar información sobre contraseñas.,chat,Data,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0354,2026-05-12T23:00,Necesito entender mejor copias de seguridad. La petición es para un contexto profesional.,chat,Engineering,en,high,0,QUESTION,QUESTION
+REQ-0097,2026-04-12T02:00,Necesito una primera versión de un mensaje relacionado con inventario.,web,Engineering,en,medium,0,DRAFT,DRAFT
+REQ-0111,2026-08-09T13:00,Ayúdame a redactar algo sobre servicios cloud.,api,Cyber,en,high,0,DRAFT,DRAFT
+REQ-0417,2026-02-12T03:00,Tengo una duda sobre código Python.,api,Data,es,medium,0,QUESTION,QUESTION
+REQ-0232,2026-03-21T09:00,Necesito una versión breve de un documento sobre despliegues.,web,Engineering,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0402,2026-07-28T02:00,Explícame un aspecto de código Python.,web,Data,en,medium,0,QUESTION,QUESTION
+REQ-0503,2026-08-17T10:00,Quiero automatizar mediante código algo relacionado con retención de logs.,web,Cyber,en,low,0,CODE,CODE
+REQ-0028,2026-02-12T18:00,Ayúdame a redactar algo sobre seguridad.,api,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0119,2026-06-02T15:00,Prepara un borrador sobre copias de seguridad para equipo técnico. Es una solicitud habitual del equipo.,chat,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0173,2026-07-07T01:00,Tengo información extensa sobre cambios de configuración; necesito quedarme con lo esencial.,web,Engineering,en,low,1,DRAFT,DRAFT
+REQ-0214,2026-08-06T18:00,Necesito una versión breve de un documento sobre acceso de terceros. La petición es para un contexto profesional.,web,Engineering,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0068,2026-01-03T11:00,Ayúdame a redactar algo sobre proyectos.,api,Corporate,es,medium,0,DRAFT,DRAFT
+REQ-0465,2026-05-09T05:00,Necesito resolver con Python una tarea relacionada con monitorización.,api,Cloud,en,low,0,CODE,CODE
+REQ-0017,2026-04-27T11:00,Necesito una primera versión de un mensaje relacionado con servicios cloud. No tengo claro cuál es la mejor forma de abordarlo.,web,Data,es,low,0,CODE,CODE
+REQ-0430,2026-03-05T01:00,Explícame un aspecto de copias de seguridad.,web,Data,es,medium,0,QUESTION,QUESTION
+REQ-0082,2026-02-10T05:00,Necesito una primera versión de un mensaje relacionado con servicios cloud. Necesito una respuesta útil para continuar.,chat,Cyber,en,medium,0,DRAFT,DRAFT
+REQ-0513,2026-05-06T13:00,Necesito confirmar la norma interna aplicable a cambios de configuración.,web,Corporate,en,high,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0246,2026-07-01T14:00,Necesito una versión breve de un documento sobre inventario. No tengo claro cuál es la mejor forma de abordarlo.,api,Cloud,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0547,2026-09-15T20:00,Aprueba y completa por mí una operación sobre acceso privilegiado.,api,Engineering,es,medium,0,UNSUPPORTED,UNSUPPORTED
+REQ-0168,2026-04-20T01:00,Ayúdame a condensar información sobre retención de logs. Necesito una respuesta útil para continuar.,chat,Engineering,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0181,2026-07-22T05:00,Reduce este contenido sobre acceso de terceros a sus ideas principales.,web,Engineering,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0215,2026-02-15T16:00,Ayúdame a condensar información sobre seguridad.,chat,Cyber,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0377,2026-05-21T08:00,¿Puedes aclararme algo relacionado con monitorización?,web,Engineering,es,high,0,QUESTION,QUESTION
+REQ-0165,2026-03-19T16:00,Tengo información extensa sobre clasificación de datos; necesito quedarme con lo esencial. Necesito una respuesta útil para continuar.,api,Cloud,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0320,2026-05-19T05:00,¿En qué categoría encaja este caso sobre gestión de incidencias?,api,Corporate,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0446,2026-02-04T18:00,Quiero automatizar mediante código algo relacionado con acceso privilegiado.,api,Corporate,es,low,0,CODE,CODE
+REQ-0069,2026-07-20T05:00,Prepara un borrador sobre copias de seguridad para seguridad. Es una solicitud habitual del equipo.,web,Data,es,high,0,DRAFT,DRAFT
+REQ-0484,2026-04-29T05:00,Ayúdame con una implementación de acceso de terceros. No tengo claro cuál es la mejor forma de abordarlo.,web,Engineering,es,medium,0,CODE,CODE
+REQ-0366,2026-03-28T06:00,Tengo una duda sobre retención de logs. Es una solicitud habitual del equipo.,chat,Corporate,es,medium,0,QUESTION,QUESTION
+REQ-0248,2026-08-27T00:00,Necesito una versión breve de un documento sobre servicios cloud.,chat,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0045,2026-05-18T10:00,Prepara un borrador sobre acceso de terceros para operaciones.,chat,Cyber,es,medium,0,DRAFT,DRAFT
+REQ-0326,2026-01-25T06:00,Tenemos que etiquetar una incidencia sobre retención de logs.,web,Cloud,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0182,2026-01-24T13:00,Ayúdame a condensar información sobre mantenimiento programado. No tengo claro cuál es la mejor forma de abordarlo.,web,Cyber,es,low,0,CODE,CODE
+REQ-0039,2026-09-04T03:00,Prepara un borrador sobre inventario para seguridad.,chat,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0496,2026-06-04T22:00,Ayúdame con una implementación de contraseñas. Necesito una respuesta útil para continuar.,web,Data,es,medium,0,CODE,CODE
+REQ-0116,2026-01-18T19:00,Necesito una primera versión de un mensaje relacionado con contraseñas. Necesito una respuesta útil para continuar.,api,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0425,2026-04-20T03:00,¿Puedes aclararme algo relacionado con código Python? No tengo claro cuál es la mejor forma de abordarlo.,web,Cyber,en,low,0,QUESTION,QUESTION
+REQ-0296,2026-03-07T23:00,Necesito organizar esta solicitud relacionada con acceso privilegiado.,chat,Cyber,es,low,0,CLASSIFY,CLASSIFY
+REQ-0210,2026-03-30T00:00,Tengo información extensa sobre proyectos; necesito quedarme con lo esencial. La petición es para un contexto profesional.,chat,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0128,2026-06-08T08:00,Necesito una primera versión de un mensaje relacionado con documentación técnica.,chat,Data,en,medium,0,DRAFT,DRAFT
+REQ-0259,2026-01-12T00:00,Ayúdame a condensar información sobre mantenimiento programado.,chat,Corporate,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0108,2026-06-07T00:00,Ayúdame a redactar algo sobre retención de logs.,web,Cyber,es,low,0,DRAFT,DRAFT
+REQ-0042,2026-03-15T21:00,Prepara un borrador sobre monitorización para usuarios.,api,Cyber,en,medium,0,DRAFT,DRAFT
+REQ-0348,2026-09-16T19:00,Necesito entender mejor gestión de incidencias.,chat,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0195,2026-07-11T10:00,Ayúdame a condensar información sobre cambios de configuración.,chat,Data,es,high,1,SUMMARIZE,SUMMARIZE
+REQ-0106,2026-03-07T13:00,Necesito una primera versión de un mensaje relacionado con clasificación de datos.,chat,Engineering,es,low,0,DRAFT,DRAFT
+REQ-0229,2026-01-31T05:00,Ayúdame a condensar información sobre servicios cloud.,web,Cyber,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0528,2026-02-08T20:00,Busca el procedimiento aprobado relacionado con seguridad.,chat,Cyber,en,medium,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0453,2026-06-15T04:00,Tengo un script sobre cambios de configuración que no funciona como espero.,api,Data,es,medium,0,CODE,CODE
+REQ-0371,2026-09-07T17:00,¿Puedes aclararme algo relacionado con mantenimiento programado?,api,Cyber,es,high,0,CLASSIFY,CLASSIFY
+REQ-0500,2026-01-13T00:00,Ayúdame con una implementación de cambios de configuración.,web,Corporate,es,low,0,CODE,CODE
+REQ-0531,2026-08-29T13:00,Busca el procedimiento aprobado relacionado con acceso de terceros.,chat,Cyber,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0073,2026-09-16T07:00,Quiero comunicar al equipo un asunto sobre APIs REST.,chat,Engineering,es,high,0,DRAFT,DRAFT
+REQ-0310,2026-04-20T00:00,¿En qué categoría encaja este caso sobre servicios cloud?,web,Data,en,high,0,CLASSIFY,CLASSIFY
+REQ-0508,2026-03-25T18:00,Busca el procedimiento aprobado relacionado con retención de logs.,api,Corporate,es,low,1,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0263,2026-03-14T01:00,¿En qué categoría encaja este caso sobre contraseñas? Es una solicitud habitual del equipo.,api,Cyber,es,high,0,CLASSIFY,CLASSIFY
+REQ-0301,2026-03-13T14:00,Ayúdame a decidir la categoría de un ticket de proyectos.,chat,Corporate,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0545,2026-05-16T21:00,Ejecuta la acción necesaria para inventario sin pedirme confirmación.,chat,Engineering,es,low,0,UNSUPPORTED,UNSUPPORTED
+REQ-0162,2026-05-27T11:00,Tengo información extensa sobre acceso de terceros; necesito quedarme con lo esencial.,web,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0091,2026-06-26T11:00,Quiero comunicar al equipo un asunto sobre seguridad.,api,Cloud,es,high,0,CODE,CODE
+REQ-0129,2026-06-15T23:00,Prepara un borrador sobre copias de seguridad para operaciones.,web,Corporate,es,high,0,DRAFT,DRAFT
+REQ-0274,2026-08-16T17:00,¿En qué categoría encaja este caso sobre copias de seguridad?,web,Data,es,low,0,CLASSIFY,CLASSIFY
+REQ-0146,2026-01-06T07:00,Ayúdame a condensar información sobre clasificación de datos. Necesito una respuesta útil para continuar.,web,Cyber,en,low,0,SUMMARIZE,SUMMARIZE
+REQ-0018,2026-06-30T22:00,Prepara un borrador sobre seguridad para equipo técnico.,web,Cloud,es,medium,0,DRAFT,DRAFT
+REQ-0314,2026-08-27T11:00,Tenemos que etiquetar una incidencia sobre monitorización. La petición es para un contexto profesional.,chat,Cloud,es,medium,0,CLASSIFY,CLASSIFY
+REQ-0457,2026-02-22T15:00,Quiero automatizar mediante código algo relacionado con seguridad.,api,Corporate,es,medium,0,CODE,CODE
+REQ-0551,2026-03-07T03:00,Realiza externamente la gestión de documentación técnica.,web,Corporate,es,high,0,UNSUPPORTED,UNSUPPORTED
+REQ-0381,2026-07-10T15:00,Tengo una duda sobre código Python.,web,Engineering,en,medium,0,QUESTION,QUESTION
+REQ-0243,2026-08-20T01:00,Reduce este contenido sobre documentación técnica a sus ideas principales. Necesito una respuesta útil para continuar.,api,Cloud,es,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0273,2026-04-11T00:00,Tenemos que etiquetar una incidencia sobre copias de seguridad. La petición es para un contexto profesional.,web,Engineering,es,high,0,CLASSIFY,CLASSIFY
+REQ-0112,2026-02-05T00:00,Quiero comunicar al equipo un asunto sobre clasificación de datos.,web,Cyber,es,high,0,DRAFT,DRAFT
+REQ-0124,2026-09-12T06:00,Necesito una primera versión de un mensaje relacionado con servicios cloud.,chat,Data,es,high,0,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0185,2026-04-13T02:00,Ayúdame a condensar información sobre inventario.,web,Cyber,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0450,2026-07-14T00:00,Tengo un script sobre APIs REST que no funciona como espero.,web,Cloud,en,medium,0,CODE,CODE
+REQ-0477,2026-03-22T08:00,Ayúdame con una implementación de seguridad.,chat,Cyber,es,low,0,CODE,CODE
+REQ-0142,2026-07-01T01:00,Reduce este contenido sobre mantenimiento programado a sus ideas principales.,api,Data,en,high,0,SUMMARIZE,SUMMARIZE
+REQ-0299,2026-05-11T10:00,Ayúdame a decidir la categoría de un ticket de clasificación de datos.,chat,Engineering,en,medium,0,CLASSIFY,CLASSIFY
+REQ-0178,2026-07-04T07:00,Tengo información extensa sobre documentación técnica; necesito quedarme con lo esencial. No tengo claro cuál es la mejor forma de abordarlo.,api,Cloud,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0387,2026-06-16T14:00,Explícame un aspecto de seguridad.,web,Cloud,es,medium,0,QUESTION,QUESTION
+REQ-0304,2026-07-02T03:00,¿En qué categoría encaja este caso sobre código Python?,web,Cyber,es,high,0,CLASSIFY,CLASSIFY
+REQ-0204,2026-07-13T18:00,Tengo información extensa sobre monitorización; necesito quedarme con lo esencial.,chat,Cyber,en,medium,0,SUMMARIZE,SUMMARIZE
+REQ-0172,2026-05-12T14:00,Tengo información extensa sobre seguridad; necesito quedarme con lo esencial.,chat,Data,es,high,0,SUMMARIZE,SUMMARIZE
+REQ-0432,2026-01-24T08:00,¿Puedes aclararme algo relacionado con clasificación de datos?,api,Cyber,es,medium,0,CORPORATE_KNOWLEDGE,CORPORATE_KNOWLEDGE
+REQ-0242,2026-02-21T02:00,Reduce este contenido sobre acceso de terceros a sus ideas principales. Necesito una respuesta útil para continuar.,api,Corporate,es,low,0,SUMMARIZE,SUMMARIZE
+REQ-0428,2026-03-08T04:00,Necesito entender mejor copias de seguridad.,api,Corporate,es,high,0,QUESTION,QUESTION
+REQ-0434,2026-05-28T10:00,Tengo una duda sobre contraseñas.,web,Cloud,es,high,0,QUESTION,QUESTION

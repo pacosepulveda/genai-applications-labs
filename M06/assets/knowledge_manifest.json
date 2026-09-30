@@ -1,0 +1,30 @@
+[
+  {
+    "file": "PROC-017_access_privileged_v3.2.md",
+    "source_id": "PROC-017"
+  },
+  {
+    "file": "PROC-017_access_privileged_v2.1_OBSOLETE.md",
+    "source_id": "PROC-017"
+  },
+  {
+    "file": "PROC-021_incident_management_v2.4.md",
+    "source_id": "PROC-021"
+  },
+  {
+    "file": "POL-004_data_classification_v4.0.md",
+    "source_id": "POL-004"
+  },
+  {
+    "file": "PROC-031_backup_restore_v1.6.md",
+    "source_id": "PROC-031"
+  },
+  {
+    "file": "STD-009_api_identifiers_v1.2.md",
+    "source_id": "STD-009"
+  },
+  {
+    "file": "KB-SEC-002_prompt_injection_v1.0.md",
+    "source_id": "KB-SEC-002"
+  }
+]

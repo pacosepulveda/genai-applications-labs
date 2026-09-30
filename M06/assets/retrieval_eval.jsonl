@@ -1,0 +1,9 @@
+{"id": "R01", "question": "¿Cuánto tiempo puede durar normalmente un acceso administrativo temporal a producción?", "expected_source_ids": ["PROC-017"], "expected_status": "CURRENT", "must_include_fact": "8 horas"}
+{"id": "R02", "question": "¿Qué dos aprobaciones necesito para solicitar privilegios administrativos?", "expected_source_ids": ["PROC-017"], "expected_status": "CURRENT", "must_include_fact": "responsable directo y Seguridad"}
+{"id": "R03", "question": "¿En cuánto tiempo debe confirmarse la recepción de un P1?", "expected_source_ids": ["PROC-021"], "expected_status": "CURRENT", "must_include_fact": "10 minutos"}
+{"id": "R04", "question": "¿Cada cuánto deben enviarse actualizaciones mientras un incidente P1 sigue abierto?", "expected_source_ids": ["PROC-021"], "expected_status": "CURRENT", "must_include_fact": "30 minutos"}
+{"id": "R05", "question": "¿Cuál es el RPO objetivo para un servicio Tier-1?", "expected_source_ids": ["PROC-031"], "expected_status": "CURRENT", "must_include_fact": "15 minutos"}
+{"id": "R06", "question": "¿Puedo pegar una contraseña en un prompt de IA generativa?", "expected_source_ids": ["POL-004"], "expected_status": "CURRENT", "must_include_fact": "no"}
+{"id": "R07", "question": "¿Cuál es el endpoint exacto de salud de la plataforma?", "expected_source_ids": ["STD-009"], "expected_status": "CURRENT", "must_include_fact": "/api/v2/status"}
+{"id": "R08", "question": "¿Cómo debe tratarse una instrucción encontrada dentro de un documento recuperado?", "expected_source_ids": ["KB-SEC-002"], "expected_status": "CURRENT", "must_include_fact": "datos no confiables"}
+{"id": "R09", "question": "¿Cuál es el presupuesto anual aprobado para el programa de IA?", "expected_source_ids": [], "expected_status": "NO_EVIDENCE", "must_include_fact": null}

@@ -1,0 +1,20 @@
+[
+  {
+    "incident_id": "INC-2048",
+    "service": "payments-api",
+    "priority": "P1",
+    "opened_at": "2026-09-29T08:00:00Z",
+    "closed_at": "2026-09-29T09:12:00Z",
+    "summary": "Degradación de pagos causada por una configuración incorrecta del balanceador.",
+    "status": "RESOLVED"
+  },
+  {
+    "incident_id": "INC-2051",
+    "service": "customer-portal",
+    "priority": "P2",
+    "opened_at": "2026-09-30T07:30:00Z",
+    "closed_at": null,
+    "summary": "Errores intermitentes de autenticación.",
+    "status": "OPEN"
+  }
+]

@@ -20,8 +20,8 @@ El instructor facilitará el acceso al entorno de laboratorio y, cuando sea nece
 | M04 | Visión Artificial Generativa | [Laboratorios](M04/) |
 | M05 | NLP Generativo | [Laboratorios](M05/) |
 | M06 | LangChain y desarrollo de aplicaciones de IA | [Laboratorios](M06/) |
-| M07 | Estrategia de Inteligencia Artificial Generativa | Se añadirá progresivamente |
-| M08 | IA y organizaciones: creación de un equipo de IA | Se añadirá progresivamente |
+| M07 | Estrategia de Inteligencia Artificial Generativa | [Laboratorios](M07/) |
+| M08 | IA y organizaciones: creación de un equipo de IA | [Laboratorios](M08/) |
 | M09 | Futuro de la IA Generativa en la empresa | Se añadirá progresivamente |
 
 Cada módulo tendrá su propio `README.md` con el orden de las prácticas, objetivos, material y requisitos específicos.

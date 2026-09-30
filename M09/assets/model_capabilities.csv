@@ -1,0 +1,7 @@
+route,modality,max_complexity,offline_capable,latency_s,cost_eur,quality_score,location,best_for
+EDGE_SLM,text,2,true,0.45,0.001,0.2,local,offline/private simple tasks
+EDGE_VISION,image+text,2,true,0.8,0.002,0.45,local,local visual extraction
+CLOUD_FAST,text,3,false,1.2,0.008,0.75,cloud,general low/medium complexity
+CLOUD_REASONING,text,5,false,5.5,0.08,0.92,cloud,complex reasoning
+CLOUD_MULTIMODAL,image+text,5,false,3,0.035,0.88,cloud,image/document understanding
+RAG_PIPELINE,text,4,false,2.5,0.018,0.9,cloud,authoritative knowledge with citations

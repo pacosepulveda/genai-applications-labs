@@ -1,0 +1,7 @@
+architecture,metric,value
+current,quality,0.9
+current,median_latency_s,2.4
+current,cost_per_task_eur,0.022
+current,energy_index_per_task,1
+current,citation_validity,0.99
+current,unauthorized_retrieval_rate,0

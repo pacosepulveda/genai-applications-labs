@@ -1,0 +1,13 @@
+component_id,component,starting_position,rationale_hint
+C01,Multimodal Intake,ADOPT_CANDIDATE,screenshots/documents
+C02,Identity & Policy,KEEP,authorization boundary
+C03,Adaptive Router,ADOPT_CANDIDATE,cost/latency/risk routing
+C04,Edge SLM,TRIAL_CANDIDATE,offline/simple tasks
+C05,Cloud Fast Model,KEEP,general tasks
+C06,Cloud Reasoning Model,KEEP,complex tasks
+C07,RAG,KEEP,authoritative knowledge
+C08,Persistent User Memory,WATCH,privacy/retention complexity
+C09,Bounded Agent Runtime,KEEP,read-only/propose workflows
+C10,Write Tools,REJECT_CURRENT_SCOPE,high-impact autonomy
+C11,Eval Platform,KEEP,portable regression evidence
+C12,Cost/Energy Telemetry,ADOPT_CANDIDATE,FinOps/sustainability

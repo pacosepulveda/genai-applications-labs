@@ -18,12 +18,12 @@ Abre `notebooks/M03_P04_CNN_Feature_Maps.ipynb`.
 3. Comprueba el shape original.
 4. Divide train/test de forma estratificada.
 5. Construye una MLP sencilla sobre los 64 píxeles.
-6. Construye una CNN con:
-   - `Conv2d`;
+6. Construye una CNN pequeña con:
+   - una o dos capas `Conv2d`;
    - ReLU;
    - pooling;
    - capa final.
-7. Entrena ambas con el mismo criterio de evaluación.
+7. Entrena ambas con el mismo criterio de evaluación y un máximo orientativo de 15 épocas.
 8. Compara:
    - precisión;
    - número de parámetros;

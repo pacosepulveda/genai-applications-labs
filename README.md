@@ -8,7 +8,9 @@ El repositorio está organizado por módulos y está diseñado para construir de
 
 Los laboratorios están preparados para realizarse **completamente desde el navegador**.
 
-El instructor facilitará el acceso al entorno de laboratorio y, cuando sea necesario, las credenciales o permisos para utilizar servicios de IA y recursos cloud. No es necesario instalar herramientas de desarrollo en el ordenador del alumno.
+El instructor facilitará el acceso al entorno de laboratorio y, cuando sea necesario, los permisos para utilizar servicios de IA y recursos cloud. No es necesario instalar herramientas de desarrollo en el ordenador del alumno.
+
+Los ejercicios utilizan datasets y modelos de tamaño contenido con finalidad didáctica. Cuando una práctica necesita un modelo generativo de mayor capacidad, se utiliza una interfaz desacoplada del proveedor.
 
 ## Módulos
 

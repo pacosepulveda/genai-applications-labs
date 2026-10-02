@@ -7,7 +7,7 @@
 
 Implementarás una GAN simple desde cero sobre imágenes 8×8.
 
-El objetivo no es obtener calidad fotográfica. El objetivo es entender el entrenamiento adversarial.
+El objetivo no es obtener calidad fotográfica ni entrenar un generador grande. El objetivo es entender el entrenamiento adversarial con redes MLP pequeñas y tiempos previsibles en clase.
 
 ## Arquitectura
 
@@ -68,6 +68,8 @@ Entrena con:
 Genera nuevas imágenes y optimiza G para que D las considere reales.
 
 ### Parte E — Fixed noise
+
+Mantén el entrenamiento acotado; como referencia, utiliza un máximo de unas 40 épocas para esta práctica.
 
 Crea una matriz `fixed_noise` una sola vez.
 

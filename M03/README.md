@@ -24,7 +24,7 @@ Enterprise GenAI Assistant v0.3
 
 Todos los laboratorios están diseñados para realizarse desde el entorno web facilitado por el instructor. No es necesario instalar herramientas en el ordenador del alumno.
 
-La mayor parte del módulo puede ejecutarse sobre CPU. Si el entorno dispone de GPU, algunos notebooks permiten utilizarla automáticamente, pero ninguna práctica depende de que exista una GPU.
+Las redes y datasets son deliberadamente pequeños: el objetivo es observar forward/backpropagation, regularización, convoluciones y self-attention. Los notebooks fijan arquitecturas y límites de entrenamiento razonables para mantener tiempos previsibles en clase.
 
 ## Orden recomendado
 

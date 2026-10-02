@@ -28,7 +28,7 @@ VisualProvider en Enterprise GenAI Assistant
 
 Todos los laboratorios están diseñados para realizarse desde el entorno web facilitado por el instructor. No es necesario instalar herramientas en el ordenador del alumno.
 
-Las prácticas base funcionan sobre CPU con imágenes pequeñas. Si el entorno dispone de GPU, PyTorch puede utilizarla automáticamente en los ejercicios de entrenamiento.
+Las prácticas utilizan imágenes de 8×8 y modelos deliberadamente pequeños. El objetivo es comprender los mecanismos de VAE, GAN y diffusion mediante implementaciones mínimas, manteniendo tiempos de ejecución adecuados para una práctica guiada.
 
 ## Orden recomendado
 

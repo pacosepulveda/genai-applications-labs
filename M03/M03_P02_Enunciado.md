@@ -31,16 +31,18 @@ Abre `notebooks/M03_P02_MLP_vs_Classic.ipynb`.
    - one-hot encoding para variables categóricas.
 3. Entrena como referencia una `LogisticRegression`.
 4. Convierte las matrices de entrada a tensores.
-5. Construye una MLP:
+5. Construye una MLP compacta:
+   - TF-IDF limitado a aproximadamente 1.000 features;
    - input;
-   - capa oculta;
+   - capa oculta de 128 unidades;
    - ReLU;
    - Dropout;
    - capa de salida.
 6. Entrena utilizando:
    - `CrossEntropyLoss`;
    - AdamW;
-   - mini-batches.
+   - mini-batches de 32 o 64;
+   - un máximo orientativo de 25 épocas.
 7. Registra por época:
    - train loss;
    - validation loss;

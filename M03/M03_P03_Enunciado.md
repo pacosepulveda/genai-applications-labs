@@ -15,8 +15,8 @@ Abre `notebooks/M03_P03_Overfitting_Regularization.ipynb`.
 
 1. Reutiliza el preprocesamiento del dataset de intenciones.
 2. Utiliza un subconjunto pequeño de train.
-3. Construye una red deliberadamente grande.
-4. Entrena suficientes épocas para observar:
+3. Construye una red deliberadamente sobredimensionada **respecto al pequeño dataset**. Como referencia, utiliza capas ocultas de 512 y 256 unidades.
+4. Entrena suficientes épocas para observar el fenómeno, con un máximo orientativo de 60 épocas:
    - train loss;
    - validation loss;
    - train accuracy/F1;

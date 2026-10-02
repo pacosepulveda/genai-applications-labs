@@ -45,7 +45,7 @@ El denoiser debe saber cuánto ruido contiene la entrada.
 
 ### Parte C — Denoiser
 
-Construye una red pequeña que reciba:
+Construye una red pequeña, por ejemplo con capas ocultas de unas 128 unidades, que reciba:
 
 ```text
 x_t + timestep
@@ -64,6 +64,8 @@ Entrena con:
 ```text
 MSE(predicted_noise, true_noise)
 ```
+
+Mantén `T=40` y un máximo orientativo de 20–30 épocas para que el ejercicio tenga tiempos de ejecución previsibles.
 
 ### Parte E — Reverse sampling
 

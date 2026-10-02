@@ -26,15 +26,17 @@ notebooks/M04_P02_VAE_Latent_Space.ipynb
 
 ### Parte A — Modelo
 
-Implementa:
+Implementa un VAE pequeño:
 
-- encoder;
+- entrada de 64 valores;
+- encoder con una capa oculta de aproximadamente 32 unidades;
 - `mu`;
 - `log_var`;
 - reparameterization;
-- decoder.
+- decoder simétrico;
+- salida de 64 valores.
 
-Utiliza un espacio latente de dimensión 2 para poder visualizarlo.
+Utiliza un espacio latente de dimensión 2 para poder visualizarlo. Mantén el entrenamiento en torno a 25–30 épocas como máximo orientativo.
 
 ### Parte B — Loss
 

@@ -57,19 +57,19 @@ primer símbolo == último símbolo
 
 La clase depende de posiciones alejadas entre sí, por lo que el modelo debe combinar información de la secuencia.
 
-Construye:
+Construye un Transformer deliberadamente pequeño:
 
 ```text
 token ids
--> Embedding
+-> Embedding (d_model=32)
 -> positional embedding
--> TransformerEncoder
+-> TransformerEncoder (1 layer, 4 heads, feed-forward=64)
 -> representación de extremos
 -> Linear
 -> clase
 ```
 
-Entrena y evalúa.
+Entrena y evalúa durante un máximo orientativo de 15 épocas.
 
 ## Preguntas
 

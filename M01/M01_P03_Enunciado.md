@@ -97,10 +97,24 @@ Antes de continuar, las pruebas de P03 deben pasar.
 ## Parte E — Ejecutar la API
 
 ```bash
-uvicorn src.main:app --reload --port 8080
+uvicorn src.main:app \
+  --reload \
+  --host 0.0.0.0 \
+  --port 8080 \
+  --root-path /jupyterlab/default/proxy/8080
 ```
 
-Utiliza la vista web o el acceso al puerto que proporcione el entorno de laboratorio para abrir `/docs`.
+En SageMaker Studio, la aplicación se publica a través del proxy de JupyterLab. Abre Swagger UI en una nueva pestaña del mismo navegador utilizando esta ruta:
+
+```text
+/jupyterlab/default/proxy/8080/docs
+```
+
+Si estás visualizando este enunciado desde JupyterLab, puedes usar directamente:
+
+[Abrir Swagger UI](/jupyterlab/default/proxy/8080/docs)
+
+Mantén el terminal con Uvicorn en ejecución mientras utilizas Swagger.
 
 Prueba una petición válida:
 

@@ -9,10 +9,24 @@ La aplicación está preparada para ejecutarse en el **entorno web de laboratori
 Desde el terminal integrado:
 
 ```bash
-uvicorn src.main:app --reload --port 8080
+uvicorn src.main:app \
+  --reload \
+  --host 0.0.0.0 \
+  --port 8080 \
+  --root-path /jupyterlab/default/proxy/8080
 ```
 
-Abre la vista web del puerto 8080 y accede a `/docs`.
+En SageMaker Studio, abre Swagger UI mediante el proxy de JupyterLab:
+
+```text
+/jupyterlab/default/proxy/8080/docs
+```
+
+Si estás visualizando este README desde JupyterLab, puedes usar directamente:
+
+[Abrir Swagger UI](/jupyterlab/default/proxy/8080/docs)
+
+Mantén el terminal con Uvicorn en ejecución mientras utilizas la API.
 
 ## Modo mock
 

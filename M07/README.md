@@ -6,48 +6,46 @@ M07 cambia la pregunta:
 
 ```text
 M01–M06:
-¿Cómo lo construimos?
+¿Cómo construimos aplicaciones de IA?
 
 M07:
 ¿Qué merece la pena construir,
-con qué datos,
-con qué riesgo
-y cómo sabremos si aporta valor?
+qué evidencia necesitamos,
+qué datos están preparados,
+qué riesgo aceptamos
+y cuándo debemos avanzar?
 ```
 
-La progresión práctica es:
+La progresión práctica sigue exactamente la narrativa del deck reducido:
 
 ```text
-oportunidad
-   ↓
-caso de uso
-   ↓
-baseline + SMART + métricas
-   ↓
-data readiness
-   ↓
-risk & governance
-   ↓
-portfolio + TCO/ROI
-   ↓
-stage gates + roadmap
+M07.P01  problema → tarea → fit → Use Case Card
+M07.P02  baseline → target → scorecard
+M07.P03  priorización defendible
+M07.P04  data readiness → estrategia técnica
+M07.P05  riesgo → controles → resiliencia
+M07.P06  stage gate → piloto → decisión
 ```
 
 ## Entorno
 
 Todos los ejercicios se realizan desde el entorno web facilitado por el instructor.
 
-No se requiere instalar software ni utilizar servicios externos personales.
+No se requiere instalar software en el equipo del alumno ni utilizar servicios
+externos personales.
 
 Los notebooks utilizan principalmente:
 
 ```text
 Python
 pandas
-matplotlib
+numpy
 ```
 
 sobre datasets ficticios incluidos en `assets/`.
+
+M07 no necesita llamadas a modelos generativos: el objetivo es tomar decisiones
+sobre el sistema construido hasta M06.
 
 ## Orden recomendado
 

@@ -1,128 +1,90 @@
-# M07.P05 — Portfolio, TCO, ROI y priorización ajustada por riesgo
+# M07.P05 — Risk register y plan de fallo seguro
 
-**Modalidad:** individual o equipos pequeños  
-**Entregable:** ranking explicable, escenarios económicos y recomendación de portfolio
+**Modalidad:** equipos pequeños  
+**Entregable:** registro de riesgos con controles, riesgo residual y plan de resiliencia
 
 ## Objetivo
 
-Priorizarás iniciativas sin confundir un score con una verdad objetiva.
+Convertirás escenarios de fallo en decisiones controlables.
 
-## Dataset
-
-```text
-assets/portfolio_candidates.csv
-assets/portfolio_weights.json
-```
-
-## Tareas
-
-Abre:
+## Material
 
 ```text
-notebooks/M07_P05_Portfolio_TCO_ROI.ipynb
+assets/risk_scenarios.jsonl
+notebooks/M07_P05_Risk_Resilience.ipynb
 ```
 
-### Parte A — Score de capacidad
+## Parte A — Riesgo inherente
 
-Calcula un score ponderado con:
+Revisa:
 
 ```text
-business_value
-strategic_alignment
-data_readiness
-technical_feasibility
-user_readiness
-time_to_value
+likelihood 1..5
+impact 1..5
+inherent_score = likelihood * impact
 ```
 
-Los pesos están en el JSON.
+La puntuación ayuda a comparar; no expresa precisión científica.
 
-### Parte B — Ajuste por riesgo
+## Parte B — Controles
 
-Crea una función explícita de penalización.
+Para cada riesgo propone controles concretos.
 
-Ejemplo conceptual:
+Ejemplo:
 
 ```text
-risk 1 -> 1.00
-risk 2 -> 0.90
-risk 3 -> 0.75
-risk 4 -> 0.55
-risk 5 -> 0.30
+riesgo:
+fuente obsoleta
+
+control:
+status=CURRENT antes de construir contexto
 ```
 
-Justifica tus factores.
+## Parte C — Riesgo residual
 
-### Parte C — Beneficio anual
-
-Estima capacidad liberada:
+Tras aplicar controles estima de nuevo:
 
 ```text
-annual_successful_tasks =
-monthly_volume * 12 * adoption_rate * success_rate
-
-hours_saved =
-annual_successful_tasks * minutes_saved_per_success / 60
+residual_likelihood
+residual_impact
+residual_score
+risk_owner
 ```
 
-Valor económico:
+## Parte D — Human oversight
+
+Decide un patrón para distintas capacidades:
 
 ```text
-hours_saved * loaded_hourly_cost_eur
+NO_HUMAN_GATE
+REVIEW_BEFORE_USE
+APPROVAL_BEFORE_ACTION
+OUT_OF_SCOPE
 ```
 
-### Parte D — TCO
+La revisión humana debe especificar qué información recibe la persona y si puede bloquear.
 
-Incluye:
+## Parte E — Resilience
+
+Para los riesgos prioritarios define:
 
 ```text
-annual_fixed_cost
-+
-annual_successful_tasks * variable_cost_per_task
+OBSERVE
+DEGRADE
+STOP
+RECOVER
 ```
 
-Discute qué costes faltan en el fichero:
+Incluye al menos un kill switch o revocación de capacidad.
 
-- integración;
-- soporte;
-- governance;
-- evaluación;
-- human review.
+## Parte F — Constraints
 
-### Parte E — ROI
-
-Calcula un ROI simplificado.
-
-Después realiza tres escenarios:
-
-```text
-CONSERVATIVE
-BASE
-OPTIMISTIC
-```
-
-variando:
-
-- adoption;
-- success rate;
-- variable cost.
-
-### Parte F — Portfolio
-
-Selecciona:
-
-```text
-2 quick wins
-1 capability builder / strategic bet
-1 NOT YET
-1 NO-GO
-```
-
-No elijas automáticamente las cinco puntuaciones más altas.
+Marca los escenarios que requieren revisión especializada de seguridad,
+privacidad, legal o proveedor. No realices una clasificación jurídica definitiva.
 
 ## Preguntas
 
-1. ¿Qué diferencia hay entre cost/request y cost/task?
-2. ¿Qué iniciativa queda peor al ajustar por riesgo?
-3. ¿Qué supuesto domina más el ROI?
-4. ¿Por qué una iniciativa con ROI negativo inicial podría seguir siendo un capability builder?
+1. ¿Qué diferencia existe entre riesgo inherente y residual?
+2. ¿Por qué autorización no debe delegarse al LLM?
+3. ¿Qué riesgo aumenta al pasar de recomendación a ejecución?
+4. ¿Cuándo utilizarías degradación en lugar de apagar todo el servicio?

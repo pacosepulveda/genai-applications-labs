@@ -1,124 +1,89 @@
-# M07.P04 — Risk Register, AI RMF y human oversight
+# M07.P04 — Data readiness y estrategia técnica
 
-**Modalidad:** equipos pequeños  
-**Entregable:** registro de riesgos con controles, riesgo residual y ownership
+**Modalidad:** individual o equipos pequeños  
+**Entregable:** inventario evaluado, gaps y decisiones de arquitectura
 
 ## Objetivo
 
-Convertirás riesgos genéricos en decisiones controlables.
+Determinarás si las fuentes necesarias son utilizables, trazables y operables.
 
-## Dataset
+## Material
 
 ```text
-assets/risk_scenarios.jsonl
+assets/data_inventory.csv
+notebooks/M07_P04_Data_Readiness.ipynb
 ```
 
-## Tareas
+## Parte A — Necesidad
 
-Abre:
-
-```text
-notebooks/M07_P04_Risk_Governance.ipynb
-```
-
-### Parte A — Inherent risk
-
-Para cada riesgo revisa:
+Clasifica cada fuente como:
 
 ```text
-likelihood 1..5
-impact 1..5
-```
-
-Calcula:
-
-```text
-inherent_score = likelihood * impact
-```
-
-No interpretes el número como precisión científica.
-
-### Parte B — Controles
-
-Propón controles concretos.
-
-Ejemplo:
-
-```text
-riesgo:
-documento obsoleto
-
-control:
-status=CURRENT before retrieval
-```
-
-Evita controles vagos como:
-
-```text
-"usar IA responsable"
-```
-
-### Parte C — Residual risk
-
-Tras controles estima nuevamente:
-
-```text
-likelihood
-impact
-residual_score
-```
-
-y asigna:
-
-```text
-risk_owner
-```
-
-### Parte D — NIST AI RMF
-
-Mapea las actividades principales a:
-
-```text
-GOVERN
-MAP
-MEASURE
-MANAGE
-```
-
-Una acción puede contribuir a más de una función.
-
-### Parte E — Human oversight
-
-Para estas capacidades decide un patrón:
-
-```text
-NO_HUMAN_GATE
-REVIEW_BEFORE_USE
-APPROVAL_BEFORE_ACTION
+REQUIRED
+OPTIONAL
 OUT_OF_SCOPE
 ```
 
-Capacidades:
+para el piloto read-only de Enterprise GenAI Assistant.
 
-- resumen interno;
-- respuesta RAG con fuentes;
-- recomendación de cambio;
-- aplicar cambio en producción;
-- aprobación de acceso privilegiado.
+## Parte B — Readiness
 
-### Parte F — Regulatory / legal review
-
-Identifica qué casos necesitan:
+Para cada fuente `REQUIRED`, evalúa:
 
 ```text
-legal_review_required = true
+owner_known
+quality_acceptable
+permissions_defined
+freshness_fit
+traceable
+operable
 ```
 
-No intentes realizar por tu cuenta una clasificación jurídica definitiva.
+Después asigna:
+
+```text
+READY
+NEEDS_WORK
+```
+
+## Parte C — Gap plan
+
+Para cada `NEEDS_WORK` define:
+
+```text
+gap
+action
+owner
+evidence_of_completion
+```
+
+## Parte D — Estrategia técnica
+
+Decide entre:
+
+```text
+PROMPTING
+RAG
+FINE_TUNING
+DETERMINISTIC
+TOOL_API
+```
+
+para:
+
+- conocimiento de procedimientos que cambia;
+- estilo de redacción corporativo;
+- estado actual de un incidente;
+- comprobación de permisos;
+- resumen de tickets.
+
+## Parte E — Minimización
+
+Identifica qué datos no deben incorporarse por defecto y por qué.
 
 ## Preguntas
 
-1. ¿Qué diferencia existe entre riesgo inherente y residual?
-2. ¿Por qué el LLM no puede ser el control de autorización?
-3. ¿Qué riesgo aumenta al pasar de recomendación a ejecución autónoma?
-4. ¿Por qué human-in-the-loop mal diseñado puede convertirse en rubber-stamping?
+1. ¿Qué diferencia existe entre `accessible` y `ready`?
+2. ¿Por qué un corpus enorme puede ser peor que uno pequeño y curado?
+3. ¿Qué información exige una tool/API en tiempo real?
+4. ¿Por qué los secretos deben quedar fuera del contexto del modelo?

@@ -1,9 +1,9 @@
-dataset_id,dataset,owner,classification,intended_use,freshness,quality,known_issues,current_readiness
-DS01,Procedimientos operativos vigentes,Security / Operations,INTERNAL,RAG knowledge,Daily,Mixed,Versiones duplicadas en dos repositorios; metadata parcial,D3
-DS02,Histórico de procedimientos retirados,Security,INTERNAL,Audit only,Monthly,Good,Debe quedar fuera del contexto operativo por defecto,D4
-DS03,Tickets de incidentes,Operations,INTERNAL,Agent tool / eval,Realtime,Good,Contiene nombres de usuarios y comentarios libres,D3
-DS04,Chat de soporte interno,Service Desk,CONFIDENTIAL,Potential eval/fine-tuning,Daily,Mixed,"PII, secretos ocasionales, retention no definida",D1
-DS05,CMDB,Platform,INTERNAL,Tool,Realtime,Good,API disponible; requiere autorización por recurso,D4
-DS06,Feedback del asistente,Product,INTERNAL,Evaluation,Weekly,Unknown,Aún no existe una taxonomía de feedback,D0
-DS07,Runbooks personales de ingenieros,Multiple,INTERNAL,Possible RAG,Ad hoc,Low,Ownership y vigencia desconocidos,D1
-DS08,Políticas corporativas publicadas,Governance,INTERNAL,RAG knowledge,Weekly,Good,Versionado y owner disponibles,D4
+dataset_id,dataset,owner,classification,intended_use,freshness,quality,known_issues
+DS01,Procedimientos operativos vigentes,Security / Operations,INTERNAL,RAG knowledge,Daily,Mixed,Versiones duplicadas en dos repositorios; metadata parcial
+DS02,Histórico de procedimientos retirados,Security,INTERNAL,Audit only,Monthly,Good,Debe quedar fuera del contexto operativo por defecto
+DS03,Tickets de incidentes,Operations,INTERNAL,Agent tool / eval,Realtime,Good,Contiene nombres de usuarios y comentarios libres
+DS04,Chat de soporte interno,Service Desk,CONFIDENTIAL,Potential eval/fine-tuning,Daily,Mixed,"PII, secretos ocasionales, retention no definida"
+DS05,CMDB,Platform,INTERNAL,Tool,Realtime,Good,API disponible; requiere autorización por recurso
+DS06,Feedback del asistente,Product,INTERNAL,Evaluation,Weekly,Unknown,Aún no existe una taxonomía de feedback
+DS07,Runbooks personales de ingenieros,Multiple,INTERNAL,Possible RAG,Ad hoc,Low,Ownership y vigencia desconocidos
+DS08,Políticas corporativas publicadas,Governance,INTERNAL,RAG knowledge,Weekly,Good,Versionado y owner disponibles

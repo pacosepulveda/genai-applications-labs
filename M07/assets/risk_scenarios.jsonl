@@ -1,8 +1,8 @@
-{"risk_id": "R1", "scenario": "El retriever devuelve un procedimiento obsoleto y el asistente lo cita como vigente.", "category": "TECHNICAL/OPERATIONAL", "suggested_inherent_likelihood": 4, "suggested_inherent_impact": 4}
-{"risk_id": "R2", "scenario": "Un usuario obtiene un fragmento documental al que no está autorizado.", "category": "SECURITY/PRIVACY", "suggested_inherent_likelihood": 3, "suggested_inherent_impact": 5}
-{"risk_id": "R3", "scenario": "El modelo inventa un source_id que no estaba entre los chunks recuperados.", "category": "TECHNICAL/TRANSPARENCY", "suggested_inherent_likelihood": 4, "suggested_inherent_impact": 3}
-{"risk_id": "R4", "scenario": "Un documento recuperado contiene una instrucción hostil que intenta alterar el comportamiento del agente.", "category": "SECURITY", "suggested_inherent_likelihood": 3, "suggested_inherent_impact": 5}
-{"risk_id": "R5", "scenario": "Los técnicos aceptan respuestas sin revisar las fuentes por exceso de confianza.", "category": "HUMAN/OPERATIONAL", "suggested_inherent_likelihood": 4, "suggested_inherent_impact": 4}
-{"risk_id": "R6", "scenario": "El proveedor del modelo no está disponible durante un incidente crítico.", "category": "RESILIENCE", "suggested_inherent_likelihood": 3, "suggested_inherent_impact": 4}
-{"risk_id": "R7", "scenario": "Las trazas almacenan texto sensible de incidentes y prompts completos.", "category": "PRIVACY/SECURITY", "suggested_inherent_likelihood": 3, "suggested_inherent_impact": 4}
-{"risk_id": "R8", "scenario": "Un agente con permisos de escritura aplica un cambio de producción incorrecto.", "category": "AGENT/AUTONOMY", "suggested_inherent_likelihood": 3, "suggested_inherent_impact": 5}
+{"risk_id":"R1","scenario":"El retriever devuelve un procedimiento obsoleto y el asistente lo cita como vigente.","category":"RETRIEVAL","suggested_inherent_likelihood":4,"suggested_inherent_impact":4}
+{"risk_id":"R2","scenario":"Un usuario obtiene un fragmento documental al que no está autorizado.","category":"SECURITY","suggested_inherent_likelihood":3,"suggested_inherent_impact":5}
+{"risk_id":"R3","scenario":"El modelo inventa un source_id que no estaba entre los chunks recuperados.","category":"TECHNICAL","suggested_inherent_likelihood":4,"suggested_inherent_impact":3}
+{"risk_id":"R4","scenario":"Un documento recuperado contiene una instrucción hostil que intenta alterar el comportamiento del agente.","category":"SECURITY","suggested_inherent_likelihood":3,"suggested_inherent_impact":5}
+{"risk_id":"R5","scenario":"Los técnicos aceptan respuestas sin revisar las fuentes por exceso de confianza.","category":"HUMAN","suggested_inherent_likelihood":4,"suggested_inherent_impact":4}
+{"risk_id":"R6","scenario":"El proveedor del modelo no está disponible durante un incidente crítico.","category":"RESILIENCE","suggested_inherent_likelihood":3,"suggested_inherent_impact":4}
+{"risk_id":"R7","scenario":"Las trazas almacenan texto sensible de incidentes y prompts completos.","category":"SECURITY","suggested_inherent_likelihood":3,"suggested_inherent_impact":4}
+{"risk_id":"R8","scenario":"Un agente con permisos de escritura aplica un cambio de producción incorrecto.","category":"AGENT","suggested_inherent_likelihood":3,"suggested_inherent_impact":5}

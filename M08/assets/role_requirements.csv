@@ -1,8 +1,0 @@
-target_role,software,data,ml,llm,rag,agents,cloud,security,evaluation,product,governance,domain
-AI Engineer,4,2,2,4,4,3,3,2,4,2,2,2
-Data/Knowledge Engineer,3,4,2,2,4,1,3,2,3,1,2,2
-Platform Engineer,3,2,1,2,2,1,4,3,3,1,2,1
-Security Partner,2,2,1,2,2,2,3,4,3,1,4,2
-Product Owner,1,1,0,2,2,1,1,1,2,4,3,3
-Domain SME,1,2,0,1,2,1,1,2,2,2,2,4
-Service Owner,2,1,1,2,2,1,3,3,3,3,3,3

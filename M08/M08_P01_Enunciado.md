@@ -1,100 +1,91 @@
-# M08.P01 — Capability Map: ¿qué equipo necesitamos realmente?
+# M08.P01 — Capabilities, ownership y decision rights
 
 **Modalidad:** individual o equipos pequeños  
-**Entregable:** capability map y propuesta de equipo inicial
+**Entregable:** ownership map y decision-rights map
 
 ## Objetivo
 
-No empezarás asignando títulos.
+Convertirás el equipo conceptual del módulo en responsabilidades operables para
+Enterprise GenAI Assistant.
 
-Empezarás preguntando:
+No empezarás por títulos. Empezarás por:
 
 ```text
-¿Qué capacidades necesita el producto?
+capability
+owner
+decision
 ```
 
 ## Material
 
 ```text
-assets/team_profiles.csv
-assets/role_requirements.csv
+assets/ownership_activities.csv
+notebooks/M08_P01_Capabilities_Ownership.ipynb
 ```
 
-Abre:
+## Parte A — Capabilities
+
+Para cada actividad identifica la capability principal:
 
 ```text
-notebooks/M08_P01_Capability_Map.ipynb
+PRODUCT
+AI_SOFTWARE
+DATA_KNOWLEDGE
+DOMAIN_SME
+PLATFORM
+SECURITY_RISK
+SERVICE_OPERATIONS
 ```
 
-## Parte A — Mapa actual
+## Parte B — Ownership
 
-Calcula para cada skill:
+Asigna un owner concreto.
 
-- media del equipo;
-- máximo disponible;
-- número de personas con nivel >= 3.
-
-## Parte B — Capacidades críticas
-
-Para Enterprise GenAI Assistant marca cada skill:
+Evita:
 
 ```text
-CRITICAL
-IMPORTANT
-SUPPORTING
+AI Team
+IT
+The business
 ```
 
-Justifica.
+como propietarios genéricos.
 
-## Parte C — Coverage
+## Parte C — Decision rights
 
-Define una regla de cobertura.
-
-Ejemplo:
+Para cada actividad decide quién puede:
 
 ```text
-covered =
-al menos una persona >= required_level
+APPROVE
+BLOCK
+ROLLBACK
 ```
 
-Después identifica:
+No todas las actividades necesitan las tres decisiones.
+
+## Parte D — Interfaces
+
+Identifica qué actividades requieren colaboración entre:
 
 ```text
-single_point_of_failure
+Product Squad
+AI Platform
+Security/Risk
+Operations
 ```
 
-si solo una persona cubre una skill crítica.
+## Parte E — Validación
 
-## Parte D — Equipo mínimo
+Comprueba automáticamente que:
 
-Propón un squad con capacidades para:
-
-- Product;
-- AI Engineering;
-- Data/Knowledge Engineering;
-- Software Engineering;
-- Domain;
-- Security/Platform support.
-
-No necesitas asignar un FTE completo a cada función.
-
-## Parte E — Roles que NO crearías
-
-Decide si crearías específicamente:
-
-```text
-Prompt Engineer
-AI Researcher
-MLOps Engineer
-```
-
-como puestos dedicados para este piloto.
-
-Justifica.
+1. toda actividad tiene un owner;
+2. todo cambio productivo tiene `APPROVE`;
+3. toda actividad que puede romper producción tiene `ROLLBACK`;
+4. la aceptación de riesgo no queda en AI/Software.
 
 ## Preguntas
 
 1. ¿Qué diferencia hay entre capability y job title?
-2. ¿Qué skill tiene mayor bus-factor risk?
-3. ¿Qué persona podría evolucionar hacia AI Engineer?
-4. ¿Qué responsabilidades no debería absorber el equipo técnico?
+2. ¿Por qué ownership compartido no debe convertirse en ownership difuso?
+3. ¿Quién debería poder bloquear un cambio de alto riesgo?
+4. ¿Quién debería poder ordenar un rollback durante un incidente?

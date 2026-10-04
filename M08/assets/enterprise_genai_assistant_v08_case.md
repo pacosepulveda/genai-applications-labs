@@ -1,8 +1,8 @@
-# Enterprise GenAI Assistant v0.8 — Operating Model Case
+# Enterprise GenAI Assistant v0.8 — Production Readiness Case
 
-## Estado heredado
+## Estado heredado de M07
 
-M07 recomendó un piloto limitado de:
+M07 recomendó un piloto limitado:
 
 ```text
 RAG read-only con citas
@@ -17,28 +17,56 @@ cambios automáticos de producción
 aprobación automática de accesos
 ```
 
+## Alcance candidato
+
+```text
+20 técnicos
+Operations
+5 procedimientos aprobados
+8 semanas
+read-only
+```
+
 ## Objetivo de M08
 
-Diseñar el equipo y el operating model necesarios para pasar de PoC a un piloto operable.
+Convertir ese piloto en un servicio operable, no ampliar su autonomía.
+
+## Requisitos de readiness
+
+Antes de producción deben existir:
+
+```text
+owners explícitos
+release manifest inmutable
+quality gates
+staging representativo
+rollback
+observability
+SLO + alerts
+runbooks
+kill switch
+incident process
+cost ownership
+```
 
 ## Restricciones
 
-- Hay que mantener separación entre product ownership, service ownership, data ownership y risk ownership.
-- El contenido de procedimientos pertenece a Operations/Security, no al equipo de IA.
-- El acceso a modelos y proveedores debe centralizar controles comunes.
-- Un cambio de prompt, modelo, índice o tool puede provocar regresiones.
-- El piloto debe disponer de rollback y kill switch.
-- Security y Risk no deben revisar manualmente cada cambio de bajo riesgo.
-- El equipo debe poder operar el servicio aunque una persona clave no esté disponible.
+- El corpus pertenece a Operations/Security, no a AI Engineering.
+- Las ACL se aplican antes de construir contexto.
+- Las trazas no almacenan secretos ni prompts completos indiscriminadamente.
+- Model access puede centralizarse, pero el gateway se convierte en servicio crítico.
+- El fallback debe haber sido evaluado antes de necesitarlo.
+- Una regresión de calidad puede ser un incidente aunque HTTP sea 200.
+- El coste se optimiza como `cost/task`, no como tokens aislados.
 
-## Entregables esperados
+## Decisión final
 
-- Team topology.
-- Skill gap plan.
-- RACI.
-- Ownership map.
-- Git/LLMOps workflow.
-- Operations readiness checklist.
-- On-call/escalation model.
-- Service catalog entry.
-- Training/change-management plan.
+El equipo debe clasificar v0.8 como:
+
+```text
+READY
+READY_WITH_CONDITIONS
+NOT_READY
+```
+
+y justificar la decisión con evidencia.

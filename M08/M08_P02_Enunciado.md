@@ -1,93 +1,112 @@
-# M08.P02 — Skill Gaps: upskill, reskill, hire o partner
+# M08.P02 — Release manifest y quality gates GenAI
 
-**Modalidad:** individual o equipos pequeños  
-**Entregable:** skill gap plan por persona y plan de capacidad del equipo
+**Modalidad:** individual o parejas  
+**Entregable:** release manifest validado, matriz de gates y estrategia de rollout
 
 ## Objetivo
 
-Convertir una skill matrix en decisiones de desarrollo de talento.
+Tratarás una release GenAI como una combinación exacta de artefactos que modifica
+el comportamiento del sistema.
 
 ## Material
 
 ```text
-assets/team_profiles.csv
-assets/role_requirements.csv
-assets/learning_catalog.csv
+assets/change_catalog.csv
+assets/quality_gates.csv
+templates/release_manifest.json
+notebooks/M08_P02_Release_Quality_Gates.ipynb
 ```
 
-## Tareas
+## Parte A — Release manifest
 
-Abre:
+Completa una release con:
 
 ```text
-notebooks/M08_P02_Skill_Gaps.ipynb
+app_version
+git_commit
+model_id
+prompt_version
+index_version
+policy_version
+eval_suite_version
+thresholds_version
 ```
 
-### Parte A — Matching
+La versión evaluada debe ser exactamente la que se pretende promover.
 
-Para cada persona calcula su distancia frente a distintos target roles.
+## Parte B — Riesgo del cambio
 
-Una métrica didáctica:
+Revisa los cambios del catálogo y su nivel:
 
 ```text
-gap =
-sum(max(required - current, 0))
+LOW
+MEDIUM
+HIGH
+CRITICAL
 ```
 
-### Parte B — Transiciones plausibles
+Puedes modificarlo si lo justificas.
 
-Evalúa:
+## Parte C — Quality gates
+
+Define `required_gates(change)` utilizando:
 
 ```text
-Ana     -> AI Engineer
-Bruno   -> Data/Knowledge Engineer
-Diego   -> Platform Engineer
-Elena   -> Security Partner
-Fátima  -> Product Owner
-Gonzalo -> Domain SME
+unit_tests
+schema_tests
+policy_tests
+prompt_eval
+retrieval_eval
+model_eval
+security_eval
+authorization_tests
+cost_latency_eval
+human_approval
+rollback_plan
 ```
 
-No asumas que menor gap numérico significa automáticamente mejor decisión.
+## Parte D — Evidencia específica
 
-### Parte C — Desarrollo
-
-Para cada gap decide:
+Añade reglas según el artefacto:
 
 ```text
-UPSKILL
-RESKILL
-HIRE
-PARTNER
+MODEL
+PROMPT
+INDEX
+TOOL_READ
+TOOL_WRITE
+POLICY
+CONFIG
 ```
 
-### Parte D — Learning Plan
+## Parte E — Promotion
 
-Utiliza `learning_catalog.csv` para construir un plan de aprendizaje.
-
-Debe ligar:
+Diseña:
 
 ```text
-skill gap
--> learning action
--> práctica real
--> evidence
+DEV
+-> STAGING
+-> EVAL
+-> APPROVAL
+-> CANARY/SHADOW
+-> PROD
 ```
 
-### Parte E — Bus factor
-
-Identifica skills críticas donde:
+y explica cuándo utilizarías:
 
 ```text
-solo una persona
+CANARY
+SHADOW
+DIRECT_PROMOTION
 ```
 
-puede operar o revisar.
+## Parte F — Rollback
 
-Propón mitigación.
+Define qué versiones exactas se restauran si la release falla.
 
 ## Preguntas
 
-1. ¿Cuándo preferirías talento interno frente a contratar?
-2. ¿Qué diferencia existe entre upskill y reskill?
-3. ¿Qué gaps no deberían cubrirse solo con formación?
-4. ¿Cómo demostrarías que una persona ha adquirido la competencia?
+1. ¿Por qué un cambio de índice es un cambio productivo?
+2. ¿Qué diferencia hay entre evaluar una configuración y promover otra?
+3. ¿Por qué una tool de escritura necesita más evidencia que un prompt?
+4. ¿Qué artefactos deben quedar fijados en un rollback?

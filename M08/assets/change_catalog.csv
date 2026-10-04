@@ -1,9 +1,10 @@
 change_id,description,artifact_type,reference_risk
-CH01,Cambiar texto explicativo de un prompt sin alterar herramientas,PROMPT,LOW
+CH01,Cambiar texto de UX que no forma parte del prompt,APP_CODE,LOW
 CH02,Modificar system prompt que controla respuestas RAG,PROMPT,MEDIUM
-CH03,Cambiar modelo productivo por otro proveedor,MODEL,HIGH
-CH04,Reindexar el mismo corpus tras cambios de documentos,INDEX,MEDIUM
-CH05,Cambiar embedding model y reconstruir índice,EMBEDDING_INDEX,HIGH
-CH06,Añadir tool read-only get_asset(),TOOL_READ,MEDIUM
+CH03,Cambiar el modelo productivo por otro modelo,MODEL,HIGH
+CH04,Reindexar el mismo corpus tras cambios documentales,INDEX,MEDIUM
+CH05,Cambiar el modelo de embeddings y reconstruir el índice,INDEX,HIGH
+CH06,Añadir tool read-only get_incident(),TOOL_READ,MEDIUM
 CH07,Añadir tool que modifica configuración productiva,TOOL_WRITE,CRITICAL
-CH08,Cambiar threshold de no-answer,CONFIG,MEDIUM
+CH08,Cambiar threshold de NO_EVIDENCE,CONFIG,MEDIUM
+CH09,Modificar política de ACL aplicada antes del retrieval,POLICY,CRITICAL

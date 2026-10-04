@@ -1,0 +1,13 @@
+activity_id,activity,category,production_impact
+A01,Definir outcome y prioridad del producto,PRODUCT,MEDIUM
+A02,Aprobar una nueva versión del prompt,PROMPT_CHANGE,MEDIUM
+A03,Publicar una nueva versión del corpus,KNOWLEDGE_CHANGE,HIGH
+A04,Cambiar el modelo productivo,MODEL_CHANGE,HIGH
+A05,Añadir una tool read-only,TOOL_CHANGE,MEDIUM
+A06,Añadir una futura tool de escritura,TOOL_CHANGE,CRITICAL
+A07,Modificar política de acceso a fuentes,SECURITY_POLICY,CRITICAL
+A08,Promover una release a producción,DEPLOYMENT,HIGH
+A09,Ordenar rollback durante un incidente,INCIDENT,HIGH
+A10,Aceptar riesgo residual,RISK,CRITICAL
+A11,Definir thresholds de calidad,EVALUATION,HIGH
+A12,Decidir una optimización de cost/task,FINOPS,MEDIUM

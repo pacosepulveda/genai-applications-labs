@@ -1,9 +1,0 @@
-learning_id,name,skill,min_current_level,expected_gain,strategy,focus
-L01,LLM Application Engineering,llm,1,2,upskill,"API, prompts, structured output"
-L02,RAG Engineering,rag,1,2,upskill,"chunking, retrieval, evaluation"
-L03,Agent Engineering,agents,1,2,upskill,"tools, state, agent eval"
-L04,GenAI Security,security,1,2,upskill,"prompt injection, tool auth, data leakage"
-L05,AI Evaluation,evaluation,1,2,upskill,"offline eval, regression, quality gates"
-L06,AI Product Management,product,1,1,upskill,"use cases, metrics, experiments"
-L07,AI Governance,governance,1,1,upskill,"risk, ownership, controls"
-L08,Cloud/Platform for AI,cloud,1,1,upskill,"deployment, observability, cost"

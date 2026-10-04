@@ -1,104 +1,144 @@
-# M08.P05 — Operar IA: métricas, alertas e incidentes
+# M08.P05 — Enterprise GenAI Assistant v0.8: Production Readiness Pack
 
 **Modalidad:** equipos pequeños  
-**Entregable:** alert policy, ownership, runbooks y postmortem
+**Entregable:** `M08_Production_Readiness_Pack.md`
 
 ## Objetivo
 
-Demostrar que un servicio AI puede estar disponible técnicamente y, sin embargo, estar fallando.
+Integrarás todo M08 para decidir si el piloto definido en M07 está preparado
+para convertirse en un servicio operable.
 
 ## Material
 
 ```text
+assets/enterprise_genai_assistant_v08_case.md
+assets/ownership_activities.csv
+assets/change_catalog.csv
 assets/service_metrics.csv
 assets/ai_incidents.json
+templates/release_manifest.json
+notebooks/M08_P05_Production_Readiness.ipynb
 ```
 
-## Tareas
+Además reutiliza las decisiones de P01–P04.
 
-Abre:
+## Parte A — Ownership
+
+Documenta owner para:
 
 ```text
-notebooks/M08_P05_AI_Operations.ipynb
+product
+service
+prompt
+knowledge corpus
+index
+model access
+eval suite
+risk
+cost
+incident response
 ```
 
-### Parte A — SLO/SLI
+## Parte B — Release contract
 
-Propón thresholds para:
+Incluye un release manifest inmutable con versiones exactas.
+
+## Parte C — Delivery
+
+Resume:
 
 ```text
-availability
-p95 latency
-citation validity
-retrieval hit rate
-unauthorized retrieval
-cost per query
+change
+-> checks
+-> staging
+-> eval
+-> approval
+-> canary/shadow
+-> production
 ```
 
-### Parte B — Detección
+## Parte D — Observability
 
-Implementa alertas.
-
-Una condición de seguridad como:
+Define:
 
 ```text
-unauthorized_retrieval_count > 0
+SLO
+dashboard
+alerts
+trace contract
+redaction
+retention
 ```
 
-debe tratarse de forma distinta a una ligera subida de latencia.
+## Parte E — Recovery
 
-### Parte C — Incident routing
-
-Para cada incidente asigna:
+Comprueba:
 
 ```text
-Incident Commander / Service Owner
-Technical Lead
-Security
-Data/Knowledge
-Product
+rollback
+kill switch
+fallback
+runbooks
+incident commander
 ```
 
-según proceda.
+## Parte F — Cost ownership
 
-### Parte D — Runbook
-
-Para cada escenario define:
+Define quién observa y decide sobre:
 
 ```text
-detect
-contain
-recover
-verify
-communicate
+cost/task
+agent loops
+retries
+model routing
 ```
 
-### Parte E — Kill switch / rollback
+## Parte G — Readiness decision
 
-Decide qué se deshabilita:
-
-- provider;
-- RAG version;
-- agent feature;
-- tool;
-- whole service.
-
-### Parte F — Postmortem
-
-Elige un incidente y genera:
+Elige:
 
 ```text
-timeline
-impact
-root/cause factors
-control failure
-corrective actions
-eval cases to add
+READY
+READY_WITH_CONDITIONS
+NOT_READY
 ```
 
-## Preguntas
+Cada condición pendiente debe tener:
 
-1. ¿Por qué HTTP 200 no significa que la aplicación AI esté sana?
-2. ¿Quién debería estar on-call?
-3. ¿Cuándo debe activarse un kill switch?
-4. ¿Cómo convierte un postmortem un fallo en una mejora del sistema?
+```text
+owner
+evidence_required
+```
+
+## Parte H — Pack
+
+Genera:
+
+```text
+M08_Production_Readiness_Pack.md
+```
+
+con:
+
+```text
+Executive summary
+Readiness decision
+Ownership
+Release manifest
+Quality gates
+Platform dependencies
+Observability
+SLO and alerts
+Incident response
+Recovery
+Cost ownership
+Open conditions
+```
+
+## Preguntas finales
+
+1. ¿Qué evidencia permite decir que el servicio es operable?
+2. ¿Qué dependencia compartida tiene mayor blast radius?
+3. ¿Qué capacidad debe tener kill switch antes de producción?
+4. ¿Quién es accountable del servicio productivo?
+5. ¿Qué debe quedar preparado para que M09 pueda cambiar componentes con seguridad?

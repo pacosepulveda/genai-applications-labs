@@ -1,99 +1,96 @@
-# M08.P03 — Operating Model, Team Topology y RACI
+# M08.P03 — Plataforma mínima y observabilidad
 
-**Modalidad:** equipos pequeños  
-**Entregable:** modelo organizativo, RACI validada y decision-rights map
+**Modalidad:** individual o equipos pequeños  
+**Entregable:** capability split y contrato de observabilidad seguro
 
 ## Objetivo
 
-Diseñar una organización que pueda entregar sin convertir Platform, Security o Governance en bottlenecks.
+Decidirás qué capacidades conviene compartir entre productos y qué ownership
+debe permanecer cerca del caso de uso.
 
 ## Material
 
 ```text
-assets/operating_activities.csv
-assets/organization_scenarios.json
+assets/platform_capabilities.csv
+assets/trace_samples.jsonl
+notebooks/M08_P03_Platform_Observability.ipynb
 ```
 
-## Tareas
+## Parte A — Shared vs product-owned
 
-Abre:
+Clasifica cada capacidad como:
 
 ```text
-notebooks/M08_P03_Operating_Model_RACI.ipynb
+SHARED_PLATFORM
+PRODUCT_OWNED
+SHARED_WITH_PRODUCT_OWNER
 ```
 
-### Parte A — Topology
+Considera:
 
-Para cada escenario organizativo selecciona:
+- repetición entre equipos;
+- necesidad de estandarización;
+- sensibilidad al dominio;
+- riesgo de convertir Platform en bottleneck.
+
+## Parte B — Golden path
+
+Selecciona las capacidades mínimas que formarían un golden path:
 
 ```text
-CENTRALIZED
-FEDERATED
-HUB_AND_SPOKE
+model access
+CI/CD
+eval tooling
+observability
+secrets
 ```
 
-Justifica.
+No diseñes una plataforma completa imaginaria.
 
-### Parte B — Enterprise GenAI Assistant
+## Parte C — Model gateway
 
-Diseña:
+Define qué debería centralizar:
 
 ```text
-Product Squad
-AI Platform
-Governance/Risk/Enablement
+auth
+routing
+logging
+cost attribution
+approved models
 ```
 
-y asigna responsabilidades.
+y qué responsabilidades operativas introduce.
 
-### Parte C — RACI
+## Parte D — Trace contract
 
-Para cada actividad A01–A15 asigna:
+A partir de las trazas de ejemplo decide qué conservar, redactar o eliminar.
+
+Como mínimo considera:
 
 ```text
-R
-A
-C
-I
+trace_id
+model_id
+prompt_version
+source_ids
+tool_calls
+tokens
+latency
+outcome
 ```
 
-Roles disponibles:
+## Parte E — Privacy by design
+
+Marca campos sensibles y define:
 
 ```text
-Product
-AI Engineering
-Data/Knowledge
-AI Platform
-Security
-Risk/Legal
-Domain SME
-Service Owner
-```
-
-### Parte D — Validación automática
-
-Implementa reglas:
-
-1. exactamente un `A`;
-2. al menos un `R`;
-3. no más de tres `R`;
-4. `A` no puede estar vacío.
-
-Genera una lista de violaciones.
-
-### Parte E — Decision rights
-
-Para actividades críticas especifica además:
-
-```text
-can_approve
-can_block
-can_rollback
+redaction
+retention
+access_control
 ```
 
 ## Preguntas
 
-1. ¿Por qué un RACI con cinco Accountable no sirve?
-2. ¿Qué debería centralizar AI Platform?
-3. ¿Qué debe permanecer en el product squad?
-4. ¿Qué tipos de cambios necesitan Risk/Security y cuáles pueden ir por fast lane?
+1. ¿Por qué compartir RAG no transfiere el ownership del corpus?
+2. ¿Qué convierte al model gateway en una dependencia crítica?
+3. ¿Qué dato de una traza ayuda a depurar sin necesidad de almacenar el prompt completo?
+4. ¿Qué capacidades deben seguir cerca del product squad?

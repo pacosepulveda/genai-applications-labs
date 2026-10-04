@@ -1,0 +1,26 @@
+{
+  "release_id": "assistant-v0.8-candidate",
+  "app_version": "",
+  "git_commit": "",
+  "model_id": "",
+  "prompt_version": "",
+  "index_version": "",
+  "policy_version": "",
+  "eval_suite_version": "",
+  "thresholds_version": "",
+  "created_by": "",
+  "evidence": {
+    "unit_tests": "",
+    "policy_tests": "",
+    "retrieval_eval": "",
+    "security_eval": "",
+    "cost_latency_eval": ""
+  },
+  "rollback_to": {
+    "release_id": "",
+    "model_id": "",
+    "prompt_version": "",
+    "index_version": "",
+    "policy_version": ""
+  }
+}

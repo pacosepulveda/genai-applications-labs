@@ -1,0 +1,13 @@
+capability_id,capability,repeated_across_products,domain_specific,security_sensitivity,operational_criticality
+PC01,Model access and authentication,HIGH,LOW,HIGH,HIGH
+PC02,CI/CD templates,HIGH,LOW,MEDIUM,MEDIUM
+PC03,Evaluation execution framework,HIGH,LOW,MEDIUM,MEDIUM
+PC04,Product eval dataset,LOW,HIGH,MEDIUM,MEDIUM
+PC05,Tracing infrastructure,HIGH,LOW,HIGH,HIGH
+PC06,Prompt content,LOW,HIGH,MEDIUM,MEDIUM
+PC07,RAG ingestion framework,HIGH,MEDIUM,HIGH,HIGH
+PC08,Knowledge corpus ownership,LOW,HIGH,HIGH,HIGH
+PC09,Vector store infrastructure,HIGH,LOW,HIGH,HIGH
+PC10,Product quality thresholds,LOW,HIGH,MEDIUM,HIGH
+PC11,Secrets management,HIGH,LOW,HIGH,HIGH
+PC12,Incident runbook for product,LOW,HIGH,HIGH,HIGH

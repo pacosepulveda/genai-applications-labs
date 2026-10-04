@@ -1,105 +1,119 @@
-# M08.P04 — Git, MLOps y LLMOps: diseñar quality gates
+# M08.P04 — AI Operations: SLO, incidentes y FinOps
 
-**Modalidad:** individual o parejas  
-**Entregable:** política de release y matriz de herramientas
+**Modalidad:** equipos pequeños  
+**Entregable:** alert policy, runbooks y postmortem con nuevo caso de evaluación
 
 ## Objetivo
 
-Tratar cambios de IA como cambios de software/producto que pueden provocar regresiones.
+Demostrarás que una aplicación GenAI puede estar disponible técnicamente y,
+sin embargo, estar fallando en calidad, seguridad o coste.
 
 ## Material
 
 ```text
-assets/change_catalog.csv
-assets/quality_gates.csv
-assets/tooling_scenarios.csv
-templates/release_policy.yaml
+assets/service_metrics.csv
+assets/ai_incidents.json
+notebooks/M08_P04_AI_Operations.ipynb
 ```
 
-## Tareas
+## Parte A — SLO y señales
 
-Abre:
+Define thresholds para:
 
 ```text
-notebooks/M08_P04_LLMOps_Quality_Gates.ipynb
+availability
+p95_latency_s
+citation_validity
+retrieval_hit_rate
+unauthorized_retrieval_count
+avg_model_calls_per_task
+cost_per_task_eur
 ```
 
-### Parte A — Clasificar cambios
+## Parte B — Alertas
 
-Revisa el nivel de riesgo propuesto para cada cambio.
-
-Puedes modificarlo si lo justificas.
-
-### Parte B — Quality gates
-
-Define qué checks exige:
+Clasifica cada señal:
 
 ```text
-LOW
-MEDIUM
-HIGH
+INFO
+WARNING
 CRITICAL
 ```
 
-Ejemplos:
+Una fuga de autorización debe tratarse de forma distinta a una subida moderada
+de latencia.
 
-- unit tests;
-- prompt eval;
-- retrieval eval;
-- model eval;
-- security review;
-- cost review;
-- authorization tests;
-- human approval;
-- rollback plan.
+## Parte C — Incident routing
 
-### Parte C — Artifact-specific gates
-
-Un cambio `MODEL` no necesita exactamente los mismos checks que `INDEX` o `TOOL_WRITE`.
-
-Define reglas adicionales.
-
-### Parte D — Validador
-
-Implementa:
-
-```python
-required_gates(change)
-```
-
-y comprueba automáticamente el catálogo.
-
-### Parte E — Tool selection
-
-Para cada escenario T01–T05 decide cuándo usar:
+Para cada incidente asigna:
 
 ```text
-Git/CI
-MLflow
-MLflow GenAI/tracing
-Kubeflow Pipelines
-ninguna herramienta adicional
+Incident Commander
+Technical Lead
+Security
+Data/Knowledge
+Product
 ```
 
-No selecciones herramientas porque “son de IA”.
+solo cuando sea necesario.
 
-### Parte F — Release flow
+## Parte D — Runbook
 
-Diseña:
+Define:
 
 ```text
-PR
--> automated checks
--> staging
--> eval
--> approval if needed
--> canary/shadow
--> production
+detect
+contain
+recover
+verify
+communicate
+```
+
+## Parte E — Recovery
+
+Decide entre:
+
+```text
+rollback release
+rollback index
+disable agent feature
+disable tool
+provider fallback
+degraded mode
+stop service
+```
+
+## Parte F — FinOps
+
+No optimices únicamente tokens.
+
+Analiza:
+
+```text
+calls/task
+cost/task
+quality
+latency
+```
+
+y propone una mejora que mantenga la calidad.
+
+## Parte G — Learning loop
+
+Para un incidente genera:
+
+```text
+timeline
+impact
+cause factors
+control failure
+corrective actions
+new_eval_case
 ```
 
 ## Preguntas
 
-1. ¿Qué añade LLMOps a MLOps?
-2. ¿Por qué cambiar el índice es un cambio productivo?
-3. ¿Cuándo Kubeflow sería excesivo?
-4. ¿Qué artefactos deben poder hacer rollback?
+1. ¿Por qué HTTP 200 no demuestra salud del servicio?
+2. ¿Cuándo usarías degradación en lugar de apagarlo todo?
+3. ¿Por qué cost/task es mejor unidad económica que cost/request?
+4. ¿Cómo convierte el postmortem un incidente en una regresión futura?

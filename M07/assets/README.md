@@ -1,14 +1,14 @@
-# Assets del M07
+# Assets M07
 
-Los datos de estas prácticas son completamente ficticios.
+Todos los datos son ficticios y se utilizan únicamente para prácticas.
 
-Se han diseñado para que las decisiones no sean triviales:
+| Fichero | Práctica | Uso |
+|---|---|---|
+| `opportunity_backlog.csv` | P01 | pain points, fit y alternativas |
+| `baseline_procedure_search.csv` | P02/P06 | baseline del caso transversal |
+| `prioritization_candidates.csv` | P03 | priorización defendible |
+| `data_inventory.csv` | P04/P06 | data readiness |
+| `risk_scenarios.jsonl` | P05/P06 | riesgo, controles y resiliencia |
+| `enterprise_genai_assistant_case.md` | P06 | Stage Gate y piloto v0.7 |
 
-- algunos casos son buen encaje para GenAI;
-- otros deberían resolverse con reglas/software convencional;
-- algunos tienen alto valor y alto riesgo;
-- existen datasets útiles pero no preparados;
-- el portfolio incluye costes, adopción y tasas de éxito;
-- el caso final exige una decisión `GO`, `NO-GO` o `NOT YET`.
-
-Los scores son instrumentos para estructurar una discusión. No sustituyen el juicio ni constituyen una decisión automática.
+No hay datos de una organización real.

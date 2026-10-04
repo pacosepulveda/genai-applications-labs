@@ -1,12 +1,8 @@
-# Caso M07 — Enterprise GenAI Assistant
+# Caso M07 — Enterprise GenAI Assistant v0.7
 
-## Problema
+## Punto de partida
 
-Los técnicos de operaciones y seguridad deben localizar rápidamente procedimientos vigentes durante incidentes y tareas operativas. La información está distribuida entre varias fuentes y existe riesgo de abrir documentación histórica.
-
-## Capability construida hasta M06
-
-La aplicación ya dispone conceptualmente de:
+M06 ha demostrado viabilidad técnica para tres modos:
 
 ```text
 DIRECT
@@ -14,72 +10,96 @@ RAG obligatorio para conocimiento corporativo
 AGENT read-only para asistencia operacional
 ```
 
-Controles técnicos existentes:
+Controles ya demostrados:
 
-- filtrado de documentación obsoleta;
-- metadata;
-- citation validation;
-- no-answer;
+- documentación obsoleta excluida;
+- metadata y citas verificables;
+- `NO_EVIDENCE`;
 - tools read-only;
-- separación entre policy y modelo;
-- estado por thread.
+- policy separada del modelo;
+- estado aislado por thread.
 
-## Baseline de ejercicio
+## Problema
 
-El fichero:
+Los técnicos de Operations pierden tiempo localizando el procedimiento vigente
+durante incidencias y, en algunos casos, terminan utilizando una fuente incorrecta
+o escalando la consulta a un experto.
+
+## Baseline del caso
+
+El dataset del laboratorio reproduce aproximadamente:
 
 ```text
-baseline_procedure_search.csv
+11 min   mediana de búsqueda
+6%       documento incorrecto
+18%      escalado a experto
 ```
 
-contiene observaciones ficticias del proceso actual.
+## Gate actual
 
-No deben asumirse como datos de una organización real.
+```text
+PoC -> Pilot
+```
+
+La pregunta no es si la demo funciona.
+
+La pregunta es si existe evidencia suficiente para probar valor con usuarios reales
+dentro de un alcance controlado.
 
 ## Alcance candidato del piloto
 
-Usuarios:
-
 ```text
-20 técnicos de Operations/Security
+20 técnicos
+1 departamento: Operations
+5 procedimientos aprobados
+8 semanas
+modo read-only
 ```
 
-Fuentes iniciales:
+Procedimientos iniciales:
 
 ```text
-procedimientos operativos
-políticas corporativas
-runbooks aprobados
+PROC-017
+PROC-021
+PROC-031
+POL-004
+STD-009
 ```
 
-Funciones propuestas:
+Funciones incluidas:
+
+- búsqueda RAG;
+- respuesta con citas;
+- consulta read-only de incidentes;
+- cálculo de duración de incidentes.
+
+Funciones fuera de alcance:
+
+- ejecutar cambios en producción;
+- aprobar accesos privilegiados;
+- tools de escritura;
+- comunicaciones externas automáticas.
+
+## Criterios de éxito
 
 ```text
-buscar procedimientos
-responder con citas
-resumir incidentes
-consultar incidentes read-only
-calcular duraciones
+reducción del tiempo mediano >= 30%
+citation validity >= 98%
+satisfacción >= 4/5
 ```
 
-Funciones explícitamente fuera de alcance:
+## Criterios de parada o replanteamiento
 
 ```text
-aplicar cambios en producción
-aprobar accesos
-enviar comunicaciones externas automáticamente
+retrieval miss > 15%
+alucinación crítica
+security blocker
 ```
 
-## Restricciones
+## Preguntas del comité
 
-- No debe existir fallback directo al conocimiento paramétrico cuando se exijan fuentes corporativas.
-- Documentos OBSOLETE no deben utilizarse como evidencia operativa.
-- Las ACL deben aplicarse antes del contexto del modelo.
-- Los logs no deben almacenar secretos ni texto completo de forma indiscriminada.
-- Acciones de escritura quedan fuera del piloto.
-
-## Pregunta del comité
-
-> ¿Debemos pasar de PoC técnico a piloto read-only?  
-> ¿Qué condiciones deben cumplirse antes de producción?  
-> ¿Qué funcionalidades deberían quedar como NOT YET?
+1. ¿Debe el RAG read-only pasar a piloto?
+2. ¿Debe incluirse la consulta read-only de incidentes?
+3. ¿Qué capacidades quedan en NOT_YET?
+4. ¿Qué capacidades reciben NO_GO para este alcance?
+5. ¿Qué debe demostrar el piloto antes de Production?

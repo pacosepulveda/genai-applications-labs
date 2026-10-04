@@ -1,0 +1,8 @@
+use_case_id,name,business_value,technical_feasibility,data_readiness,risk,time_to_value
+UC01,RAG de procedimientos,5,4,4,3,5
+UC02,Borradores de comunicaciones,4,5,4,2,5
+UC05,Resumen de tickets,5,5,4,2,5
+UC06,Traducción técnica asistida,4,5,4,2,5
+UC07,Ranking automático de candidatos,4,3,2,5,2
+UC08,Extracción contractual con citas,4,4,3,4,3
+UC10,Agente de cambios en producción,5,3,3,5,1

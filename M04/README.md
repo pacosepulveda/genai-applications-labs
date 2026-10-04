@@ -17,18 +17,28 @@ espacio latente
       ↓
 GAN
       ↓
-diagnóstico y evaluación
+diagnóstico de diversidad y cobertura
       ↓
-diffusion
+tiny diffusion
       ↓
 VisualProvider en Enterprise GenAI Assistant
+      ↓
+modelo visual real mediante Amazon Bedrock
 ```
 
-## Entorno
+## Entorno de laboratorio
 
-Todos los laboratorios están diseñados para realizarse desde el entorno web facilitado por el instructor. No es necesario instalar herramientas en el ordenador del alumno.
+Cada alumno trabaja desde un **SageMaker Space** con una instancia **`ml.t3.large`**, sin GPU.
 
-Las prácticas utilizan imágenes de 8×8 y modelos deliberadamente pequeños. El objetivo es comprender los mecanismos de VAE, GAN y diffusion mediante implementaciones mínimas, manteniendo tiempos de ejecución adecuados para una práctica guiada.
+Por ese motivo las prácticas locales están diseñadas para CPU:
+
+- dataset `sklearn.datasets.load_digits`, disponible localmente;
+- imágenes de 8×8;
+- VAE, GAN y denoiser deliberadamente pequeños;
+- sin descarga de datasets grandes;
+- sin Stable Diffusion ni otros modelos grandes ejecutándose dentro del Space.
+
+El objetivo de P01–P05 es comprender mecanismos y poder observar el entrenamiento. En P06 se añade un provider visual real mediante **Amazon Bedrock**: el cálculo pesado ocurre en el servicio gestionado y el Space actúa como cliente de la API.
 
 ## Orden recomendado
 
@@ -36,7 +46,11 @@ Las prácticas utilizan imágenes de 8×8 y modelos deliberadamente pequeños. E
 M04.P01 -> M04.P02 -> M04.P03 -> M04.P04 -> M04.P05 -> M04.P06
 ```
 
-P03 y P04 trabajan sobre la misma GAN. P06 reutiliza el generador entrenado en P03 si está disponible, pero dispone también de un provider mock.
+P03 y P04 trabajan sobre la misma GAN. P06 reutiliza el generador entrenado en P03 si está disponible y mantiene también un provider mock para probar arquitectura y tests sin depender de un modelo externo.
+
+## Continuidad del proyecto transversal
+
+M04.P06 construye **Enterprise GenAI Assistant v0.4** como evolución de v0.3. La capacidad visual no debe eliminar el endpoint de borradores, el router ni los controles deterministas construidos en módulos anteriores.
 
 ## Material
 

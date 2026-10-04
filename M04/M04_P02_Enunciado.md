@@ -16,6 +16,8 @@ imagen
 -> reconstrucción
 ```
 
+La práctica utiliza `load_digits` 8×8 y está dimensionada para CPU.
+
 ## Tareas
 
 Abre:
@@ -28,13 +30,13 @@ notebooks/M04_P02_VAE_Latent_Space.ipynb
 
 Implementa un VAE pequeño:
 
-- entrada de 64 valores;
+- entrada de 64 valores normalizados a `[0,1]`;
 - encoder con una capa oculta de aproximadamente 32 unidades;
 - `mu`;
 - `log_var`;
 - reparameterization;
 - decoder simétrico;
-- salida de 64 valores.
+- salida de 64 valores con activación coherente con `[0,1]`.
 
 Utiliza un espacio latente de dimensión 2 para poder visualizarlo. Mantén el entrenamiento en torno a 25–30 épocas como máximo orientativo.
 
@@ -48,17 +50,19 @@ reconstruction loss
 KL divergence
 ```
 
-Registra ambos componentes por separado.
+El notebook proporciona la expresión de KL necesaria para esta práctica. El objetivo es entender y programar la combinación de términos, no derivar la fórmula desde cero.
+
+Registra por separado:
+
+- reconstruction loss;
+- KL loss;
+- total loss.
 
 ### Parte C — Entrenamiento
 
 Entrena sobre `load_digits`.
 
-Visualiza:
-
-- train loss;
-- reconstruction loss;
-- KL loss.
+Visualiza la evolución de los tres términos anteriores.
 
 ### Parte D — Reconstrucción
 

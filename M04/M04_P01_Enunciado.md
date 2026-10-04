@@ -7,7 +7,7 @@
 
 Antes de generar imágenes debes comprender qué recibe realmente una red neuronal.
 
-Utilizarás `sklearn.datasets.load_digits`, que contiene imágenes de dígitos de 8×8 y está disponible localmente.
+Utilizarás `sklearn.datasets.load_digits`, que contiene imágenes de dígitos de 8×8 y está disponible localmente. La práctica está diseñada para ejecutarse íntegramente en CPU dentro del SageMaker Space.
 
 ## Tareas
 
@@ -74,11 +74,13 @@ Después crea deliberadamente una transformación problemática y explica por qu
 
 ### Parte D — Dataset para generación
 
-Construye un `TensorDataset` o `DataLoader` que entregue batches con shape:
+El notebook ya importa `TensorDataset` y `DataLoader`. Utilízalos para entregar batches con shape:
 
 ```text
 batch × 1 × 8 × 8
 ```
+
+No es necesario explorar opciones avanzadas de `DataLoader`: aquí solo necesitamos agrupar tensores en mini-batches.
 
 ## Preguntas
 

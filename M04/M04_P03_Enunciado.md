@@ -1,13 +1,13 @@
 # M04.P03 — GAN desde cero: Generator vs Discriminator
 
 **Modalidad:** individual o parejas  
-**Entregable:** GAN entrenada, checkpoints y evolución visual usando ruido fijo
+**Entregable:** GAN entrenada, checkpoint y evolución visual usando ruido fijo
 
 ## Objetivo
 
 Implementarás una GAN simple desde cero sobre imágenes 8×8.
 
-El objetivo no es obtener calidad fotográfica ni entrenar un generador grande. El objetivo es entender el entrenamiento adversarial con redes MLP pequeñas y tiempos previsibles en clase.
+El objetivo no es obtener calidad fotográfica ni entrenar un generador grande. El objetivo es entender el entrenamiento adversarial con redes MLP pequeñas y tiempos previsibles en una `ml.t3.large` sin GPU.
 
 ## Arquitectura
 
@@ -44,7 +44,7 @@ en:
 1 × 8 × 8
 ```
 
-Utiliza una activación final compatible con el rango de las imágenes reales.
+Utiliza una MLP pequeña y una activación final compatible con el rango `[-1,1]` de las imágenes reales.
 
 ### Parte B — Discriminator
 
@@ -69,28 +69,31 @@ Genera nuevas imágenes y optimiza G para que D las considere reales.
 
 ### Parte E — Fixed noise
 
-Mantén el entrenamiento acotado; como referencia, utiliza un máximo de unas 40 épocas para esta práctica.
+Mantén el entrenamiento acotado; como referencia, utiliza un máximo aproximado de 40 épocas.
 
-Crea una matriz `fixed_noise` una sola vez.
+Crea `fixed_noise` una sola vez y reutilízalo cada varias épocas para observar la evolución de las mismas entradas latentes.
 
-Cada varias épocas genera una cuadrícula con ese mismo ruido.
+### Parte F — Checkpoints
 
-Guarda la evolución.
-
-### Parte F — Checkpoint
-
-Guarda al menos:
+Guarda un artefacto ligero para serving:
 
 ```text
-generator.pt
-gan_config.json
+enterprise-genai-assistant/artifacts/generator.pt
+enterprise-genai-assistant/artifacts/gan_config.json
 ```
 
-en:
+Guarda además un checkpoint de entrenamiento que incluya como mínimo:
 
 ```text
-enterprise-genai-assistant/artifacts/
+generator_state_dict
+discriminator_state_dict
+optimizer_g_state_dict
+optimizer_d_state_dict
+epoch
+config
 ```
+
+Así podrás reanudar o inspeccionar el experimento sin confundir serving con estado de entrenamiento.
 
 ## Preguntas
 
@@ -98,3 +101,4 @@ enterprise-genai-assistant/artifacts/
 2. ¿Por qué no queremos aplicar una `sigmoid` manual si usamos `BCEWithLogitsLoss`?
 3. ¿Por qué las losses de una GAN son más difíciles de interpretar que las de un clasificador?
 4. ¿Qué ventaja aporta observar siempre el mismo `fixed_noise`?
+5. ¿Por qué `generator.pt` y un checkpoint completo resuelven necesidades distintas?

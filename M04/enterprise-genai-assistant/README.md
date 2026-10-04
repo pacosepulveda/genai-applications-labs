@@ -1,17 +1,46 @@
 # Enterprise GenAI Assistant — M04
 
-Esta versión añade un servicio de generación visual con provider desacoplado.
+La versión v0.4 **extiende v0.3**: mantiene la capacidad textual y añade generación visual mediante un contrato multi-provider.
 
-## Providers
+## Capacidades
 
 ```text
-mock
-local_gan
+/v1/draft
+  └── routing + políticas de M03
+
+/v1/images
+  └── visual policy
+      └── VisualProvider
+          ├── mock
+          ├── local_gan
+          └── bedrock
 ```
 
-`local_gan` utiliza los artefactos creados en M04.P03.
+## Entorno de laboratorio
 
-## API
+El código se ejecuta desde un SageMaker Space `ml.t3.large` sin GPU.
+
+- `local_gan` utiliza el Generator 8×8 creado en M04.P03 y ejecuta inferencia en CPU.
+- `bedrock` llama a un modelo visual gestionado. El modelo grande no se ejecuta dentro del Space.
+- `mock` permite probar API, política y almacenamiento sin dependencia externa.
+
+## Configuración
+
+Copia `.env.example` a `.env` cuando necesites personalizar valores.
+
+```text
+VISUAL_PROVIDER=mock
+BEDROCK_IMAGE_REGION=us-west-2
+BEDROCK_IMAGE_MODEL_ID=stability.sd3-5-large-v1:0
+```
+
+No guardes access keys en `.env`. En AWS el SDK debe utilizar las credenciales/rol proporcionados por el entorno.
+
+## Continuidad desde M03
+
+Conserva tu implementación completada de v0.3 y sus artefactos. El scaffold de M04 incluye los contratos y ficheros necesarios para mantener la funcionalidad anterior, pero no pretende resolver de nuevo las tareas de M03.
+
+## API visual
 
 ```text
 POST /v1/images
@@ -31,4 +60,4 @@ pytest -q
 uvicorn src.main:app --reload --port 8080
 ```
 
-Abre `/docs` utilizando la vista web del entorno de laboratorio.
+En SageMaker Studio utiliza la vista web/proxy disponible para abrir `/docs`; no dependas de exponer `localhost` directamente al navegador del equipo del alumno.

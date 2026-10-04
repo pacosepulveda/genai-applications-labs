@@ -1,4 +1,4 @@
-# M04.P05 — Diffusion paso a paso: ruido, timestep y denoising
+# M04.P05 — Tiny Diffusion: ruido, timestep y denoising
 
 **Modalidad:** individual o parejas  
 **Entregable:** notebook con forward diffusion, denoiser entrenado y sampling iterativo
@@ -7,7 +7,7 @@
 
 Comprenderás diffusion entrenando un modelo pequeño sobre imágenes 8×8.
 
-No utilizaremos un modelo text-to-image grande. La práctica aísla el mecanismo fundamental:
+No utilizaremos un modelo text-to-image grande dentro del Space. La práctica aísla el mecanismo fundamental:
 
 ```text
 imagen
@@ -16,6 +16,8 @@ imagen
 -> retirar ruido
 -> repetir
 ```
+
+Todo se ejecuta en CPU.
 
 ## Tareas
 
@@ -39,23 +41,25 @@ Visualiza la misma imagen en distintos timesteps.
 
 ### Parte B — Timestep encoding
 
-Construye una representación sencilla del timestep.
+Para esta práctica utiliza una representación sencilla y guiada del timestep, por ejemplo un escalar normalizado `t/(T-1)`.
 
-El denoiser debe saber cuánto ruido contiene la entrada.
+El objetivo no es diseñar embeddings temporales sofisticados, sino comprobar que el denoiser necesita conocer el nivel de ruido.
 
 ### Parte C — Denoiser
 
-Construye una red pequeña, por ejemplo con capas ocultas de unas 128 unidades, que reciba:
+Construye una red pequeña con entrada equivalente a:
 
 ```text
-x_t + timestep
+64 valores de x_t + timestep
 ```
 
-y prediga:
+y salida:
 
 ```text
-epsilon
+64 valores de epsilon_pred
 ```
+
+Una MLP `65 -> 128 -> 128 -> 64` es suficiente.
 
 ### Parte D — Training objective
 
@@ -65,13 +69,15 @@ Entrena con:
 MSE(predicted_noise, true_noise)
 ```
 
-Mantén `T=40` y un máximo orientativo de 20–30 épocas para que el ejercicio tenga tiempos de ejecución previsibles.
+Mantén `T=40` y aproximadamente 15–20 épocas como referencia. No buscamos optimizar calidad visual, sino observar que el modelo aprende una señal de denoising.
 
 ### Parte E — Reverse sampling
 
 Comienza con ruido gaussiano y aplica iterativamente el denoiser.
 
-Visualiza varias etapas del proceso.
+El notebook proporciona la ecuación simplificada del paso inverso que necesitas implementar. No se espera que derives DDPM desde cero.
+
+Guarda varios estados intermedios para visualizar la evolución.
 
 ### Parte F — Comparación con GAN
 
@@ -89,3 +95,4 @@ Compara:
 2. ¿Qué diferencia fundamental existe entre el entrenamiento de GAN y diffusion?
 3. ¿Por qué diffusion suele necesitar varios pasos de inferencia?
 4. ¿Qué ventaja aportaría realizar el proceso en un espacio latente?
+5. ¿Por qué tiene sentido estudiar el mecanismo localmente y utilizar un modelo visual grande mediante API en P06?

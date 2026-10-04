@@ -1,6 +1,8 @@
 from pathlib import Path
 import json
+
 from PIL import Image
+
 
 class ArtifactStore:
     def __init__(self, root: str | Path):
@@ -14,7 +16,7 @@ class ArtifactStore:
         image.save(image_path)
         metadata_path.write_text(
             json.dumps(metadata, indent=2, ensure_ascii=False),
-            encoding="utf-8"
+            encoding="utf-8",
         )
         return image_path, metadata_path
 

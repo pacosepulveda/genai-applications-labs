@@ -1,27 +1,11 @@
-# M07.P06 — Enterprise GenAI Assistant v0.7: Stage Gate y roadmap
+# M07.P06 — Enterprise GenAI Assistant v0.7: Stage Gate y piloto
 
 **Modalidad:** equipos pequeños  
 **Entregable:** Decision Pack y defensa de la decisión
 
 ## Objetivo
 
-Cerrarás M07 tomando una decisión sobre el proyecto transversal.
-
-No debes responder:
-
-```text
-"es una buena idea"
-```
-
-Debes elegir:
-
-```text
-GO
-NO-GO
-NOT YET
-```
-
-para cada alcance.
+Cerrarás M07 decidiendo si la PoC técnica de M06 debe pasar a un piloto controlado.
 
 ## Material
 
@@ -30,12 +14,7 @@ assets/enterprise_genai_assistant_case.md
 assets/baseline_procedure_search.csv
 assets/data_inventory.csv
 assets/risk_scenarios.jsonl
-```
-
-Abre:
-
-```text
-notebooks/M07_P06_Stage_Gate_Roadmap.ipynb
+notebooks/M07_P06_Stage_Gate_Pilot.ipynb
 ```
 
 ## Parte A — Gate actual
@@ -45,68 +24,69 @@ Supón que M06 ha demostrado viabilidad técnica.
 Estás en:
 
 ```text
-Gate 2:
 PoC -> Pilot
 ```
 
 Evalúa:
 
 - valor;
-- baseline;
+- baseline y métricas;
 - datos;
 - riesgo;
-- operación;
+- capacidad operativa;
 - ownership.
 
-### Parte B — Decisiones separadas
+## Parte B — Decisiones por capacidad
 
-Toma una decisión distinta para:
-
-1. **RAG read-only con citas**.
-2. **Consulta read-only de incidentes**.
-3. **Agente que propone acciones**.
-4. **Agente que ejecuta cambios en producción**.
-5. **Aprobación automática de accesos privilegiados**.
-
-Una única decisión global no es suficiente.
-
-### Parte C — Pilot hypothesis
-
-Redacta:
+Toma una decisión distinta:
 
 ```text
-We believe...
-for...
-will improve...
-measured by...
+GO
+NOT_YET
+NO_GO
 ```
 
-### Parte D — Pilot scorecard
+para:
 
-Define:
+1. RAG read-only con citas;
+2. consulta read-only de incidentes;
+3. agente que propone acciones;
+4. agente que ejecuta cambios;
+5. aprobación automática de accesos privilegiados.
 
-- baseline;
-- targets;
-- counter-metrics;
-- guardrails;
-- stop criteria.
+## Parte C — Piloto
 
-### Parte E — Pilot scope
-
-Especifica:
+El alcance candidato es:
 
 ```text
-usuarios
-fuentes
-funciones
-exclusiones
-soporte
-rollback
+20 técnicos
+1 departamento
+5 procedimientos
+read-only
+8 semanas
 ```
 
-### Parte F — Roadmap
+## Parte D — Success y stop criteria
 
-Construye:
+Incluye:
+
+```text
+time_saved >= 30%
+citation_validity >= 98%
+satisfaction >= 4/5
+```
+
+y detén/replantea si ocurre:
+
+```text
+retrieval_miss > 15%
+critical_hallucination
+security_blocker
+```
+
+## Parte E — Roadmap
+
+Construye únicamente las fases explicadas en el deck:
 
 ```text
 Discovery
@@ -114,19 +94,18 @@ Feasibility
 PoC
 Pilot
 Production
-Scale
 ```
 
-Para cada fase añade:
+Para cada una añade:
 
 ```text
 learning_goal
-deliverable
+evidence
 gate
 owner
 ```
 
-### Parte G — Decision record
+## Parte F — Decision Pack
 
 Genera:
 
@@ -138,7 +117,7 @@ con:
 
 ```text
 Executive summary
-Decision
+Decisions
 Evidence
 Metrics
 Data readiness
@@ -151,8 +130,8 @@ Open dependencies
 
 ## Preguntas finales
 
-1. ¿Qué evidencias permiten pasar a piloto?
-2. ¿Qué capacidades quedan en `NOT YET`?
-3. ¿Qué condición produciría un `NO-GO` inmediato?
-4. ¿Qué debería demostrar el piloto antes de producción?
-5. ¿Qué temas de ownership y organización debemos resolver en M08?
+1. ¿Qué evidencias justifican pasar a piloto?
+2. ¿Qué capacidades quedan en `NOT_YET`?
+3. ¿Qué condición produciría un `NO_GO` inmediato?
+4. ¿Qué debe demostrar el piloto antes de producción?
+5. ¿Qué ownership queda por resolver en M08?

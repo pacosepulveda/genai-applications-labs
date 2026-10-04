@@ -5,15 +5,9 @@
 
 ## Objetivo
 
-Integrarás los componentes de M06 en la aplicación transversal.
+Extenderás **Enterprise GenAI Assistant v0.5**. La v0.6 no sustituye capacidades anteriores.
 
-La aplicación tendrá tres modos claramente separados:
-
-```text
-DIRECT
-RAG
-AGENT
-```
+Debe conservar `/v1/draft`, `/v1/images`, `/v1/text` y `/v1/chat`, y añadir `/v1/ask` y `/v1/operations`.
 
 ## Arquitectura
 
@@ -23,147 +17,47 @@ request
 policy
   ↓
 task router
-  ├── DIRECT -> text provider
-  ├── RAG    -> retriever -> model -> citation validator
-  └── AGENT  -> create_agent -> read-only tools
+  ├── DIRECT -> TextModelProvider -> GPT-5.6 Luna
+  ├── RAG    -> retriever -> Luna -> citation validator
+  └── AGENT  -> create_agent(Luna) -> read-only tools
 ```
 
-## Parte A — Knowledge service
+### Parte A — Knowledge service
 
-Completa:
+Completa `src/knowledge.py`: cargar, excluir obsoletos, dividir, indexar, recuperar y devolver metadata.
 
-```text
-src/knowledge.py
-```
+### Parte B — RAG service
 
-Responsabilidades:
+Completa `src/rag.py`. Debe producir `RAGAnswer` y validar citas.
 
-- cargar documentos;
-- excluir obsoletos;
-- dividir;
-- indexar;
-- recuperar;
-- devolver metadata.
+### Parte C — Regla obligatoria
 
-## Parte B — RAG service
-
-Completa:
-
-```text
-src/rag.py
-```
-
-Debe producir:
-
-```python
-RAGAnswer
-```
-
-y validar que sus fuentes pertenecen a los chunks recuperados.
-
-## Parte C — Regla obligatoria
-
-Si:
-
-```text
-task = CORPORATE_KNOWLEDGE
-```
-
-o:
-
-```text
-requires_authoritative_sources = true
-```
-
-el flujo debe ser:
-
-```text
-RAG
-```
-
-Nunca `DIRECT`.
-
-Si retrieval no encuentra evidencia suficiente:
-
-```text
-NO_EVIDENCE
-```
+`CORPORATE_KNOWLEDGE` o `requires_authoritative_sources=true` siempre seleccionan RAG. Si no hay evidencia, `NO_EVIDENCE`. Nunca fallback DIRECT.
 
 ### Parte D — Agent
 
-El modo `OPERATIONS_ASSIST` puede utilizar:
-
-- `search_knowledge_base`;
-- `get_incident`;
-- `calculate_duration_minutes`.
-
-No añadas tools de escritura.
+`OPERATIONS_ASSIST` puede utilizar únicamente `search_knowledge_base`, `get_incident` y `calculate_duration_minutes`. No añadas tools de escritura.
 
 ### Parte E — Thread state
 
-El endpoint del agente aceptará:
-
-```text
-conversation_id
-```
-
-que se mapeará a:
-
-```text
-thread_id
-```
-
-del checkpointer.
+`conversation_id` se mapea a `thread_id` del checkpointer.
 
 ### Parte F — API
 
-Completa:
-
-```text
-POST /v1/ask
-POST /v1/operations
-GET  /health
-```
-
-`/v1/ask` devuelve como mínimo:
-
-```text
-mode
-answer
-source_ids
-insufficient_evidence
-```
+Completa `/v1/ask`, `/v1/operations` y conserva los endpoints heredados.
 
 ### Parte G — Observabilidad mínima
 
-Registra sin prompts completos:
-
-```text
-request_id
-mode
-retrieved_source_ids
-model/provider
-latency
-citation_validation
-```
+Registra, sin prompts completos: `request_id`, `mode`, `retrieved_source_ids`, `model/provider`, latencia y `citation_validation`.
 
 ### Parte H — Tests
 
-Incluye tests para:
-
-1. documento obsoleto excluido;
-2. `PROC-017` devuelve 8 horas y no 24;
-3. corporate knowledge nunca usa direct fallback;
-4. source IDs inventados son rechazados;
-5. pregunta sin evidencia produce `insufficient_evidence`;
-6. tools son read-only;
-7. threads se mantienen aislados;
-8. provider/model puede sustituirse sin cambiar la policy.
+Incluye pruebas para documento obsoleto excluido; `PROC-017` devuelve 8 horas y no 24; corporate knowledge nunca usa direct fallback; citas inventadas rechazadas; no-evidence; tools read-only; threads aislados; provider sustituible sin cambiar policy; y endpoints de v0.5 conservados.
 
 ## Preguntas finales
 
-1. ¿Qué partes de v0.6 son LangChain y cuáles son lógica de dominio?
-2. ¿Qué cambiaría al sustituir `InMemoryVectorStore` por un backend persistente?
-3. ¿Qué cambiaría al sustituir el modelo por otro proveedor?
-4. ¿Qué componentes escalarían por separado en producción?
-5. ¿Qué riesgos quedan pendientes antes de desplegar el sistema?
+1. ¿Qué partes son LangChain y cuáles lógica de dominio?
+2. ¿Qué cambia con un vector store persistente?
+3. ¿Qué cambia al sustituir el modelo?
+4. ¿Qué componentes escalarían por separado?
+5. ¿Qué riesgos quedan pendientes antes de producción?

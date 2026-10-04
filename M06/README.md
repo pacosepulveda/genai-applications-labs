@@ -4,8 +4,6 @@
 
 En M06 dejamos de estudiar el modelo de forma aislada y construimos una aplicación alrededor de él.
 
-La progresión es:
-
 ```text
 Runnable + prompt + structured output
               ↓
@@ -22,31 +20,43 @@ tools + create_agent + state
 Enterprise GenAI Assistant v0.6
 ```
 
-## Entorno
+## Entorno de laboratorio
 
-Todos los laboratorios están diseñados para ejecutarse desde el entorno web facilitado por el instructor.
+Todo se ejecuta desde el SageMaker Space facilitado por el instructor:
 
-No se requiere instalar software en el equipo del alumno ni utilizar credenciales personales.
+- `ml.t3.large`;
+- CPU, sin GPU;
+- navegador únicamente;
+- SageMaker en `us-east-1`.
 
-El laboratorio distingue dos tipos de componentes:
+### Modelo generativo
 
-### Componentes locales
+Las prácticas que necesitan generación, structured output o tool calling utilizan:
 
-Funcionan sin consumir un modelo generativo gestionado:
+```text
+GPT-5.6 Luna
+Amazon Bedrock
+region: us-east-1
+model/inference profile: us.openai.gpt-5.6-luna
+```
 
-- carga de documentos;
-- splitting;
-- vector store;
-- retrieval;
-- evaluación;
-- tools deterministas;
-- tests.
+La integración LangChain utiliza `ChatBedrockConverse`.
 
-### Componentes con modelo
+### Embeddings
 
-El entorno facilitado por el instructor proporcionará un modelo compatible para las celdas de generación y agent.
+El retrieval utiliza un modelo local de embeddings precargado en el entorno:
 
-El código mantiene el proveedor desacoplado.
+```text
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+```
+
+Se ejecuta en CPU. No requiere un segundo modelo Bedrock ni permisos adicionales.
+
+El notebook P02 incluye además una alternativa didáctica local para distinguir claramente:
+
+```text
+embedding model != vector store != retriever
+```
 
 ## Orden recomendado
 
@@ -56,9 +66,10 @@ M06.P01 -> M06.P02 -> M06.P03 -> M06.P04 -> M06.P05 -> M06.P06
 
 ## API moderna
 
-Los laboratorios utilizan la API actual de LangChain:
+Los laboratorios trabajan con:
 
-- `Runnable`s;
+- `Runnable`;
+- `ChatBedrockConverse`;
 - `create_agent`;
 - `InMemorySaver`;
 - structured output;
@@ -66,14 +77,20 @@ Los laboratorios utilizan la API actual de LangChain:
 
 No utilizan `LLMChain`, `ConversationBufferMemory` ni `AgentExecutor` como patrón principal.
 
+## Continuidad
+
+`Enterprise GenAI Assistant v0.6` **extiende v0.5**. No elimina las capacidades anteriores.
+
+A los endpoints ya construidos se añaden:
+
+```text
+POST /v1/ask
+POST /v1/operations
+```
+
 ## Material
 
-- `M06_P01_Enunciado.md`
-- `M06_P02_Enunciado.md`
-- `M06_P03_Enunciado.md`
-- `M06_P04_Enunciado.md`
-- `M06_P05_Enunciado.md`
-- `M06_P06_Enunciado.md`
+- `M06_P01_Enunciado.md` … `M06_P06_Enunciado.md`
 - `notebooks/`
 - `assets/`
 - `enterprise-genai-assistant/`

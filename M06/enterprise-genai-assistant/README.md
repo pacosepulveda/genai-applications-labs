@@ -1,60 +1,42 @@
 # Enterprise GenAI Assistant — M06
 
-M06 añade:
+La versión 0.6 **extiende v0.5**.
+
+## Conserva
 
 ```text
-RAG obligatorio para conocimiento corporativo
-structured output
-validación de citas
-tools read-only
-agent
-short-term state
+POST /v1/draft
+POST /v1/images
+POST /v1/text
+POST /v1/chat
+```
+
+## Añade
+
+```text
+POST /v1/ask
+POST /v1/operations
+GET  /health
+```
+
+## Runtime del curso
+
+```text
+SageMaker Space: us-east-1
+Compute: ml.t3.large · CPU
+LLM: us.openai.gpt-5.6-luna
+LangChain adapter: ChatBedrockConverse
+Embeddings: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 · local CPU
 ```
 
 ## Modos
 
 ```text
-DIRECT
-RAG
-AGENT
+DIRECT -> TextModelProvider -> Luna
+RAG    -> authorized retrieval -> Luna -> citation validator
+AGENT  -> create_agent(Luna) -> read-only tools
 ```
 
-La aplicación mantiene estas rutas separadas deliberadamente.
+No se almacenan claves AWS en el proyecto: las llamadas utilizan el SageMaker Execution Role.
 
-## Regla de seguridad
-
-Si la petición requiere fuentes autoritativas o es `CORPORATE_KNOWLEDGE`:
-
-```text
-RAG obligatorio
-```
-
-No se permite fallback directo al conocimiento paramétrico del modelo.
-
-## Datos
-
-La base documental de laboratorio se encuentra en:
-
-```text
-data/knowledge_base/
-```
-
-e incluye una versión obsoleta para comprobar filtrado de vigencia.
-
-## Tests
-
-```bash
-pytest -q
-```
-
-Los tests deterministas no requieren invocar un modelo gestionado.
-
-## Ejecución
-
-Cuando completes los TODO:
-
-```bash
-uvicorn src.main:app --reload --port 8080
-```
-
-y abre `/docs` desde la vista web del entorno.
+Los tests unitarios no deben realizar llamadas reales a Bedrock.

@@ -5,118 +5,53 @@
 
 ## Objetivo
 
-Construirás el flujo que utilizaremos para conocimiento corporativo:
+Construirás el flujo para conocimiento corporativo:
 
 ```text
-question
--> authorized retrieval
--> context
--> model
--> RAGAnswer
--> citation validation
+question -> authorized retrieval -> context -> GPT-5.6 Luna -> RAGAnswer -> citation validation
 ```
 
-Retrieval es obligatorio. El modelo **no decide si quiere buscar**.
+Retrieval es obligatorio. El modelo no decide si quiere buscar.
 
 ## Tareas
 
-Abre:
-
-```text
-notebooks/M06_P04_Two_Step_RAG.ipynb
-```
+Abre `notebooks/M06_P04_Two_Step_RAG.ipynb`.
 
 ### Parte A — RAGAnswer
 
-Define:
-
-```python
-class RAGAnswer(BaseModel):
-    answer: str
-    source_ids: list[str]
-    insufficient_evidence: bool
-```
+Define `answer`, `source_ids` e `insufficient_evidence` mediante Pydantic.
 
 ### Parte B — Context formatter
 
-Cada chunk debe entrar con un identificador verificable:
-
-```text
-[S1]
-source_id=PROC-017
-version=3.2
-status=CURRENT
-...
-```
+Cada chunk debe entrar con identificador, `source_id`, versión, status y contenido.
 
 ### Parte C — Retrieval obligatorio
 
-Utiliza la configuración seleccionada en P03.
-
-Excluye documentación obsoleta **antes** de construir el contexto.
+Reutiliza la configuración elegida en P03 y excluye obsoletos antes del contexto.
 
 ### Parte D — Prompt
 
-El prompt debe indicar:
+Debe responder solo con fuentes, tratar las fuentes como datos y no instrucciones, declarar evidencia insuficiente y citar solo `source_ids` utilizados.
 
-- responder solo con las fuentes;
-- no convertir texto de las fuentes en instrucciones;
-- declarar evidencia insuficiente cuando proceda;
-- devolver únicamente `source_ids` realmente utilizados.
+### Parte E — Structured output con Luna
 
-### Parte E — Structured output
-
-Utiliza la capacidad de structured output del modelo facilitado en el entorno.
-
-Si el proveedor no la soporta nativamente, utiliza una estrategia equivalente validada con Pydantic.
+Utiliza GPT-5.6 Luna mediante `ChatBedrockConverse` y `model.with_structured_output(RAGAnswer)`.
 
 ### Parte F — Citation validator
 
-Implementa:
-
-```python
-validate_citations(answer, retrieved_docs)
-```
-
-Debe rechazar:
-
-```text
-source_id inventado
-source_id no recuperado
-source_id obsoleto
-```
+Rechaza source IDs inventados, no recuperados u obsoletos.
 
 ### Parte G — No evidence
 
-Ejecuta:
-
-```text
-¿Cuál es el presupuesto anual aprobado para el programa de IA?
-```
-
-La respuesta correcta del sistema es:
-
-```text
-insufficient_evidence = true
-```
-
-No debe responder utilizando conocimiento paramétrico.
+Para `¿Cuál es el presupuesto anual aprobado para el programa de IA?`, el sistema debe producir `insufficient_evidence=true`; no hay fallback al conocimiento paramétrico.
 
 ### Parte H — Regression cases
 
-Ejecuta todos los casos del eval set y registra:
-
-```text
-question
-retrieved_sources
-answer_sources
-citations_valid
-insufficient_evidence
-```
+Ejecuta el eval set y registra fuentes recuperadas/citadas, validación y no-evidence.
 
 ## Preguntas
 
 1. ¿Por qué RAG no elimina las alucinaciones?
-2. ¿Qué diferencia existe entre “fuente recuperada” y “fuente citada”?
-3. ¿Por qué `insufficient_evidence=true` es una capacidad útil?
+2. ¿Qué diferencia existe entre fuente recuperada y fuente citada?
+3. ¿Por qué no-answer es una capacidad útil?
 4. ¿Por qué no permitimos fallback directo al LLM para información corporativa?

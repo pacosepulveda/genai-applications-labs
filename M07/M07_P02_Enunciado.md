@@ -1,67 +1,50 @@
-# M07.P02 — Baseline, objetivos SMART y métricas que importan
+# M07.P02 — Baseline, target y scorecard
 
 **Modalidad:** individual o equipos pequeños  
-**Entregable:** baseline calculada, objetivo SMART y scorecard de métricas
+**Entregable:** baseline calculado, objetivo de piloto y scorecard
 
 ## Objetivo
 
-Construirás el sistema de medida **antes** de afirmar que la IA mejora algo.
+Construirás el sistema de medida **antes** de afirmar que la IA aporta valor.
 
-## Dataset
+## Material
 
 ```text
 assets/baseline_procedure_search.csv
+notebooks/M07_P02_Baseline_Metrics.ipynb
 ```
 
-Cada fila representa una búsqueda manual de un procedimiento.
-
-## Tareas
-
-Abre:
-
-```text
-notebooks/M07_P02_SMART_Metrics.ipynb
-```
-
-### Parte A — Baseline
+## Parte A — Baseline
 
 Calcula:
 
-- media de tiempo;
+- media;
 - mediana;
 - p90;
 - tasa de documento incorrecto;
 - tasa de escalado a experto.
 
-### Parte B — North Star Metric
-
-Elige una métrica principal.
-
-Justifica por qué:
+Comprueba que el dataset reproduce aproximadamente el baseline del caso:
 
 ```text
-número de prompts
+11 min de mediana
+6% documento incorrecto
+18% escalado a experto
 ```
 
-no sería adecuada como North Star.
+## Parte B — Target
 
-### Parte C — Objetivo SMART
-
-Formula un objetivo para un piloto.
-
-Debe contener:
+Define un piloto de 8 semanas cuyo objetivo principal sea:
 
 ```text
-usuario
-baseline
-target
-counter-metric
-periodo
+reducir al menos un 30% el tiempo mediano
 ```
 
-### Parte D — Cuatro capas
+sin empeorar calidad ni seguridad.
 
-Define métricas:
+## Parte C — Scorecard
+
+Define al menos una métrica por capa:
 
 ```text
 MODEL
@@ -70,32 +53,30 @@ USER
 BUSINESS
 ```
 
-Incluye al menos dos por capa.
+## Parte D — Counter-metrics
 
-### Parte E — Counter-metrics
+Incluye, como mínimo:
 
-Si optimizamos tiempo, añade controles para evitar:
-
-- respuestas incorrectas;
-- uso de fuente obsoleta;
+- documento o fuente incorrecta;
 - retrieval no autorizado;
-- escalado innecesario.
+- escalado a experto;
+- retrabajo.
 
-### Parte F — Diseño de experimento
+## Parte E — Diseño de comparación
 
-Propón cómo comparar:
+Explica cómo compararías:
 
 ```text
 proceso actual
 vs
-asistente
+asistente read-only
 ```
 
-Evita medir únicamente percepción.
+evitando medir únicamente percepción.
 
 ## Preguntas
 
-1. ¿Por qué utilizarías mediana además de media?
-2. ¿Qué diferencia hay entre una métrica técnica y una métrica de negocio?
-3. ¿Qué ocurre si el tiempo baja un 40% pero aumenta el uso de documentos incorrectos?
-4. ¿Qué dato falta antes de poder calcular ROI real?
+1. ¿Por qué usar mediana además de media?
+2. ¿Por qué `número de prompts` no es una North Star útil?
+3. ¿Qué decisión tomarías si el tiempo baja un 40% pero aumentan los errores?
+4. ¿Qué métrica de negocio conectaría mejor el piloto con capacidad operativa?

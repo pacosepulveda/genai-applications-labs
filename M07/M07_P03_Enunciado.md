@@ -1,102 +1,79 @@
-# M07.P03 — Data Readiness y gobernanza de datos
+# M07.P03 — Priorización defendible
 
 **Modalidad:** individual o equipos pequeños  
-**Entregable:** inventario enriquecido, nivel de readiness y plan de preparación
+**Entregable:** ranking explicable y cuatro decisiones de portfolio
 
 ## Objetivo
 
-Determinarás si los datos están realmente preparados para soportar un caso de IA.
+Compararás oportunidades sin convertir una puntuación en una verdad matemática.
 
-## Dataset
-
-```text
-assets/data_inventory.csv
-```
-
-## Tareas
-
-Abre:
+## Material
 
 ```text
-notebooks/M07_P03_Data_Readiness.ipynb
+assets/prioritization_candidates.csv
+notebooks/M07_P03_Prioritization.ipynb
 ```
 
-### Parte A — Inventario
+## Parte A — Cinco dimensiones
 
-Revisa para cada dataset:
+Revisa cada candidato en:
 
 ```text
-owner
-classification
-intended_use
-freshness
-quality
-issues
+business_value
+technical_feasibility
+data_readiness
+risk
+time_to_value
 ```
 
-### Parte B — Readiness D0–D5
+Todos los valores usan una escala 1..5.
 
-Utiliza:
+En `risk`, 5 significa mayor riesgo.
+
+## Parte B — Score transparente
+
+Construye un score sencillo convirtiendo primero:
 
 ```text
-D0 unknown
-D1 inventoried
-D2 accessible
-D3 curated/metadata
-D4 evaluated for use case
-D5 operationalized/monitored
+risk -> risk_safety = 6 - risk
 ```
 
-Revisa críticamente el valor inicial del fichero y modifícalo si procede.
+y calcula una media de las cinco dimensiones.
 
-### Parte C — Requirements
+El score sirve para ordenar la conversación, no para decidir automáticamente.
 
-Para Enterprise GenAI Assistant, clasifica cada dataset como:
+## Parte C — Sensibilidad
+
+Cambia el peso de una sola dimensión y comprueba si cambia el ranking.
+
+Documenta qué supuesto ha movido la decisión.
+
+## Parte D — Portfolio
+
+Elige:
 
 ```text
-REQUIRED
-OPTIONAL
-OUT_OF_SCOPE
+1 QUICK_WIN
+1 STRATEGIC_BET
+1 NOT_YET
+1 NO_GO
 ```
 
-### Parte D — Gap analysis
+No tienen por qué ser los cuatro scores más extremos.
 
-Para cada dataset `REQUIRED` que no esté en D4 o D5, define:
+## Parte E — Evidencia pendiente
+
+Para cada decisión indica:
 
 ```text
-gap
-action
-owner
-evidence_of_completion
+current_decision
+reason
+evidence_that_could_change_it
 ```
-
-### Parte E — RAG vs fine-tuning
-
-Para los siguientes problemas decide:
-
-```text
-PROMPTING
-RAG
-FINE_TUNING
-DETERMINISTIC
-TOOL/API
-```
-
-Casos:
-
-- conocimiento de procedimientos que cambia;
-- estilo de redacción corporativo;
-- consulta de estado actual de un incidente;
-- comprobación de permisos;
-- resumen de tickets.
-
-### Parte F — Minimización
-
-Identifica datos que **no deberían incorporarse por defecto** al sistema.
 
 ## Preguntas
 
-1. ¿Por qué un dataset grande puede estar en D1?
-2. ¿Qué diferencia hay entre estar accesible y estar preparado?
-3. ¿Por qué los chats históricos requieren especial cuidado?
-4. ¿Qué datos deben venir de una tool en tiempo real y no del RAG?
+1. ¿Por qué un caso con valor 5 puede no ser prioritario?
+2. ¿Qué casos empeoran al considerar riesgo?
+3. ¿Qué diferencia hay entre `NOT_YET` y `NO_GO`?
+4. ¿Qué dimensión contiene más incertidumbre en tu ranking?

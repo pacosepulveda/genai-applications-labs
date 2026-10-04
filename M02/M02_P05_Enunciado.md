@@ -24,6 +24,12 @@ request
   -> provider / review / controlled flow
 ```
 
+## Continuidad de controles
+
+La v0.2 añade Machine Learning, pero no debe perder los controles deterministas ya trabajados. Se mantienen las restricciones de clasificación de datos y el bloqueo educativo de patrones evidentes de prompt injection y material que parece contener secretos o credenciales.
+
+Además, una petición que marque `requires_authoritative_sources=true` **no puede terminar en generación libre**. En esta versión debe desviarse a un flujo controlado, aunque el clasificador proponga otra intención.
+
 ## Preparación
 
 Trabaja en `enterprise-genai-assistant/`.
@@ -72,10 +78,11 @@ La respuesta debe incluir:
 Aplica estas reglas mínimas:
 
 1. Si la política determinista de seguridad bloquea la petición, el ML no puede anular el bloqueo.
-2. Si `confidence < ROUTER_THRESHOLD`, utiliza `REVIEW`.
-3. `CORPORATE_KNOWLEDGE` debe ir a `CONTROLLED_KNOWLEDGE_FLOW`.
-4. `UNSUPPORTED` debe bloquearse.
-5. Las demás clases pueden usar `GENERATION` en esta versión.
+2. Si `requires_authoritative_sources=true`, utiliza `CONTROLLED_KNOWLEDGE_FLOW`.
+3. Si `confidence < ROUTER_THRESHOLD`, utiliza `REVIEW`.
+4. `CORPORATE_KNOWLEDGE` debe ir a `CONTROLLED_KNOWLEDGE_FLOW`.
+5. `UNSUPPORTED` debe bloquearse.
+6. Las demás clases pueden usar `GENERATION` en esta versión.
 
 ## Parte D — Pruebas
 

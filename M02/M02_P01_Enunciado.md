@@ -36,6 +36,8 @@ Abre `notebooks/M02_P01_Data_Quality_Leakage.ipynb`.
    - split aleatorio estratificado;
    - split temporal.
 
+   En el split aleatorio, **estratificar por `label`** significa mantener aproximadamente la proporción de cada clase en train y test. Esto ayuda a evitar que una clase poco frecuente quede accidentalmente mal representada en una de las particiones.
+
 5. Explica cuál utilizarías para:
    - una prueba didáctica inicial;
    - una estimación más realista del comportamiento futuro.

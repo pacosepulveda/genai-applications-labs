@@ -39,4 +39,4 @@ Abre `notebooks/M02_P04_Anomaly_Detection.ipynb`.
 
 - ¿Por qué una anomalía estadística no equivale necesariamente a un incidente?
 - ¿Qué pasaría si la distribución normal de latencia cambiara tras migrar de proveedor?
-- ¿Qué diferencia habría entre `data drift` y un incidente puntual?
+- ¿Cómo distinguirías un cambio sostenido de la distribución normal frente a un evento puntual?

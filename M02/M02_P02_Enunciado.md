@@ -21,6 +21,12 @@ Debe clasificar solicitudes en:
 
 No utilices `final_route` como feature. Esa columna representa información disponible después de resolver la solicitud y produciría **data leakage**.
 
+## Decisión didáctica sobre el split
+
+En P01 has comparado un split aleatorio estratificado con un split temporal. En esta práctica utilizaremos deliberadamente un **split aleatorio estratificado** para mantener representación de todas las clases y obtener resultados reproducibles durante el laboratorio.
+
+Esto no significa que sea siempre la estrategia adecuada para producción. Si el objetivo es estimar comportamiento futuro y existe dependencia temporal, un holdout temporal puede ser más realista.
+
 ## Tareas
 
 Abre `notebooks/M02_P02_Intent_Classifier.ipynb`.
@@ -39,8 +45,8 @@ La opción recomendada para empezar es `LogisticRegression`.
 6. Entrena el pipeline.
 7. Compara el modelo con el baseline mediante:
    - accuracy;
-   - macro F1;
-   - weighted F1.
+   - macro F1: calcula F1 por clase dando el mismo peso a todas;
+   - weighted F1: calcula F1 por clase ponderando según el número de ejemplos de cada una.
 8. Obtén la matriz de confusión.
 9. Revisa al menos cinco errores.
 10. Guarda el pipeline completo en:

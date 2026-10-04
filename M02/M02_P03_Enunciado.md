@@ -15,6 +15,10 @@ o
 abstenerse y pedir revisión
 ```
 
+## Concepto operativo
+
+En esta práctica llamaremos **coverage** al porcentaje de solicitudes que el sistema resuelve automáticamente en lugar de enviarlas a `REVIEW`. Al aumentar el threshold suele reducirse la cobertura, porque exigimos más confianza para automatizar.
+
 ## Tareas
 
 Abre `notebooks/M02_P03_Thresholds_Abstention.ipynb`.

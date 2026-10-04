@@ -52,9 +52,11 @@ def draft(req: DraftRequest):
     # TODO M02.P05
     # 1. Ejecuta router.predict(...)
     # 2. Aplica la política de routing:
+    #    - requires_authoritative_sources=True -> CONTROLLED_KNOWLEDGE_FLOW
     #    - confidence < threshold -> REVIEW
     #    - CORPORATE_KNOWLEDGE -> CONTROLLED_KNOWLEDGE_FLOW
     #    - UNSUPPORTED -> BLOCK
     #    - resto -> GENERATION
     # 3. Solo llama al provider en GENERATION.
+    # El routing ML nunca puede anular un bloqueo determinista de seguridad.
     raise NotImplementedError

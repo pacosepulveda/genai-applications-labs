@@ -1,39 +1,33 @@
 # M07.P01 — De pain point a caso de uso defendible
 
 **Modalidad:** individual o equipos pequeños  
-**Entregable:** portfolio clasificado y tres Use Case Cards
+**Entregable:** backlog clasificado, descomposición de un proceso y una Use Case Card
 
 ## Objetivo
 
-No empezarás seleccionando un modelo.
+Partirás de fricciones observables y decidirás qué tecnología encaja con cada tarea.
 
-Empezarás identificando:
-
-```text
-problema
-tarea
-usuario
-alternativas
-valor potencial
-```
-
-## Dataset
-
-Abre:
+## Material
 
 ```text
 assets/opportunity_backlog.csv
-```
-
-y el notebook:
-
-```text
 notebooks/M07_P01_Opportunity_Discovery.ipynb
 ```
 
-## Parte A — Analizar tareas
+## Parte A — Fricción
 
-Para cada caso determina:
+Calcula:
+
+```text
+monthly_hours_of_friction =
+monthly_volume * avg_minutes_per_case / 60
+```
+
+Este valor describe volumen de fricción; **no equivale automáticamente a ahorro**.
+
+## Parte B — Fit
+
+Clasifica cada caso como:
 
 ```text
 GOOD_GENAI_FIT
@@ -42,66 +36,66 @@ BETTER_DETERMINISTIC
 HIGH_RISK_REVIEW
 ```
 
-Justifica la decisión.
+Justifica la decisión utilizando:
 
-No todo caso de alto valor debe clasificarse como buen candidato para GenAI.
+- tipo de tarea;
+- tolerancia al error;
+- necesidad de exactitud;
+- impacto de la decisión.
 
-## Parte B — Alternativa no-IA
+## Parte C — Alternativa
 
-Para cada iniciativa identifica al menos una alternativa:
-
-- reglas;
-- búsqueda;
-- workflow;
-- ML clásico;
-- BI;
-- rediseño del proceso.
-
-## Parte C — Volumen de fricción
-
-Calcula:
+Para cada caso indica una alternativa razonable:
 
 ```text
-monthly_hours =
-monthly_volume * avg_minutes_per_case / 60
+RULES
+SEARCH
+WORKFLOW
+CLASSIC_ML
+GENAI
+RAG
+HYBRID
 ```
-
-No interpretes todo ese tiempo como ahorro potencial.
 
 ## Parte D — Process decomposition
 
-Elige un proceso de la lista y divídelo en tareas.
+Elige un proceso y divídelo en tareas.
 
 Para cada tarea marca:
 
 ```text
 DETERMINISTIC
 AI_ASSISTED
-HUMAN_ONLY
+HUMAN_DECISION
 ```
 
-## Parte E — Use Case Cards
+y un nivel de autonomía `L1..L4`.
 
-Selecciona tres iniciativas y completa:
+## Parte E — Use Case Card
+
+Completa una única ficha con:
 
 ```text
-problem
 user
-job_to_be_done
+problem
+task
 current_process
-proposed_capability
-data
 baseline_needed
-value_hypothesis
-risk
+proposed_capability
+alternative_without_genai
+required_data
+main_risk
 owner
+success_criterion
 ```
 
-Una de las tres debe ser un caso que **no recomendarías avanzar**.
+## Parte F — Decisión negativa
+
+Selecciona una oportunidad que **no avanzarías** y explica por qué.
 
 ## Preguntas
 
 1. ¿Qué diferencia hay entre problema y solución?
-2. ¿Qué casos del dataset están intentando sustituir lógica determinista por probabilística?
-3. ¿Qué tarea tiene mucho volumen pero no necesariamente mucho riesgo?
-4. ¿Qué caso merece un `NOT YET` aunque su valor potencial sea alto?
+2. ¿Qué casos intentan sustituir una regla conocida por comportamiento probabilístico?
+3. ¿Qué caso tiene alto volumen pero riesgo relativamente bajo?
+4. ¿Qué evidencia te haría cambiar una decisión negativa?

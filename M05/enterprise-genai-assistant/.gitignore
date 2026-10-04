@@ -2,3 +2,7 @@
 .venv/
 __pycache__/
 .pytest_cache/
+artifacts/*
+!artifacts/.gitkeep
+generated/*
+!generated/.gitkeep

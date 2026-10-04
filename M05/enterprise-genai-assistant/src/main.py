@@ -1,60 +1,182 @@
+from datetime import datetime, timezone
+from pathlib import Path
+import time
+import uuid
+
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 
 from .conversation_store import ConversationStore
-from .models import TextRequest, TextResponse, ChatRequest, ChatResponse
+from .models import (
+    DraftRequest,
+    DraftResponse,
+    RoutingMetadata,
+    ImageGenerationRequest,
+    ImageGenerationResponse,
+    TextRequest,
+    TextResponse,
+    ChatRequest,
+    ChatResponse,
+)
+from .policy import evaluate_request
+from .provider import MockProvider
+from .routers import build_router
 from .settings import settings
+from .storage import ArtifactStore
 from .text_policy import evaluate_text
 from .text_provider import build_text_provider
+from .visual_policy import evaluate_visual_request
+from .visual_provider import build_visual_provider
+
+
+ROOT = Path(__file__).resolve().parents[1]
+ARTIFACTS = ROOT / "artifacts"
+GENERATED = ROOT / "generated"
 
 app = FastAPI(title="Enterprise GenAI Assistant", version="0.5.0-m05")
 
+store = ArtifactStore(GENERATED)
+draft_provider = MockProvider()
+router = None
 conversations = ConversationStore(settings.max_history_messages)
 
-@app.get("/health")
-def health():
-    return {"status":"ok","nlp":True}
+app.mount("/generated", StaticFiles(directory=GENERATED), name="generated")
 
-def provider_for(name: str | None):
+
+def get_router():
+    global router
+    if router is None:
+        router = build_router(settings.router_backend, ARTIFACTS)
+    return router
+
+
+def text_provider_for(name: str | None):
     selected = name or settings.text_provider
     try:
         return build_text_provider(
             selected,
             settings.seq2seq_model_id,
             settings.chat_model_id,
+            settings.bedrock_text_region,
+            settings.bedrock_text_model_id,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
 
+
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "version": "0.5",
+        "router_backend": settings.router_backend,
+        "visual_provider": settings.visual_provider,
+        "text_provider": settings.text_provider,
+        "nlp": True,
+        "visual": True,
+    }
+
+
+# ---------------------------------------------------------------------
+# Capacidades heredadas de v0.3/v0.4
+# ---------------------------------------------------------------------
+
+@app.post("/v1/draft", response_model=DraftResponse)
+def draft(req: DraftRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+
+    policy = evaluate_request(req)
+    if not policy.allowed:
+        return DraftResponse(
+            status="blocked",
+            content=None,
+            warnings=[f"Bloqueado: {policy.reason}"],
+            routing=RoutingMetadata(
+                backend=settings.router_backend,
+                intent="NOT_EVALUATED",
+                confidence=0.0,
+                route="BLOCK",
+                model_version=settings.router_model_version,
+            ),
+            request_id=request_id,
+            latency_ms=int((time.perf_counter() - started) * 1000),
+        )
+
+    current_router = get_router()
+
+    # TODO heredado de M03/M04:
+    # conserva tu implementación completada de routing y generación textual.
+    raise NotImplementedError
+
+
+@app.post("/v1/images", response_model=ImageGenerationResponse)
+def generate_image(req: ImageGenerationRequest):
+    provider_name = req.provider or settings.visual_provider
+
+    policy = evaluate_visual_request(req.prompt, provider_name)
+    if not policy.allowed:
+        raise HTTPException(status_code=400, detail=policy.reason)
+
+    # TODO heredado de M04:
+    # conserva build_visual_provider(...), generación, ArtifactStore y response.
+    raise NotImplementedError
+
+
+@app.get("/v1/images/{artifact_id}")
+def image_metadata(artifact_id: str):
+    try:
+        return store.load_metadata(artifact_id)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="artifact_not_found")
+
+
+# ---------------------------------------------------------------------
+# Nuevas capacidades M05
+# ---------------------------------------------------------------------
+
 @app.post("/v1/text", response_model=TextResponse)
 def text(req: TextRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+
     policy = evaluate_text(req.text, settings.max_input_chars)
     if not policy.allowed:
         raise HTTPException(status_code=400, detail=policy.reason)
 
-    provider = provider_for(req.provider)
+    provider = text_provider_for(req.provider)
 
     # TODO M05.P06:
-    # construye prompt según task:
-    # SUMMARIZE / TRANSLATE / GENERATE
-    # llama provider.generate(...)
-    # devuelve TextResponse
+    # 1) construye prompt según SUMMARIZE / TRANSLATE / GENERATE;
+    # 2) valida target_language cuando sea necesario;
+    # 3) aplica min(req.max_new_tokens, settings.max_new_tokens);
+    # 4) llama provider.generate(...);
+    # 5) devuelve TextResponse con request_id y latency_ms.
     raise NotImplementedError
+
 
 @app.post("/v1/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+
     policy = evaluate_text(req.message, settings.max_input_chars)
     if not policy.allowed:
         raise HTTPException(status_code=400, detail=policy.reason)
 
-    provider = provider_for(req.provider)
+    provider = text_provider_for(req.provider)
 
+    conversations.ensure_system(
+        req.conversation_id,
+        settings.chat_system_prompt,
+    )
     conversations.append(req.conversation_id, "user", req.message)
     truncated = conversations.compact(req.conversation_id)
     history = conversations.get(req.conversation_id)
 
     # TODO M05.P06:
-    # result = provider.chat(history,...)
+    # result = provider.chat(history, max_new_tokens)
     # añade assistant al historial
     # compact de nuevo
-    # devuelve ChatResponse
+    # devuelve ChatResponse con finish_reason, request_id y latency_ms.
     raise NotImplementedError

@@ -30,20 +30,31 @@ M05.P01 -> M05.P02 -> M05.P03 -> M05.P04 -> M05.P05 -> M05.P06
 
 ## Entorno
 
-Todos los laboratorios están diseñados para ejecutarse desde el entorno web facilitado por el instructor. No se requiere instalar software en el ordenador del alumno ni disponer de una cuenta personal en servicios de IA.
+Todos los laboratorios están diseñados para ejecutarse en el SageMaker Space facilitado por el instructor:
 
-Los modelos utilizados son deliberadamente pequeños y pueden precargarse en la caché del entorno de laboratorio.
+```text
+ml.t3.large
+CPU
+sin GPU
+```
+
+No se requiere instalar software en el ordenador del alumno ni disponer de una cuenta personal en servicios de IA.
+
+Los modelos locales son deliberadamente pequeños. Para evitar descargas simultáneas durante la clase, se recomienda precargar sus checkpoints/tokenizers en la caché del entorno antes de la sesión.
 
 ## Modelos utilizados
 
 | Uso | Modelo |
 |---|---|
-| Tokenización multilingual/WordPiece | `google-bert/bert-base-multilingual-cased` |
+| Tokenización multilingual / WordPiece | `google-bert/bert-base-multilingual-cased` |
 | Embeddings BERT pequeños | `google/bert_uncased_L-2_H-128_A-2` |
 | Decoder causal / chat template | `HuggingFaceTB/SmolLM2-135M-Instruct` |
 | Encoder-decoder text-to-text | `google/flan-t5-small` |
+| Provider gestionado real | `us.openai.gpt-5.6-luna` en Amazon Bedrock |
 
-Los modelos pequeños se utilizan para comprender mecanismos. La calidad de sus respuestas no representa la calidad de modelos empresariales de mayor tamaño.
+Los modelos locales pequeños se utilizan para comprender mecanismos. La calidad de sus respuestas no representa la calidad de modelos empresariales de mayor tamaño.
+
+P06 añade Luna como provider gestionado real usando las credenciales del SageMaker Execution Role. No se almacenan API keys en el repositorio.
 
 ## Material
 

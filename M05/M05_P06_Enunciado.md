@@ -1,32 +1,55 @@
 # M05.P06 — Enterprise GenAI Assistant v0.5: TextModelProvider y conversación
 
 **Modalidad:** individual o parejas  
-**Entregable:** API textual, provider desacoplado, conversación y tests
+**Entregable:** ampliación v0.5 de la API, provider textual desacoplado, conversación y tests
 
 ## Objetivo
 
-Añadirás una capa NLP real a la aplicación transversal.
+Ampliarás la aplicación transversal. **v0.5 extiende v0.4; no la sustituye.**
 
-La lógica será:
+Al terminar deben seguir existiendo las capacidades anteriores, incluyendo el routing y la generación visual, y se añaden:
+
+```text
+POST /v1/text
+POST /v1/chat
+```
+
+La nueva rama textual será:
 
 ```text
 request
   ↓
 text policy
   ↓
-task
+task selection
   ↓
 TextModelProvider
       ├── mock
       ├── local_seq2seq
-      └── local_chat
+      ├── local_chat
+      └── bedrock_luna
   ↓
 output validation
   ↓
 response
 ```
 
-## Parte A — TextModelProvider
+## Parte A — Continuidad de v0.4
+
+Conserva la implementación completada en los módulos anteriores.
+
+No elimines ni debilites:
+
+- `/v1/draft`;
+- `/v1/images`;
+- router clásico/neural;
+- políticas de clasificación, prompt injection y material sensible;
+- `VisualProvider`;
+- almacenamiento y metadatos visuales.
+
+El directorio `enterprise-genai-assistant/` de este módulo incluye el scaffold acumulativo. Los bloques marcados como heredados deben sustituirse por tu implementación completada de los módulos anteriores cuando corresponda.
+
+## Parte B — TextModelProvider
 
 Completa:
 
@@ -64,7 +87,20 @@ HuggingFaceTB/SmolLM2-135M-Instruct
 
 y el `chat_template` del tokenizer.
 
-## Parte B — API de texto
+### `bedrock_luna`
+
+Utiliza Amazon Bedrock Runtime desde el SageMaker Execution Role:
+
+```text
+region: us-east-1
+model:  us.openai.gpt-5.6-luna
+```
+
+No guardes access keys, bearer tokens ni secretos en el repositorio.
+
+El provider debe utilizar la API Converse de Bedrock y devolver el mismo `GenerationResult` que los providers locales.
+
+## Parte C — API de texto
 
 Completa:
 
@@ -83,18 +119,20 @@ Petición conceptual:
 }
 ```
 
-La respuesta debe incluir metadatos:
+La respuesta debe incluir:
 
 ```text
+request_id
 provider
 model
 task
 input_tokens
 output_tokens
 finish_reason
+latency_ms
 ```
 
-## Parte C — Chat
+## Parte D — Chat
 
 Implementa:
 
@@ -110,11 +148,11 @@ message
 provider
 ```
 
-El servidor mantendrá un historial **en memoria** exclusivamente para el laboratorio.
+El servidor mantendrá historial **en memoria** exclusivamente para el laboratorio.
 
-No lo presentes como un mecanismo de memoria empresarial.
+No lo presentes como memoria empresarial.
 
-## Parte D — Chat template
+## Parte E — Chat template
 
 `local_chat` debe construir la conversación mediante:
 
@@ -124,7 +162,11 @@ tokenizer.apply_chat_template(...)
 
 No concatenes manualmente marcas de roles.
 
-## Parte E — Context policy
+`bedrock_luna` recibe los mensajes mediante el contrato de Converse; no necesita el chat template de SmolLM2.
+
+## Parte F — Context policy
+
+La conversación parte de un system message configurado por la aplicación.
 
 Define un máximo de mensajes.
 
@@ -134,22 +176,29 @@ Si se supera:
 conservar system + últimos turnos
 ```
 
-y registrar que hubo truncation.
+y devuelve:
 
-## Parte F — Salida estructurada
+```text
+history_truncated=true
+```
 
-La API debe devolver un objeto Pydantic validado, no el texto crudo del modelo.
+## Parte G — Salida estructurada
 
-## Parte G — Políticas
+La API debe devolver objetos Pydantic validados, no el texto crudo del modelo.
+
+## Parte H — Políticas
 
 Mantén fuera del LLM al menos:
 
-- tamaño máximo de entrada;
-- clasificación de datos simplificada;
+- tamaño máximo de input;
+- clasificación de datos;
+- controles deterministas heredados;
 - providers permitidos;
 - límite de output.
 
-## Parte H — Tests
+Cambiar de provider no puede saltarse una política.
+
+## Parte I — Tests
 
 Añade pruebas para:
 
@@ -157,15 +206,19 @@ Añade pruebas para:
 2. provider desconocido;
 3. límite de input;
 4. historial de conversación;
-5. truncation de historial;
-6. metadatos de tokens.
+5. truncation preservando system;
+6. metadatos de tokens;
+7. metadata `request_id` y `latency_ms`;
+8. `bedrock_luna` mediante mock/stub del cliente: los tests no deben realizar llamadas reales ni generar coste;
+9. regresión de controles heredados.
 
 ## Preguntas finales
 
 1. ¿Qué diferencia hay entre historial y memoria externa?
 2. ¿Qué parte de la aplicación depende del proveedor?
-3. ¿Por qué el chat template pertenece al tokenizer/modelo?
-4. ¿Qué cambiaría al sustituir el provider local por Bedrock?
-5. ¿Qué falta todavía para contestar preguntas basadas en documentos corporativos autorizados?
+3. ¿Por qué el chat template pertenece al tokenizer/modelo local?
+4. ¿Qué cambia al pasar del provider local a Luna en Bedrock?
+5. ¿Qué permanece igual aunque cambie el provider?
+6. ¿Qué falta todavía para contestar preguntas basadas en documentos corporativos autorizados?
 
-La respuesta a la última pregunta conduce directamente a M06: **retrieval y RAG**.
+La última pregunta conduce directamente a M06: **retrieval y RAG**.

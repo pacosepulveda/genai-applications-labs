@@ -10,12 +10,17 @@ class ConversationStore:
         history = self._conversations.setdefault(conversation_id, [])
         history.append({"role": role, "content": content})
 
+    def ensure_system(self, conversation_id: str, content: str):
+        history = self._conversations.setdefault(conversation_id, [])
+        if not history or history[0].get("role") != "system":
+            history.insert(0, {"role": "system", "content": content})
+
     def compact(self, conversation_id: str):
         history = self._conversations.get(conversation_id, [])
         if len(history) <= self.max_messages:
             return False
 
         # TODO M05.P06:
-        # conserva como máximo los últimos max_messages.
-        # No hay memoria externa ni resumen en esta versión.
+        # conserva system si existe y después los últimos mensajes
+        # hasta max_messages. No resumas ni crees memoria externa.
         raise NotImplementedError

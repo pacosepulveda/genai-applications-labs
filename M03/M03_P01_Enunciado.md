@@ -61,6 +61,8 @@ Entrena la neurona durante varias actualizaciones y registra:
 - predicción;
 - loss.
 
+Antes de modificar manualmente los parámetros, utiliza `torch.no_grad()`. La actualización de los pesos no forma parte del cálculo cuya derivada queremos obtener, por lo que no debe añadirse al grafo de autograd.
+
 ### Parte D — MLP
 
 Construye una red:
@@ -82,5 +84,6 @@ Inspecciona:
 
 1. ¿Qué contiene `parameter.grad` después de `backward()`?
 2. ¿Por qué se limpian los gradientes antes de la siguiente actualización?
-3. ¿Qué ocurriría si todas las capas fuesen lineales y no hubiese activaciones?
-4. ¿Cuál es la diferencia entre un logit y una probabilidad?
+3. ¿Por qué utilizamos `torch.no_grad()` al modificar manualmente los parámetros?
+4. ¿Qué ocurriría si todas las capas fuesen lineales y no hubiese activaciones?
+5. ¿Cuál es la diferencia entre un logit y una probabilidad?

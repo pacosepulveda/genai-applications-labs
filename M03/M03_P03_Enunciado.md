@@ -9,11 +9,13 @@ El overfitting se entiende mejor cuando se observa.
 
 En esta práctica reducirás deliberadamente el conjunto de entrenamiento y aumentarás la capacidad de la red para provocar sobreajuste.
 
+Para aislar el fenómeno utilizaremos únicamente la representación textual mediante TF-IDF. No intentamos reproducir exactamente todas las features categóricas del router de P02: queremos observar con claridad la diferencia entre memorizar train y generalizar a validation.
+
 ## Tareas
 
 Abre `notebooks/M03_P03_Overfitting_Regularization.ipynb`.
 
-1. Reutiliza el preprocesamiento del dataset de intenciones.
+1. Reutiliza el dataset de intenciones, trabajando en esta práctica solo con `request_text`.
 2. Utiliza un subconjunto pequeño de train.
 3. Construye una red deliberadamente sobredimensionada **respecto al pequeño dataset**. Como referencia, utiliza capas ocultas de 512 y 256 unidades.
 4. Entrena suficientes épocas para observar el fenómeno, con un máximo orientativo de 60 épocas:

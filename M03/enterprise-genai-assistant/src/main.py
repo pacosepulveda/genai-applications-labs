@@ -51,6 +51,12 @@ def draft(req: DraftRequest):
         )
 
     # TODO M03.P06:
-    # prediction = router.predict(...)
-    # aplica threshold y políticas
+    # 1. prediction = router.predict(...)
+    # 2. Aplica la política de routing sin permitir que ML anule la seguridad:
+    #    - requires_authoritative_sources=True -> CONTROLLED_KNOWLEDGE_FLOW
+    #    - confidence < threshold -> REVIEW
+    #    - CORPORATE_KNOWLEDGE -> CONTROLLED_KNOWLEDGE_FLOW
+    #    - UNSUPPORTED -> BLOCK
+    #    - resto -> GENERATION
+    # 3. Solo llama al provider en GENERATION.
     raise NotImplementedError

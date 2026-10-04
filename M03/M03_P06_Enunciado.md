@@ -97,10 +97,16 @@ CONTINUE_EXPERIMENT
 
 Se mantienen las reglas de M01/M02:
 
+- `CONFIDENTIAL` y `RESTRICTED` se bloquean antes del router;
+- los patrones educativos de prompt injection directa siguen bloqueados;
+- el material que parece contener secretos o credenciales sigue bloqueado;
 - un modelo no puede anular un bloqueo determinista;
+- `requires_authoritative_sources=true` -> `CONTROLLED_KNOWLEDGE_FLOW`;
 - baja confianza -> `REVIEW`;
 - `CORPORATE_KNOWLEDGE` -> `CONTROLLED_KNOWLEDGE_FLOW`;
 - `UNSUPPORTED` -> `BLOCK`.
+
+Cambiar `ROUTER_BACKEND` solo cambia el componente aprendido. Las políticas deterministas deben producir el mismo resultado con ambos backends.
 
 ## Parte F — Tests
 

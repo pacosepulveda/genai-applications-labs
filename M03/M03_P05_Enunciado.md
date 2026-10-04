@@ -15,9 +15,9 @@ Abre `notebooks/M03_P05_Attention_Transformer.ipynb`.
 
 Implementa:
 
-[
-Attention(Q,K,V)=softmaxleft(rac{QK^T}{sqrt{d_k}}ight)V
-]
+```text
+Attention(Q, K, V) = softmax((QK^T) / sqrt(d_k)) V
+```
 
 Inspecciona:
 
@@ -44,6 +44,12 @@ Utiliza `torch.nn.MultiheadAttention`.
 Compara shapes con la implementación manual.
 
 No se espera que los valores sean iguales: las proyecciones aprendidas son distintas.
+
+## Antes de la Parte D — Embeddings
+
+`nn.Embedding` funciona como una tabla aprendible: recibe un identificador entero y devuelve un vector. En esta práctica esos identificadores no son palabras, sino símbolos abstractos.
+
+El **positional embedding** hace algo equivalente con la posición `0, 1, 2...`, permitiendo que el modelo distinga dónde aparece cada símbolo.
 
 ## Parte D — Mini Transformer
 

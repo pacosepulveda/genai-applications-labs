@@ -1,13 +1,11 @@
-component_id,component,starting_position,rationale_hint
-C01,Multimodal Intake,ADOPT_CANDIDATE,screenshots/documents
-C02,Identity & Policy,KEEP,authorization boundary
-C03,Adaptive Router,ADOPT_CANDIDATE,cost/latency/risk routing
-C04,Edge SLM,TRIAL_CANDIDATE,offline/simple tasks
-C05,Cloud Fast Model,KEEP,general tasks
-C06,Cloud Reasoning Model,KEEP,complex tasks
-C07,RAG,KEEP,authoritative knowledge
-C08,Persistent User Memory,WATCH,privacy/retention complexity
-C09,Bounded Agent Runtime,KEEP,read-only/propose workflows
-C10,Write Tools,REJECT_CURRENT_SCOPE,high-impact autonomy
-C11,Eval Platform,KEEP,portable regression evidence
-C12,Cost/Energy Telemetry,ADOPT_CANDIDATE,FinOps/sustainability
+component,capability,current_state,proposal,strategic_dependency
+text_rag,authoritative_knowledge,ADOPTED,KEEP,HIGH
+multimodal_intake,vision_documents,NOT_PRESENT,TRIAL,MEDIUM
+bounded_agent_runtime,controlled_action,LIMITED,TRIAL,HIGH
+long_term_memory,personalization,NOT_PRESENT,WATCH,MEDIUM
+edge_slm,local_inference,NOT_PRESENT,TRIAL,MEDIUM
+adaptive_router,model_selection,STATIC,TRIAL,HIGH
+portable_eval_suite,evidence,ADOPTED,KEEP,VERY_HIGH
+model_provider_interface,portability,PRESENT,KEEP,VERY_HIGH
+human_approval_gate,accountability,PRESENT,KEEP,VERY_HIGH
+broad_unsupervised_autonomy,general_autonomy,NOT_PRESENT,REJECT,HIGH

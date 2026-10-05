@@ -1,123 +1,30 @@
 [
   {
     "scenario_id": "S01",
-    "title": "El proveedor duplica precios",
-    "event": "El coste del modelo principal aumenta un 100% con 30 días de aviso.",
-    "primary_dimensions": [
-      "cost",
-      "vendor_lock_in",
-      "routing"
-    ],
-    "suggested_options": [
-      "KEEP",
-      "TRIAL_ALTERNATIVE",
-      "RETIRE"
-    ]
+    "name": "CLOUD_ACCELERATES",
+    "change": "Cloud models improve capability and reduce cost materially.",
+    "pressure": ["routing", "provider choice", "eval-first migration"],
+    "questions": ["Should more traffic move to cloud?", "What eval proves benefit?"]
   },
   {
     "scenario_id": "S02",
-    "title": "Modelo local suficiente",
-    "event": "Un SLM on-device alcanza el 95% de la calidad actual en clasificación y extracción.",
-    "primary_dimensions": [
-      "privacy",
-      "edge",
-      "cost",
-      "latency"
-    ],
-    "suggested_options": [
-      "ADOPT_PARTIAL",
-      "TRIAL",
-      "WATCH"
-    ]
+    "name": "EDGE_ACCELERATES",
+    "change": "Local SLM capability becomes sufficient for more private/offline tasks.",
+    "pressure": ["edge runtime", "routing", "device constraints"],
+    "questions": ["Which tasks can move local?", "What quality loss is acceptable?"]
   },
   {
     "scenario_id": "S03",
-    "title": "Deprecación del modelo",
-    "event": "El proveedor anuncia retirada del modelo actual en 90 días.",
-    "primary_dimensions": [
-      "model_lifecycle",
-      "migration",
-      "evals"
-    ],
-    "suggested_options": [
-      "MIGRATE",
-      "TRIAL",
-      "RETIRE"
-    ]
+    "name": "REGULATION_INCREASES",
+    "change": "New obligations require stronger inventory, evidence and human oversight.",
+    "pressure": ["policy", "audit", "ownership", "human gates"],
+    "questions": ["What evidence is missing?", "Which decisions need human accountability?"]
   },
   {
     "scenario_id": "S04",
-    "title": "Nueva obligación regulatoria",
-    "event": "Una nueva obligación exige evidencia adicional de transparencia y trazabilidad.",
-    "primary_dimensions": [
-      "regulation",
-      "evidence",
-      "governance"
-    ],
-    "suggested_options": [
-      "ADAPT",
-      "PAUSE_SCOPE",
-      "REJECT_FEATURE"
-    ]
-  },
-  {
-    "scenario_id": "S05",
-    "title": "Consumo energético pasa a KPI",
-    "event": "La organización exige reportar energía estimada por tarea y reducirla un 25%.",
-    "primary_dimensions": [
-      "sustainability",
-      "routing",
-      "model_size"
-    ],
-    "suggested_options": [
-      "OPTIMIZE",
-      "TRIAL_EDGE",
-      "MODEL_CASCADE"
-    ]
-  },
-  {
-    "scenario_id": "S06",
-    "title": "Nueva write tool",
-    "event": "Operations solicita que el agente pueda modificar configuración de producción.",
-    "primary_dimensions": [
-      "agents",
-      "security",
-      "human_oversight"
-    ],
-    "suggested_options": [
-      "REJECT_CURRENT_SCOPE",
-      "TRIAL_SANDBOX",
-      "APPROVAL_REQUIRED"
-    ]
-  },
-  {
-    "scenario_id": "S07",
-    "title": "Benchmark +20%",
-    "event": "Aparece un modelo con un 20% más de puntuación en un benchmark público.",
-    "primary_dimensions": [
-      "evaluation",
-      "hype",
-      "migration"
-    ],
-    "suggested_options": [
-      "WATCH",
-      "TRIAL_WITH_OWN_EVALS",
-      "ADOPT"
-    ]
-  },
-  {
-    "scenario_id": "S08",
-    "title": "Context window 10x",
-    "event": "Un modelo soporta 10 veces más contexto por precio similar.",
-    "primary_dimensions": [
-      "long_context",
-      "rag",
-      "cost"
-    ],
-    "suggested_options": [
-      "TRIAL",
-      "KEEP_RAG",
-      "HYBRID"
-    ]
+    "name": "COST_ENERGY_CONSTRAINS",
+    "change": "Cost and energy budgets tighten while outcome targets remain unchanged.",
+    "pressure": ["small models", "context efficiency", "agent budgets", "routing"],
+    "questions": ["Where is work unnecessary?", "What remains worth paying for?"]
   }
 ]

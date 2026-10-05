@@ -1,37 +1,23 @@
-# Architecture Evolution Decision Pack — Enterprise GenAI Assistant v1.0
+# Architecture Evolution Decision Pack
 
 ## Executive summary
 
-## What stays
-
-## What we adopt
-
-## What we trial
-
-## What we watch
-
-## What we reject / retire
+## Component decisions
 
 ## Target architecture
 
 ## Routing policy
 
-## Multimodal strategy
+## Eval-first migration
 
-## Edge / cloud strategy
+## Human + AI / approval gates
 
-## Agent autonomy policy
+## Regulatory / cost / sustainability constraints
 
-## Personalization and memory
+## Portable assets
 
-## Evaluation plan
+## Exit plan
 
-## Cost and sustainability
+## Technology lifecycle
 
-## Security / risk / regulation
-
-## Human-AI operating model
-
-## Migration roadmap
-
-## Exit / rollback plan
+## Final decision

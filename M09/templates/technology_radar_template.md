@@ -1,25 +1,11 @@
 # Technology Radar
 
-## Criteria
+| Candidate | Horizon | Decision | Evidence | Risk/Ops | Internal eval | Revisit trigger |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |
 
-- Business value
-- Technical maturity
-- Risk
-- Switching cost
-- Operational complexity
-- Strategic relevance
+## Reglas
 
-## Decisions
-
-| Technology | Horizon | Decision | Evidence | Revisit trigger |
-|---|---|---|---|---|
-
-## Portfolio balance
-
-### ADOPT
-
-### TRIAL
-
-### WATCH
-
-### REJECT / RETIRE
+- `NOW / NEXT / WATCH` describe madurez/horizonte.
+- `ADOPT / TRIAL / WATCH / REJECT / RETIRE` describen nuestra decisión.
+- Un benchmark externo es señal; el workload interno aporta evidencia.

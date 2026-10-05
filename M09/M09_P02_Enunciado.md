@@ -1,61 +1,56 @@
-# M09.P02 — Arquitectura adaptativa: Edge, Cloud, RAG y Multimodal
+# M09.P02 — Arquitectura adaptativa: routing por capability
 
 **Modalidad:** individual o parejas  
-**Entregable:** política de routing + análisis de coste/latencia
+**Entregable:** política de routing y comparación coste/latencia
 
 ## Objetivo
 
-Implementar un router sencillo que seleccione la capacidad adecuada según:
-
-```text
-modality
-complexity
-risk
-classification
-offline capability
-authoritative knowledge
-realtime state
-cost
-latency
-```
+Implementar un router sencillo que no trate todos los backends como equivalentes.
 
 ## Material
 
 ```text
 assets/adaptive_routing_requests.csv
 assets/model_capabilities.csv
-```
-
-Abre:
-
-```text
 notebooks/M09_P02_Adaptive_Architecture.ipynb
 ```
 
-## Parte A — Reglas mínimas
+## Parte A — Requests
 
-Diseña reglas como:
+Cada petición describe:
 
 ```text
-authoritative knowledge
-→ RAG
-
-realtime system state
-→ TOOL/API
-
-image + high complexity
-→ CLOUD_MULTIMODAL
-
-offline/private simple task
-→ EDGE
-
-complex reasoning
-→ CLOUD_REASONING
+modality
+complexity
+privacy
+offline_required
+authoritative_knowledge
+realtime_state
+impact
 ```
 
-## Parte B — Router
+## Parte B — Backends
 
-Implementa `route_request(row)`.
+Trabajarás con capacidades abstractas:
+
+```text
+EDGE_SLM
+CLOUD_STANDARD
+CLOUD_REASONING
+CLOUD_MULTIMODAL
+RAG
+TOOL_API
+```
+
+No representan proveedores concretos.
+
+## Parte C — Router
+
+Implementa:
+
+```python
+route_request(row)
+```
 
 El resultado debe incluir:
 
@@ -65,36 +60,35 @@ reason
 human_gate
 ```
 
-## Parte C — Riesgo
+Reglas mínimas:
 
-Las tareas `CRITICAL` no pueden pasar automáticamente a una ruta que ejecute cambios.
+```text
+authoritative_knowledge -> RAG
+realtime_state          -> TOOL_API
+offline/private simple  -> EDGE_SLM
+image                    -> CLOUD_MULTIMODAL
+complex reasoning       -> CLOUD_REASONING
+otherwise               -> CLOUD_STANDARD
+```
 
-El router debe poder responder:
+## Parte D — Human gate
+
+Una tarea de impacto `HIGH` o `CRITICAL` que pueda ejecutar acciones debe requerir:
 
 ```text
 HUMAN_APPROVAL_REQUIRED
 ```
 
-o:
+## Parte E — Coste y latencia
 
-```text
-UNSUPPORTED_AUTONOMY
-```
-
-## Parte D — Coste y latencia
-
-Usando `model_capabilities.csv`, estima:
+Estima:
 
 ```text
 total_cost
 mean_latency
 ```
 
-de la política elegida.
-
-## Parte E — Comparación
-
-Compara:
+para:
 
 ```text
 ALL_CLOUD_REASONING
@@ -102,17 +96,13 @@ vs
 ADAPTIVE_ROUTING
 ```
 
-en coste y latencia.
+## Parte F — Decisión
 
-## Parte F — Reflexión
-
-¿Dónde sacrificarías coste para ganar calidad?
-
-¿Dónde sacrificarías calidad para garantizar privacidad/offline?
+Explica qué requests justificarían pagar más por capability y cuáles priorizan privacidad/offline.
 
 ## Preguntas
 
-1. ¿Por qué un único modelo para todo puede ser subóptimo?
-2. ¿Qué requests deben ir necesariamente a RAG y cuáles a una tool/API?
+1. ¿Por qué una interfaz común no implica capabilities equivalentes?
+2. ¿Cuándo RAG es mejor que long context?
 3. ¿Cuándo edge aporta valor real?
-4. ¿Qué control nunca debe delegarse al modelo?
+4. ¿Qué decisión nunca debería inferirse solo desde coste?

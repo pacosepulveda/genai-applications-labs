@@ -1,11 +1,9 @@
-request_id,task,modality,complexity,risk,classification,edge_capable,authoritative_knowledge_required,realtime_state_required,estimated_tokens,cloud_latency_s,cloud_cost_eur
-REQ01,Clasificar prioridad de ticket corto,text,1,LOW,INTERNAL,True,False,False,250,1.2,0.002
-REQ02,Responder duda sobre procedimiento vigente,text,3,MEDIUM,INTERNAL,True,True,False,1200,2.5,0.015
-REQ03,Analizar screenshot de error de consola,image+text,3,MEDIUM,INTERNAL,False,False,False,1800,3.2,0.03
-REQ04,Resumir documento público de 3 páginas,document,2,LOW,PUBLIC,False,False,False,2200,2.8,0.02
-REQ05,Extraer campos de formulario sensible offline,image+text,2,HIGH,CONFIDENTIAL,True,False,False,900,1.4,0.004
-REQ06,Investigar incidente complejo con varias fuentes,text,5,HIGH,INTERNAL,True,True,False,6500,8.0,0.12
-REQ07,Generar borrador de comunicación interna,text,2,LOW,INTERNAL,True,False,False,900,1.6,0.01
-REQ08,Consultar estado actual de un incidente,text,2,MEDIUM,INTERNAL,True,False,True,500,1.0,0.006
-REQ09,Responder consulta sin conectividad externa,text,2,MEDIUM,INTERNAL,True,False,False,700,1.3,0.003
-REQ10,Proponer y ejecutar cambio productivo,text,5,CRITICAL,INTERNAL,True,True,False,7000,10.0,0.18
+request_id,modality,complexity,privacy,offline_required,authoritative_knowledge,realtime_state,impact,action_required
+R01,text,LOW,HIGH,TRUE,FALSE,FALSE,LOW,FALSE
+R02,text,MEDIUM,MEDIUM,FALSE,TRUE,FALSE,MEDIUM,FALSE
+R03,image,HIGH,MEDIUM,FALSE,FALSE,FALSE,MEDIUM,FALSE
+R04,text,HIGH,LOW,FALSE,FALSE,FALSE,MEDIUM,FALSE
+R05,text,MEDIUM,HIGH,FALSE,FALSE,TRUE,HIGH,FALSE
+R06,text,HIGH,HIGH,FALSE,FALSE,TRUE,CRITICAL,TRUE
+R07,text,LOW,LOW,FALSE,FALSE,FALSE,LOW,FALSE
+R08,image,MEDIUM,HIGH,FALSE,TRUE,FALSE,HIGH,FALSE

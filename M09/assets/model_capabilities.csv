@@ -1,8 +1,7 @@
-route,modality,max_complexity,offline_capable,latency_s,cost_eur,quality_score,location,best_for
-EDGE_SLM,text,2,True,0.45,0.001,0.8,local,offline/private simple tasks
-EDGE_VISION,image+text,2,True,0.8,0.002,0.82,local,local visual extraction
-CLOUD_FAST,text,3,False,1.2,0.008,0.75,cloud,general low/medium complexity
-CLOUD_REASONING,text,5,False,5.5,0.08,0.92,cloud,complex reasoning
-CLOUD_MULTIMODAL,image+text,5,False,3.0,0.035,0.88,cloud,image/document understanding
-RAG_PIPELINE,text,4,False,2.5,0.018,0.9,cloud,authoritative knowledge with citations
-TOOL_API,structured,3,False,0.3,0.002,0.99,internal/cloud,realtime authoritative system state
+route,supports_text,supports_image,supports_offline,supports_reasoning,supports_authoritative_knowledge,supports_realtime_state,cost_per_task_eur,latency_s,quality_proxy
+EDGE_SLM,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE,0.005,0.20,0.72
+CLOUD_STANDARD,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,0.025,0.80,0.84
+CLOUD_REASONING,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,0.090,2.40,0.94
+CLOUD_MULTIMODAL,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,0.110,2.10,0.92
+RAG,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,0.065,1.50,0.91
+TOOL_API,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,0.040,1.00,0.96

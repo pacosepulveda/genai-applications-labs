@@ -1,13 +1,9 @@
-tech_id,technology,category,reference_horizon,business_value,technical_maturity,risk,switching_cost,operational_complexity,strategic_relevance,notes
-T01,Multimodal foundation models,Multimodal,NOW,5,4,3,3,3,4,Imagen/audio + texto para soporte y documentos.
-T02,Bounded tool-calling agents,Agents,NOW,5,4,4,3,3,4,"Agentes con tools limitadas, estado y approval gates."
-T03,Long-running durable agents,Agents,NEXT,4,3,5,4,4,3,"Persistencia, reanudación y workflows de larga duración."
-T04,MCP-based tool interoperability,Interoperability,NEXT,4,4,3,3,3,4,Interoperabilidad estandarizada entre aplicaciones y herramientas.
-T05,On-device SLM / NPU inference,Edge AI,NOW,4,4,3,3,4,4,"Inferencia local para privacidad, latencia y offline."
-T06,Highly autonomous production agents,Agents,WATCH,4,2,5,5,5,2,Autonomía amplia con write access y poca supervisión.
-T07,Mixture-of-Experts models,Model architecture,NOW,3,4,2,3,4,3,Capacidad elevada con activación dispersa.
-T08,State Space / hybrid sequence models,Model architecture,WATCH,3,2,2,3,3,2,Alternativas/complementos a atención completa.
-T09,Very long context as primary knowledge strategy,Context,NEXT,3,3,3,4,4,3,Context windows muy grandes como alternativa parcial a retrieval.
-T10,Adaptive model routing,Architecture,NOW,5,4,3,3,3,4,"Seleccionar modelo/ruta según complejidad, coste, riesgo y modalidad."
-T11,Persistent personal AI memory,Personalization,NEXT,4,3,5,4,4,3,Memoria longitudinal de usuario y preferencias.
-T12,Rack-scale AI infrastructure,Hardware,NOW,2,4,2,5,5,3,Infraestructura integrada CPU/GPU/network/memory para gran escala.
+candidate,capability,use_case,business_value,technical_maturity,strategic_relevance,evidence_strength,risk,operational_complexity,switching_cost,reference_horizon
+Bounded agent workflows,controlled_action,incident_assistance,5,4,5,4,3,3,3,NOW
+Multimodal document understanding,vision_documents,procedures_with_diagrams,5,4,5,4,3,3,2,NOW
+Durable agent runtime,long_running_workflows,case_orchestration,4,3,4,3,4,4,3,NEXT
+Long-term user memory,personalization,user_preferences,3,3,3,2,5,4,4,NEXT
+Edge SLM,local_inference,offline_private_tasks,4,3,4,3,2,3,3,NEXT
+Adaptive model routing,model_selection,cost_quality_optimization,5,4,5,4,3,3,3,NOW
+State-space / hybrid architectures,model_architecture,long_sequence_efficiency,2,2,2,2,3,4,5,WATCH
+Broad unsupervised autonomy,general_autonomy,open_ended_work,2,2,2,1,5,5,5,WATCH

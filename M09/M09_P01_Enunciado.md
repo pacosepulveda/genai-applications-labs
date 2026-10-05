@@ -1,16 +1,20 @@
-# M09.P01 — Technology Radar: ADOPT, TRIAL, WATCH, REJECT
+# M09.P01 — Technology Radar: señal, evidencia y decisión
 
 **Modalidad:** equipos pequeños  
 **Entregable:** Technology Radar razonado
 
 ## Objetivo
 
-Evaluar tecnologías emergentes sin confundir:
+Separar dos preguntas diferentes:
 
 ```text
-new
-=
-better
+¿qué madurez tiene esta capability?
+```
+
+y:
+
+```text
+¿qué decisión debemos tomar nosotros?
 ```
 
 ## Material
@@ -18,43 +22,54 @@ better
 ```text
 assets/technology_radar_candidates.csv
 templates/technology_radar_template.md
-```
-
-Abre:
-
-```text
 notebooks/M09_P01_Technology_Radar.ipynb
 ```
 
-## Parte A — Revisar el radar inicial
+## Parte A — Horizon
 
-El dataset contiene tecnologías de multimodalidad, agents, MCP/interoperabilidad, Edge AI, model architectures, long context, adaptive routing, memory y hardware.
+Clasifica cada candidato:
 
-La columna `reference_horizon` es solo un punto de partida. Puedes cambiarla.
+```text
+NOW
+NEXT
+WATCH
+```
 
-## Parte B — Score
+`NOW` no significa automáticamente `ADOPT`.
 
-Construye una puntuación usando:
+## Parte B — Filtro común
+
+Para cada candidato analiza:
+
+```text
+capability
+use case
+evidence
+risk / operations
+```
+
+Construye una puntuación orientativa con:
 
 ```text
 business_value
 technical_maturity
 strategic_relevance
+evidence_strength
 ```
 
-y penalizando:
+y penaliza:
 
 ```text
 risk
-switching_cost
 operational_complexity
+switching_cost
 ```
 
 Los pesos deben ser explícitos.
 
-## Parte C — Decisión
+## Parte C — Decisión de lifecycle
 
-Para cada tecnología selecciona:
+Selecciona:
 
 ```text
 ADOPT
@@ -64,28 +79,26 @@ REJECT
 RETIRE
 ```
 
-No conviertas el score en una decisión automática.
+El score ayuda a discutir. No decide automáticamente.
 
-## Parte D — Revisit trigger
+## Parte D — Internal eval
 
-Para cada `WATCH`, define qué evidencia haría que pasara a `TRIAL`.
-
-Ejemplos:
+Para cada `TRIAL`, define qué prueba ejecutarías sobre nuestro workload:
 
 ```text
-GA del proveedor
-quality threshold
-cost reduction
-security control available
+quality
+cost/task
+latency
+risk
 ```
 
-## Parte E — Portfolio
+## Parte E — Revisit trigger
 
-Comprueba que no has creado un radar lleno de `ADOPT`. Un radar sano también contiene `WATCH` y `REJECT`.
+Para cada `WATCH` o `REJECT`, define qué evidencia obligaría a revisar la decisión.
 
 ## Preguntas
 
-1. ¿Qué diferencia existe entre `NOW` y `ADOPT`?
-2. ¿Qué tecnologías tienen alta madurez pero bajo valor para nuestro caso?
-3. ¿Qué tecnología tiene valor alto pero riesgo/operación excesivos?
-4. ¿Por qué un benchmark o anuncio no es evidencia suficiente?
+1. ¿Por qué `NOW` y `ADOPT` no son sinónimos?
+2. ¿Qué candidato parece maduro pero aporta poco valor al caso?
+3. ¿Cuál tiene valor potencial alto pero evidencia insuficiente?
+4. ¿Por qué un benchmark externo solo selecciona candidatos?

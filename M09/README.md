@@ -1,33 +1,26 @@
-# Módulo 9 — Futuro de la IA Generativa en la Empresa
+# Módulo 9 — El Futuro de la IA Generativa en la Empresa
 
 ## Objetivo
 
-M09 cierra el curso con cuatro prácticas orientadas a **evaluar y adaptar**, no a perseguir novedades.
+M09 cierra el curso con una idea: no necesitamos predecir qué tecnología
+dominará, sino mantener nuestras aplicaciones preparadas para **evaluar y
+adaptarse con evidencia**.
+
+La progresión práctica sigue el deck reducido:
 
 ```text
-Technology Radar
-      ↓
-Adaptive Architecture
-      ↓
-Future Scenario Stress Test
-      ↓
-Enterprise GenAI Assistant v1.0
+M09.P01  señal → horizon → evidencia → decisión
+M09.P02  request → capability → policy → adaptive routing
+M09.P03  future scenario → impacto → eval → respuesta
+M09.P04  Enterprise GenAI Assistant v1.0 → architecture evolution decision
 ```
 
 ## Entorno
 
 Todo se realiza desde el entorno web facilitado por el instructor.
 
-No se requiere instalar software ni utilizar cuentas personales.
-
-Los notebooks utilizan principalmente:
-
-```text
-Python
-pandas
-```
-
-sobre datasets ficticios incluidos en `assets/`.
+No se requieren instalaciones locales, cuentas personales ni servicios externos.
+Los notebooks utilizan Python y pandas sobre datasets ficticios.
 
 ## Orden recomendado
 

@@ -1,55 +1,46 @@
-# Enterprise GenAI Assistant v1.0 — Capstone Case
+# Enterprise GenAI Assistant v1.0 — Architecture Evolution Case
 
 ## Estado heredado
 
-La solución ha evolucionado durante M01–M08 hasta disponer de:
+M08 dejó un servicio operable con:
 
 ```text
-API controlada
-ML / neural routing
-NLP / embeddings
-RAG con citas
-tools read-only
-agentes limitados
-evaluation
-risk / governance
-operating model
+RAG read-only con citas
+consulta read-only de incidentes
+release manifest
+quality gates
+observability
+rollback / kill switch
+cost ownership
 ```
 
-## Peticiones de evolución
+## Objetivo de M09
 
-La organización quiere estudiar:
+No reconstruir el producto.
 
-1. entrada multimodal para screenshots y documentos;
-2. routing entre modelos rápidos, reasoning y edge;
-3. soporte offline para algunas tareas;
-4. agentes duraderos para investigaciones;
-5. personalización por rol;
-6. mayor trazabilidad regulatoria;
-7. reducción de coste y consumo;
-8. posible write access futuro.
+Decidir qué capabilities nuevas merecen modificar la arquitectura.
 
-## Restricciones
+## Presiones
 
-- Conocimiento corporativo autorizado sigue requiriendo fuentes.
-- Permisos no los decide el LLM.
-- No se permite write access en producción sin un gate separado.
-- Cualquier cambio de modelo debe pasar la misma suite de evaluación.
-- Personalización no puede romper tenant/user boundaries.
-- El sistema debe poder degradarse si el proveedor cloud no está disponible.
-- Debe existir un plan para retirar modelos y tecnologías.
+- parte del conocimiento llega en documentos con diagramas e imágenes;
+- algunas tareas simples podrían ejecutarse localmente;
+- el coste debe medirse por tarea completada;
+- las acciones de alto impacto deben conservar accountability humana;
+- modelos y proveedores seguirán cambiando;
+- regulación, auditoría y evidencia pueden endurecerse.
 
-## Objetivo
-
-Diseñar una versión 1.0 que clasifique cada capability como:
+## Principios
 
 ```text
-KEEP
-ADOPT
-TRIAL
-WATCH
-REJECT
-RETIRE
+least agency
+minimum useful context
+smallest adequate model
+eval-first migration
+portable assets
+explicit lifecycle
 ```
 
-y justifique la evolución mediante evidencia, no por novedad.
+## Resultado esperado
+
+Una arquitectura adaptativa en la que cada request utiliza la capability
+suficiente y cada cambio tecnológico compite contra la misma evidencia.

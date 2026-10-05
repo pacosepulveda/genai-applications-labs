@@ -1,13 +1,13 @@
-# M09.P04 — Enterprise GenAI Assistant v1.0: Capstone final
+# M09.P04 — Enterprise GenAI Assistant v1.0: Architecture Evolution Decision Pack
 
 **Modalidad:** equipos pequeños  
 **Entregable:** `Architecture_Evolution_Decision_Pack.md`
 
 ## Objetivo
 
-Cerrar el proyecto transversal integrando lo aprendido de M01 a M09.
+Cerrar el proyecto transversal con **la siguiente arquitectura defendible**.
 
-No debes diseñar “la arquitectura más futurista”. Debes diseñar **la siguiente arquitectura defendible**.
+No hay que activar todas las tendencias del módulo.
 
 ## Material
 
@@ -15,86 +15,134 @@ No debes diseñar “la arquitectura más futurista”. Debes diseñar **la sigu
 assets/enterprise_genai_assistant_v10_case.md
 assets/v10_component_candidates.csv
 templates/architecture_evolution_decision_pack.md
-```
-
-y los resultados de P01–P03.
-
-Abre:
-
-```text
 notebooks/M09_P04_Capstone_v10.ipynb
 ```
 
+Además reutiliza P01–P03.
+
 ## Parte A — Component decisions
 
-Para cada componente decide `KEEP / ADOPT / TRIAL / WATCH / REJECT / RETIRE` e incluye evidencia y condición de revisión.
+Para cada componente decide:
+
+```text
+KEEP
+TRIAL
+WATCH
+REJECT
+RETIRE
+```
+
+Incluye:
+
+```text
+why
+evidence_needed
+revisit_trigger
+```
 
 ## Parte B — Target architecture
 
-Debe contemplar, al menos:
+Diseña únicamente las rutas necesarias:
 
 ```text
-multimodal intake
+intake
 identity / policy
-adaptive router
+task router
 edge / cloud
 RAG
-agent runtime
+bounded agent runtime
 tools
 human gates
+```
+
+Transversalmente deben existir:
+
+```text
 evals
 observability
-cost / energy
+cost
+security
+audit
 ```
 
-No todos los componentes tienen que activarse.
+## Parte C — Eval-first migration
 
-## Parte C — Routing policy
-
-Define decisiones para simple/private/offline, corporate knowledge, multimodal, complex reasoning y agentic tasks.
-
-## Parte D — Agent autonomy
-
-Clasifica capacidades:
+Elige un cambio candidato y define:
 
 ```text
-READ_ONLY
-PROPOSE
-APPROVAL_REQUIRED
-WRITE_ALLOWED
+candidate
+same eval set
+comparison
+gate
+decision
+rollback
 ```
 
-Explica qué condiciones necesitarías antes de permitir `WRITE_ALLOWED`.
+## Parte D — Human + AI
 
-## Parte E — Personalization
-
-Decide qué usarías entre role context, preferences, session memory y long-term memory, y qué NO almacenarías.
-
-## Parte F — Migration roadmap
-
-Define:
+Identifica una tarea para:
 
 ```text
-KEEP NOW
+AUGMENT
+AUTOMATE_WITH_LIMITS
+HUMAN_DECISION
+```
+
+La supervisión debe poder intervenir realmente.
+
+## Parte E — Optionality / exit
+
+Selecciona qué activos deben mantenerse portables:
+
+```text
+data
+prompts
+evals
+interfaces
+routing policy
+```
+
+Describe cómo cambiarías un proveedor o backend sin reconstruir el producto.
+
+## Parte F — Lifecycle roadmap
+
+Resume:
+
+```text
+ADOPT / KEEP NOW
 TRIAL NEXT
-WATCH LATER
+WATCH
+REJECT
+RETIRE
 ```
 
-con gates claros.
+## Parte G — Final Decision Pack
 
-## Parte G — Exit strategy
+Genera:
 
-Explica cómo cambiarías model provider, embedding model, agent framework y vector backend sin reconstruir todo el producto.
+```text
+Architecture_Evolution_Decision_Pack.md
+```
 
-## Parte H — Final Decision Pack
+con:
 
-Genera `Architecture_Evolution_Decision_Pack.md` con las decisiones, arquitectura, routing, multimodalidad, edge/cloud, autonomía, personalización, evaluación, coste/sostenibilidad, seguridad/regulación, colaboración humano-IA, roadmap y exit/rollback plan.
+```text
+Executive summary
+Component decisions
+Target architecture
+Routing policy
+Eval-first migration
+Human gates
+Constraints
+Portable assets
+Exit plan
+Technology lifecycle
+```
 
 ## Preguntas finales
 
-1. ¿Qué parte de M01–M08 conservarías sin cambios?
-2. ¿Qué tendencia aporta más valor inmediato?
-3. ¿Qué tendencia mantendrías en WATCH?
-4. ¿Qué componente constituye el principal lock-in?
-5. ¿Qué activo del curso hace más fácil adoptar futuros modelos?
-6. ¿Qué significa para ti una arquitectura preparada para cambiar?
+1. ¿Qué parte de M01–M08 conservarías intacta?
+2. ¿Qué tendencia aporta valor inmediato?
+3. ¿Qué mantendrías en WATCH?
+4. ¿Qué activo reduce más el switching cost futuro?
+5. ¿Qué significa una arquitectura preparada para cambiar?

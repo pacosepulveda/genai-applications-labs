@@ -1,41 +1,54 @@
 # M09.P03 — Future Scenario Stress Test
 
 **Modalidad:** equipos pequeños  
-**Entregable:** respuestas a escenarios + Architecture Resilience Report
+**Entregable:** Architecture Resilience Report
 
 ## Objetivo
 
-Comprobar si la arquitectura y el operating model sobreviven a cambios tecnológicos, económicos y regulatorios.
+Comprobar si la arquitectura sigue siendo defendible en varios futuros sin
+intentar acertar un único forecast.
 
 ## Material
 
 ```text
 assets/future_scenarios.json
 assets/current_architecture_metrics.csv
-```
-
-Abre:
-
-```text
 notebooks/M09_P03_Future_Scenario_Stress_Test.ipynb
 ```
 
 ## Parte A — Baseline
 
-Resume la arquitectura actual con quality, latency, cost/task, energy index, citation validity y authorization.
-
-## Parte B — Escenarios
-
-Analiza los 8 escenarios. Para cada uno responde:
+Resume el estado actual:
 
 ```text
-impact
-decision
-architecture_change
+quality
+latency
+cost/task
+energy_index
+citation_validity
+authorization
+```
+
+## Parte B — Cuatro futuros
+
+Analiza:
+
+```text
+CLOUD_ACCELERATES
+EDGE_ACCELERATES
+REGULATION_INCREASES
+COST_ENERGY_CONSTRAINS
+```
+
+Para cada uno documenta:
+
+```text
+affected_components
+what_stays
+what_changes
 eval_needed
 risk_change
 owner
-trigger / deadline
 ```
 
 ## Parte C — Decisión
@@ -44,37 +57,43 @@ Utiliza cuando proceda:
 
 ```text
 KEEP
-ADOPT
 TRIAL
 WATCH
 REJECT
 RETIRE
 ```
 
-No tienes que seleccionar las opciones sugeridas en el JSON.
+## Parte D — Resilience score
 
-## Parte D — Scenario Matrix
-
-Construye una matriz:
+Puntúa de 1 a 5:
 
 ```text
-scenario
-→ affected components
-→ resilience
-→ action
+adaptability
+vendor_portability
+regulatory_readiness
+cost_resilience
 ```
 
-## Parte E — Stress score
+## Parte E — Top 3 improvements
 
-Define una escala 1–5 para adaptability, vendor portability, regulatory readiness, cost resilience y operational resilience.
+Selecciona solo tres mejoras que aumenten más la opcionalidad.
 
-## Parte F — Top 3 improvements
+Ejemplos:
 
-Selecciona las tres mejoras que aumentarían más la capacidad de adaptación. Pueden ser `portable eval set`, `model registry`, `feature flags` o `exit plan`.
+```text
+portable eval set
+feature flags
+policy-as-code
+documented provider interface
+versioned routing policy
+exit plan
+```
+
+No sobrearquitectes.
 
 ## Preguntas
 
-1. ¿Qué escenario exige actuar aunque no cambie el modelo?
-2. ¿Qué escenario no justifica una migración inmediata?
-3. ¿Cuál muestra mejor el valor de un eval set portable?
-4. ¿Qué mejora de arquitectura ofrece opcionalidad sin sobrearquitectura?
+1. ¿Qué escenario exige actuar aunque el modelo no cambie?
+2. ¿Cuál no justifica una migración inmediata?
+3. ¿Qué activo hace más barata una futura comparación?
+4. ¿Qué abstracción estratégica merece conservarse?

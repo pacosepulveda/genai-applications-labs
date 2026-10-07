@@ -1,80 +1,44 @@
 # Módulo 4 — Visión Artificial Generativa
 
-## Objetivos
+## Enfoque práctico
 
-El módulo introduce las ideas fundamentales de generación visual y termina llevando esa capacidad a una aplicación.
+Los laboratorios de M04 se entregan con el código completo.
 
-La ruta conceptual es:
+El trabajo del alumno es:
 
 ```text
-imagen como tensor
-      ↓
-modelar una distribución
-      ↓
-espacio latente / VAE
-      ↓
-GAN
-      ↓
-diffusion y conditioning
-      ↓
-evaluación, riesgo y procedencia
-      ↓
-VisualProvider + ArtifactStore
+ejecutar -> inspeccionar -> modificar una variable -> comparar -> explicar
 ```
 
-## Entorno de laboratorio
+El objetivo es evitar que errores de sintaxis o boilerplate consuman el tiempo destinado a comprender los mecanismos y la arquitectura.
 
-Cada alumno trabaja desde un **SageMaker Space** con una instancia **`ml.t3.large`**, sin GPU.
+## Ruta de clase
 
-Los notebooks locales utilizan modelos y datasets pequeños para que puedan ejecutarse en CPU. Los modelos visuales grandes se consumen mediante un servicio gestionado, por lo que el cálculo pesado no se ejecuta dentro del Space.
-
-## Ruta de trabajo recomendada
-
-La práctica principal del módulo es:
+La práctica principal es:
 
 ```text
 M04.P06 — Enterprise GenAI Assistant v0.4
 ```
 
-En ella se construye el flujo:
+P06 no depende de haber entrenado previamente VAE, GAN o diffusion. El provider `mock` permite comprobar policy, provider abstraction, API, almacenamiento y metadata de principio a fin.
 
-```text
-POST /v1/images
-      ↓
-visual policy
-      ↓
-VisualProvider
-      ├── mock
-      └── bedrock
-      ↓
-ArtifactStore
-      ↓
-PNG + metadata
-```
+## Ampliaciones ejecutables
 
-Los laboratorios **M04.P01–M04.P05** permanecen disponibles como ampliación técnica para profundizar en:
+- `M04.P01` — tensores, rangos y augmentations.
+- `M04.P02` — VAE, sampling e interpolación.
+- `M04.P03` — training loop GAN.
+- `M04.P04` — diversidad, cobertura y mode collapse.
+- `M04.P05` — tiny diffusion.
 
-- representación de imágenes;
-- VAE y espacio latente;
-- entrenamiento adversarial;
-- evaluación de GAN;
-- tiny diffusion.
+P01-P05 también están completamente resueltas en los notebooks y en `scripts/`. P04 reutiliza los artefactos generados por P03.
 
-No son una dependencia de M04.P06.
+## Entorno
 
-## Continuidad del proyecto transversal
-
-M04.P06 añade generación visual a **Enterprise GenAI Assistant**. La práctica visual puede realizarse de forma independiente de los artefactos de entrenamiento de P01–P05.
-
-El scaffold conserva también los componentes textuales de módulos anteriores. Para la práctica M04 no es necesario reimplementar el router neuronal ni completar tareas pendientes del módulo 3.
+Los ejemplos utilizan CPU y datasets pequeños. No es necesaria GPU.
 
 ## Material
 
-- `M04_P01_Enunciado.md` — ampliación
-- `M04_P02_Enunciado.md` — ampliación
-- `M04_P03_Enunciado.md` — ampliación
-- `M04_P04_Enunciado.md` — ampliación
-- `M04_P05_Enunciado.md` — ampliación
-- `M04_P06_Enunciado.md` — práctica principal
+- `M04_P01_Enunciado.md` … `M04_P06_Enunciado.md`
 - `notebooks/`
+- `scripts/`
 - `enterprise-genai-assistant/`

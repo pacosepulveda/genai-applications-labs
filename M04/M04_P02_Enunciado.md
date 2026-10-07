@@ -1,104 +1,25 @@
-# M04.P02 — VAE: reconstrucción, sampling y espacio latente
+# M04.P02 — VAE: reconstruir, muestrear e interpolar
 
 **Modalidad:** individual o parejas  
-**Entregable:** VAE entrenado, reconstrucciones, muestras e interpolación latente
+**Entregable:** interpretación de reconstrucciones, sampling y latent
 
 ## Objetivo
 
-Construirás un Variational Autoencoder pequeño para observar directamente:
+Observar el comportamiento de un VAE sin dedicar tiempo a escribir su implementación.
 
-```text
-imagen
--> μ, log_var
--> sampling
--> z
--> decoder
--> reconstrucción
-```
+## Trabajo
 
-La práctica utiliza `load_digits` 8×8 y está dimensionada para CPU.
+Abre `notebooks/M04_P02_VAE_Latent_Space.ipynb`.
 
-## Tareas
+El notebook ya contiene encoder, `mu`, `log_var`, reparameterization, decoder, reconstruction loss + KL, entrenamiento, sampling e interpolación.
 
-Abre:
+Ejecuta el flujo completo y analiza sus salidas.
 
-```text
-notebooks/M04_P02_VAE_Latent_Space.ipynb
-```
-
-### Parte A — Modelo
-
-Implementa un VAE pequeño:
-
-- entrada de 64 valores normalizados a `[0,1]`;
-- encoder con una capa oculta de aproximadamente 32 unidades;
-- `mu`;
-- `log_var`;
-- reparameterization;
-- decoder simétrico;
-- salida de 64 valores con activación coherente con `[0,1]`.
-
-Utiliza un espacio latente de dimensión 2 para poder visualizarlo. Mantén el entrenamiento en torno a 25–30 épocas como máximo orientativo.
-
-### Parte B — Loss
-
-Combina:
-
-```text
-reconstruction loss
-+
-KL divergence
-```
-
-El notebook proporciona la expresión de KL necesaria para esta práctica. El objetivo es entender y programar la combinación de términos, no derivar la fórmula desde cero.
-
-Registra por separado:
-
-- reconstruction loss;
-- KL loss;
-- total loss.
-
-### Parte C — Entrenamiento
-
-Entrena sobre `load_digits`.
-
-Visualiza la evolución de los tres términos anteriores.
-
-### Parte D — Reconstrucción
-
-Selecciona varias imágenes de test y muestra:
-
-```text
-original | reconstrucción
-```
-
-### Parte E — Sampling
-
-Genera valores:
-
-```python
-z ~ N(0, I)
-```
-
-y decodifícalos.
-
-Comprueba que el modelo genera imágenes nuevas sin recibir una imagen original.
-
-### Parte F — Espacio latente
-
-Proyecta los ejemplos de test usando `mu` y colorea por clase.
-
-No esperamos que las diez clases queden perfectamente separadas.
-
-### Parte G — Interpolación
-
-Elige dos imágenes, obtén sus representaciones latentes e interpola entre ambas.
-
-Visualiza la transición.
+Después cambia `latent_dim=2` por `latent_dim=4` y explica qué cambia, especialmente respecto a la visualización directa del espacio latente.
 
 ## Preguntas
 
-1. ¿Por qué un VAE devuelve una distribución y no un único `z`?
-2. ¿Qué papel cumple KL divergence?
-3. ¿Qué ocurriría si eliminamos por completo el término KL?
-4. ¿Por qué las reconstrucciones pueden ser más suaves que las imágenes originales?
+1. ¿Por qué el encoder no devuelve solo un punto?
+2. ¿Qué intenta conservar reconstruction loss?
+3. ¿Qué papel tiene KL?
+4. ¿Por qué sampling permite generar sin partir de una imagen original?

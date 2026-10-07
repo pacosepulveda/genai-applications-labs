@@ -21,14 +21,13 @@ from .storage import ArtifactStore
 from .visual_policy import evaluate_visual_request
 from .visual_provider import build_visual_provider
 
-
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = ROOT / "artifacts"
 GENERATED = ROOT / "generated"
 
 app = FastAPI(title="Enterprise GenAI Assistant", version="0.4.0-m04")
 store = ArtifactStore(GENERATED)
-provider = MockProvider()
+text_provider = MockProvider()
 router = None
 
 app.mount("/generated", StaticFiles(directory=GENERATED), name="generated")
@@ -57,8 +56,8 @@ def health():
 def draft(req: DraftRequest):
     started = time.perf_counter()
     request_id = str(uuid.uuid4())
-
     policy = evaluate_request(req)
+
     if not policy.allowed:
         return DraftResponse(
             status="blocked",
@@ -75,29 +74,100 @@ def draft(req: DraftRequest):
             latency_ms=int((time.perf_counter() - started) * 1000),
         )
 
-    current_router = get_router()
+    prediction = get_router().predict(
+        request_text=req.task,
+        channel=req.channel,
+        business_unit=req.business_unit,
+        language=req.language,
+        urgency=req.urgency,
+        requires_authoritative_sources=req.requires_authoritative_sources,
+    )
 
-    # Continuidad de M03:
-    # conserva aquí tu implementación de routing textual si la completaste.
-    # M04.P06 puede realizarse sin invocar este endpoint.
-    raise NotImplementedError
+    if req.requires_authoritative_sources:
+        route = "CONTROLLED_KNOWLEDGE_FLOW"
+    elif prediction.confidence < settings.router_threshold:
+        route = "REVIEW"
+    elif prediction.intent == "CORPORATE_KNOWLEDGE":
+        route = "CONTROLLED_KNOWLEDGE_FLOW"
+    elif prediction.intent == "UNSUPPORTED":
+        route = "BLOCK"
+    else:
+        route = "GENERATION"
+
+    routing = RoutingMetadata(
+        backend=settings.router_backend,
+        intent=prediction.intent,
+        confidence=prediction.confidence,
+        route=route,
+        model_version=settings.router_model_version,
+    )
+
+    if route == "BLOCK":
+        return DraftResponse(
+            status="blocked",
+            content=None,
+            warnings=policy.warnings + ["La intención no permite generación directa."],
+            routing=routing,
+            request_id=request_id,
+            latency_ms=int((time.perf_counter() - started) * 1000),
+        )
+
+    if route in {"REVIEW", "CONTROLLED_KNOWLEDGE_FLOW"}:
+        return DraftResponse(
+            status="review",
+            content=None,
+            warnings=policy.warnings + [f"Ruta controlada: {route}"],
+            routing=routing,
+            request_id=request_id,
+            latency_ms=int((time.perf_counter() - started) * 1000),
+        )
+
+    return DraftResponse(
+        status="ok",
+        content=text_provider.generate(req.task),
+        warnings=policy.warnings,
+        routing=routing,
+        request_id=request_id,
+        latency_ms=int((time.perf_counter() - started) * 1000),
+    )
 
 
 @app.post("/v1/images", response_model=ImageGenerationResponse)
 def generate_image(req: ImageGenerationRequest):
     provider_name = req.provider or settings.visual_provider
-
     policy = evaluate_visual_request(req.prompt, provider_name)
     if not policy.allowed:
         raise HTTPException(status_code=400, detail=policy.reason)
 
-    # TODO M04.P06:
-    # 1. Construye el provider con build_visual_provider(...).
-    # 2. Genera la imagen.
-    # 3. Crea artifact_id y metadata.
-    # 4. Guarda PNG + JSON con store.save(...).
-    # 5. Devuelve ImageGenerationResponse.
-    raise NotImplementedError
+    visual_provider = build_visual_provider(
+        provider_name,
+        settings.bedrock_image_region,
+        settings.bedrock_image_model_id,
+    )
+    result = visual_provider.generate(req.prompt, req.seed)
+    artifact_id = str(uuid.uuid4())
+
+    metadata = {
+        "artifact_id": artifact_id,
+        "provider": result.provider,
+        "model_version": result.model_version,
+        "seed": req.seed,
+        "width": result.image.width,
+        "height": result.image.height,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    store.save(artifact_id, result.image, metadata)
+
+    return ImageGenerationResponse(
+        artifact_id=artifact_id,
+        provider=result.provider,
+        model_version=result.model_version,
+        seed=req.seed,
+        width=result.image.width,
+        height=result.image.height,
+        image_url=f"/generated/{artifact_id}.png",
+        metadata_url=f"/v1/images/{artifact_id}",
+    )
 
 
 @app.get("/v1/images/{artifact_id}")

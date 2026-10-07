@@ -25,7 +25,7 @@ class MockVisualProvider:
         x = rng.randint(30, 170)
         y = rng.randint(30, 170)
         draw.rectangle((x, y, x + 50, y + 50), outline=(20, 20, 20), width=4)
-        return VisualResult(img, self.name, "mock-v1")
+        return VisualResult(image=img, provider=self.name, model_version="mock-v1")
 
 
 class BedrockVisualProvider:
@@ -42,22 +42,26 @@ class BedrockVisualProvider:
             "seed": seed,
             "output_format": "png",
         }
+        response = self.client.invoke_model(
+            modelId=self.model_id,
+            contentType="application/json",
+            accept="application/json",
+            body=json.dumps(body),
+        )
+        payload = json.loads(response["body"].read())
+        image_bytes = base64.b64decode(payload["images"][0])
+        image = Image.open(BytesIO(image_bytes)).convert("RGB")
+        return VisualResult(
+            image=image,
+            provider=self.name,
+            model_version=self.model_id,
+        )
 
-        # TODO M04.P06:
-        # 1. invoca self.client.invoke_model(...);
-        # 2. convierte response["body"] a JSON;
-        # 3. decodifica payload["images"][0] desde base64;
-        # 4. abre los bytes con PIL y devuelve VisualResult.
-        raise NotImplementedError
 
-
-def build_visual_provider(
-    name: str,
-    bedrock_region: str,
-    bedrock_model_id: str,
-):
-    # TODO M04.P06:
-    # mock -> MockVisualProvider()
-    # bedrock -> BedrockVisualProvider(...)
-    # cualquier otro valor -> ValueError
-    raise NotImplementedError
+def build_visual_provider(name: str, bedrock_region: str, bedrock_model_id: str):
+    normalized = name.strip().lower()
+    if normalized == "mock":
+        return MockVisualProvider()
+    if normalized == "bedrock":
+        return BedrockVisualProvider(bedrock_region, bedrock_model_id)
+    raise ValueError(f"visual provider no soportado: {name!r}")

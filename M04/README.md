@@ -2,63 +2,79 @@
 
 ## Objetivos
 
-Estas prácticas recorren las ideas fundamentales de la generación visual desde los píxeles hasta un servicio visual integrable en una aplicación empresarial.
+El módulo introduce las ideas fundamentales de generación visual y termina llevando esa capacidad a una aplicación.
 
-La progresión es:
+La ruta conceptual es:
 
 ```text
 imagen como tensor
       ↓
-preprocessing y augmentation
+modelar una distribución
       ↓
-autoencoder / VAE
-      ↓
-espacio latente
+espacio latente / VAE
       ↓
 GAN
       ↓
-diagnóstico de diversidad y cobertura
+diffusion y conditioning
       ↓
-tiny diffusion
+evaluación, riesgo y procedencia
       ↓
-VisualProvider en Enterprise GenAI Assistant
-      ↓
-modelo visual real mediante Amazon Bedrock
+VisualProvider + ArtifactStore
 ```
 
 ## Entorno de laboratorio
 
 Cada alumno trabaja desde un **SageMaker Space** con una instancia **`ml.t3.large`**, sin GPU.
 
-Por ese motivo las prácticas locales están diseñadas para CPU:
+Los notebooks locales utilizan modelos y datasets pequeños para que puedan ejecutarse en CPU. Los modelos visuales grandes se consumen mediante un servicio gestionado, por lo que el cálculo pesado no se ejecuta dentro del Space.
 
-- dataset `sklearn.datasets.load_digits`, disponible localmente;
-- imágenes de 8×8;
-- VAE, GAN y denoiser deliberadamente pequeños;
-- sin descarga de datasets grandes;
-- sin Stable Diffusion ni otros modelos grandes ejecutándose dentro del Space.
+## Ruta de trabajo recomendada
 
-El objetivo de P01–P05 es comprender mecanismos y poder observar el entrenamiento. En P06 se añade un provider visual real mediante **Amazon Bedrock**: el cálculo pesado ocurre en el servicio gestionado y el Space actúa como cliente de la API.
-
-## Orden recomendado
+La práctica principal del módulo es:
 
 ```text
-M04.P01 -> M04.P02 -> M04.P03 -> M04.P04 -> M04.P05 -> M04.P06
+M04.P06 — Enterprise GenAI Assistant v0.4
 ```
 
-P03 y P04 trabajan sobre la misma GAN. P06 reutiliza el generador entrenado en P03 si está disponible y mantiene también un provider mock para probar arquitectura y tests sin depender de un modelo externo.
+En ella se construye el flujo:
+
+```text
+POST /v1/images
+      ↓
+visual policy
+      ↓
+VisualProvider
+      ├── mock
+      └── bedrock
+      ↓
+ArtifactStore
+      ↓
+PNG + metadata
+```
+
+Los laboratorios **M04.P01–M04.P05** permanecen disponibles como ampliación técnica para profundizar en:
+
+- representación de imágenes;
+- VAE y espacio latente;
+- entrenamiento adversarial;
+- evaluación de GAN;
+- tiny diffusion.
+
+No son una dependencia de M04.P06.
 
 ## Continuidad del proyecto transversal
 
-M04.P06 construye **Enterprise GenAI Assistant v0.4** como evolución de v0.3. La capacidad visual no debe eliminar el endpoint de borradores, el router ni los controles deterministas construidos en módulos anteriores.
+M04.P06 añade generación visual a **Enterprise GenAI Assistant**. La práctica visual puede realizarse de forma independiente de los artefactos de entrenamiento de P01–P05.
+
+El scaffold conserva también los componentes textuales de módulos anteriores. Para la práctica M04 no es necesario reimplementar el router neuronal ni completar tareas pendientes del módulo 3.
 
 ## Material
 
-- `M04_P01_Enunciado.md`
-- `M04_P02_Enunciado.md`
-- `M04_P03_Enunciado.md`
-- `M04_P04_Enunciado.md`
-- `M04_P05_Enunciado.md`
-- `M04_P06_Enunciado.md`
+- `M04_P01_Enunciado.md` — ampliación
+- `M04_P02_Enunciado.md` — ampliación
+- `M04_P03_Enunciado.md` — ampliación
+- `M04_P04_Enunciado.md` — ampliación
+- `M04_P05_Enunciado.md` — ampliación
+- `M04_P06_Enunciado.md` — práctica principal
 - `notebooks/`
 - `enterprise-genai-assistant/`

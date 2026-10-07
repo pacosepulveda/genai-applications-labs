@@ -77,9 +77,9 @@ def draft(req: DraftRequest):
 
     current_router = get_router()
 
-    # TODO heredado de M03.P06:
-    # conserva tu implementación completada de routing y generación textual.
-    # El nuevo servicio visual no debe alterar estas políticas.
+    # Continuidad de M03:
+    # conserva aquí tu implementación de routing textual si la completaste.
+    # M04.P06 puede realizarse sin invocar este endpoint.
     raise NotImplementedError
 
 
@@ -92,25 +92,11 @@ def generate_image(req: ImageGenerationRequest):
         raise HTTPException(status_code=400, detail=policy.reason)
 
     # TODO M04.P06:
-    # visual_provider = build_visual_provider(
-    #     provider_name,
-    #     ARTIFACTS,
-    #     settings.bedrock_image_region,
-    #     settings.bedrock_image_model_id,
-    # )
-    # result = visual_provider.generate(req.prompt, req.seed)
-    # artifact_id = str(uuid.uuid4())
-    # metadata = {
-    #     "artifact_id": artifact_id,
-    #     "provider": result.provider,
-    #     "model_version": result.model_version,
-    #     "seed": req.seed,
-    #     "width": result.image.width,
-    #     "height": result.image.height,
-    #     "created_at": datetime.now(timezone.utc).isoformat(),
-    # }
-    # store.save(artifact_id, result.image, metadata)
-    # return ImageGenerationResponse(...)
+    # 1. Construye el provider con build_visual_provider(...).
+    # 2. Genera la imagen.
+    # 3. Crea artifact_id y metadata.
+    # 4. Guarda PNG + JSON con store.save(...).
+    # 5. Devuelve ImageGenerationResponse.
     raise NotImplementedError
 
 

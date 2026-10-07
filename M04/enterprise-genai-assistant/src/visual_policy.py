@@ -7,11 +7,15 @@ class VisualPolicyDecision:
     reason: str | None = None
 
 
-ALLOWED_PROVIDERS = {"mock", "local_gan", "bedrock"}
+ALLOWED_PROVIDERS = {"mock", "bedrock"}
 
+# Reglas educativas deliberadamente sencillas.
+# TODO M04.P06: completa una o más expresiones representativas
+# para cada una de las categorías del enunciado.
 BLOCKED_PATTERNS = [
-    # TODO M04.P06:
-    # añade expresiones simples para las categorías indicadas en el enunciado.
+    # suplantación explícita de una persona real
+    # generación de credenciales de acceso
+    # documento oficial falso
 ]
 
 

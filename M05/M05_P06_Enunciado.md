@@ -3,6 +3,8 @@
 **Modalidad:** individual o parejas  
 **Entregable:** endpoint textual, provider abstraction y tests
 
+> **Ruta esencial del módulo:** `M05.P01 -> M05.P04 -> M05.P06`. P01 permite observar tokenización y presupuesto de contexto; P04 permite observar decoding; esta práctica lleva ambos conceptos al nivel de aplicación.
+
 ## Objetivo
 
 Convertirás la capacidad de generación de texto en un servicio de aplicación con un contrato estable.
@@ -23,7 +25,7 @@ TextModelProvider
 TextResponse
 ```
 
-No necesitas entrenar un modelo ni cargar modelos locales para completar la ruta principal.
+No necesitas entrenar un modelo ni cargar modelos locales adicionales para completar esta práctica.
 
 ## Parte A — Contrato de entrada
 
@@ -50,11 +52,7 @@ Para `TRANSLATE` debes recibir también `target_language`.
 
 ## Parte B — Policy antes del modelo
 
-Antes de seleccionar o invocar el provider utiliza:
-
-```text
-src/text_policy.py
-```
+Antes de seleccionar o invocar el provider utiliza `src/text_policy.py`.
 
 La aplicación debe rechazar, como mínimo:
 
@@ -68,11 +66,7 @@ El provider nunca debe poder saltarse estos controles.
 
 ## Parte C — TextModelProvider
 
-Completa:
-
-```text
-src/text_provider.py
-```
+Completa `src/text_provider.py`.
 
 La ruta principal utiliza dos providers.
 
@@ -91,10 +85,7 @@ BEDROCK_TEXT_REGION=us-east-1
 BEDROCK_TEXT_MODEL_ID=us.openai.gpt-5.6-luna
 ```
 
-La llamada debe enviar:
-
-- un mensaje `user`;
-- `maxTokens` dentro de `inferenceConfig`.
+La llamada debe enviar un mensaje `user` y `maxTokens` dentro de `inferenceConfig`.
 
 Convierte la respuesta de Bedrock al contrato común `GenerationResult`:
 
@@ -111,22 +102,11 @@ No guardes credenciales en el repositorio.
 
 ## Parte D — Selección del provider
 
-Completa `build_text_provider(...)` para soportar:
-
-```text
-mock
-bedrock_luna
-```
-
-Un nombre desconocido debe producir `ValueError`.
+Completa `build_text_provider(...)` para soportar `mock` y `bedrock_luna`. Un nombre desconocido debe producir `ValueError`.
 
 ## Parte E — Construcción de la tarea
 
-Completa:
-
-```text
-POST /v1/text
-```
+Completa `POST /v1/text`.
 
 Construye una instrucción distinta según la tarea:
 
@@ -138,15 +118,13 @@ No necesitas implementar prompt engineering avanzado. Queremos una separación c
 
 ## Parte F — Límite de salida
 
-El cliente puede solicitar `max_new_tokens`, pero la aplicación debe imponer su máximo configurado.
-
-Utiliza:
+El cliente puede solicitar `max_new_tokens`, pero la aplicación debe imponer su máximo configurado:
 
 ```python
 min(req.max_new_tokens, settings.max_new_tokens)
 ```
 
-Esto demuestra que un parámetro de generación también es un control operacional.
+Esto conecta directamente con M05.P04: un parámetro de generación también es un control operacional.
 
 ## Parte G — Respuesta estructurada
 
@@ -164,7 +142,7 @@ request_id
 latency_ms
 ```
 
-El objetivo es no tratar la salida del modelo como un string sin contexto operativo.
+Los metadatos de tokens conectan también con M05.P01: la aplicación debe observar cuánto contexto entra y cuánto texto sale.
 
 ## Parte H — Tests
 
@@ -188,13 +166,7 @@ Los tests automatizados **no deben realizar llamadas reales a Bedrock**.
 
 ## Prueba manual de integración
 
-Cuando los tests funcionen, cambia el provider a:
-
-```text
-bedrock_luna
-```
-
-y realiza una petición corta desde `/docs`.
+Cuando los tests funcionen, cambia el provider a `bedrock_luna` y realiza una petición corta desde `/docs`.
 
 Comprueba que recibes contenido y metadatos de uso.
 
@@ -209,7 +181,7 @@ Como ampliación puedes implementar:
 - `local_seq2seq` con FLAN-T5-small;
 - `local_chat` con SmolLM2 y `chat_template`.
 
-Estas extensiones no son necesarias para completar la ruta principal del módulo.
+Estas extensiones no son necesarias para completar la ruta esencial del módulo.
 
 ## Preguntas finales
 

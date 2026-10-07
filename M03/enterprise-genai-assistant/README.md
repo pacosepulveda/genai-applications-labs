@@ -1,30 +1,39 @@
 # Enterprise GenAI Assistant — M03
 
-La versión M03 permite seleccionar un router clásico o neuronal mediante configuración:
+La implementación está completa para que el laboratorio se centre en comparar comportamiento y políticas.
+
+## 1. Generar los archivos de modelo
+
+Ejecuta primero `M03.P02`. El notebook guarda en `artifacts/`:
 
 ```text
-ROUTER_BACKEND=classic
+classic_router.joblib
+neural_preprocessor.joblib
+neural_label_encoder.joblib
+neural_router.pt
+neural_router_config.json
 ```
 
-o:
+## 2. Instalar dependencias
 
-```text
-ROUTER_BACKEND=neural
+```bash
+pip install -r requirements.txt
 ```
 
-Los artefactos se generan en M03.P02.
-
-## Principio de diseño
-
-El backend de ML es intercambiable. Las políticas empresariales y de seguridad no dependen del modelo elegido.
-
-## Ejecución
-
-Desde el terminal integrado del entorno web:
+## 3. Tests
 
 ```bash
 pytest -q
+```
+
+## 4. Ejecutar
+
+```bash
 uvicorn src.main:app --reload --port 8080
 ```
 
-Utiliza la vista web del entorno para abrir `/docs`.
+Configura `ROUTER_BACKEND=classic` o `ROUTER_BACKEND=neural` para comparar ambos backends.
+
+## Principio de diseño
+
+El backend aprendido es intercambiable. Las políticas deterministas se ejecutan antes del router y no dependen del modelo elegido.

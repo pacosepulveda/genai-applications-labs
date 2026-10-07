@@ -1,46 +1,35 @@
-# M05.P01 — Tokenización, vocabulario y presupuesto de contexto
+# M05.P01 — Tokenización y presupuesto de contexto
 
 **Modalidad:** individual o parejas  
-**Entregable:** notebook con comparación de tokenizers y análisis de contexto
+**Entregable:** notebook con observación de tokens, truncation y presupuesto de contexto
 
 ## Objetivo
 
-Comprobarás que un modelo de lenguaje no recibe palabras: recibe tokens e IDs.
-
-Compararás tres estrategias:
+Comprobarás dos ideas fundamentales para trabajar con LLMs:
 
 ```text
-WordPiece
-Byte-level BPE
-SentencePiece
+texto -> tokens -> IDs
 ```
+
+y:
+
+```text
+input_tokens + output_reserve <= context_window
+```
+
+La práctica utiliza un único tokenizer generativo para centrarnos en el mecanismo y evitar trabajo repetitivo.
 
 ## Tareas
 
-Abre:
+Abre `notebooks/M05_P01_Tokenization_Context.ipynb`.
 
-```text
-notebooks/M05_P01_Tokenization_Context.ipynb
-```
+### Parte A — Texto, tokens e IDs
 
-### Parte A — Tres tokenizers
+Carga el tokenizer `HuggingFaceTB/SmolLM2-135M-Instruct`.
 
-Carga:
+Tokeniza una frase corta en español y muestra tokens, IDs y número total de tokens. Comprueba que **token no equivale necesariamente a palabra**.
 
-- `google-bert/bert-base-multilingual-cased`;
-- `HuggingFaceTB/SmolLM2-135M-Instruct`;
-- `google/flan-t5-small`.
-
-Tokeniza las mismas frases en español.
-
-Para cada tokenizer muestra:
-
-- tokens;
-- IDs;
-- número de tokens;
-- special tokens añadidos.
-
-### Parte B — Texto técnico
+### Parte B — Identificadores técnicos
 
 Tokeniza:
 
@@ -51,31 +40,17 @@ customer_id
 192.168.10.25
 OpenTelemetry
 Kubernetes
-🔐
 ```
 
-Analiza qué identificadores se fragmentan más.
+Muestra cuántos tokens consume cada elemento e identifica cuáles se fragmentan más.
 
-### Parte C — Padding y attention mask
+### Parte C — Truncation
 
-Crea un batch con frases de longitudes distintas.
+Construye un texto largo que termine con `INFORMACION_CRITICA_FINAL`.
 
-Muestra:
+Tokenízalo con `max_length=64` y `truncation=True`. Decodifica la entrada resultante y comprueba si la información crítica ha sobrevivido.
 
-```text
-input_ids
-attention_mask
-```
-
-Identifica qué posiciones corresponden a padding.
-
-### Parte D — Truncation
-
-Crea un texto mayor que el límite configurado del tokenizer.
-
-Aplica truncation y comprueba qué información desaparece.
-
-### Parte E — Token budget
+### Parte D — Token budget
 
 Implementa:
 
@@ -83,19 +58,18 @@ Implementa:
 estimate_budget(...)
 ```
 
-que reciba:
+La función debe recibir system text, history, user input, output reserve y context limit. Debe devolver al menos `input_tokens`, `total_reserved`, `fits` y `remaining`.
 
-- system text;
-- history;
-- user input;
-- output reserve.
+Prueba un escenario que quepa y otro que no.
 
-Debe indicar si la petición cabe en una context window configurada.
+## Ampliación
+
+Si quieres profundizar, compara el mismo texto con WordPiece y SentencePiece y explora padding + `attention_mask`.
 
 ## Preguntas
 
 1. ¿Por qué token no equivale a palabra?
-2. ¿Qué ventaja aporta subword tokenization?
-3. ¿Por qué un identificador técnico puede consumir muchos tokens?
-4. ¿Qué diferencia existe entre padding y truncation?
-5. ¿Por qué la context window debe reservar espacio para la salida?
+2. ¿Por qué un identificador técnico puede consumir varios tokens?
+3. ¿Qué riesgo tiene truncar sin estrategia?
+4. ¿Por qué debemos reservar espacio para la salida?
+5. ¿Qué tendría que hacer una aplicación cuando la petición no cabe?

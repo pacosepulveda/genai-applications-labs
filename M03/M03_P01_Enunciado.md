@@ -1,68 +1,63 @@
 # M03.P01 — Dentro de una red: forward, loss y backpropagation
 
 **Modalidad:** individual o parejas  
-**Entregable:** notebook completado y explicación de una actualización de pesos
+**Entregable:** resultados ejecutados y explicación de una actualización
 
 ## Objetivo
 
-Observar directamente el ciclo mínimo de aprendizaje de una red:
+Observar directamente:
 
 ```text
-entrada
--> forward
--> predicción
--> loss
--> backward
--> gradientes
--> actualización
+entrada -> forward -> predicción -> loss -> backward -> gradientes -> actualización
 ```
 
-La práctica se centra en comparar un cálculo manual con el que realiza `autograd`.
+El notebook ya contiene el código completo para evitar perder tiempo en errores de sintaxis.
 
 ## Ruta esencial
 
-Abre `notebooks/M03_P01_Forward_Backprop.ipynb`.
-
-### Parte A — Una neurona sin framework de alto nivel
-
-Implementa manualmente:
+Abre:
 
 ```text
-z = w*x + b
-L = (y_hat - y)^2
+notebooks/M03_P01_Forward_Backprop.ipynb
 ```
 
-Calcula:
+### Parte A — Ejecuta y verifica
 
-- predicción;
-- loss;
-- gradiente respecto a `w`;
-- gradiente respecto a `b`;
-- una actualización con el learning rate indicado.
+Ejecuta el cálculo manual y la versión con `autograd`.
 
-### Parte B — El mismo cálculo con autograd
+Comprueba que:
 
-Repite el ejemplo con PyTorch:
-
-```python
-loss.backward()
+```text
+dL/dw manual == w_t.grad
+dL/db manual == b_t.grad
 ```
 
-Compara los gradientes manuales con:
+### Parte B — Predice antes de modificar
 
-```python
-w_t.grad
-b_t.grad
+Antes de ejecutar de nuevo, elige **un solo cambio**:
+
+```text
+x
+y
+lr
 ```
 
-Deben coincidir salvo pequeñas diferencias de representación numérica.
+Escribe qué esperas que ocurra con:
 
-## Preguntas
+- gradiente;
+- actualización;
+- loss.
 
-1. ¿Qué contiene `parameter.grad` después de `backward()`?
-2. ¿Qué parte del proceso automatiza `autograd`?
-3. ¿Qué elementos sigue definiendo el desarrollador: datos, arquitectura, loss u objetivo?
+Después modifica únicamente ese valor y comprueba tu predicción.
+
+### Parte C — Interpreta
+
+Explica:
+
+1. qué contiene `.grad`;
+2. qué automatiza `autograd`;
+3. qué sigue decidiendo el desarrollador.
 
 ## Ampliación
 
-El notebook conserva una sección opcional para repetir varias actualizaciones y observar cómo cambian peso, bias, predicción y loss. Si modificas parámetros manualmente, utiliza `torch.no_grad()` y limpia los gradientes antes de la siguiente iteración.
+Ejecuta la sección de varias iteraciones y observa cómo cambian peso, bias, predicción y loss.

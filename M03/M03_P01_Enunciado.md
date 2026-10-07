@@ -5,7 +5,7 @@
 
 ## Objetivo
 
-Observarás directamente los pasos que normalmente ocultan los frameworks:
+Observar directamente el ciclo mínimo de aprendizaje de una red:
 
 ```text
 entrada
@@ -17,7 +17,9 @@ entrada
 -> actualización
 ```
 
-## Tareas
+La práctica se centra en comparar un cálculo manual con el que realiza `autograd`.
+
+## Ruta esencial
 
 Abre `notebooks/M03_P01_Forward_Backprop.ipynb`.
 
@@ -25,65 +27,42 @@ Abre `notebooks/M03_P01_Forward_Backprop.ipynb`.
 
 Implementa manualmente:
 
-[
-z = wx + b
-]
+```text
+z = w*x + b
+L = (y_hat - y)^2
+```
 
-y una función de pérdida cuadrática:
+Calcula:
 
-[
-L=(hat y-y)^2
-]
+- predicción;
+- loss;
+- gradiente respecto a `w`;
+- gradiente respecto a `b`;
+- una actualización con el learning rate indicado.
 
-Calcula el gradiente respecto a `w` y `b` para un único ejemplo.
+### Parte B — El mismo cálculo con autograd
 
-Realiza una actualización utilizando un learning rate pequeño.
-
-### Parte B — Autograd
-
-Repite el mismo cálculo con PyTorch y:
+Repite el ejemplo con PyTorch:
 
 ```python
 loss.backward()
 ```
 
-Compara:
+Compara los gradientes manuales con:
 
-- gradiente manual;
-- gradiente producido por `autograd`.
-
-### Parte C — Varias iteraciones
-
-Entrena la neurona durante varias actualizaciones y registra:
-
-- peso;
-- bias;
-- predicción;
-- loss.
-
-Antes de modificar manualmente los parámetros, utiliza `torch.no_grad()`. La actualización de los pesos no forma parte del cálculo cuya derivada queremos obtener, por lo que no debe añadirse al grafo de autograd.
-
-### Parte D — MLP
-
-Construye una red:
-
-```text
-2 inputs
--> Linear(2, 8)
--> ReLU
--> Linear(8, 2)
+```python
+w_t.grad
+b_t.grad
 ```
 
-Inspecciona:
-
-- shapes;
-- logits;
-- número de parámetros.
+Deben coincidir salvo pequeñas diferencias de representación numérica.
 
 ## Preguntas
 
 1. ¿Qué contiene `parameter.grad` después de `backward()`?
-2. ¿Por qué se limpian los gradientes antes de la siguiente actualización?
-3. ¿Por qué utilizamos `torch.no_grad()` al modificar manualmente los parámetros?
-4. ¿Qué ocurriría si todas las capas fuesen lineales y no hubiese activaciones?
-5. ¿Cuál es la diferencia entre un logit y una probabilidad?
+2. ¿Qué parte del proceso automatiza `autograd`?
+3. ¿Qué elementos sigue definiendo el desarrollador: datos, arquitectura, loss u objetivo?
+
+## Ampliación
+
+El notebook conserva una sección opcional para repetir varias actualizaciones y observar cómo cambian peso, bias, predicción y loss. Si modificas parámetros manualmente, utiliza `torch.no_grad()` y limpia los gradientes antes de la siguiente iteración.

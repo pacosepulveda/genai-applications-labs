@@ -1,55 +1,72 @@
-# M05.P06 — Enterprise GenAI Assistant v0.5: TextModelProvider y conversación
+# M05.P06 — Enterprise GenAI Assistant v0.5: servicio NLP
 
 **Modalidad:** individual o parejas  
-**Entregable:** ampliación v0.5 de la API, provider textual desacoplado, conversación y tests
+**Entregable:** endpoint textual, provider abstraction y tests
 
 ## Objetivo
 
-Ampliarás la aplicación transversal. **v0.5 extiende v0.4; no la sustituye.**
+Convertirás la capacidad de generación de texto en un servicio de aplicación con un contrato estable.
 
-Al terminar deben seguir existiendo las capacidades anteriores, incluyendo el routing y la generación visual, y se añaden:
+La ruta principal será:
 
 ```text
 POST /v1/text
-POST /v1/chat
-```
-
-La nueva rama textual será:
-
-```text
-request
-  ↓
+      ↓
 text policy
-  ↓
-task selection
-  ↓
+      ↓
+task prompt
+      ↓
 TextModelProvider
       ├── mock
-      ├── local_seq2seq
-      ├── local_chat
       └── bedrock_luna
-  ↓
-output validation
-  ↓
-response
+      ↓
+TextResponse
 ```
 
-## Parte A — Continuidad de v0.4
+No necesitas entrenar un modelo ni cargar modelos locales para completar la ruta principal.
 
-Conserva la implementación completada en los módulos anteriores.
+## Parte A — Contrato de entrada
 
-No elimines ni debilites:
+El endpoint recibe una petición como:
 
-- `/v1/draft`;
-- `/v1/images`;
-- router clásico/neural;
-- políticas de clasificación, prompt injection y material sensible;
-- `VisualProvider`;
-- almacenamiento y metadatos visuales.
+```json
+{
+  "task": "SUMMARIZE",
+  "text": "...",
+  "provider": "mock",
+  "max_new_tokens": 120
+}
+```
 
-El directorio `enterprise-genai-assistant/` de este módulo incluye el scaffold acumulativo. Los bloques marcados como heredados deben sustituirse por tu implementación completada de los módulos anteriores cuando corresponda.
+Las tareas soportadas son:
 
-## Parte B — TextModelProvider
+```text
+GENERATE
+SUMMARIZE
+TRANSLATE
+```
+
+Para `TRANSLATE` debes recibir también `target_language`.
+
+## Parte B — Policy antes del modelo
+
+Antes de seleccionar o invocar el provider utiliza:
+
+```text
+src/text_policy.py
+```
+
+La aplicación debe rechazar, como mínimo:
+
+- entrada vacía;
+- input que supere el límite configurado;
+- material marcado como `CONFIDENTIAL:` o `RESTRICTED:`;
+- patrones deterministas de prompt injection definidos en el scaffold;
+- material con apariencia de secreto según las reglas del laboratorio.
+
+El provider nunca debe poder saltarse estos controles.
+
+## Parte C — TextModelProvider
 
 Completa:
 
@@ -57,50 +74,53 @@ Completa:
 src/text_provider.py
 ```
 
-Implementa una interfaz común.
+La ruta principal utiliza dos providers.
 
 ### `mock`
 
-No utiliza ningún modelo.
-
-### `local_seq2seq`
-
-Utiliza:
-
-```text
-google/flan-t5-small
-```
-
-para:
-
-- `SUMMARIZE`;
-- `TRANSLATE`;
-- instrucciones texto-a-texto.
-
-### `local_chat`
-
-Utiliza:
-
-```text
-HuggingFaceTB/SmolLM2-135M-Instruct
-```
-
-y el `chat_template` del tokenizer.
+Ya está implementado y permite comprobar la aplicación sin inferencia ni coste.
 
 ### `bedrock_luna`
 
-Utiliza Amazon Bedrock Runtime desde el SageMaker Execution Role:
+Completa `BedrockLunaProvider.generate(...)` utilizando Amazon Bedrock Runtime y la API Converse.
+
+Configuración:
 
 ```text
-region: us-east-1
-model:  us.openai.gpt-5.6-luna
+BEDROCK_TEXT_REGION=us-east-1
+BEDROCK_TEXT_MODEL_ID=us.openai.gpt-5.6-luna
 ```
 
-No guardes access keys, bearer tokens ni secretos en el repositorio.
+La llamada debe enviar:
 
-El provider debe utilizar la API Converse de Bedrock y devolver el mismo `GenerationResult` que los providers locales.
+- un mensaje `user`;
+- `maxTokens` dentro de `inferenceConfig`.
 
-## Parte C — API de texto
+Convierte la respuesta de Bedrock al contrato común `GenerationResult`:
+
+```text
+text
+provider
+model
+input_tokens
+output_tokens
+finish_reason
+```
+
+No guardes credenciales en el repositorio.
+
+## Parte D — Selección del provider
+
+Completa `build_text_provider(...)` para soportar:
+
+```text
+mock
+bedrock_luna
+```
+
+Un nombre desconocido debe producir `ValueError`.
+
+## Parte E — Construcción de la tarea
 
 Completa:
 
@@ -108,117 +128,96 @@ Completa:
 POST /v1/text
 ```
 
-Petición conceptual:
+Construye una instrucción distinta según la tarea:
 
-```json
-{
-  "task": "SUMMARIZE",
-  "text": "...",
-  "provider": "local_seq2seq",
-  "max_new_tokens": 120
-}
+- `GENERATE`: utiliza el texto como instrucción;
+- `SUMMARIZE`: pide un resumen fiel y conciso;
+- `TRANSLATE`: pide traducir al idioma indicado y conservar identificadores técnicos.
+
+No necesitas implementar prompt engineering avanzado. Queremos una separación clara entre **tarea de aplicación** y **provider**.
+
+## Parte F — Límite de salida
+
+El cliente puede solicitar `max_new_tokens`, pero la aplicación debe imponer su máximo configurado.
+
+Utiliza:
+
+```python
+min(req.max_new_tokens, settings.max_new_tokens)
 ```
 
-La respuesta debe incluir:
+Esto demuestra que un parámetro de generación también es un control operacional.
+
+## Parte G — Respuesta estructurada
+
+Devuelve un `TextResponse` validado por Pydantic con:
 
 ```text
-request_id
+output
 provider
 model
 task
 input_tokens
 output_tokens
 finish_reason
+request_id
 latency_ms
 ```
 
-## Parte D — Chat
+El objetivo es no tratar la salida del modelo como un string sin contexto operativo.
 
-Implementa:
+## Parte H — Tests
 
-```text
-POST /v1/chat
+Ejecuta:
+
+```bash
+python -m pytest -q
 ```
 
-con:
+Comprueba al menos:
 
-```text
-conversation_id
-message
-provider
-```
-
-El servidor mantendrá historial **en memoria** exclusivamente para el laboratorio.
-
-No lo presentes como memoria empresarial.
-
-## Parte E — Chat template
-
-`local_chat` debe construir la conversación mediante:
-
-```python
-tokenizer.apply_chat_template(...)
-```
-
-No concatenes manualmente marcas de roles.
-
-`bedrock_luna` recibe los mensajes mediante el contrato de Converse; no necesita el chat template de SmolLM2.
-
-## Parte F — Context policy
-
-La conversación parte de un system message configurado por la aplicación.
-
-Define un máximo de mensajes.
-
-Si se supera:
-
-```text
-conservar system + últimos turnos
-```
-
-y devuelve:
-
-```text
-history_truncated=true
-```
-
-## Parte G — Salida estructurada
-
-La API debe devolver objetos Pydantic validados, no el texto crudo del modelo.
-
-## Parte H — Políticas
-
-Mantén fuera del LLM al menos:
-
-- tamaño máximo de input;
-- clasificación de datos;
-- controles deterministas heredados;
-- providers permitidos;
-- límite de output.
-
-Cambiar de provider no puede saltarse una política.
-
-## Parte I — Tests
-
-Añade pruebas para:
-
-1. provider mock;
+1. provider `mock`;
 2. provider desconocido;
-3. límite de input;
-4. historial de conversación;
-5. truncation preservando system;
-6. metadatos de tokens;
-7. metadata `request_id` y `latency_ms`;
-8. `bedrock_luna` mediante mock/stub del cliente: los tests no deben realizar llamadas reales ni generar coste;
-9. regresión de controles heredados.
+3. input demasiado grande;
+4. construcción del endpoint con `mock`;
+5. metadatos de la respuesta;
+6. límite de `max_new_tokens`;
+7. `bedrock_luna` mediante un stub/mock del cliente, sin llamada real.
+
+Los tests automatizados **no deben realizar llamadas reales a Bedrock**.
+
+## Prueba manual de integración
+
+Cuando los tests funcionen, cambia el provider a:
+
+```text
+bedrock_luna
+```
+
+y realiza una petición corta desde `/docs`.
+
+Comprueba que recibes contenido y metadatos de uso.
+
+## Ampliación
+
+El scaffold conserva componentes para continuar experimentando con conversación y modelos locales.
+
+Como ampliación puedes implementar:
+
+- `/v1/chat`;
+- historial en memoria;
+- `local_seq2seq` con FLAN-T5-small;
+- `local_chat` con SmolLM2 y `chat_template`.
+
+Estas extensiones no son necesarias para completar la ruta principal del módulo.
 
 ## Preguntas finales
 
-1. ¿Qué diferencia hay entre historial y memoria externa?
-2. ¿Qué parte de la aplicación depende del proveedor?
-3. ¿Por qué el chat template pertenece al tokenizer/modelo local?
-4. ¿Qué cambia al pasar del provider local a Luna en Bedrock?
-5. ¿Qué permanece igual aunque cambie el provider?
-6. ¿Qué falta todavía para contestar preguntas basadas en documentos corporativos autorizados?
+1. ¿Qué parte cambia al pasar de `mock` a `bedrock_luna`?
+2. ¿Qué partes de la aplicación permanecen iguales aunque cambie el provider?
+3. ¿Por qué la policy debe ejecutarse antes de llamar al modelo?
+4. ¿Por qué `max_new_tokens` no es solo una preferencia estética?
+5. ¿Por qué conviene devolver tokens, modelo, `request_id` y latencia junto al texto?
+6. ¿Qué falta para contestar preguntas utilizando documentación corporativa autorizada y trazable?
 
 La última pregunta conduce directamente a M06: **retrieval y RAG**.

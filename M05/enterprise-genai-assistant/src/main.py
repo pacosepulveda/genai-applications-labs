@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from pathlib import Path
 import time
 import uuid
@@ -6,7 +5,6 @@ import uuid
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 
-from .conversation_store import ConversationStore
 from .models import (
     DraftRequest,
     DraftResponse,
@@ -16,7 +14,6 @@ from .models import (
     TextRequest,
     TextResponse,
     ChatRequest,
-    ChatResponse,
 )
 from .policy import evaluate_request
 from .provider import MockProvider
@@ -26,7 +23,6 @@ from .storage import ArtifactStore
 from .text_policy import evaluate_text
 from .text_provider import build_text_provider
 from .visual_policy import evaluate_visual_request
-from .visual_provider import build_visual_provider
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,7 +34,6 @@ app = FastAPI(title="Enterprise GenAI Assistant", version="0.5.0-m05")
 store = ArtifactStore(GENERATED)
 draft_provider = MockProvider()
 router = None
-conversations = ConversationStore(settings.max_history_messages)
 
 app.mount("/generated", StaticFiles(directory=GENERATED), name="generated")
 
@@ -55,8 +50,6 @@ def text_provider_for(name: str | None):
     try:
         return build_text_provider(
             selected,
-            settings.seq2seq_model_id,
-            settings.chat_model_id,
             settings.bedrock_text_region,
             settings.bedrock_text_model_id,
         )
@@ -78,7 +71,7 @@ def health():
 
 
 # ---------------------------------------------------------------------
-# Capacidades heredadas de v0.3/v0.4
+# Capacidades heredadas de módulos anteriores
 # ---------------------------------------------------------------------
 
 @app.post("/v1/draft", response_model=DraftResponse)
@@ -105,8 +98,8 @@ def draft(req: DraftRequest):
 
     current_router = get_router()
 
-    # TODO heredado de M03/M04:
-    # conserva tu implementación completada de routing y generación textual.
+    # TODO heredado:
+    # conserva tu implementación anterior si quieres utilizar este endpoint.
     raise NotImplementedError
 
 
@@ -118,8 +111,8 @@ def generate_image(req: ImageGenerationRequest):
     if not policy.allowed:
         raise HTTPException(status_code=400, detail=policy.reason)
 
-    # TODO heredado de M04:
-    # conserva build_visual_provider(...), generación, ArtifactStore y response.
+    # TODO heredado:
+    # conserva tu implementación de M04 si quieres utilizar este endpoint.
     raise NotImplementedError
 
 
@@ -132,7 +125,7 @@ def image_metadata(artifact_id: str):
 
 
 # ---------------------------------------------------------------------
-# Nuevas capacidades M05
+# Ruta principal M05
 # ---------------------------------------------------------------------
 
 @app.post("/v1/text", response_model=TextResponse)
@@ -147,36 +140,21 @@ def text(req: TextRequest):
     provider = text_provider_for(req.provider)
 
     # TODO M05.P06:
-    # 1) construye prompt según SUMMARIZE / TRANSLATE / GENERATE;
-    # 2) valida target_language cuando sea necesario;
-    # 3) aplica min(req.max_new_tokens, settings.max_new_tokens);
-    # 4) llama provider.generate(...);
-    # 5) devuelve TextResponse con request_id y latency_ms.
+    # 1. construye el prompt para GENERATE / SUMMARIZE / TRANSLATE;
+    # 2. en TRANSLATE exige target_language;
+    # 3. effective_max = min(req.max_new_tokens, settings.max_new_tokens);
+    # 4. result = provider.generate(prompt, effective_max);
+    # 5. devuelve TextResponse con request_id y latency_ms.
     raise NotImplementedError
 
 
-@app.post("/v1/chat", response_model=ChatResponse)
+# ---------------------------------------------------------------------
+# Ampliación opcional
+# ---------------------------------------------------------------------
+
+@app.post("/v1/chat")
 def chat(req: ChatRequest):
-    started = time.perf_counter()
-    request_id = str(uuid.uuid4())
-
-    policy = evaluate_text(req.message, settings.max_input_chars)
-    if not policy.allowed:
-        raise HTTPException(status_code=400, detail=policy.reason)
-
-    provider = text_provider_for(req.provider)
-
-    conversations.ensure_system(
-        req.conversation_id,
-        settings.chat_system_prompt,
+    raise HTTPException(
+        status_code=501,
+        detail="optional_extension_not_implemented",
     )
-    conversations.append(req.conversation_id, "user", req.message)
-    truncated = conversations.compact(req.conversation_id)
-    history = conversations.get(req.conversation_id)
-
-    # TODO M05.P06:
-    # result = provider.chat(history, max_new_tokens)
-    # añade assistant al historial
-    # compact de nuevo
-    # devuelve ChatResponse con finish_reason, request_id y latency_ms.
-    raise NotImplementedError

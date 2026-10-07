@@ -20,7 +20,8 @@ class ConversationStore:
         if len(history) <= self.max_messages:
             return False
 
-        # TODO M05.P06:
-        # conserva system si existe y después los últimos mensajes
-        # hasta max_messages. No resumas ni crees memoria externa.
-        raise NotImplementedError
+        system = history[0] if history and history[0].get("role") == "system" else None
+        available = self.max_messages - (1 if system else 0)
+        tail = history[-available:] if available > 0 else []
+        self._conversations[conversation_id] = ([system] if system else []) + tail
+        return True

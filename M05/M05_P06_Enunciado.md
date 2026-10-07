@@ -1,140 +1,52 @@
-# M05.P06 — Enterprise GenAI Assistant v0.5: servicio NLP
+# M05.P06 — Enterprise GenAI Assistant v0.5
 
-**Modalidad:** individual o parejas  
-**Entregable:** endpoint textual, provider abstraction y tests
-
-> **Ruta esencial del módulo:** `M05.P01 -> M05.P04 -> M05.P06`. P01 permite observar tokenización y presupuesto de contexto; P04 permite observar decoding; esta práctica lleva ambos conceptos al nivel de aplicación.
+**Ruta esencial**
 
 ## Objetivo
 
-Convertirás la capacidad de generación de texto en un servicio de aplicación con un contrato estable.
+Analizarás una aplicación textual completa con policy, provider abstraction, límites y metadatos. El código ya está implementado: la práctica consiste en ejecutarlo, cambiar configuración y comprobar que el contrato permanece estable.
 
-La ruta principal será:
+Trabaja en:
 
 ```text
-POST /v1/text
-      ↓
-text policy
-      ↓
-task prompt
-      ↓
-TextModelProvider
-      ├── mock
-      └── bedrock_luna
-      ↓
-TextResponse
+M05/enterprise-genai-assistant/
 ```
 
-No necesitas entrenar un modelo ni cargar modelos locales adicionales para completar esta práctica.
+## Parte A — Validación
 
-## Parte A — Contrato de entrada
+Ejecuta:
 
-El endpoint recibe una petición como:
+```bash
+pip install -r requirements.txt
+python -m pytest -q
+```
+
+Todos los tests normales utilizan `mock` o stubs; no hacen una llamada real a Bedrock.
+
+## Parte B — API con mock
+
+Arranca:
+
+```bash
+uvicorn src.main:app --reload --port 8080
+```
+
+Desde `/docs`, ejecuta `POST /v1/text` con:
 
 ```json
 {
   "task": "SUMMARIZE",
-  "text": "...",
+  "text": "El servicio estuvo degradado durante veinte minutos. No hubo pérdida de datos.",
   "provider": "mock",
-  "max_new_tokens": 120
+  "max_new_tokens": 80
 }
 ```
 
-Las tareas soportadas son:
+Inspecciona:
 
 ```text
-GENERATE
-SUMMARIZE
-TRANSLATE
-```
-
-Para `TRANSLATE` debes recibir también `target_language`.
-
-## Parte B — Policy antes del modelo
-
-Antes de seleccionar o invocar el provider utiliza `src/text_policy.py`.
-
-La aplicación debe rechazar, como mínimo:
-
-- entrada vacía;
-- input que supere el límite configurado;
-- material marcado como `CONFIDENTIAL:` o `RESTRICTED:`;
-- patrones deterministas de prompt injection definidos en el scaffold;
-- material con apariencia de secreto según las reglas del laboratorio.
-
-El provider nunca debe poder saltarse estos controles.
-
-## Parte C — TextModelProvider
-
-Completa `src/text_provider.py`.
-
-La ruta principal utiliza dos providers.
-
-### `mock`
-
-Ya está implementado y permite comprobar la aplicación sin inferencia ni coste.
-
-### `bedrock_luna`
-
-Completa `BedrockLunaProvider.generate(...)` utilizando Amazon Bedrock Runtime y la API Converse.
-
-Configuración:
-
-```text
-BEDROCK_TEXT_REGION=us-east-1
-BEDROCK_TEXT_MODEL_ID=us.openai.gpt-5.6-luna
-```
-
-La llamada debe enviar un mensaje `user` y `maxTokens` dentro de `inferenceConfig`.
-
-Convierte la respuesta de Bedrock al contrato común `GenerationResult`:
-
-```text
-text
 provider
 model
-input_tokens
-output_tokens
-finish_reason
-```
-
-No guardes credenciales en el repositorio.
-
-## Parte D — Selección del provider
-
-Completa `build_text_provider(...)` para soportar `mock` y `bedrock_luna`. Un nombre desconocido debe producir `ValueError`.
-
-## Parte E — Construcción de la tarea
-
-Completa `POST /v1/text`.
-
-Construye una instrucción distinta según la tarea:
-
-- `GENERATE`: utiliza el texto como instrucción;
-- `SUMMARIZE`: pide un resumen fiel y conciso;
-- `TRANSLATE`: pide traducir al idioma indicado y conservar identificadores técnicos.
-
-No necesitas implementar prompt engineering avanzado. Queremos una separación clara entre **tarea de aplicación** y **provider**.
-
-## Parte F — Límite de salida
-
-El cliente puede solicitar `max_new_tokens`, pero la aplicación debe imponer su máximo configurado:
-
-```python
-min(req.max_new_tokens, settings.max_new_tokens)
-```
-
-Esto conecta directamente con M05.P04: un parámetro de generación también es un control operacional.
-
-## Parte G — Respuesta estructurada
-
-Devuelve un `TextResponse` validado por Pydantic con:
-
-```text
-output
-provider
-model
-task
 input_tokens
 output_tokens
 finish_reason
@@ -142,54 +54,31 @@ request_id
 latency_ms
 ```
 
-Los metadatos de tokens conectan también con M05.P01: la aplicación debe observar cuánto contexto entra y cuánto texto sale.
+## Parte C — Límites y policy
 
-## Parte H — Tests
+1. Reduce `max_new_tokens`.
+2. Prueba un input vacío o demasiado grande.
+3. Prueba un texto con un patrón que la policy bloquee.
+4. Comprueba que el modelo no decide por sí mismo estas reglas.
 
-Ejecuta:
+## Parte D — Cambio de provider
 
-```bash
-python -m pytest -q
+Si el entorno tiene acceso a Bedrock, repite una petición con:
+
+```text
+provider=bedrock_luna
 ```
 
-Comprueba al menos:
+El endpoint y el modelo de respuesta no cambian. Solo cambia la implementación del provider.
 
-1. provider `mock`;
-2. provider desconocido;
-3. input demasiado grande;
-4. construcción del endpoint con `mock`;
-5. metadatos de la respuesta;
-6. límite de `max_new_tokens`;
-7. `bedrock_luna` mediante un stub/mock del cliente, sin llamada real.
+## Parte E — Conversación
 
-Los tests automatizados **no deben realizar llamadas reales a Bedrock**.
+Como ampliación, prueba `/v1/chat` con el mismo `conversation_id` en dos mensajes y observa el historial/truncation.
 
-## Prueba manual de integración
+## Preguntas
 
-Cuando los tests funcionen, cambia el provider a `bedrock_luna` y realiza una petición corta desde `/docs`.
-
-Comprueba que recibes contenido y metadatos de uso.
-
-## Ampliación
-
-El scaffold conserva componentes para continuar experimentando con conversación y modelos locales.
-
-Como ampliación puedes implementar:
-
-- `/v1/chat`;
-- historial en memoria;
-- `local_seq2seq` con FLAN-T5-small;
-- `local_chat` con SmolLM2 y `chat_template`.
-
-Estas extensiones no son necesarias para completar la ruta esencial del módulo.
-
-## Preguntas finales
-
-1. ¿Qué parte cambia al pasar de `mock` a `bedrock_luna`?
-2. ¿Qué partes de la aplicación permanecen iguales aunque cambie el provider?
-3. ¿Por qué la policy debe ejecutarse antes de llamar al modelo?
-4. ¿Por qué `max_new_tokens` no es solo una preferencia estética?
-5. ¿Por qué conviene devolver tokens, modelo, `request_id` y latencia junto al texto?
-6. ¿Qué falta para contestar preguntas utilizando documentación corporativa autorizada y trazable?
-
-La última pregunta conduce directamente a M06: **retrieval y RAG**.
+1. ¿Qué cambia al pasar de `mock` a `bedrock_luna`?
+2. ¿Qué permanece estable?
+3. ¿Por qué policy se ejecuta antes de inferencia?
+4. ¿Por qué `max_new_tokens` debe estar limitado por la aplicación?
+5. ¿Qué falta para responder con documentación corporativa autoritativa?

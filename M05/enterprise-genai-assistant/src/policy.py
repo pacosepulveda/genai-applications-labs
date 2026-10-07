@@ -27,7 +27,10 @@ _SECRET_PATTERNS = (
 
 
 def _matches_any(text: str, patterns: tuple[str, ...]) -> bool:
-    return any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns)
+    return any(
+        re.search(pattern, text, flags=re.IGNORECASE)
+        for pattern in patterns
+    )
 
 
 def evaluate_request(req: DraftRequest) -> PolicyDecision:
@@ -43,4 +46,7 @@ def evaluate_request(req: DraftRequest) -> PolicyDecision:
     if _matches_any(req.task, _SECRET_PATTERNS):
         return PolicyDecision(False, "sensitive_information")
 
-    return PolicyDecision(True, warnings=["La salida requiere revisión humana."])
+    return PolicyDecision(
+        True,
+        warnings=["La salida requiere revisión humana."],
+    )

@@ -1,14 +1,11 @@
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 class Settings(BaseSettings):
-    # M03
     router_backend: str = Field(default="classic", validation_alias="ROUTER_BACKEND")
     router_threshold: float = Field(default=0.70, validation_alias="ROUTER_THRESHOLD")
     router_model_version: str = Field(default="m03", validation_alias="ROUTER_MODEL_VERSION")
 
-    # M04
     visual_provider: str = Field(default="mock", validation_alias="VISUAL_PROVIDER")
     bedrock_image_region: str = Field(default="us-west-2", validation_alias="BEDROCK_IMAGE_REGION")
     bedrock_image_model_id: str = Field(
@@ -16,7 +13,6 @@ class Settings(BaseSettings):
         validation_alias="BEDROCK_IMAGE_MODEL_ID",
     )
 
-    # M05
     text_provider: str = Field(default="mock", validation_alias="TEXT_PROVIDER")
     max_input_chars: int = Field(default=12000, validation_alias="MAX_INPUT_CHARS")
     max_new_tokens: int = Field(default=256, validation_alias="MAX_NEW_TOKENS")
@@ -33,16 +29,12 @@ class Settings(BaseSettings):
         default="HuggingFaceTB/SmolLM2-135M-Instruct",
         validation_alias="CHAT_MODEL_ID",
     )
-    bedrock_text_region: str = Field(
-        default="us-east-1",
-        validation_alias="BEDROCK_TEXT_REGION",
-    )
+    bedrock_text_region: str = Field(default="us-east-1", validation_alias="BEDROCK_TEXT_REGION")
     bedrock_text_model_id: str = Field(
         default="us.openai.gpt-5.6-luna",
         validation_alias="BEDROCK_TEXT_MODEL_ID",
     )
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
-
 
 settings = Settings()

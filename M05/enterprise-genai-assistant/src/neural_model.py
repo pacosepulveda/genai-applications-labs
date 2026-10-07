@@ -1,4 +1,3 @@
-import torch
 from torch import nn
 
 
@@ -10,6 +9,7 @@ class NeuralIntentMLP(nn.Module):
         hidden_dim: int = 128,
     ):
         super().__init__()
+
         self.network = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
             nn.ReLU(),

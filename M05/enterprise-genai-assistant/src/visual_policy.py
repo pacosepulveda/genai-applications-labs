@@ -7,11 +7,17 @@ class VisualPolicyDecision:
     reason: str | None = None
 
 
-ALLOWED_PROVIDERS = {"mock", "local_gan", "bedrock"}
+ALLOWED_PROVIDERS = {"mock", "bedrock"}
 
+# Controles educativos deliberadamente simples.
 BLOCKED_PATTERNS = [
-    # TODO heredado de M04.P06:
-    # conserva las expresiones simples implementadas en tu versión v0.4.
+    "suplanta a una persona real",
+    "hazte pasar por una persona real",
+    "impersonate a real person",
+    "genera credenciales de acceso",
+    "generate access credentials",
+    "documento oficial falso",
+    "fake official document",
 ]
 
 
@@ -23,6 +29,7 @@ def evaluate_visual_request(prompt: str, provider: str) -> VisualPolicyDecision:
         return VisualPolicyDecision(False, "unknown_provider")
 
     lower = prompt.lower()
+
     for pattern in BLOCKED_PATTERNS:
         if pattern in lower:
             return VisualPolicyDecision(False, "visual_policy")

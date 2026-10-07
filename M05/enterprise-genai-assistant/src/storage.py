@@ -14,12 +14,22 @@ class ArtifactStore:
         metadata_path = self.root / f"{artifact_id}.json"
 
         image.save(image_path)
+
         metadata_path.write_text(
-            json.dumps(metadata, indent=2, ensure_ascii=False),
+            json.dumps(
+                metadata,
+                indent=2,
+                ensure_ascii=False,
+            ),
             encoding="utf-8",
         )
+
         return image_path, metadata_path
 
     def load_metadata(self, artifact_id: str) -> dict:
         path = self.root / f"{artifact_id}.json"
+
+        if not path.exists():
+            raise FileNotFoundError(path)
+
         return json.loads(path.read_text(encoding="utf-8"))

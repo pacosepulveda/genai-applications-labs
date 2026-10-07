@@ -1,11 +1,21 @@
 # Módulo 5 — NLP Generativo
 
-## Objetivos
+## Objetivo
 
-El módulo conecta el funcionamiento básico de un modelo de lenguaje con su uso dentro de una aplicación:
+M05 conecta el funcionamiento de un modelo de lenguaje con su integración en una aplicación:
 
 ```text
-texto -> tokens + contexto -> Transformer -> logits -> decoding -> texto -> aplicación
+texto -> tokens/contexto -> Transformer -> logits -> decoding -> aplicación
+```
+
+## Formato de los laboratorios
+
+Los notebooks y scripts están **completamente implementados**. No es necesario copiar código ni rellenar `TODOs`.
+
+El trabajo práctico sigue este patrón:
+
+```text
+ejecutar -> inspeccionar -> modificar -> comparar -> explicar
 ```
 
 ## Ruta esencial de clase
@@ -14,16 +24,16 @@ texto -> tokens + contexto -> Transformer -> logits -> decoding -> texto -> apli
 M05.P01 -> M05.P04 -> M05.P06
 ```
 
-- **M05.P01** — tokens, identificadores técnicos, truncation y presupuesto de contexto.
-- **M05.P04** — logits, greedy, temperature, top-p y `max_new_tokens`.
-- **M05.P06** — policy, provider abstraction, Bedrock Luna y respuesta estructurada.
+- **P01** — tokenización, truncation y presupuesto de contexto.
+- **P04** — logits, greedy, temperature, top-p y `max_new_tokens`.
+- **P06** — policy, provider abstraction, Bedrock Luna y contrato de aplicación.
 
 ## Ampliación
 
-- `M05.P02` — embeddings contextuales.
-- `M05.P03` — encoder-only, decoder-only y encoder-decoder.
-- `M05.P05` — tareas NLP y evaluación más extensa.
-- ampliaciones de P06 — conversación y providers locales.
+- **P02** — embeddings contextuales.
+- **P03** — familias Transformer.
+- **P05** — tareas NLP y evaluación.
+- `/v1/chat` y providers locales de P06.
 
 ## Entorno
 
@@ -31,19 +41,14 @@ M05.P01 -> M05.P04 -> M05.P06
 SageMaker Space
 ml.t3.large
 CPU
-sin GPU
 ```
 
-Los modelos locales pequeños se utilizan para comprender mecanismos. P06 utiliza también un provider gestionado real mediante Amazon Bedrock y el SageMaker Execution Role, sin almacenar API keys en el repositorio.
+Los modelos locales pequeños se utilizan para observar mecanismos. P06 puede utilizar Amazon Bedrock mediante el rol del SageMaker Space, sin guardar claves en el repositorio.
 
 ## Material
 
-- `M05_P01_Enunciado.md` — esencial
-- `M05_P02_Enunciado.md` — ampliación
-- `M05_P03_Enunciado.md` — ampliación
-- `M05_P04_Enunciado.md` — esencial
-- `M05_P05_Enunciado.md` — ampliación
-- `M05_P06_Enunciado.md` — esencial
-- `notebooks/`
+- `M05_P01_Enunciado.md` … `M05_P06_Enunciado.md`
+- `notebooks/` — notebooks ejecutables
+- `scripts/` — equivalentes `.py` ejecutables
 - `assets/`
-- `enterprise-genai-assistant/`
+- `enterprise-genai-assistant/` — aplicación v0.5 completa

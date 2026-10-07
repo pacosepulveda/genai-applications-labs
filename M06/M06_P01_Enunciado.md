@@ -1,13 +1,11 @@
-# M06.P01 — LangChain moderno: Runnables, prompts y structured output
+# M06.P01 — Runnables, prompt y structured output
 
 **Modalidad:** individual o parejas  
-**Entregable:** notebook con pipeline compuesto, batch y salida validada
+**Entregable:** notebook con un pipeline compuesto y una salida Pydantic
 
 ## Objetivo
 
-Comprenderás la unidad de composición actual de LangChain: `Runnable`.
-
-Primero construirás la chain sin depender del modelo remoto para inspeccionar cada contrato. Después sustituirás el mock por **GPT-5.6 Luna en Amazon Bedrock**.
+Comprobarás que podemos cambiar el componente generativo sin cambiar el contrato que recibe el backend.
 
 ## Tareas
 
@@ -17,44 +15,64 @@ Abre:
 notebooks/M06_P01_Runnables_Structured_Output.ipynb
 ```
 
-### Parte A — Prompt template
+### Parte A — Prompt
 
-Construye un `ChatPromptTemplate` para analizar un incidente con `incident_id`, `service` y `summary`. Inspecciona el objeto que produce `prompt.invoke(...)`.
-
-### Parte B — RunnableLambda
-
-Crea un componente determinista que reciba el prompt y produzca un JSON de demostración:
+Inspecciona el `ChatPromptTemplate` preparado para un incidente con:
 
 ```text
-input -> prompt -> runnable -> parser
+incident_id
+service
+summary
 ```
 
-### Parte C — PydanticOutputParser
+Ejecuta `prompt.invoke(...)` y observa el tipo y el contenido producido.
 
-Define `IncidentAnalysis` con `incident_id`, `category` y `requires_review`. Construye `prompt | mock_model | parser` y ejecuta `invoke()`.
+### Parte B — Runnable determinista
 
-### Parte D — Batch
+Completa `deterministic_demo(...)` para devolver un JSON compatible con:
 
-Ejecuta la chain sobre varios incidentes mediante `batch()`.
+```python
+class IncidentAnalysis(BaseModel):
+    incident_id: str
+    category: str
+    requires_review: bool
+```
 
-### Parte E — RunnableParallel
-
-Con el mismo input calcula en paralelo longitud del resumen, presencia de `balanceador` y análisis estructurado.
-
-### Parte F — GPT-5.6 Luna
-
-Crea el chat model con `ChatBedrockConverse`:
+Compón:
 
 ```text
-region: us-east-1
+prompt -> RunnableLambda -> PydanticOutputParser
+```
+
+y ejecuta `invoke()`.
+
+### Parte C — GPT-5.6 Luna
+
+Crea `ChatBedrockConverse` con:
+
+```text
 model: us.openai.gpt-5.6-luna
+region: us-east-1
 ```
 
-Utiliza `with_structured_output(IncidentAnalysis)`. El resultado consumido por la lógica posterior debe seguir siendo un `IncidentAnalysis`.
+Utiliza:
+
+```python
+model.with_structured_output(IncidentAnalysis)
+```
+
+El resultado final debe seguir siendo un `IncidentAnalysis`.
+
+## Ampliación
+
+Si dispones de tiempo:
+
+- `batch()`;
+- `RunnableParallel`;
+- `ainvoke()`.
 
 ## Preguntas
 
-1. ¿Qué ventaja tiene que los componentes compartan la interfaz `Runnable`?
-2. ¿Por qué `prompt | model | parser` describe contratos entre tipos?
-3. ¿Qué diferencia hay entre schema validation y validación de negocio?
-4. ¿Cuándo utilizarías `batch()` y cuándo `ainvoke()`?
+1. ¿Qué ventaja tiene mantener un contrato Pydantic estable?
+2. ¿Qué responsabilidad resuelve el parser/schema y cuál no?
+3. ¿Qué ha cambiado al sustituir el mock por Luna?

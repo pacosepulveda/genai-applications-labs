@@ -2,91 +2,69 @@
 
 ## Objetivo
 
-En M06 dejamos de estudiar el modelo de forma aislada y construimos una aplicación alrededor de él.
+M06 convierte una llamada a modelo en un sistema:
 
 ```text
-Runnable + prompt + structured output
-              ↓
-documents + metadata + chunking
-              ↓
-embeddings + vector store + retriever
-              ↓
-retrieval evaluation
-              ↓
-two-step RAG + citations
-              ↓
-tools + create_agent + state
-              ↓
-Enterprise GenAI Assistant v0.6
+prompt + contrato
+      ↓
+retrieval
+      ↓
+evaluación
+      ↓
+RAG con fuentes
+      ↓
+tools / agent
+      ↓
+integración
 ```
 
-## Entorno de laboratorio
+## Ruta esencial de clase
 
-Todo se ejecuta desde el SageMaker Space facilitado por el instructor:
-
-- `ml.t3.large`;
-- CPU, sin GPU;
-- navegador únicamente;
-- SageMaker en `us-east-1`.
-
-### Modelo generativo
-
-Las prácticas que necesitan generación, structured output o tool calling utilizan:
-
-```text
-GPT-5.6 Luna
-Amazon Bedrock
-region: us-east-1
-model/inference profile: us.openai.gpt-5.6-luna
-```
-
-La integración LangChain utiliza `ChatBedrockConverse`.
-
-### Embeddings
-
-El retrieval utiliza un modelo local de embeddings precargado en el entorno:
-
-```text
-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
-```
-
-Se ejecuta en CPU. No requiere un segundo modelo Bedrock ni permisos adicionales.
-
-El notebook P02 incluye además una alternativa didáctica local para distinguir claramente:
-
-```text
-embedding model != vector store != retriever
-```
-
-## Orden recomendado
+Se mantienen los **seis laboratorios**, pero cada uno se limita a una evidencia concreta:
 
 ```text
 M06.P01 -> M06.P02 -> M06.P03 -> M06.P04 -> M06.P05 -> M06.P06
 ```
 
-## API moderna
+- **P01** — prompt, Runnable y structured output.
+- **P02** — documentos, metadata, embeddings y retriever.
+- **P03** — Hit Rate@k y selección básica de `k`.
+- **P04** — two-step RAG, citas y no-answer.
+- **P05** — tools read-only y `create_agent`.
+- **P06** — integración DIRECT / RAG / AGENT.
 
-Los laboratorios trabajan con:
+Las secciones marcadas como **Ampliación** permiten profundizar sin ser necesarias para completar la ruta esencial.
 
-- `Runnable`;
-- `ChatBedrockConverse`;
-- `create_agent`;
-- `InMemorySaver`;
-- structured output;
-- retrievers actuales.
-
-No utilizan `LLMChain`, `ConversationBufferMemory` ni `AgentExecutor` como patrón principal.
-
-## Continuidad
-
-`Enterprise GenAI Assistant v0.6` **extiende v0.5**. No elimina las capacidades anteriores.
-
-A los endpoints ya construidos se añaden:
+## Entorno
 
 ```text
-POST /v1/ask
-POST /v1/operations
+SageMaker Space
+ml.t3.large
+CPU
+us-east-1
 ```
+
+### Modelo generativo
+
+```text
+GPT-5.6 Luna
+Amazon Bedrock
+us.openai.gpt-5.6-luna
+```
+
+La integración usa `ChatBedrockConverse`.
+
+### Embeddings
+
+```text
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+```
+
+Se ejecutan localmente en CPU.
+
+## API moderna
+
+Los laboratorios utilizan `Runnable`, structured output, retrievers, `create_agent` y `InMemorySaver`. No se utilizan APIs legacy como patrón principal.
 
 ## Material
 

@@ -1,57 +1,102 @@
-# M06.P02 — De documentos a retriever: metadata, chunking y vector store
+# M06.P02 — De documentos a retriever
 
 **Modalidad:** individual o parejas  
-**Entregable:** índice en memoria y análisis comparativo de estrategias de chunking
+**Entregable:** retriever en memoria con metadata y filtro de vigencia
 
 ## Objetivo
 
-Construirás la parte offline de un RAG:
+Construirás el pipeline mínimo:
 
 ```text
-Markdown -> Document -> metadata -> chunks -> embeddings -> InMemoryVectorStore -> retriever
+Markdown -> Document -> chunks -> embeddings -> vector store -> retrieval
 ```
 
 ## Dataset
 
-`assets/knowledge_base/` incluye documentación vigente y una versión obsoleta.
+Utiliza:
+
+```text
+assets/knowledge_base/
+```
+
+El corpus contiene una versión vigente y otra obsoleta de `PROC-017`.
 
 ## Tareas
 
-Abre `notebooks/M06_P02_Ingestion_VectorStore.ipynb`.
+Abre:
 
-### Parte A — Carga y metadata
+```text
+notebooks/M06_P02_Ingestion_VectorStore.ipynb
+```
 
-Extrae `source_id`, `version`, `status`, `department`, `classification` y `effective_date`.
+### Parte A — Document y metadata
 
-### Parte B — Inspección
+Carga los Markdown y conserva al menos:
 
-Comprueba documentos, versiones y cuál está `OBSOLETE`.
+```text
+source_id
+version
+status
+classification
+```
 
-### Parte C — Chunking
+Muestra qué versión está marcada como `OBSOLETE`.
 
-Compara dos configuraciones de `RecursiveCharacterTextSplitter`, registra número de chunks, longitud media y máxima, y conserva metadata del documento padre.
+### Parte B — Chunking
 
-### Parte D — Embeddings locales
+Utiliza una única configuración:
 
-Utiliza el modelo precargado `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` mediante `HuggingFaceEmbeddings`, en CPU. No se utiliza Bedrock para embeddings.
+```text
+chunk_size=500
+chunk_overlap=80
+```
 
-Incluye además una representación local didáctica basada en TF-IDF o hashing para entender `vector store != embedding model`.
+Comprueba que la metadata del documento padre se mantiene en los chunks.
 
-### Parte E — InMemoryVectorStore
+### Parte C — Embeddings y vector store
 
-Crea el store y añade los chunks.
+Utiliza:
 
-### Parte F — Retrieval
+```text
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+```
 
-Prueba preguntas sobre acceso privilegiado, incidentes P1, RPO de Tier-1 y `/api/v2/status`. Muestra `source_id`, versión, status, fragmento y score.
+con CPU y `InMemoryVectorStore`.
 
-### Parte G — Vigencia
+### Parte D — Retrieval observable
 
-Demuestra que similitud puede recuperar `PROC-017 v2.1` y exclúyelo antes de construir contexto.
+Prueba estas dos consultas:
+
+```text
+¿Cuánto dura un acceso privilegiado?
+¿Cuándo se envían actualizaciones de un P1?
+```
+
+Muestra para cada resultado:
+
+```text
+source_id
+version
+status
+fragmento
+```
+
+### Parte E — Vigencia
+
+Implementa un filtro que impida utilizar documentos con:
+
+```text
+status=OBSOLETE
+```
+
+Comprueba que `PROC-017 v2.1` nunca entra en el contexto final.
+
+## Ampliación
+
+Compara otro tamaño de chunk o analiza `/api/v2/status`.
 
 ## Preguntas
 
-1. ¿Por qué metadata es parte funcional del RAG?
-2. ¿Qué trade-off existe entre chunks pequeños y grandes?
-3. ¿Por qué cambiar el embedding model puede requerir reindexar?
-4. ¿Por qué una versión obsoleta no debe resolverse con una instrucción al LLM?
+1. ¿Por qué metadata forma parte del comportamiento del RAG?
+2. ¿Por qué similitud no equivale a vigencia?
+3. ¿Por qué cambiar el embedding model suele requerir reindexar?

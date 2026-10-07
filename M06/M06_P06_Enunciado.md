@@ -1,63 +1,86 @@
-# M06.P06 — Enterprise GenAI Assistant v0.6: RAG obligatorio y agente controlado
+# M06.P06 — Enterprise GenAI Assistant v0.6: integración guiada
 
 **Modalidad:** individual o parejas  
-**Entregable:** aplicación integrada con RAG, citations, tools read-only, state y tests
+**Entregable:** routing DIRECT/RAG/AGENT y pruebas críticas
 
 ## Objetivo
 
-Extenderás **Enterprise GenAI Assistant v0.5**. La v0.6 no sustituye capacidades anteriores.
+Integrarás las piezas ya construidas. **No vuelvas a implementar desde cero P02, P04 o P05.**
 
-Debe conservar `/v1/draft`, `/v1/images`, `/v1/text` y `/v1/chat`, y añadir `/v1/ask` y `/v1/operations`.
-
-## Arquitectura
+La arquitectura es:
 
 ```text
 request
   ↓
-policy
-  ↓
-task router
-  ├── DIRECT -> TextModelProvider -> GPT-5.6 Luna
-  ├── RAG    -> retriever -> Luna -> citation validator
-  └── AGENT  -> create_agent(Luna) -> read-only tools
+policy / routing
+  ├── DIRECT
+  ├── RAG
+  └── AGENT
 ```
 
-### Parte A — Knowledge service
+## Parte A — Reutilización
 
-Completa `src/knowledge.py`: cargar, excluir obsoletos, dividir, indexar, recuperar y devolver metadata.
+Lleva al scaffold de `enterprise-genai-assistant/` las implementaciones que ya tienes de:
 
-### Parte B — RAG service
+- knowledge/retrieval;
+- RAG + citation validator;
+- tools/agent.
 
-Completa `src/rag.py`. Debe producir `RAGAnswer` y validar citas.
+Los endpoints de M05 se conservan; no son el foco de esta práctica.
 
-### Parte C — Regla obligatoria
+## Parte B — Regla de routing
 
-`CORPORATE_KNOWLEDGE` o `requires_authoritative_sources=true` siempre seleccionan RAG. Si no hay evidencia, `NO_EVIDENCE`. Nunca fallback DIRECT.
+Debe cumplirse:
 
-### Parte D — Agent
+```text
+requires_authoritative_sources=true -> RAG
+CORPORATE_KNOWLEDGE              -> RAG
+```
 
-`OPERATIONS_ASSIST` puede utilizar únicamente `search_knowledge_base`, `get_incident` y `calculate_duration_minutes`. No añadas tools de escritura.
+La decisión no se delega al modelo.
 
-### Parte E — Thread state
+## Parte C — `/v1/ask`
 
-`conversation_id` se mapea a `thread_id` del checkpointer.
+Completa el flujo:
 
-### Parte F — API
+```text
+DIRECT -> provider textual
+RAG    -> RAGService
+```
 
-Completa `/v1/ask`, `/v1/operations` y conserva los endpoints heredados.
+Si RAG devuelve evidencia insuficiente:
 
-### Parte G — Observabilidad mínima
+```text
+NO_EVIDENCE
+```
 
-Registra, sin prompts completos: `request_id`, `mode`, `retrieved_source_ids`, `model/provider`, latencia y `citation_validation`.
+Nunca hagas fallback silencioso a DIRECT.
 
-### Parte H — Tests
+## Parte D — `/v1/operations`
 
-Incluye pruebas para documento obsoleto excluido; `PROC-017` devuelve 8 horas y no 24; corporate knowledge nunca usa direct fallback; citas inventadas rechazadas; no-evidence; tools read-only; threads aislados; provider sustituible sin cambiar policy; y endpoints de v0.5 conservados.
+Conecta el `AgentService` de P05.
+
+La práctica utiliza únicamente tools read-only.
+
+## Parte E — Pruebas críticas
+
+Comprueba como mínimo:
+
+1. `PROC-017 v2.1 OBSOLETE` no se utiliza;
+2. `PROC-017` vigente indica **8 horas**, no 24;
+3. una cita inventada se rechaza;
+4. corporate knowledge no hace fallback DIRECT;
+5. el caso sin evidencia devuelve no-answer.
+
+## Ampliación
+
+- aislamiento de threads;
+- observabilidad detallada;
+- regresión de todos los endpoints de v0.5.
 
 ## Preguntas finales
 
-1. ¿Qué partes son LangChain y cuáles lógica de dominio?
-2. ¿Qué cambia con un vector store persistente?
-3. ¿Qué cambia al sustituir el modelo?
-4. ¿Qué componentes escalarían por separado?
-5. ¿Qué riesgos quedan pendientes antes de producción?
+1. ¿Qué responsabilidad pertenece a policy y cuál al modelo?
+2. ¿Qué cambiaría al sustituir el vector store?
+3. ¿Qué cambiaría al sustituir Luna?
+4. ¿Por qué DIRECT, RAG y AGENT no deberían convertirse en un único flujo opaco?

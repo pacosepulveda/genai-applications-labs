@@ -1,48 +1,75 @@
-# M06.P05 — Tools, create_agent y estado por thread
+# M06.P05 — Tools y create_agent
 
 **Modalidad:** individual o parejas  
-**Entregable:** tools probadas de forma independiente, agente read-only y demostración de short-term memory
+**Entregable:** dos tools read-only probadas y un agente que las combina
 
 ## Objetivo
 
-Construirás un agente solo después de disponer de tools deterministas y probadas: `search_knowledge_base`, `get_incident` y `calculate_duration_minutes`. Todas son read-only.
+Construirás un agente **después** de probar sus funciones de forma determinista.
 
 ## Tareas
 
-Abre `notebooks/M06_P05_Tools_Agent_Memory.ipynb`.
+Abre:
 
-### Parte A — Tools
+```text
+notebooks/M06_P05_Tools_Agent_Memory.ipynb
+```
 
-Implementa las tres funciones con `@tool`, type hints y docstrings precisos.
+### Parte A — Dos funciones
 
-### Parte B — Test manual
+Implementa:
 
-Ejecuta cada tool directamente antes del agente. Comprueba `INC-2048` y calcula su duración.
+```text
+get_incident
+calculate_duration_minutes
+```
 
-### Parte C — create_agent + Luna
+Ambas son read-only.
 
-Crea el modelo con `ChatBedrockConverse` usando `us.openai.gpt-5.6-luna` en `us-east-1`, y después utiliza `create_agent(...)` con las tres tools.
+### Parte B — Prueba directa
 
-### Parte D — Pregunta multi-tool
+Antes de crear el agente:
 
-Analiza `INC-2048`, calcula su duración y consulta qué requisitos de comunicación P1 son aplicables. Inspecciona las tool calls.
+1. recupera `INC-2048`;
+2. calcula su duración.
 
-### Parte E — Short-term memory
+Comprueba el resultado manualmente.
 
-Añade `InMemorySaver()` y utiliza `thread_id="thread-a"`. Primero indica `Estamos analizando INC-2048.` y después pregunta `¿Cuánto duró?`.
+### Parte C — Tool
 
-### Parte F — Aislamiento
+Convierte ambas funciones en tools con:
 
-Repite la segunda pregunta con `thread_id="thread-b"` y comprueba que no comparte estado.
+- nombre claro;
+- type hints;
+- docstring preciso.
 
-### Parte G — Límites
+### Parte D — Agent
 
-Discute límites de iteraciones, timeout, autorización y aprobación humana. No añadas tools destructivas.
+Crea GPT-5.6 Luna con `ChatBedrockConverse` y utiliza:
+
+```python
+create_agent(...)
+```
+
+Pregunta:
+
+```text
+Consulta INC-2048 y dime cuánto duró el incidente.
+```
+
+Inspecciona qué tools utiliza.
+
+## Ampliación guiada
+
+Si queda tiempo:
+
+- añade `search_knowledge_base`;
+- añade `InMemorySaver`;
+- demuestra `thread-a` frente a `thread-b`.
 
 ## Preguntas
 
-1. ¿Quién ejecuta realmente una tool?
-2. ¿Por qué probar la tool antes de dársela al agente?
-3. ¿Cuándo sería mejor un workflow determinista?
-4. ¿Qué persiste `InMemorySaver` al reiniciar el proceso?
-5. ¿Por qué short-term memory no es RAG?
+1. ¿Quién ejecuta realmente la tool?
+2. ¿Por qué probarla antes de entregársela al agent?
+3. ¿Cuándo preferirías un workflow determinista?
+4. ¿Por qué las tools del laboratorio son read-only?

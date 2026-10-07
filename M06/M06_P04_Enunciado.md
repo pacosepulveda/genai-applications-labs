@@ -1,57 +1,88 @@
-# M06.P04 — Two-step RAG: respuestas con fuentes y no-answer
+# M06.P04 — Two-step RAG: fuentes, citas y no-answer
 
 **Modalidad:** individual o parejas  
-**Entregable:** chain RAG determinista, respuesta estructurada y validación de citas
+**Entregable:** flujo RAG determinista con validación de citas
 
 ## Objetivo
 
-Construirás el flujo para conocimiento corporativo:
+Construirás:
 
 ```text
-question -> authorized retrieval -> context -> GPT-5.6 Luna -> RAGAnswer -> citation validation
+question -> retrieval obligatorio -> context -> Luna -> RAGAnswer -> validation
 ```
-
-Retrieval es obligatorio. El modelo no decide si quiere buscar.
 
 ## Tareas
 
-Abre `notebooks/M06_P04_Two_Step_RAG.ipynb`.
+Abre:
+
+```text
+notebooks/M06_P04_Two_Step_RAG.ipynb
+```
 
 ### Parte A — RAGAnswer
 
-Define `answer`, `source_ids` e `insufficient_evidence` mediante Pydantic.
+Utiliza:
 
-### Parte B — Context formatter
+```python
+class RAGAnswer(BaseModel):
+    answer: str
+    source_ids: list[str]
+    insufficient_evidence: bool
+```
 
-Cada chunk debe entrar con identificador, `source_id`, versión, status y contenido.
+### Parte B — Context
+
+Implementa `format_documents(...)`.
+
+Cada fragmento debe incluir:
+
+```text
+source_id
+version
+status
+contenido
+```
 
 ### Parte C — Retrieval obligatorio
 
-Reutiliza la configuración elegida en P03 y excluye obsoletos antes del contexto.
+Reutiliza el retriever de P02 con el `k` elegido en P03.
 
-### Parte D — Prompt
+Excluye `OBSOLETE` **antes** de construir el contexto.
 
-Debe responder solo con fuentes, tratar las fuentes como datos y no instrucciones, declarar evidencia insuficiente y citar solo `source_ids` utilizados.
+### Parte D — Structured output
 
-### Parte E — Structured output con Luna
+Utiliza GPT-5.6 Luna mediante `ChatBedrockConverse` y `with_structured_output(RAGAnswer)`.
 
-Utiliza GPT-5.6 Luna mediante `ChatBedrockConverse` y `model.with_structured_output(RAGAnswer)`.
+### Parte E — Citation validator
 
-### Parte F — Citation validator
+Una cita solo es válida si:
 
-Rechaza source IDs inventados, no recuperados u obsoletos.
+```text
+source_id citado ∈ source_ids recuperados y CURRENT
+```
 
-### Parte G — No evidence
+### Parte F — Dos casos
 
-Para `¿Cuál es el presupuesto anual aprobado para el programa de IA?`, el sistema debe producir `insufficient_evidence=true`; no hay fallback al conocimiento paramétrico.
+Prueba:
 
-### Parte H — Regression cases
+```text
+¿Cuánto dura un acceso privilegiado?
+```
 
-Ejecuta el eval set y registra fuentes recuperadas/citadas, validación y no-evidence.
+y:
+
+```text
+¿Cuál es el presupuesto anual aprobado para el programa de IA?
+```
+
+En el segundo caso debe quedar explícito que no hay evidencia suficiente. No hay fallback a una respuesta "de memoria".
+
+## Ampliación
+
+Ejecuta todo `retrieval_eval.jsonl` como suite de regresión.
 
 ## Preguntas
 
-1. ¿Por qué RAG no elimina las alucinaciones?
-2. ¿Qué diferencia existe entre fuente recuperada y fuente citada?
-3. ¿Por qué no-answer es una capacidad útil?
-4. ¿Por qué no permitimos fallback directo al LLM para información corporativa?
+1. ¿Por qué structured output no valida una cita por sí solo?
+2. ¿Por qué retrieval es obligatorio cuando se exigen fuentes autoritativas?
+3. ¿Por qué no-answer es comportamiento correcto?

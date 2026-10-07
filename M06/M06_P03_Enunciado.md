@@ -1,17 +1,27 @@
-# M06.P03 — Retrieval evaluation: medir antes de generar
+# M06.P03 — Retrieval evaluation mínima
 
 **Modalidad:** individual o parejas  
-**Entregable:** benchmark del retriever y decisión de configuración
+**Entregable:** Hit Rate@k y decisión entre dos configuraciones
 
 ## Objetivo
 
-Evaluarás el sistema de retrieval **sin utilizar todavía un LLM**.
+Medirás el retriever **antes de añadir generación**.
 
-El dataset de evaluación está en:
+## Dataset
 
 ```text
 assets/retrieval_eval.jsonl
 ```
+
+Para la ruta esencial utiliza:
+
+```text
+R01
+R03
+R09
+```
+
+`R09` es un caso `NO_EVIDENCE`.
 
 ## Tareas
 
@@ -21,17 +31,7 @@ Abre:
 notebooks/M06_P03_Retrieval_Evaluation.ipynb
 ```
 
-### Parte A — Eval set
-
-Carga cada caso:
-
-```text
-question
-expected_source_ids
-expected_status
-```
-
-### Parte B — Hit Rate@k
+### Parte A — Hit Rate@k
 
 Implementa:
 
@@ -39,62 +39,37 @@ Implementa:
 hit_rate_at_k(...)
 ```
 
-Un caso es hit cuando al menos una fuente esperada aparece en top-k.
+Un caso es hit si alguna fuente esperada aparece en top-k.
 
-Los casos `NO_EVIDENCE` deben evaluarse aparte.
+### Parte B — k=2 frente a k=4
 
-### Parte C — MRR
-
-Implementa Mean Reciprocal Rank usando la posición de la primera fuente relevante.
-
-### Parte D — Configuraciones
-
-Compara al menos:
+Ejecuta los casos con:
 
 ```text
-k = 1
-k = 2
-k = 4
+k=2
+k=4
 ```
 
-y dos estrategias:
+y compara el resultado.
 
-```text
-similarity
-MMR
-```
+### Parte C — NO_EVIDENCE
 
-### Parte E — Vigencia
+Para `R09`, explica por qué recuperar el documento "menos malo" no debe contarse automáticamente como éxito.
 
-Repite la evaluación:
+### Parte D — Decisión
 
-1. sin filtrar documentos obsoletos;
-2. excluyendo `status=OBSOLETE`.
+Elige el `k` que utilizarás en P04 y justifica la decisión considerando:
 
-Comprueba el efecto sobre `PROC-017`.
+- cobertura;
+- ruido;
+- número de chunks enviados al modelo.
 
-### Parte F — Exact IDs
+## Ampliación
 
-Analiza el caso:
-
-```text
-/api/v2/status
-```
-
-y explica por qué un sistema híbrido lexical + semantic podría resultar útil.
-
-### Parte G — Selección
-
-Elige una configuración para P04 y justifica usando:
-
-- Hit Rate@k;
-- MRR;
-- coste de contexto;
-- ruido recuperado.
+Implementa MRR, compara MMR o amplía el benchmark al dataset completo.
 
 ## Preguntas
 
-1. ¿Por qué evaluar solo la respuesta final oculta fallos del retriever?
-2. ¿Qué mide MRR que no muestra Hit Rate?
-3. ¿Por qué `k` alto no es siempre mejor?
-4. ¿Cuándo añadirías búsqueda lexical o reranking?
+1. ¿Por qué separar retrieval eval de generation eval?
+2. ¿Por qué `k` alto no es siempre mejor?
+3. ¿Qué significa realmente `NO_EVIDENCE`?

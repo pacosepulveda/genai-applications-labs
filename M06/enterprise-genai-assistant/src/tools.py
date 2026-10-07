@@ -19,9 +19,26 @@ def duration_minutes(start_iso: str, end_iso: str) -> int:
     return int((end - start).total_seconds() // 60)
 
 def build_agent_tools(knowledge, incidents_file: Path):
-    # TODO M06.P06:
-    # crea @tool wrappers read-only para:
-    # - search_knowledge_base
-    # - get_incident
-    # - calculate_duration_minutes
-    raise NotImplementedError
+    from langchain.tools import tool
+    incidents = load_incidents(incidents_file)
+
+    @tool
+    def search_knowledge_base(query: str) -> str:
+        """Busca procedimientos corporativos vigentes en modo solo lectura."""
+        docs = knowledge.retrieve(query)
+        return "\n\n".join(
+            f"{d.metadata.get('source_id')} v{d.metadata.get('version')}: {d.page_content}"
+            for d in docs
+        )
+
+    @tool
+    def get_incident(incident_id: str) -> dict:
+        """Obtiene un incidente por identificador exacto INC-* en modo solo lectura."""
+        return get_incident_record(incidents, incident_id)
+
+    @tool
+    def calculate_duration_minutes(start_iso: str, end_iso: str) -> int:
+        """Calcula minutos entre dos timestamps ISO-8601."""
+        return duration_minutes(start_iso, end_iso)
+
+    return [search_knowledge_base, get_incident, calculate_duration_minutes]

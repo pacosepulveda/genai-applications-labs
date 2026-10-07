@@ -1,78 +1,27 @@
 # M06.P01 — Runnables, prompt y structured output
 
-**Modalidad:** individual o parejas  
-**Entregable:** notebook con un pipeline compuesto y una salida Pydantic
+**Ruta de clase** · notebook completamente implementado
 
 ## Objetivo
 
-Comprobarás que podemos cambiar el componente generativo sin cambiar el contrato que recibe el backend.
+Comprobar que podemos cambiar el componente generativo sin cambiar el contrato que recibe el backend.
 
-## Tareas
+Abre `notebooks/M06_P01_Runnables_Structured_Output.ipynb` y ejecútalo de arriba abajo.
 
-Abre:
+## Experimentos
 
-```text
-notebooks/M06_P01_Runnables_Structured_Output.ipynb
-```
-
-### Parte A — Prompt
-
-Inspecciona el `ChatPromptTemplate` preparado para un incidente con:
-
-```text
-incident_id
-service
-summary
-```
-
-Ejecuta `prompt.invoke(...)` y observa el tipo y el contenido producido.
-
-### Parte B — Runnable determinista
-
-Completa `deterministic_demo(...)` para devolver un JSON compatible con:
-
-```python
-class IncidentAnalysis(BaseModel):
-    incident_id: str
-    category: str
-    requires_review: bool
-```
-
-Compón:
-
-```text
-prompt -> RunnableLambda -> PydanticOutputParser
-```
-
-y ejecuta `invoke()`.
-
-### Parte C — GPT-5.6 Luna
-
-Crea `ChatBedrockConverse` con:
-
-```text
-model: us.openai.gpt-5.6-luna
-region: us-east-1
-```
-
-Utiliza:
-
-```python
-model.with_structured_output(IncidentAnalysis)
-```
-
-El resultado final debe seguir siendo un `IncidentAnalysis`.
-
-## Ampliación
-
-Si dispones de tiempo:
-
-- `batch()`;
-- `RunnableParallel`;
-- `ainvoke()`.
+1. Inspecciona el `ChatPromptTemplate` y localiza los roles `system` y `user`.
+2. Ejecuta el pipeline determinista y confirma que el resultado es un `IncidentAnalysis`.
+3. Cambia `requires_review` en el mock y comprueba que el contrato Pydantic no cambia.
+4. Si Bedrock está disponible, ejecuta la misma entrada con GPT-5.6 Luna y compara el tipo de salida.
+5. Introduce deliberadamente un JSON incompatible con el schema y observa dónde falla.
 
 ## Preguntas
 
-1. ¿Qué ventaja tiene mantener un contrato Pydantic estable?
-2. ¿Qué responsabilidad resuelve el parser/schema y cuál no?
-3. ¿Qué ha cambiado al sustituir el mock por Luna?
+- ¿Qué ventaja aporta mantener un contrato Pydantic estable?
+- ¿Qué valida el schema y qué no puede validar?
+- ¿Qué parte del sistema cambia al sustituir mock por Luna?
+
+## Ampliación
+
+Prueba `batch()`, `RunnableParallel` o `ainvoke()`.

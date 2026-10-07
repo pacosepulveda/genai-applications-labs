@@ -1,54 +1,320 @@
+from datetime import datetime, timezone
 from pathlib import Path
-import time, uuid
+import time
+import uuid
+
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
+
 from .conversation_store import ConversationStore
-from .models import DraftRequest,DraftResponse,ImageGenerationRequest,ImageGenerationResponse,TextRequest,TextResponse,ChatRequest,ChatResponse,AskRequest,AskResponse,OperationsRequest,OperationsResponse
+from .models import (
+    DraftRequest, DraftResponse, RoutingMetadata,
+    ImageGenerationRequest, ImageGenerationResponse,
+    TextRequest, TextResponse, TextTask,
+    ChatRequest, ChatResponse,
+    AskRequest, AskResponse,
+    OperationsRequest, OperationsResponse,
+)
+from .policy import evaluate_request, choose_mode
+from .provider import MockProvider
+from .routers import build_router
 from .settings import settings
 from .storage import ArtifactStore
-from .policy import choose_mode
+from .text_policy import evaluate_text
+from .text_provider import build_text_provider
+from .visual_policy import evaluate_visual_request
+from .visual_provider import build_visual_provider
+from .knowledge import KnowledgeService
+from .rag import RAGService, validate_citations
+from .tools import build_agent_tools
+from .agent_service import AgentService
+from .model_factory import build_chat_model
 
-ROOT=Path(__file__).resolve().parents[1]
-ARTIFACTS=ROOT/"artifacts"
-GENERATED=ROOT/"generated"
-app=FastAPI(title="Enterprise GenAI Assistant",version="0.6.0-m06")
-store=ArtifactStore(GENERATED)
-conversations=ConversationStore(settings.max_history_messages)
-app.mount("/generated",StaticFiles(directory=GENERATED),name="generated")
+ROOT = Path(__file__).resolve().parents[1]
+ARTIFACTS = ROOT / "artifacts"
+GENERATED = ROOT / "generated"
+DATA = ROOT / "data"
+
+app = FastAPI(title="Enterprise GenAI Assistant", version="0.6.0-m06")
+store = ArtifactStore(GENERATED)
+draft_provider = MockProvider()
+router = None
+conversations = ConversationStore(settings.max_history_messages)
+
+knowledge_service = None
+rag_service = None
+agent_service = None
+
+app.mount("/generated", StaticFiles(directory=GENERATED), name="generated")
+
+def get_router():
+    global router
+    if router is None:
+        router = build_router(settings.router_backend, ARTIFACTS)
+    return router
+
+def text_provider_for(name: str | None):
+    selected = name or settings.text_provider
+    try:
+        return build_text_provider(
+            selected,
+            settings.seq2seq_model_id,
+            settings.chat_model_id,
+            settings.bedrock_text_region,
+            settings.bedrock_text_model_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+
+def get_m06_services():
+    global knowledge_service, rag_service, agent_service
+    if knowledge_service is None:
+        knowledge_service = KnowledgeService(
+            DATA / "knowledge_base",
+            settings.embedding_model_id,
+            top_k=settings.top_k,
+            min_relevance_score=settings.min_relevance_score,
+        )
+    if rag_service is None or agent_service is None:
+        model = build_chat_model(settings.model_provider, settings.model_id, settings.model_region)
+        rag_service = RAGService(knowledge_service, model)
+        tools = build_agent_tools(knowledge_service, DATA / "incidents.json")
+        agent_service = AgentService(model, tools)
+    return knowledge_service, rag_service, agent_service
 
 @app.get("/health")
 def health():
-    return {"status":"ok","version":"0.6","model_provider":settings.model_provider,"model_id":settings.model_id,"model_region":settings.model_region,"text_provider":settings.text_provider,"visual_provider":settings.visual_provider,"rag":True,"agent":True}
+    return {
+        "status": "ok",
+        "version": "0.6",
+        "model_provider": settings.model_provider,
+        "model_id": settings.model_id,
+        "model_region": settings.model_region,
+        "text_provider": settings.text_provider,
+        "visual_provider": settings.visual_provider,
+        "rag": True,
+        "agent": True,
+    }
 
-# Capacidades heredadas: conserva aquí las implementaciones completadas en v0.5.
-@app.post("/v1/draft",response_model=DraftResponse)
-def draft(req:DraftRequest): raise NotImplementedError
+@app.post("/v1/draft", response_model=DraftResponse)
+def draft(req: DraftRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+    policy = evaluate_request(req)
+    if not policy.allowed:
+        return DraftResponse(
+            status="blocked",
+            content=None,
+            warnings=[f"Bloqueado: {policy.reason}"],
+            routing=RoutingMetadata(
+                backend=settings.router_backend,
+                intent="NOT_EVALUATED",
+                confidence=0.0,
+                route="BLOCK",
+                model_version=settings.router_model_version,
+            ),
+            request_id=request_id,
+            latency_ms=int((time.perf_counter()-started)*1000),
+        )
+    prediction = get_router().predict(
+        request_text=req.task,
+        channel=req.channel,
+        business_unit=req.business_unit,
+        language=req.language,
+        urgency=req.urgency,
+        requires_authoritative_sources=req.requires_authoritative_sources,
+    )
+    if req.requires_authoritative_sources:
+        route = "CONTROLLED_KNOWLEDGE_FLOW"
+    elif prediction.confidence < settings.router_threshold:
+        route = "REVIEW"
+    elif prediction.intent == "CORPORATE_KNOWLEDGE":
+        route = "CONTROLLED_KNOWLEDGE_FLOW"
+    elif prediction.intent == "UNSUPPORTED":
+        route = "BLOCK"
+    else:
+        route = "GENERATION"
+    routing = RoutingMetadata(
+        backend=settings.router_backend,
+        intent=prediction.intent,
+        confidence=prediction.confidence,
+        route=route,
+        model_version=settings.router_model_version,
+    )
+    if route == "BLOCK":
+        return DraftResponse(
+            status="blocked",
+            content=None,
+            warnings=policy.warnings,
+            routing=routing,
+            request_id=request_id,
+            latency_ms=int((time.perf_counter()-started)*1000),
+        )
+    if route in {"REVIEW", "CONTROLLED_KNOWLEDGE_FLOW"}:
+        return DraftResponse(
+            status="review",
+            content=None,
+            warnings=policy.warnings + [f"Ruta controlada: {route}"],
+            routing=routing,
+            request_id=request_id,
+            latency_ms=int((time.perf_counter()-started)*1000),
+        )
+    return DraftResponse(
+        status="ok",
+        content=draft_provider.generate(req.task),
+        warnings=policy.warnings,
+        routing=routing,
+        request_id=request_id,
+        latency_ms=int((time.perf_counter()-started)*1000),
+    )
 
-@app.post("/v1/images",response_model=ImageGenerationResponse)
-def generate_image(req:ImageGenerationRequest): raise NotImplementedError
+@app.post("/v1/images", response_model=ImageGenerationResponse)
+def generate_image(req: ImageGenerationRequest):
+    provider_name = req.provider or settings.visual_provider
+    policy = evaluate_visual_request(req.prompt, provider_name)
+    if not policy.allowed:
+        raise HTTPException(status_code=400, detail=policy.reason)
+    provider = build_visual_provider(
+        provider_name,
+        settings.bedrock_image_region,
+        settings.bedrock_image_model_id,
+    )
+    result = provider.generate(req.prompt, req.seed)
+    artifact_id = str(uuid.uuid4())
+    metadata = {
+        "artifact_id": artifact_id,
+        "provider": result.provider,
+        "model_version": result.model_version,
+        "seed": req.seed,
+        "width": result.image.width,
+        "height": result.image.height,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    store.save(artifact_id, result.image, metadata)
+    return ImageGenerationResponse(
+        artifact_id=artifact_id,
+        provider=result.provider,
+        model_version=result.model_version,
+        seed=req.seed,
+        width=result.image.width,
+        height=result.image.height,
+        image_url=f"/generated/{artifact_id}.png",
+        metadata_url=f"/v1/images/{artifact_id}",
+    )
 
 @app.get("/v1/images/{artifact_id}")
-def image_metadata(artifact_id:str):
-    try: return store.load_metadata(artifact_id)
-    except FileNotFoundError: raise HTTPException(status_code=404,detail="artifact_not_found")
+def image_metadata(artifact_id: str):
+    try:
+        return store.load_metadata(artifact_id)
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="artifact_not_found")
 
-@app.post("/v1/text",response_model=TextResponse)
-def text(req:TextRequest): raise NotImplementedError
+def build_task_prompt(req: TextRequest):
+    if req.task == TextTask.GENERATE:
+        return req.text
+    if req.task == TextTask.SUMMARIZE:
+        return "Resume de forma fiel y concisa el siguiente texto:\n\n" + req.text
+    if req.task == TextTask.TRANSLATE:
+        if not req.target_language:
+            raise HTTPException(status_code=400, detail="target_language_required")
+        return f"Traduce a {req.target_language} conservando identificadores técnicos:\n\n{req.text}"
+    raise HTTPException(status_code=400, detail="unsupported_task")
 
-@app.post("/v1/chat",response_model=ChatResponse)
-def chat(req:ChatRequest): raise NotImplementedError
+@app.post("/v1/text", response_model=TextResponse)
+def text(req: TextRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+    policy = evaluate_text(req.text, settings.max_input_chars)
+    if not policy.allowed:
+        raise HTTPException(status_code=400, detail=policy.reason)
+    provider = text_provider_for(req.provider)
+    result = provider.generate(
+        build_task_prompt(req),
+        min(req.max_new_tokens, settings.max_new_tokens),
+    )
+    return TextResponse(
+        output=result.text,
+        provider=result.provider,
+        model=result.model,
+        task=req.task.value,
+        input_tokens=result.input_tokens,
+        output_tokens=result.output_tokens,
+        finish_reason=result.finish_reason,
+        request_id=request_id,
+        latency_ms=int((time.perf_counter()-started)*1000),
+    )
 
-# Nuevas capacidades M06.
-@app.post("/v1/ask",response_model=AskResponse)
-def ask(req:AskRequest):
-    started=time.perf_counter(); request_id=uuid.uuid4().hex; route=choose_mode(req)
-    if route.mode=="RAG":
-        # TODO: RAG obligatorio; nunca fallback DIRECT ante NO_EVIDENCE.
-        raise NotImplementedError
-    # TODO: DIRECT reutiliza TextModelProvider/bedrock_luna de v0.5.
-    raise NotImplementedError
+@app.post("/v1/chat", response_model=ChatResponse)
+def chat(req: ChatRequest):
+    started = time.perf_counter()
+    request_id = str(uuid.uuid4())
+    policy = evaluate_text(req.message, settings.max_input_chars)
+    if not policy.allowed:
+        raise HTTPException(status_code=400, detail=policy.reason)
+    provider = text_provider_for(req.provider)
+    conversations.ensure_system(req.conversation_id, settings.chat_system_prompt)
+    conversations.append(req.conversation_id, "user", req.message)
+    truncated = conversations.compact(req.conversation_id)
+    result = provider.chat(
+        conversations.get(req.conversation_id),
+        min(req.max_new_tokens, settings.max_new_tokens),
+    )
+    conversations.append(req.conversation_id, "assistant", result.text)
+    truncated = conversations.compact(req.conversation_id) or truncated
+    return ChatResponse(
+        conversation_id=req.conversation_id,
+        answer=result.text,
+        provider=result.provider,
+        model=result.model,
+        input_tokens=result.input_tokens,
+        output_tokens=result.output_tokens,
+        finish_reason=result.finish_reason,
+        history_truncated=truncated,
+        request_id=request_id,
+        latency_ms=int((time.perf_counter()-started)*1000),
+    )
 
-@app.post("/v1/operations",response_model=OperationsResponse)
-def operations(req:OperationsRequest):
-    # TODO: AgentService; conversation_id -> thread_id.
-    raise NotImplementedError
+@app.post("/v1/ask", response_model=AskResponse)
+def ask(req: AskRequest):
+    started = time.perf_counter()
+    request_id = uuid.uuid4().hex
+    route = choose_mode(req)
+
+    if route.mode == "RAG":
+        _, rag, _ = get_m06_services()
+        answer, docs = rag.ask(req.question)
+        return AskResponse(
+            mode="RAG",
+            answer=answer.answer,
+            source_ids=answer.source_ids,
+            insufficient_evidence=answer.insufficient_evidence,
+            request_id=request_id,
+            citation_validation=validate_citations(answer, docs),
+            latency_ms=int((time.perf_counter()-started)*1000),
+        )
+
+    provider = text_provider_for("bedrock_luna")
+    result = provider.generate(req.question, min(180, settings.max_new_tokens))
+    return AskResponse(
+        mode="DIRECT",
+        answer=result.text,
+        source_ids=[],
+        insufficient_evidence=False,
+        request_id=request_id,
+        citation_validation=None,
+        latency_ms=int((time.perf_counter()-started)*1000),
+    )
+
+@app.post("/v1/operations", response_model=OperationsResponse)
+def operations(req: OperationsRequest):
+    started = time.perf_counter()
+    request_id = uuid.uuid4().hex
+    _, _, agent = get_m06_services()
+    answer = agent.ask(req.conversation_id, req.message)
+    return OperationsResponse(
+        conversation_id=req.conversation_id,
+        answer=answer,
+        mode="AGENT",
+        request_id=request_id,
+        latency_ms=int((time.perf_counter()-started)*1000),
+    )

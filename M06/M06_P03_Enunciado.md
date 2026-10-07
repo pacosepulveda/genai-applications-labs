@@ -1,75 +1,27 @@
-# M06.P03 — Retrieval evaluation mínima
+# M06.P03 — Retrieval evaluation
 
-**Modalidad:** individual o parejas  
-**Entregable:** Hit Rate@k y decisión entre dos configuraciones
+**Ruta de clase** · notebook completamente implementado
 
 ## Objetivo
 
-Medirás el retriever **antes de añadir generación**.
+Medir retrieval antes de añadir generación.
 
-## Dataset
+Abre `notebooks/M06_P03_Retrieval_Evaluation.ipynb` y ejecuta el benchmark.
 
-```text
-assets/retrieval_eval.jsonl
-```
+## Experimentos
 
-Para la ruta esencial utiliza:
-
-```text
-R01
-R03
-R09
-```
-
-`R09` es un caso `NO_EVIDENCE`.
-
-## Tareas
-
-Abre:
-
-```text
-notebooks/M06_P03_Retrieval_Evaluation.ipynb
-```
-
-### Parte A — Hit Rate@k
-
-Implementa:
-
-```python
-hit_rate_at_k(...)
-```
-
-Un caso es hit si alguna fuente esperada aparece en top-k.
-
-### Parte B — k=2 frente a k=4
-
-Ejecuta los casos con:
-
-```text
-k=2
-k=4
-```
-
-y compara el resultado.
-
-### Parte C — NO_EVIDENCE
-
-Para `R09`, explica por qué recuperar el documento "menos malo" no debe contarse automáticamente como éxito.
-
-### Parte D — Decisión
-
-Elige el `k` que utilizarás en P04 y justifica la decisión considerando:
-
-- cobertura;
-- ruido;
-- número de chunks enviados al modelo.
-
-## Ampliación
-
-Implementa MRR, compara MMR o amplía el benchmark al dataset completo.
+1. Compara `Hit Rate@2` y `Hit Rate@4`.
+2. Localiza qué `source_id` se esperaba para cada caso positivo.
+3. Analiza `R09`, marcado como `NO_EVIDENCE`.
+4. Explica por qué devolver el documento más parecido en `R09` no significa que exista evidencia.
+5. Elige `k=2` o `k=4` para P04 y justifica la elección considerando cobertura, ruido y contexto.
 
 ## Preguntas
 
-1. ¿Por qué separar retrieval eval de generation eval?
-2. ¿Por qué `k` alto no es siempre mejor?
-3. ¿Qué significa realmente `NO_EVIDENCE`?
+- ¿Por qué separar retrieval eval de generation eval?
+- ¿Por qué aumentar `k` puede empeorar el sistema aunque aumente cobertura?
+- ¿Cómo debería medirse un caso donde la respuesta correcta es no recuperar evidencia suficiente?
+
+## Ampliación
+
+Implementa MRR o compara MMR con similarity search.

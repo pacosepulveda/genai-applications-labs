@@ -1,102 +1,24 @@
 # M06.P02 — De documentos a retriever
 
-**Modalidad:** individual o parejas  
-**Entregable:** retriever en memoria con metadata y filtro de vigencia
+**Ruta de clase** · notebook completamente implementado
 
 ## Objetivo
 
-Construirás el pipeline mínimo:
+Observar el pipeline `Document -> chunks -> embeddings -> vector store -> retrieval` y comprobar por qué metadata y vigencia forman parte del comportamiento del RAG.
 
-```text
-Markdown -> Document -> chunks -> embeddings -> vector store -> retrieval
-```
+Abre `notebooks/M06_P02_Ingestion_VectorStore.ipynb` y ejecútalo.
 
-## Dataset
+## Experimentos
 
-Utiliza:
-
-```text
-assets/knowledge_base/
-```
-
-El corpus contiene una versión vigente y otra obsoleta de `PROC-017`.
-
-## Tareas
-
-Abre:
-
-```text
-notebooks/M06_P02_Ingestion_VectorStore.ipynb
-```
-
-### Parte A — Document y metadata
-
-Carga los Markdown y conserva al menos:
-
-```text
-source_id
-version
-status
-classification
-```
-
-Muestra qué versión está marcada como `OBSOLETE`.
-
-### Parte B — Chunking
-
-Utiliza una única configuración:
-
-```text
-chunk_size=500
-chunk_overlap=80
-```
-
-Comprueba que la metadata del documento padre se mantiene en los chunks.
-
-### Parte C — Embeddings y vector store
-
-Utiliza:
-
-```text
-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
-```
-
-con CPU y `InMemoryVectorStore`.
-
-### Parte D — Retrieval observable
-
-Prueba estas dos consultas:
-
-```text
-¿Cuánto dura un acceso privilegiado?
-¿Cuándo se envían actualizaciones de un P1?
-```
-
-Muestra para cada resultado:
-
-```text
-source_id
-version
-status
-fragmento
-```
-
-### Parte E — Vigencia
-
-Implementa un filtro que impida utilizar documentos con:
-
-```text
-status=OBSOLETE
-```
-
-Comprueba que `PROC-017 v2.1` nunca entra en el contexto final.
-
-## Ampliación
-
-Compara otro tamaño de chunk o analiza `/api/v2/status`.
+1. Inspecciona `source_id`, `version`, `status` y `classification`.
+2. Localiza `PROC-017` vigente y la versión `OBSOLETE`.
+3. Ejecuta las consultas preparadas y revisa qué documentos devuelve el retriever.
+4. Comprueba que el filtro `only_current()` excluye la versión obsoleta del contexto final.
+5. Cambia una consulta por otra equivalente y observa si cambia el ranking.
+6. Opcional: cambia `chunk_size=500` por `300` y compara el resultado.
 
 ## Preguntas
 
-1. ¿Por qué metadata forma parte del comportamiento del RAG?
-2. ¿Por qué similitud no equivale a vigencia?
-3. ¿Por qué cambiar el embedding model suele requerir reindexar?
+- ¿Por qué similarity no equivale a vigencia?
+- ¿Por qué la metadata debe sobrevivir al chunking?
+- ¿Qué implicaría cambiar el embedding model de un índice ya construido?

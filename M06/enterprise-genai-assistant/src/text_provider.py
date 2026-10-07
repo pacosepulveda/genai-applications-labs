@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from typing import Protocol
-
 import boto3
-
 
 @dataclass
 class GenerationResult:
@@ -13,14 +11,9 @@ class GenerationResult:
     output_tokens: int
     finish_reason: str = "stop"
 
-
 class TextModelProvider(Protocol):
-    def generate(self, prompt: str, max_new_tokens: int) -> GenerationResult:
-        ...
-
-    def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult:
-        ...
-
+    def generate(self, prompt: str, max_new_tokens: int) -> GenerationResult: ...
+    def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult: ...
 
 class MockTextProvider:
     name = "mock"
@@ -32,56 +25,86 @@ class MockTextProvider:
             text=text,
             provider=self.name,
             model=self.model_id,
-            input_tokens=len(prompt.split()),
-            output_tokens=len(text.split()),
+            input_tokens=max(1, len(prompt.split())),
+            output_tokens=max(1, len(text.split())),
+            finish_reason="stop",
         )
 
     def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult:
         last = messages[-1]["content"] if messages else ""
-        text = f"MOCK CHAT: {last[:200]}"
+        text = "MOCK CHAT: " + last[:200]
         return GenerationResult(
             text=text,
             provider=self.name,
             model=self.model_id,
-            input_tokens=sum(len(m["content"].split()) for m in messages),
-            output_tokens=len(text.split()),
+            input_tokens=max(1, sum(len(m["content"].split()) for m in messages)),
+            output_tokens=max(1, len(text.split())),
+            finish_reason="stop",
         )
-
 
 class LocalSeq2SeqProvider:
     name = "local_seq2seq"
 
     def __init__(self, model_id: str):
-        # TODO M05.P06: lazy-load tokenizer y AutoModelForSeq2SeqLM.
+        from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
         self.model_id = model_id
+        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+        self.model.eval()
 
     def generate(self, prompt: str, max_new_tokens: int) -> GenerationResult:
-        # TODO M05.P06
-        raise NotImplementedError
+        import torch
+        encoded = self.tokenizer(prompt, return_tensors="pt", truncation=True)
+        with torch.no_grad():
+            out = self.model.generate(**encoded, max_new_tokens=max_new_tokens)
+        text = self.tokenizer.decode(out[0], skip_special_tokens=True)
+        return GenerationResult(
+            text=text,
+            provider=self.name,
+            model=self.model_id,
+            input_tokens=int(encoded["input_ids"].numel()),
+            output_tokens=int(out[0].numel()),
+            finish_reason="stop",
+        )
 
     def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult:
         prompt = messages[-1]["content"] if messages else ""
         return self.generate(prompt, max_new_tokens)
 
-
 class LocalChatProvider:
     name = "local_chat"
 
     def __init__(self, model_id: str):
-        # TODO M05.P06: lazy-load tokenizer y AutoModelForCausalLM.
+        from transformers import AutoTokenizer, AutoModelForCausalLM
         self.model_id = model_id
+        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+        self.model = AutoModelForCausalLM.from_pretrained(model_id)
+        self.model.eval()
 
     def generate(self, prompt: str, max_new_tokens: int) -> GenerationResult:
-        # TODO: tratar como un único mensaje user y reutilizar chat().
-        raise NotImplementedError
+        return self.chat([{"role": "user", "content": prompt}], max_new_tokens)
 
     def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult:
-        # TODO:
-        # tokenizer.apply_chat_template(..., add_generation_prompt=True)
-        # model.generate(...)
-        # decodificar SOLO tokens nuevos.
-        raise NotImplementedError
-
+        import torch
+        rendered = self.tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,
+        )
+        encoded = self.tokenizer(rendered, return_tensors="pt")
+        input_len = encoded["input_ids"].shape[1]
+        with torch.no_grad():
+            out = self.model.generate(**encoded, max_new_tokens=max_new_tokens, do_sample=False)
+        new_tokens = out[0, input_len:]
+        text = self.tokenizer.decode(new_tokens, skip_special_tokens=True)
+        return GenerationResult(
+            text=text,
+            provider=self.name,
+            model=self.model_id,
+            input_tokens=int(input_len),
+            output_tokens=int(new_tokens.numel()),
+            finish_reason="stop",
+        )
 
 class BedrockLunaProvider:
     name = "bedrock_luna"
@@ -91,34 +114,59 @@ class BedrockLunaProvider:
         self.model_id = model_id
         self.client = boto3.client("bedrock-runtime", region_name=region)
 
+    @staticmethod
+    def _to_result(response, provider, model_id):
+        content = response["output"]["message"]["content"]
+        text = "".join(block.get("text", "") for block in content if isinstance(block, dict))
+        usage = response.get("usage", {})
+        return GenerationResult(
+            text=text,
+            provider=provider,
+            model=model_id,
+            input_tokens=int(usage.get("inputTokens", 0)),
+            output_tokens=int(usage.get("outputTokens", 0)),
+            finish_reason=str(response.get("stopReason", "stop")),
+        )
+
     def generate(self, prompt: str, max_new_tokens: int) -> GenerationResult:
-        # TODO M05.P06:
-        # llama a self.client.converse(
-        #   modelId=self.model_id,
-        #   messages=[{"role":"user","content":[{"text": prompt}]}],
-        #   inferenceConfig={"maxTokens": max_new_tokens},
-        # )
-        # extrae output.message.content, usage y stopReason.
-        raise NotImplementedError
+        response = self.client.converse(
+            modelId=self.model_id,
+            messages=[{"role": "user", "content": [{"text": prompt}]}],
+            inferenceConfig={"maxTokens": max_new_tokens},
+        )
+        return self._to_result(response, self.name, self.model_id)
 
     def chat(self, messages: list[dict], max_new_tokens: int) -> GenerationResult:
-        # TODO M05.P06:
-        # adapta roles/contenido al contrato Converse.
-        # El system message debe enviarse como system, no como un mensaje user.
-        raise NotImplementedError
+        system_blocks = []
+        converse_messages = []
+        for message in messages:
+            role = message["role"]
+            content = message["content"]
+            if role == "system":
+                system_blocks.append({"text": content})
+            else:
+                converse_messages.append({
+                    "role": role,
+                    "content": [{"text": content}],
+                })
+        kwargs = {
+            "modelId": self.model_id,
+            "messages": converse_messages,
+            "inferenceConfig": {"maxTokens": max_new_tokens},
+        }
+        if system_blocks:
+            kwargs["system"] = system_blocks
+        response = self.client.converse(**kwargs)
+        return self._to_result(response, self.name, self.model_id)
 
-
-def build_text_provider(
-    name: str,
-    seq2seq_model_id: str,
-    chat_model_id: str,
-    bedrock_region: str,
-    bedrock_model_id: str,
-):
-    # TODO M05.P06:
-    # mock -> MockTextProvider()
-    # local_seq2seq -> LocalSeq2SeqProvider(seq2seq_model_id)
-    # local_chat -> LocalChatProvider(chat_model_id)
-    # bedrock_luna -> BedrockLunaProvider(bedrock_region, bedrock_model_id)
-    # otro -> ValueError
-    raise NotImplementedError
+def build_text_provider(name, seq2seq_model_id, chat_model_id, bedrock_region, bedrock_model_id):
+    normalized = name.strip().lower()
+    if normalized == "mock":
+        return MockTextProvider()
+    if normalized == "local_seq2seq":
+        return LocalSeq2SeqProvider(seq2seq_model_id)
+    if normalized == "local_chat":
+        return LocalChatProvider(chat_model_id)
+    if normalized == "bedrock_luna":
+        return BedrockLunaProvider(bedrock_region, bedrock_model_id)
+    raise ValueError(f"text provider no soportado: {name!r}")

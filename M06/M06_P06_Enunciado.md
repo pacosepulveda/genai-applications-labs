@@ -1,13 +1,10 @@
-# M06.P06 — Enterprise GenAI Assistant v0.6: integración guiada
+# M06.P06 — Enterprise GenAI Assistant v0.6
 
-**Modalidad:** individual o parejas  
-**Entregable:** routing DIRECT/RAG/AGENT y pruebas críticas
+**Ruta de clase** · aplicación completamente implementada
 
 ## Objetivo
 
-Integrarás las piezas ya construidas. **No vuelvas a implementar desde cero P02, P04 o P05.**
-
-La arquitectura es:
+Inspeccionar y validar una arquitectura con tres modos explícitos:
 
 ```text
 request
@@ -18,69 +15,47 @@ policy / routing
   └── AGENT
 ```
 
-## Parte A — Reutilización
+No tienes que implementar módulos ni copiar código. Trabajarás sobre `enterprise-genai-assistant/` ya funcional.
 
-Lleva al scaffold de `enterprise-genai-assistant/` las implementaciones que ya tienes de:
+## Parte A — Tests
 
-- knowledge/retrieval;
-- RAG + citation validator;
-- tools/agent.
+Desde el directorio de la aplicación ejecuta:
 
-Los endpoints de M05 se conservan; no son el foco de esta práctica.
+```bash
+python -m pytest -q
+```
 
-## Parte B — Regla de routing
+Identifica qué tests comprueban routing, citas, documentos obsoletos y tools.
 
-Debe cumplirse:
+## Parte B — Routing
+
+Inspecciona `choose_mode()` y comprueba:
 
 ```text
 requires_authoritative_sources=true -> RAG
-CORPORATE_KNOWLEDGE              -> RAG
+CORPORATE_KNOWLEDGE               -> RAG
+resto                              -> DIRECT
 ```
 
-La decisión no se delega al modelo.
+Cambia una petición DIRECT para exigir fuentes autoritativas y observa el cambio de ruta.
 
-## Parte C — `/v1/ask`
+## Parte C — RAG
 
-Completa el flujo:
+Prueba `/v1/ask` con una pregunta sobre `PROC-017` y verifica que utiliza la versión vigente de **8 horas**, no la obsoleta de 24.
 
-```text
-DIRECT -> provider textual
-RAG    -> RAGService
-```
+Fuerza una cita inventada en un test y comprueba que se rechaza.
 
-Si RAG devuelve evidencia insuficiente:
+## Parte D — NO_EVIDENCE
 
-```text
-NO_EVIDENCE
-```
+Pregunta por información no presente en el corpus. La aplicación debe responder sin evidencia suficiente y **no** hacer fallback a DIRECT.
 
-Nunca hagas fallback silencioso a DIRECT.
+## Parte E — AGENT
 
-## Parte D — `/v1/operations`
-
-Conecta el `AgentService` de P05.
-
-La práctica utiliza únicamente tools read-only.
-
-## Parte E — Pruebas críticas
-
-Comprueba como mínimo:
-
-1. `PROC-017 v2.1 OBSOLETE` no se utiliza;
-2. `PROC-017` vigente indica **8 horas**, no 24;
-3. una cita inventada se rechaza;
-4. corporate knowledge no hace fallback DIRECT;
-5. el caso sin evidencia devuelve no-answer.
-
-## Ampliación
-
-- aislamiento de threads;
-- observabilidad detallada;
-- regresión de todos los endpoints de v0.5.
+Prueba `/v1/operations` con `INC-2048` y observa el uso de tools read-only.
 
 ## Preguntas finales
 
-1. ¿Qué responsabilidad pertenece a policy y cuál al modelo?
-2. ¿Qué cambiaría al sustituir el vector store?
-3. ¿Qué cambiaría al sustituir Luna?
-4. ¿Por qué DIRECT, RAG y AGENT no deberían convertirse en un único flujo opaco?
+- ¿Qué responsabilidad pertenece a policy y cuál al modelo?
+- ¿Qué cambiaría al sustituir el vector store?
+- ¿Qué cambiaría al sustituir Luna?
+- ¿Por qué DIRECT, RAG y AGENT no deberían ocultarse detrás de un único flujo opaco?

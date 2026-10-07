@@ -1,13 +1,13 @@
 # M03.P05 — Self-attention y causal mask
 
 **Modalidad:** individual o parejas  
-**Entregable:** cálculo de scaled dot-product attention y explicación de una causal mask
+**Entregable:** matrices inspeccionadas y explicación de la causal mask
 
 ## Objetivo
 
-Comprender el mecanismo esencial de atención antes de introducir NLP generativo en M05.
+Comprender el mecanismo esencial de attention antes de M05.
 
-Trabajaremos con tensores pequeños y no con texto.
+El notebook contiene el cálculo completo para que el trabajo se centre en interpretar las matrices.
 
 ## Ruta esencial
 
@@ -15,32 +15,25 @@ Abre `notebooks/M03_P05_Attention_Transformer.ipynb`.
 
 ### Parte A — Scaled dot-product attention
 
-Completa:
+Ejecuta:
 
 ```text
-Attention(Q, K, V) = softmax((QK^T) / sqrt(d_k)) V
+scores = QK^T / sqrt(d_k)
+weights = softmax(scores)
+output = weights V
 ```
 
-Inspecciona:
-
-- matriz de scores;
-- pesos de atención;
-- suma de cada fila;
-- salida final.
-
-Comprueba que cada fila de los pesos suma aproximadamente `1`.
+Comprueba scores, pesos, suma por fila y salida.
 
 ### Parte B — Causal mask
 
-Construye una máscara triangular que bloquee las posiciones futuras.
+Ejecuta la versión con máscara triangular y compara `weights` con `causal_weights`.
 
-Aplica la máscara **antes del softmax** y vuelve a calcular los pesos.
+Localiza las posiciones futuras y comprueba que su peso queda en cero tras softmax.
 
-Comprueba que una posición:
+### Parte C — Modifica y predice
 
-- puede atender a sí misma;
-- puede atender al pasado;
-- no puede atender al futuro.
+Cambia un único vector de Q. Antes de ejecutar, predice qué fila de la matriz de atención cambiará más.
 
 ## Preguntas
 
@@ -51,4 +44,4 @@ Comprueba que una posición:
 
 ## Ampliación
 
-El notebook conserva una sección opcional con `nn.MultiheadAttention` para inspeccionar las formas de entrada y salida. El entrenamiento de un Transformer completo queda fuera de la ruta esencial.
+El notebook incluye `MultiheadAttention` y un mini Transformer ya implementados.

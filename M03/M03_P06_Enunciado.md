@@ -1,91 +1,43 @@
-# M03.P06 — Enterprise GenAI Assistant v0.3: router intercambiable y gate de calidad
+# M03.P06 — Enterprise GenAI Assistant v0.3 · ampliación
 
 **Modalidad:** individual o parejas  
-**Entregable:** API capaz de utilizar router clásico o neuronal y decisión de despliegue documentada
+**Entregable:** ejecución de la API con router intercambiable y análisis del gate de calidad
 
 ## Objetivo
 
-Integrarás el router neuronal de P02 sin asumir que debe sustituir automáticamente al modelo clásico.
+Observar cómo una aplicación puede cambiar entre `classic` y `neural` sin reescribir la política de negocio.
 
-La aplicación soportará dos backends:
+El código de `enterprise-genai-assistant/` está completo. No tienes que implementar `routers.py` ni `main.py`.
 
-```text
-classic
-neural
+## Prerrequisito
+
+Ejecuta P02 una vez para generar en `enterprise-genai-assistant/artifacts/` los archivos del router clásico y neuronal.
+
+## Parte A — Tests
+
+Desde `M03/enterprise-genai-assistant/` ejecuta:
+
+```bash
+pytest -q
 ```
 
-seleccionados mediante configuración.
+## Parte B — Router clásico
 
-## Arquitectura
+Configura `ROUTER_BACKEND=classic`, arranca:
 
-```text
-request
-  -> deterministic policy
-  -> selected intent router
-       ├── classic
-       └── neural
-  -> confidence policy
-  -> routing policy
-  -> generation / review / controlled flow / block
+```bash
+uvicorn src.main:app --reload --port 8080
 ```
 
-## Parte A — Artefactos
+y prueba `/health` y `/v1/draft`.
 
-Comprueba que existen:
+## Parte C — Router neuronal
 
-```text
-artifacts/
-├── classic_router.joblib
-├── neural_preprocessor.joblib
-├── neural_label_encoder.joblib
-├── neural_router.pt
-└── neural_router_config.json
-```
-
-## Parte B — Routers
-
-Completa:
-
-```text
-src/routers.py
-```
-
-Debe proporcionar una interfaz común:
-
-```python
-predict(...) -> intent, confidence
-```
-
-para ambos modelos.
-
-## Parte C — Configuración
-
-La variable:
-
-```text
-ROUTER_BACKEND=classic
-```
-
-o:
-
-```text
-ROUTER_BACKEND=neural
-```
-
-debe seleccionar el modelo sin modificar la lógica de negocio.
+Cambia únicamente a `ROUTER_BACKEND=neural`, reinicia la aplicación y repite los mismos casos.
 
 ## Parte D — Gate de calidad
 
-Antes de elegir el router neuronal, utiliza el benchmark de P02.
-
-Define criterios explícitos, por ejemplo:
-
-- macro F1 mínimo;
-- latencia máxima;
-- degradación permitida por clase;
-- coste operacional.
-
-Documenta tu decisión:
+Utiliza los resultados de P02 y decide entre:
 
 ```text
 KEEP_CLASSIC
@@ -93,39 +45,19 @@ USE_NEURAL
 CONTINUE_EXPERIMENT
 ```
 
-## Parte E — Seguridad
+## Comprobaciones
 
-Se mantienen las reglas de M01/M02:
+Verifica que cambiar backend no cambia estas reglas:
 
 - `CONFIDENTIAL` y `RESTRICTED` se bloquean antes del router;
-- los patrones educativos de prompt injection directa siguen bloqueados;
-- el material que parece contener secretos o credenciales sigue bloqueado;
-- un modelo no puede anular un bloqueo determinista;
-- `requires_authoritative_sources=true` -> `CONTROLLED_KNOWLEDGE_FLOW`;
 - baja confianza -> `REVIEW`;
+- `requires_authoritative_sources=true` -> `CONTROLLED_KNOWLEDGE_FLOW`;
 - `CORPORATE_KNOWLEDGE` -> `CONTROLLED_KNOWLEDGE_FLOW`;
 - `UNSUPPORTED` -> `BLOCK`.
 
-Cambiar `ROUTER_BACKEND` solo cambia el componente aprendido. Las políticas deterministas deben producir el mismo resultado con ambos backends.
-
-## Parte F — Tests
-
-Ejecuta:
-
-```bash
-pytest -q
-```
-
-Añade pruebas que confirmen que:
-
-1. ambos backends cumplen la misma interfaz;
-2. cambiar backend no cambia las políticas;
-3. una petición confidencial se bloquea antes de cualquier decisión aprendida.
-
 ## Preguntas finales
 
-1. ¿Qué ganaríamos sustituyendo el modelo clásico?
-2. ¿Qué coste introduce la red?
-3. ¿Cómo versionarías preprocesador, pesos y arquitectura?
-4. ¿Qué ocurriría si desplegásemos pesos de una arquitectura distinta?
-5. ¿Por qué un gate de calidad es preferible a desplegar “el modelo más moderno”?
+1. ¿Qué componente cambia realmente con `ROUTER_BACKEND`?
+2. ¿Por qué el modelo aprendido no puede anular una policy determinista?
+3. ¿Qué archivos deben versionarse juntos?
+4. ¿Por qué un gate de calidad es preferible a desplegar “el modelo más moderno”?

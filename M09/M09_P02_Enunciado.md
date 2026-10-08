@@ -1,37 +1,33 @@
-# M09.P02 — Arquitectura adaptativa: routing por capability
+# M09.P02 — Adaptive Architecture & Human Control
 
-**Modalidad:** individual o parejas  
-**Entregable:** política de routing y comparación coste/latencia
+**Modalidad:** equipos pequeños  
+**Entregable:** `M09_P02_Adaptive_Architecture_Board.md`
 
 ## Objetivo
 
-Implementar un router sencillo que no trate todos los backends como equivalentes.
+Diseñar una arquitectura adaptativa que seleccione la **capability mínima suficiente** para cada request sin fingir que todos los backends son equivalentes.
+
+Los principios del ejercicio son:
+
+```text
+smallest adequate model
+least agency
+minimum useful context
+human accountability
+```
 
 ## Material
 
 ```text
-assets/adaptive_routing_requests.csv
 assets/model_capabilities.csv
-notebooks/M09_P02_Adaptive_Architecture.ipynb
+assets/adaptive_routing_requests.csv
+assets/current_architecture_metrics.csv
+templates/M09_P02_Adaptive_Architecture_Board.md
 ```
 
-## Parte A — Requests
+## Situación
 
-Cada petición describe:
-
-```text
-modality
-complexity
-privacy
-offline_required
-authoritative_knowledge
-realtime_state
-impact
-```
-
-## Parte B — Backends
-
-Trabajarás con capacidades abstractas:
+Enterprise GenAI Assistant puede combinar rutas distintas:
 
 ```text
 EDGE_SLM
@@ -42,67 +38,154 @@ RAG
 TOOL_API
 ```
 
-No representan proveedores concretos.
+Cada una tiene capacidades, coste, latencia y calidad proxy diferentes.
 
-## Parte C — Router
+El objetivo no es elegir una ruta global. El objetivo es definir qué debería ocurrir con cada tipo de petición.
 
-Implementa:
+## Parte A — Capability matching
 
-```python
-route_request(row)
-```
-
-El resultado debe incluir:
+Para cada request `R01–R08`, identifica primero los requisitos no negociables:
 
 ```text
-route
-reason
+modality
+privacy
+offline_required
+authoritative_knowledge
+realtime_state
+impact
+action_required
+```
+
+Después asigna una ruta o una composición de rutas.
+
+No elijas por precio antes de comprobar capability y policy.
+
+## Parte B — Regla de routing
+
+Para cada decisión documenta:
+
+```text
+selected_route
+why_this_route
+rejected_alternatives
+policy_constraints
+expected_cost
+expected_latency
 human_gate
+fallback
 ```
 
-Reglas mínimas:
+Si ninguna ruta aislada satisface el caso, diseña una composición explícita.
+
+## Caso crítico — R06
+
+`R06` combina:
 
 ```text
-authoritative_knowledge -> RAG
-realtime_state          -> TOOL_API
-offline/private simple  -> EDGE_SLM
-image                    -> CLOUD_MULTIMODAL
-complex reasoning       -> CLOUD_REASONING
-otherwise               -> CLOUD_STANDARD
+complexity=HIGH
+privacy=HIGH
+realtime_state=TRUE
+impact=CRITICAL
+action_required=TRUE
 ```
 
-## Parte D — Human gate
+No respondas automáticamente "agent".
 
-Una tarea de impacto `HIGH` o `CRITICAL` que pueda ejecutar acciones debe requerir:
+Decide:
+
+- qué componente obtiene estado real;
+- qué componente puede razonar;
+- qué acción puede proponerse;
+- quién autoriza la ejecución;
+- qué kill switch debe existir.
+
+Aplica `least agency`.
+
+## Parte C — Long context vs RAG vs reasoning
+
+Para los requests con conocimiento autoritativo o complejidad alta, decide qué mecanismo resuelve realmente el problema:
 
 ```text
+long context
+RAG
+reasoning-time compute
+```
+
+No los trates como sustitutos equivalentes.
+
+## Parte D — Human + AI
+
+Clasifica cada request como:
+
+```text
+AUGMENT
+AUTOMATE_BOUNDED
 HUMAN_APPROVAL_REQUIRED
+HUMAN_ONLY
 ```
 
-## Parte E — Coste y latencia
-
-Estima:
+Justifica usando:
 
 ```text
-total_cost
-mean_latency
+impact
+reversibility
+accountability
+reviewability
 ```
 
-para:
+## Inyecto 1 — El cloud reasoning baja de precio
+
+El coste de `CLOUD_REASONING` cae de `0.090 €` a `0.030 €` por tarea y su latencia baja a `1.3 s`.
+
+La calidad proxy no cambia.
+
+Revisa solo las rutas cuya decisión debería cambiar realmente.
+
+Pregunta:
+
+> ¿Una caída de precio justifica enviar por reasoning tareas simples que ya resolvía un backend más pequeño?
+
+## Inyecto 2 — Nueva restricción de privacidad
+
+Security establece que todo request con:
 
 ```text
-ALL_CLOUD_REASONING
-vs
-ADAPTIVE_ROUTING
+privacy=HIGH
+impact>=HIGH
 ```
 
-## Parte F — Decisión
+debe minimizar exposición de contenido y conservar una ruta de revisión humana si existe una acción sobre sistemas reales.
 
-Explica qué requests justificarían pagar más por capability y cuáles priorizan privacidad/offline.
+Revisa `R05`, `R06` y `R08`.
 
-## Preguntas
+Documenta qué decisiones cambian y cuáles permanecen.
 
-1. ¿Por qué una interfaz común no implica capabilities equivalentes?
-2. ¿Cuándo RAG es mejor que long context?
-3. ¿Cuándo edge aporta valor real?
-4. ¿Qué decisión nunca debería inferirse solo desde coste?
+## Parte E — Optionality
+
+Identifica qué interfaces merece la pena mantener portables:
+
+```text
+model provider
+retrieval
+eval suite
+routing policy
+tool schemas
+```
+
+No abstraigas todo.
+
+Para cada abstracción propuesta indica:
+
+```text
+strategic_dependency
+switching_cost_avoided
+complexity_added
+```
+
+## Debrief
+
+1. ¿Por qué una interfaz común no significa que todos los modelos sean equivalentes?
+2. ¿Dónde aporta valor real un SLM local?
+3. ¿Qué requests justifican reasoning adicional?
+4. ¿Qué decisiones no debería tomar un agent de forma autónoma?
+5. ¿Qué parte de la arquitectura debe seguir siendo portable aunque no cambiemos proveedor hoy?

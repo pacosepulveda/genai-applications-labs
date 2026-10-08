@@ -1,8 +1,8 @@
 # Enterprise GenAI Assistant v1.0 — Architecture Evolution Case
 
-## Estado heredado
+## Estado inicial del caso
 
-M08 dejó un servicio operable con:
+Enterprise GenAI Assistant es ya un servicio operable con:
 
 ```text
 RAG read-only con citas
@@ -14,11 +14,23 @@ rollback / kill switch
 cost ownership
 ```
 
+No es necesario haber realizado M08 para trabajar con este caso. Este es el baseline del que parte M09.
+
+## Alcance actual
+
+```text
+usuarios internos
+conocimiento corporativo autorizado
+consultas read-only
+rutas DIRECT / RAG / AGENT acotadas
+operación con métricas y rollback
+```
+
 ## Objetivo de M09
 
 No reconstruir el producto.
 
-Decidir qué capabilities nuevas merecen modificar la arquitectura.
+Decidir qué capabilities nuevas merecen modificar la arquitectura y cuáles deben esperar.
 
 ## Presiones
 
@@ -27,7 +39,8 @@ Decidir qué capabilities nuevas merecen modificar la arquitectura.
 - el coste debe medirse por tarea completada;
 - las acciones de alto impacto deben conservar accountability humana;
 - modelos y proveedores seguirán cambiando;
-- regulación, auditoría y evidencia pueden endurecerse.
+- regulación, auditoría y evidencia pueden endurecerse;
+- nuevas capacidades no deben destruir la posibilidad de rollback o migración.
 
 ## Principios
 
@@ -40,7 +53,15 @@ portable assets
 explicit lifecycle
 ```
 
+## Restricciones
+
+- ninguna migración tecnológica se aprueba solo por benchmark externo;
+- knowledge y authorization siguen siendo controles del producto, no del modelo;
+- una tool de alto impacto requiere límites y accountability explícitos;
+- los eval sets deben poder ejecutarse contra candidatos distintos;
+- una abstracción solo se mantiene si reduce una dependencia estratégica real;
+- todo componente adoptado debe tener trigger de revisión y exit plan cuando corresponda.
+
 ## Resultado esperado
 
-Una arquitectura adaptativa en la que cada request utiliza la capability
-suficiente y cada cambio tecnológico compite contra la misma evidencia.
+Una arquitectura adaptativa en la que cada request utiliza la capability suficiente y cada cambio tecnológico compite contra la misma evidencia.

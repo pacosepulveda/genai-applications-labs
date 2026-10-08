@@ -2,57 +2,85 @@
 
 ## Objetivo
 
-M08 parte del piloto definido en M07 y cambia la pregunta:
+M08 cambia el foco desde la construcción técnica hacia la capacidad de entregar, cambiar y operar una aplicación GenAI de forma controlada.
 
 ```text
+M01–M06:
+construir capacidades técnicas
+
 M07:
-¿Merece la pena avanzar?
+decidir qué merece la pena llevar a piloto
 
 M08:
-¿Cómo entregamos, cambiamos y operamos
-la aplicación de forma controlada?
+definir quién responde, cómo se promueven cambios
+y cómo se opera el servicio cuando algo falla
 ```
 
-La progresión práctica sigue exactamente el deck reducido:
+## Enfoque práctico
+
+M08 no fuerza el uso de notebooks. Las prácticas son **tabletops y workshops de decisión** apoyados en evidence packs ficticios incluidos en `assets/`.
+
+El patrón es:
 
 ```text
-M08.P01  capabilities → ownership → decision rights
-M08.P02  release manifest → quality gates → promotion → rollback
-M08.P03  minimal platform → product ownership → observability
-M08.P04  SLO/alerts → incidents → FinOps → recovery
-M08.P05  Enterprise GenAI Assistant v0.8 → production readiness
+situación
+→ evidencia
+→ decisión
+→ inyecto
+→ revisión de la decisión
+→ artefacto operativo
+→ debrief
 ```
 
-## Entorno
+Las prácticas no dependen de que el alumno haya ejecutado laboratorios de M07. El estado inicial necesario está incluido dentro de M08.
 
-Todo se realiza desde el entorno web facilitado por el instructor.
-
-No se requieren instalaciones locales, servicios externos personales ni llamadas
-a modelos generativos para completar M08.
-
-Los notebooks utilizan principalmente:
+## Ruta práctica
 
 ```text
-Python
-pandas
-JSON
+M08.P01  Operating Model & Decision Rights
+M08.P02  Release Gate & Platform Decisions
+M08.P03  Production Day & Readiness Review
 ```
 
-sobre datasets ficticios incluidos en `assets/`.
+### M08.P01 — Operating Model & Decision Rights
 
-## Orden recomendado
+Convierte capabilities en owners, decision rights e interfaces operativas.
 
-```text
-M08.P01 -> M08.P02 -> M08.P03 -> M08.P04 -> M08.P05
-```
+**Momento recomendado:** después de la slide 7 del deck reducido.
+
+### M08.P02 — Release Gate & Platform Decisions
+
+Decide qué artefactos se promueven, qué gates son obligatorios, qué capacidades deben ser compartidas y cómo limitar el blast radius.
+
+**Momento recomendado:** después de la slide 22.
+
+### M08.P03 — Production Day & Readiness Review
+
+Responde a degradaciones de disponibilidad, calidad, seguridad y coste, y termina con una decisión `READY / READY_WITH_CONDITIONS / NOT_READY`.
+
+**Momento recomendado:** después de la slide 27.
 
 ## Material
 
 - `M08_P01_Enunciado.md`
 - `M08_P02_Enunciado.md`
 - `M08_P03_Enunciado.md`
-- `M08_P04_Enunciado.md`
-- `M08_P05_Enunciado.md`
-- `notebooks/`
-- `assets/`
-- `templates/`
+- `assets/` — evidence packs e inyectos
+- `templates/` — plantillas editables
+- `work/` — espacio local recomendado para las respuestas del alumno
+
+## Forma de trabajo
+
+Duplica la plantilla de cada práctica dentro de `work/` y completa allí las decisiones.
+
+`work/` está ignorado por Git para que el trabajo del alumno no provoque conflictos al actualizar el repositorio.
+
+## Regla de diseño
+
+No hay una única respuesta correcta para todas las decisiones. Se evalúa la calidad de la postura:
+
+- qué evidencia se utilizó;
+- qué riesgo se acepta;
+- quién tiene autoridad para decidir;
+- qué condiciones producirían un rollback, degradación o parada;
+- qué información haría cambiar la decisión.

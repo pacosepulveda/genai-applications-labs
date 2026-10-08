@@ -2,64 +2,84 @@
 
 ## Objetivo
 
-M07 cambia la pregunta:
+M07 cambia el tipo de práctica del curso.
 
 ```text
-M01–M06:
-¿Cómo construimos aplicaciones de IA?
+M01–M06
+construir · ejecutar · medir · depurar
 
-M07:
-¿Qué merece la pena construir,
-qué evidencia necesitamos,
-qué datos están preparados,
-qué riesgo aceptamos
-y cuándo debemos avanzar?
+M07
+decidir · priorizar · justificar · gobernar
 ```
 
-La progresión práctica sigue exactamente la narrativa del deck reducido:
+El resultado esperado ya no es código. Es una **decisión defendible** sobre qué merece la pena construir, con qué evidencia, qué datos, qué riesgo y bajo qué condiciones debe avanzar.
+
+Por eso las prácticas de este módulo se realizan como **tabletops y workshops de decisión**. No requieren notebooks, kernel de Python ni llamadas a modelos.
+
+## Ruta práctica
 
 ```text
-M07.P01  problema → tarea → fit → Use Case Card
-M07.P02  baseline → target → scorecard
-M07.P03  priorización defendible
-M07.P04  data readiness → estrategia técnica
-M07.P05  riesgo → controles → resiliencia
-M07.P06  stage gate → piloto → decisión
+M07.P01  Opportunity Triage
+         problema → tarea → fit → autonomía → Use Case Card
+
+M07.P02  Evidence & Readiness Committee
+         baseline → métricas → priorización → datos → estrategia técnica
+
+M07.P03  Pilot Gate Under Pressure
+         riesgo → controles → resiliencia → GO / NOT_YET / NO_GO
 ```
 
-## Entorno
-
-Todos los ejercicios se realizan desde el entorno web facilitado por el instructor.
-
-No se requiere instalar software en el equipo del alumno ni utilizar servicios
-externos personales.
-
-Los notebooks utilizan principalmente:
+## Ubicación recomendada en el deck reducido
 
 ```text
-Python
-pandas
-numpy
+Después de slide 9   → M07.P01
+Después de slide 19  → M07.P02
+Después de slide 25  → M07.P03
+Slide 26             → síntesis
 ```
 
-sobre datasets ficticios incluidos en `assets/`.
+De esta forma cada tabletop se realiza después de haber explicado los conceptos que necesita.
 
-M07 no necesita llamadas a modelos generativos: el objetivo es tomar decisiones
-sobre el sistema construido hasta M06.
+## Cómo trabajar
 
-## Orden recomendado
+Cada práctica incluye un enunciado y una plantilla Markdown en `templates/`.
 
-```text
-M07.P01 -> M07.P02 -> M07.P03 -> M07.P04 -> M07.P05 -> M07.P06
-```
+Duplica la plantilla correspondiente dentro de `work/` y trabaja sobre esa copia. `work/` está ignorado por Git para que tus decisiones y anotaciones no interfieran con futuras actualizaciones del repositorio.
+
+No es necesario escribir Python. Los CSV y JSONL de `assets/` funcionan como **evidence pack**: puedes inspeccionarlos directamente desde JupyterLab cuando necesites justificar una decisión.
 
 ## Material
+
+### Enunciados
 
 - `M07_P01_Enunciado.md`
 - `M07_P02_Enunciado.md`
 - `M07_P03_Enunciado.md`
-- `M07_P04_Enunciado.md`
-- `M07_P05_Enunciado.md`
-- `M07_P06_Enunciado.md`
-- `notebooks/`
-- `assets/`
+
+### Plantillas
+
+- `templates/M07_P01_Opportunity_Triage.md`
+- `templates/M07_P02_Evidence_Readiness.md`
+- `templates/M07_P03_Pilot_Gate.md`
+
+### Evidencia
+
+- `assets/opportunity_backlog.csv`
+- `assets/baseline_procedure_search.csv`
+- `assets/prioritization_candidates.csv`
+- `assets/data_inventory.csv`
+- `assets/risk_scenarios.jsonl`
+- `assets/enterprise_genai_assistant_case.md`
+
+## Caso transversal
+
+El Enterprise GenAI Assistant construido hasta M06 se utiliza como caso principal. M07 parte de una PoC técnicamente viable y pregunta si existe evidencia suficiente para avanzar a un piloto controlado.
+
+El criterio del módulo es siempre el mismo:
+
+```text
+no avanzar porque la tecnología funcione
+
+avanzar cuando la evidencia justifique
+valor + datos + riesgo + operación + ownership
+```

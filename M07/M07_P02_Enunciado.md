@@ -1,82 +1,181 @@
-# M07.P02 — Baseline, target y scorecard
+# M07.P02 — Tabletop · Evidence & Readiness Committee
 
-**Modalidad:** individual o equipos pequeños  
-**Entregable:** baseline calculado, objetivo de piloto y scorecard
+**Modalidad:** equipos pequeños  
+**Entregable:** scorecard de evidencia, decisión de datos y arquitectura propuesta
 
-## Objetivo
+## Situación
 
-Construirás el sistema de medida **antes** de afirmar que la IA aporta valor.
+El comité acepta estudiar el caso del Enterprise GenAI Assistant, pero no autoriza todavía un piloto.
+
+La PoC técnica de M06 funciona. Ahora hay que demostrar que existe un problema medible, que los datos están preparados y que la estrategia técnica encaja con cada necesidad.
 
 ## Material
 
 ```text
+assets/enterprise_genai_assistant_case.md
 assets/baseline_procedure_search.csv
-notebooks/M07_P02_Baseline_Metrics.ipynb
+assets/prioritization_candidates.csv
+assets/data_inventory.csv
+templates/M07_P02_Evidence_Readiness.md
 ```
 
-## Parte A — Baseline
+Los CSV son evidencia para inspeccionar, no datasets que haya que procesar con Python.
 
-Calcula:
+---
 
-- media;
-- mediana;
-- p90;
-- tasa de documento incorrecto;
-- tasa de escalado a experto.
+## Ronda 1 — Baseline antes de prometer valor
 
-Comprueba que el dataset reproduce aproximadamente el baseline del caso:
+Utiliza como baseline del caso transversal:
 
 ```text
-11 min de mediana
-6% documento incorrecto
-18% escalado a experto
+11 min   mediana de búsqueda del procedimiento
+6%       uso de documento incorrecto
+18%      escalado a experto
 ```
 
-## Parte B — Target
+Define:
 
-Define un piloto de 8 semanas cuyo objetivo principal sea:
+1. una **North Star** del piloto;
+2. al menos una métrica `MODEL`;
+3. al menos una métrica `SYSTEM`;
+4. al menos una métrica `USER`;
+5. al menos una métrica `BUSINESS`;
+6. tres counter-metrics que impidan declarar éxito a costa de calidad, seguridad o retrabajo.
+
+El objetivo inicial del sponsor es:
 
 ```text
-reducir al menos un 30% el tiempo mediano
+reducir >= 30% el tiempo mediano de búsqueda
 ```
 
-sin empeorar calidad ni seguridad.
+Decide qué condiciones adicionales deben cumplirse para que esa reducción pueda considerarse éxito.
 
-## Parte C — Scorecard
+## Ronda 2 — Priorizar no es ordenar una hoja de cálculo
 
-Define al menos una métrica por capa:
+Revisa `prioritization_candidates.csv`.
+
+Debes asignar una de estas decisiones de portfolio:
 
 ```text
-MODEL
-SYSTEM
-USER
-BUSINESS
+QUICK_WIN
+STRATEGIC_BET
+NOT_YET
+NO_GO
 ```
 
-## Parte D — Counter-metrics
+No conviertas el score en una decisión automática.
 
-Incluye, como mínimo:
-
-- documento o fuente incorrecta;
-- retrieval no autorizado;
-- escalado a experto;
-- retrabajo.
-
-## Parte E — Diseño de comparación
-
-Explica cómo compararías:
+Para cada decisión explica qué pesa más entre:
 
 ```text
-proceso actual
-vs
-asistente read-only
+business value
+technical feasibility
+data readiness
+risk
+time-to-value
 ```
 
-evitando medir únicamente percepción.
+Selecciona al menos un caso cuyo valor parezca alto pero que **no deba ser prioritario todavía**.
 
-## Preguntas
+## Ronda 3 — Data readiness
 
-1. ¿Por qué usar mediana además de media?
-2. ¿Por qué `número de prompts` no es una North Star útil?
-3. ¿Qué decisión tomarías si el tiempo baja un 40% pero aumentan los errores?
-4. ¿Qué métrica de negocio conectaría mejor el piloto con capacidad operativa?
+Revisa `data_inventory.csv` desde la perspectiva de un piloto **read-only** del Enterprise GenAI Assistant.
+
+Clasifica cada fuente que consideres relevante como:
+
+```text
+REQUIRED
+OPTIONAL
+OUT_OF_SCOPE
+```
+
+Para las fuentes `REQUIRED`, responde:
+
+- ¿el owner está claro?;
+- ¿la calidad es suficiente?;
+- ¿los permisos están definidos?;
+- ¿la freshness encaja con la tarea?;
+- ¿la fuente es trazable?;
+- ¿puede operarse de forma repetible?;
+
+Asigna finalmente:
+
+```text
+READY
+NEEDS_WORK
+```
+
+Para cada `NEEDS_WORK`, define:
+
+```text
+gap
+action
+owner
+evidence_of_completion
+```
+
+## Ronda 4 — Nueva evidencia
+
+Antes de cerrar la decisión, el comité confirma lo siguiente:
+
+> La colección de procedimientos operativos contiene versiones duplicadas y metadata incompleta en parte del corpus. El histórico de procedimientos retirados debe conservarse para auditoría, pero no debe entrar por defecto en el contexto operativo. El chat interno contiene PII y secretos ocasionales y no tiene una política de retención suficientemente definida.
+
+Revisa tu selección de datos.
+
+Debes indicar qué fuentes:
+
+```text
+entran en el piloto
+entran después de remediación
+quedan fuera
+```
+
+## Ronda 5 — Elegir la estrategia técnica
+
+Decide la opción principal para cada necesidad:
+
+```text
+PROMPTING
+RAG
+FINE_TUNING
+DETERMINISTIC
+TOOL_API
+```
+
+Casos a decidir:
+
+1. conocimiento de procedimientos que cambia con el tiempo;
+2. estilo de redacción corporativo;
+3. estado actual de un incidente;
+4. comprobación de permisos;
+5. resumen de tickets largos.
+
+La justificación debe explicar **qué queremos cambiar o recuperar**, no qué tecnología parece más sofisticada.
+
+## Gate de la práctica
+
+Con la evidencia disponible, decide para el caso principal:
+
+```text
+READY_FOR_PILOT_DESIGN
+NOT_YET
+NO_GO
+```
+
+Si eliges `NOT_YET`, enumera exactamente qué evidencias faltan.
+
+## Resultado esperado
+
+El comité debe poder reconstruir esta cadena:
+
+```text
+baseline
+→ target
+→ métricas
+→ datos necesarios
+→ readiness
+→ estrategia técnica
+→ decisión
+```
+
+La decisión no debe depender de haber ejecutado código, sino de la calidad de la evidencia y de los supuestos declarados.

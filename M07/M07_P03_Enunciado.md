@@ -1,79 +1,244 @@
-# M07.P03 — Priorización defendible
+# M07.P03 — Tabletop · Pilot Gate Under Pressure
 
-**Modalidad:** individual o equipos pequeños  
-**Entregable:** ranking explicable y cuatro decisiones de portfolio
+**Modalidad:** equipos pequeños  
+**Entregable:** Decision Pack y defensa del gate
 
-## Objetivo
+## Situación
 
-Compararás oportunidades sin convertir una puntuación en una verdad matemática.
+La PoC de M06 ha demostrado viabilidad técnica y el comité ha aceptado diseñar un piloto controlado.
+
+Tu equipo actúa ahora como comité de gate. Debe decidir qué capacidades pasan al piloto, cuáles esperan y cuáles quedan fuera.
 
 ## Material
 
 ```text
-assets/prioritization_candidates.csv
-notebooks/M07_P03_Prioritization.ipynb
+assets/enterprise_genai_assistant_case.md
+assets/risk_scenarios.jsonl
+assets/data_inventory.csv
+templates/M07_P03_Pilot_Gate.md
 ```
 
-## Parte A — Cinco dimensiones
+---
 
-Revisa cada candidato en:
+## Ronda 1 — Decidir por capacidad
+
+Evalúa por separado:
+
+1. RAG read-only con citas;
+2. consulta read-only de incidentes;
+3. agente que propone acciones pero no las ejecuta;
+4. agente que ejecuta cambios en producción;
+5. aprobación automática de accesos privilegiados.
+
+Para cada capacidad decide:
 
 ```text
-business_value
-technical_feasibility
-data_readiness
-risk
-time_to_value
+GO
+NOT_YET
+NO_GO
 ```
 
-Todos los valores usan una escala 1..5.
+No existe obligación de dar la misma decisión a todas.
 
-En `risk`, 5 significa mayor riesgo.
-
-## Parte B — Score transparente
-
-Construye un score sencillo convirtiendo primero:
+Documenta:
 
 ```text
-risk -> risk_safety = 6 - risk
+value hypothesis
+evidence available
+main risk
+required control
+maximum autonomy
+owner
+decision
 ```
 
-y calcula una media de las cinco dimensiones.
+## Ronda 2 — Risk register
 
-El score sirve para ordenar la conversación, no para decidir automáticamente.
+Revisa `risk_scenarios.jsonl`.
 
-## Parte C — Sensibilidad
+Selecciona los riesgos que consideres materiales para el alcance del piloto.
 
-Cambia el peso de una sola dimensión y comprueba si cambia el ranking.
-
-Documenta qué supuesto ha movido la decisión.
-
-## Parte D — Portfolio
-
-Elige:
+Para cada uno registra:
 
 ```text
-1 QUICK_WIN
-1 STRATEGIC_BET
-1 NOT_YET
-1 NO_GO
+inherent likelihood 1..5
+inherent impact 1..5
+controls
+residual likelihood 1..5
+residual impact 1..5
+risk owner
 ```
 
-No tienen por qué ser los cuatro scores más extremos.
+La puntuación sirve para ordenar la conversación; no representa precisión científica.
 
-## Parte E — Evidencia pendiente
-
-Para cada decisión indica:
+Incluye para los riesgos prioritarios una respuesta de resiliencia:
 
 ```text
-current_decision
-reason
-evidence_that_could_change_it
+OBSERVE
+DEGRADE
+STOP
+RECOVER
 ```
 
-## Preguntas
+Debe existir al menos un mecanismo concreto de kill switch, revocación de tool o degradación a un modo más seguro.
 
-1. ¿Por qué un caso con valor 5 puede no ser prioritario?
-2. ¿Qué casos empeoran al considerar riesgo?
-3. ¿Qué diferencia hay entre `NOT_YET` y `NO_GO`?
-4. ¿Qué dimensión contiene más incertidumbre en tu ranking?
+## Ronda 3 — Piloto inicial
+
+El alcance propuesto es:
+
+```text
+20 técnicos
+1 departamento
+5 procedimientos aprobados
+8 semanas
+read-only
+```
+
+Criterios de éxito mínimos:
+
+```text
+time_saved >= 30%
+citation_validity >= 98%
+satisfaction >= 4/5
+```
+
+Criterios de parada o replanteamiento:
+
+```text
+retrieval_miss > 15%
+critical_hallucination
+security_blocker
+```
+
+Decide si estos criterios son suficientes. Puedes añadir counter-metrics, pero no eliminar los controles esenciales sin justificarlo.
+
+## Ronda 4 — Inyecto operacional
+
+Durante una prueba previa al piloto aparecen estos resultados:
+
+```text
+time_saved              37%
+citation_validity       99.1%
+retrieval_miss          12%
+satisfaction            4.3/5
+critical_hallucinations 0
+```
+
+Pero el equipo de seguridad descubre que dos usuarios pudieron recuperar un procedimiento fuera de su ACL debido a un error en el filtrado del índice.
+
+Decide inmediatamente una postura:
+
+```text
+CONTINUE
+DEGRADE
+STOP
+```
+
+Después define:
+
+- qué capacidad deshabilitas o limitas;
+- qué evidencia necesitas para recuperar el servicio completo;
+- quién autoriza la recuperación;
+- qué nuevo caso debe añadirse al eval set o a los tests.
+
+## Ronda 5 — Presión de negocio
+
+El sponsor responde:
+
+> “Las métricas son buenas. Añadamos una tool de escritura para que el agente pueda corregir automáticamente cambios simples en producción durante el piloto.”
+
+Decide:
+
+```text
+GO
+NOT_YET
+NO_GO
+```
+
+para esta ampliación concreta.
+
+La respuesta debe distinguir entre:
+
+- valor potencial;
+- evidencia disponible;
+- autonomía;
+- blast radius;
+- rollback;
+- accountability.
+
+## Ronda 6 — Stage Gate final
+
+Construye el roadmap únicamente con estas fases:
+
+```text
+Discovery
+Feasibility
+PoC
+Pilot
+Production
+```
+
+Para cada fase registra:
+
+```text
+learning_goal
+evidence
+gate
+owner
+```
+
+La decisión final debe ser una de:
+
+```text
+GO
+NOT_YET
+NO_GO
+```
+
+para el paso actual `PoC -> Pilot`.
+
+## Decision Pack
+
+Completa la plantilla con:
+
+```text
+Executive summary
+Capabilities and decisions
+Evidence
+Metrics and counter-metrics
+Data readiness
+Top risks and residual risk
+Pilot scope
+Human oversight
+Resilience / kill switch
+Success criteria
+Stop criteria
+Roadmap
+Open dependencies
+Final gate decision
+```
+
+## Defensa final
+
+El equipo debe poder responder:
+
+1. ¿Qué evidencia justifica avanzar?
+2. ¿Qué capacidad queda en `NOT_YET` y qué falta exactamente?
+3. ¿Qué capacidad recibe `NO_GO` para este alcance?
+4. ¿Qué condición obliga a degradar o detener el sistema?
+5. ¿Quién acepta el riesgo residual?
+6. ¿Qué debe demostrar el piloto antes de Production?
+
+## Resultado esperado
+
+Una buena respuesta no maximiza el número de capacidades aprobadas.
+
+Maximiza la **calidad de la decisión**:
+
+```text
+valor demostrado
++ riesgo controlado
++ autonomía proporcional
++ ownership explícito
++ capacidad de parar y recuperar
+```

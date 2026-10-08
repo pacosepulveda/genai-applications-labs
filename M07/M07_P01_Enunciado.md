@@ -1,33 +1,30 @@
-# M07.P01 — De pain point a caso de uso defendible
+# M07.P01 — Tabletop · Opportunity Triage
 
-**Modalidad:** individual o equipos pequeños  
-**Entregable:** backlog clasificado, descomposición de un proceso y una Use Case Card
+**Modalidad:** equipos pequeños  
+**Entregable:** una decisión de oportunidad y una Use Case Card
 
-## Objetivo
+## Situación
 
-Partirás de fricciones observables y decidirás qué tecnología encaja con cada tarea.
+La organización quiere ampliar el uso de IA generativa después de las capacidades demostradas en M01–M06. El sponsor ha pedido identificar casos que puedan generar valor rápidamente.
+
+Tu trabajo no consiste en encontrar dónde “meter un LLM”. Debes decidir **qué problemas merecen una solución de IA y cuáles no**.
 
 ## Material
 
 ```text
 assets/opportunity_backlog.csv
-notebooks/M07_P01_Opportunity_Discovery.ipynb
+templates/M07_P01_Opportunity_Triage.md
 ```
 
-## Parte A — Fricción
+Trabaja sobre una copia de la plantilla dentro de `work/`.
 
-Calcula:
+---
 
-```text
-monthly_hours_of_friction =
-monthly_volume * avg_minutes_per_case / 60
-```
+## Ronda 1 — Triage de oportunidades
 
-Este valor describe volumen de fricción; **no equivale automáticamente a ahorro**.
+Revisa el backlog y selecciona **cuatro oportunidades que representen decisiones distintas**.
 
-## Parte B — Fit
-
-Clasifica cada caso como:
+Para cada una asigna una postura inicial:
 
 ```text
 GOOD_GENAI_FIT
@@ -36,16 +33,15 @@ BETTER_DETERMINISTIC
 HIGH_RISK_REVIEW
 ```
 
-Justifica la decisión utilizando:
+No utilices una puntuación automática. Justifica cada postura mediante:
 
-- tipo de tarea;
+- naturaleza de la tarea;
 - tolerancia al error;
-- necesidad de exactitud;
-- impacto de la decisión.
+- necesidad de exactitud o reproducibilidad;
+- impacto de una decisión incorrecta;
+- existencia de una alternativa más sencilla.
 
-## Parte C — Alternativa
-
-Para cada caso indica una alternativa razonable:
+Para cada oportunidad indica además la capacidad que considerarías primero:
 
 ```text
 RULES
@@ -54,14 +50,15 @@ WORKFLOW
 CLASSIC_ML
 GENAI
 RAG
+TOOL_API
 HYBRID
 ```
 
-## Parte D — Process decomposition
+## Ronda 2 — Descomponer antes de automatizar
 
-Elige un proceso y divídelo en tareas.
+Elige la oportunidad que consideres más prometedora y descompón su proceso en tareas concretas.
 
-Para cada tarea marca:
+Para cada tarea decide:
 
 ```text
 DETERMINISTIC
@@ -69,11 +66,35 @@ AI_ASSISTED
 HUMAN_DECISION
 ```
 
-y un nivel de autonomía `L1..L4`.
+Asigna también un nivel máximo de autonomía:
 
-## Parte E — Use Case Card
+```text
+L1  informar
+L2  recomendar
+L3  preparar / supervisar
+L4  ejecutar dentro de límites explícitos
+```
 
-Completa una única ficha con:
+No es obligatorio que todas las tareas del proceso utilicen IA.
+
+## Ronda 3 — Presión del sponsor
+
+El sponsor plantea la siguiente petición:
+
+> “Si ya tenemos un agente, deberíamos dejarle aprobar accesos privilegiados y ejecutar cambios sencillos. Así podremos demostrar más ROI.”
+
+Sin modificar los datos del backlog, responde:
+
+1. ¿Qué parte de esta propuesta aceptarías, si alguna?
+2. ¿Qué parte mantendrías determinista o bajo decisión humana?
+3. ¿Qué evidencia necesitarías antes de aumentar autonomía?
+4. ¿Qué riesgo cambia al pasar de recomendar a ejecutar?
+
+## Ronda 4 — Use Case Card
+
+Completa una única ficha para la oportunidad que sí llevarías a la siguiente fase.
+
+Debe contener:
 
 ```text
 user
@@ -84,18 +105,29 @@ baseline_needed
 proposed_capability
 alternative_without_genai
 required_data
+maximum_autonomy
 main_risk
 owner
 success_criterion
 ```
 
-## Parte F — Decisión negativa
+## Decisión negativa obligatoria
 
-Selecciona una oportunidad que **no avanzarías** y explica por qué.
+Selecciona al menos una oportunidad del backlog que **no avanzarías con GenAI**.
 
-## Preguntas
+Explica qué alternativa utilizarías y qué nueva evidencia podría hacerte revisar esa postura.
 
-1. ¿Qué diferencia hay entre problema y solución?
-2. ¿Qué casos intentan sustituir una regla conocida por comportamiento probabilístico?
-3. ¿Qué caso tiene alto volumen pero riesgo relativamente bajo?
-4. ¿Qué evidencia te haría cambiar una decisión negativa?
+## Defensa
+
+El equipo debe ser capaz de responder sin consultar el notebook o ejecutar código:
+
+- ¿Cuál es el problema observable?
+- ¿Qué tarea concreta cambia?
+- ¿Por qué GenAI aporta algo que una solución más simple no aporta?
+- ¿Dónde se mantiene lógica determinista?
+- ¿Qué autonomía máxima aceptarías hoy?
+- ¿Quién es responsable de decidir si el caso avanza?
+
+## Resultado esperado
+
+No existe una única clasificación correcta para todas las oportunidades. Sí debe existir una **cadena de razonamiento coherente** entre problema, tecnología, autonomía, riesgo y criterio de éxito.

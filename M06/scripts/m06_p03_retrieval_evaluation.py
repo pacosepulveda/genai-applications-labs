@@ -1,9 +1,31 @@
 from pathlib import Path
 import json
+import torch
+from transformers import AutoTokenizer, AutoModel
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
+
+class LocalHFEmbeddings:
+    def __init__(self, model_name: str):
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name)
+        self.model.eval()
+
+    def _encode(self, texts):
+        batch = self.tokenizer(texts, padding=True, truncation=True, return_tensors="pt")
+        with torch.no_grad():
+            hidden = self.model(**batch).last_hidden_state
+        mask = batch["attention_mask"].unsqueeze(-1).to(hidden.dtype)
+        pooled = (hidden * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1e-9)
+        normalized = torch.nn.functional.normalize(pooled, p=2, dim=1)
+        return normalized.cpu().tolist()
+
+    def embed_documents(self, texts):
+        return self._encode(texts)
+
+    def embed_query(self, text):
+        return self._encode([text])[0]
 
 def parse_markdown(path: Path) -> Document:
     text = path.read_text(encoding="utf-8")
@@ -23,11 +45,7 @@ def build_store(kb_path: Path):
     documents = [parse_markdown(p) for p in sorted(kb_path.glob("*.md"))]
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=80)
     chunks = splitter.split_documents(documents)
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
-        model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
-    )
+    embeddings = LocalHFEmbeddings("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
     store = InMemoryVectorStore(embeddings)
     store.add_documents(chunks)
     return documents, chunks, store

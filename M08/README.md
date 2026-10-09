@@ -16,6 +16,10 @@ definir quién responde, cómo se promueven cambios
 y cómo se opera el servicio cuando algo falla
 ```
 
+## Documentación
+
+La [documentación técnica completa del módulo](documentacion/README.md) está disponible en la carpeta `documentacion/`.
+
 ## Enfoque práctico
 
 M08 no fuerza el uso de notebooks. Las prácticas son **tabletops y workshops de decisión** apoyados en evidence packs ficticios incluidos en `assets/`.

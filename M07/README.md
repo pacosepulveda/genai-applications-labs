@@ -16,6 +16,10 @@ El resultado esperado ya no es código. Es una **decisión defendible** sobre qu
 
 Por eso las prácticas de este módulo se realizan como **tabletops y workshops de decisión**. No requieren notebooks, kernel de Python ni llamadas a modelos.
 
+## Documentación
+
+La [documentación técnica completa del módulo](documentacion/README.md) está disponible en la carpeta `documentacion/`.
+
 ## Ruta práctica
 
 ```text

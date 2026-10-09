@@ -19,6 +19,10 @@ adaptarlo cuando cambian capabilities, modelos,
 hardware, regulación, coste y patrones de uso
 ```
 
+## Documentación
+
+La [documentación técnica completa del módulo](documentacion/README.md) está disponible en la carpeta `documentacion/`.
+
 ## Enfoque práctico
 
 M09 no fuerza el uso de notebooks. Las prácticas son **tabletops y workshops de decisión** apoyados en evidence packs ficticios incluidos en `assets/`.

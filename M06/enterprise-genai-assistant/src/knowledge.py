@@ -32,6 +32,37 @@ def load_current_records(root: Path) -> list[KnowledgeRecord]:
     return records
 
 
+class LocalHFEmbeddings:
+    def __init__(self, model_name: str):
+        import torch
+        from transformers import AutoTokenizer, AutoModel
+
+        self.torch = torch
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModel.from_pretrained(model_name)
+        self.model.eval()
+
+    def _encode(self, texts):
+        batch = self.tokenizer(
+            texts,
+            padding=True,
+            truncation=True,
+            return_tensors="pt",
+        )
+        with self.torch.no_grad():
+            hidden = self.model(**batch).last_hidden_state
+        mask = batch["attention_mask"].unsqueeze(-1).to(hidden.dtype)
+        pooled = (hidden * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1e-9)
+        normalized = self.torch.nn.functional.normalize(pooled, p=2, dim=1)
+        return normalized.cpu().tolist()
+
+    def embed_documents(self, texts):
+        return self._encode(texts)
+
+    def embed_query(self, text):
+        return self._encode([text])[0]
+
+
 class KnowledgeService:
     def __init__(
         self,
@@ -49,7 +80,6 @@ class KnowledgeService:
     def build(self):
         from langchain_core.documents import Document
         from langchain_text_splitters import RecursiveCharacterTextSplitter
-        from langchain_huggingface import HuggingFaceEmbeddings
         from langchain_core.vectorstores import InMemoryVectorStore
 
         records = load_current_records(self.root)
@@ -62,11 +92,7 @@ class KnowledgeService:
             chunk_overlap=80,
         )
         chunks = splitter.split_documents(documents)
-        embeddings = HuggingFaceEmbeddings(
-            model_name=self.embedding_model_id,
-            model_kwargs={"device": "cpu"},
-            encode_kwargs={"normalize_embeddings": True},
-        )
+        embeddings = LocalHFEmbeddings(self.embedding_model_id)
         self.vector_store = InMemoryVectorStore(embeddings)
         self.vector_store.add_documents(chunks)
         return self
